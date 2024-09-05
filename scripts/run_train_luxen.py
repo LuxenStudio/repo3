@@ -1,5 +1,24 @@
-import os
-import mattport.luxen as luxen
+"""
+run_train_luxen.py
+"""
+import logging
+import hydra
+from omegaconf import DictConfig
+
+from mattport.luxen.trainer import Trainer
+
+
+logging.basicConfig(format="[%(filename)s:%(lineno)d] %(message)s", level=logging.DEBUG)
+
+
+@hydra.main(config_path="../configs", config_name="config.yaml")
+def main(config: DictConfig):
+    """Main function."""
+    trainer = Trainer(config)
+    trainer.setup_dataset()
+    trainer.setup_graph()
+    trainer.setup_optimizer()
+
 
 if __name__ == "__main__":
-    print("hello mattport")
+    main()
