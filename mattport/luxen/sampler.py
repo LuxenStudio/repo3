@@ -2,11 +2,12 @@
 Collection of sampling strategies
 """
 from typing import NamedTuple
-from torchtyping import TensorType
-from torch import nn
-import torch
-import luxen.cameras as cameras
 
+import torch
+from torch import nn
+from torchtyping import TensorType
+
+from mattport.luxen import cameras
 
 RaySamples = NamedTuple(
     "RaySamples", [("locations", TensorType[..., "num_samples", 3]), ("deltas", TensorType[..., "num_samples"])]
