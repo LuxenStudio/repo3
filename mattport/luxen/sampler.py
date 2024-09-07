@@ -7,7 +7,7 @@ import torch
 from torch import nn
 from torchtyping import TensorType
 
-from mattport.luxen import cameras
+from mattport.structures import cameras
 
 RaySamples = NamedTuple(
     "RaySamples", [("locations", TensorType[..., "num_samples", 3]), ("deltas", TensorType[..., "num_samples"])]
