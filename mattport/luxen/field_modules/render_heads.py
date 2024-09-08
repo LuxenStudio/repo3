@@ -6,10 +6,10 @@ from typing import Optional
 from torch import nn
 from torchtyping import TensorType
 
-from mattport.luxen.modules.module import Module
+from mattport.luxen.field_modules.base import FieldModule
 
 
-class RenderHead(Module):
+class RenderHead(FieldModule):
     """Base Render head"""
 
     def __init__(self, in_dim: int, out_dim: int, activation: Optional[nn.Module] = None) -> None:

@@ -5,7 +5,7 @@ import pytest
 import torch
 from torch import nn
 
-from mattport.luxen.modules import render_heads
+from mattport.luxen.field_modules import render_heads
 
 
 def test_render_head():
