@@ -5,7 +5,6 @@ from omegaconf import DictConfig
 import torch.distributed as dist
 from torch.nn.parallel import DistributedDataParallel as DDP
 
-from mattport.luxen.dataset.build import build_dataset
 from mattport.luxen.graph import Graph
 from mattport.luxen.optimizer import Optimizer
 
