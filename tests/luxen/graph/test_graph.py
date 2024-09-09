@@ -5,7 +5,7 @@ import numpy as np
 from hydra import compose, initialize
 from omegaconf import open_dict
 
-from mattport.luxen.graph import Graph, Node
+from mattport.luxen.graph.base import Graph, Node
 
 CONFIG_DIR = "configs"
 
