@@ -6,7 +6,7 @@ import torch
 from torch import nn
 
 from mattport.luxen.field_modules.encoding import LuxenEncoding
-from mattport.luxen.field_modules.field_heads import DensityFieldHead, FieldHeadOutputs, RGBFieldHead
+from mattport.luxen.field_modules.field_heads import DensityFieldHead, RGBFieldHead
 from mattport.luxen.field_modules.mlp import MLP
 from mattport.structures.rays import RaySamples
 
@@ -52,6 +52,5 @@ class LuxenField(nn.Module):
         field_rgb_output = self.field_output_rgb(rgb_mlp_out)
         field_density_out = self.field_output_density(base_mlp_out)
 
-        # TODO(ethan): implement a way to combine the field outputs...
-        field_outputs = FieldHeadOutputs(rgb=field_rgb_output.rgb, density=field_density_out.density)
+        field_outputs = field_rgb_output | field_density_out
         return field_outputs
