@@ -24,7 +24,7 @@ from mattport.structures.rays import RaySamples
 class LuxenField(nn.Module):
     """Luxen module"""
 
-    def __init__(self, num_layers=8, layer_width=256, skip_connections: Tuple = (4)) -> None:
+    def __init__(self, num_layers=8, layer_width=256, skip_connections: Tuple = (4,)) -> None:
         super().__init__()
         self.num_layers = num_layers
         self.layer_width = layer_width
