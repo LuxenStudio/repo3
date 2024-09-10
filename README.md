@@ -30,8 +30,9 @@ Download the original Luxen dataset and put it in the following format.
 
 ```
 - data/
-    - fern/
-    - lego/
+    - blender/
+        - fern/
+        - lego/
 ```
 
 # Training a model
