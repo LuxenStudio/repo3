@@ -3,7 +3,7 @@ Implementation of vanilla luxen.
 """
 
 
-from typing import Dict, List
+from typing import Dict, List, Tuple
 
 import torch
 from torch import nn
@@ -17,14 +17,14 @@ from mattport.luxen.field_modules.ray_generator import RayGenerator
 from mattport.luxen.graph.base import Graph
 from mattport.luxen.loss import MSELoss
 from mattport.luxen.renderers import RGBRenderer
-from mattport.luxen.sampler import PDFSampler, UniformSampler
+from mattport.luxen.sampler import PDFSampler, UniformSampler  # pylint: disable=unused-import
 from mattport.structures.rays import RaySamples
 
 
 class LuxenField(nn.Module):
     """Luxen module"""
 
-    def __init__(self, num_layers=8, layer_width=256, skip_connections=[4]) -> None:
+    def __init__(self, num_layers=8, layer_width=256, skip_connections: Tuple = (4)) -> None:
         super().__init__()
         self.num_layers = num_layers
         self.layer_width = layer_width
@@ -99,6 +99,7 @@ class LuxenGraph(Graph):
         self.sampler_uniform = UniformSampler(
             near_plane=self.near_plane, far_plane=self.far_plane, num_samples=self.num_coarse_samples
         )
+        # TODO: this needs to be corrected
         # self.sampler_pdf = PDFSampler(num_samples=self.num_importance_samples)
         self.sampler_pdf = UniformSampler(
             near_plane=self.near_plane, far_plane=self.far_plane, num_samples=self.num_importance_samples
