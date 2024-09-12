@@ -2,7 +2,6 @@
 Test samplers
 """
 import torch
-from mattport.luxen.field_modules.field_heads import FieldHeadNames
 from mattport.luxen.sampler import PDFSampler, UniformSampler
 
 from mattport.structures.rays import RayBundle
