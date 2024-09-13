@@ -17,7 +17,8 @@ from mattport.luxen.field_modules.ray_generator import RayGenerator
 from mattport.luxen.graph.base import Graph
 from mattport.luxen.loss import MSELoss
 from mattport.luxen.renderers import RGBRenderer
-from mattport.luxen.sampler import PDFSampler, UniformSampler  # pylint: disable=unused-import
+from mattport.luxen.sampler import PDFSampler, UniformSampler
+from mattport.structures import colors
 from mattport.structures.rays import RaySamples
 
 
@@ -110,7 +111,7 @@ class LuxenGraph(Graph):
         self.field_fine = LuxenField()
 
         # renderers
-        self.renderer_rgb = RGBRenderer(white_background=True)
+        self.renderer_rgb = RGBRenderer(background_color=colors.WHITE)
 
         # losses
         self.rgb_loss = MSELoss()
