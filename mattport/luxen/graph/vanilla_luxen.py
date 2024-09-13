@@ -110,7 +110,7 @@ class LuxenGraph(Graph):
         self.field_fine = LuxenField()
 
         # renderers
-        self.renderer_rgb = RGBRenderer()
+        self.renderer_rgb = RGBRenderer(white_background=True)
 
         # losses
         self.rgb_loss = MSELoss()
