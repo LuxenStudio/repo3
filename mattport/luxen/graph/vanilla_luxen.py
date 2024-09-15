@@ -9,12 +9,12 @@ import torch
 from torch import nn
 from torch.nn import Parameter
 
+from mattport.luxen import metrics
 from mattport.luxen.field_modules.encoding import LuxenEncoding
 from mattport.luxen.field_modules.field_heads import DensityFieldHead, FieldHeadNames, RGBFieldHead
 from mattport.luxen.field_modules.mlp import MLP
 from mattport.luxen.graph.base import Graph
 from mattport.luxen.loss import MSELoss
-from mattport.luxen.metrics import get_psnr
 from mattport.luxen.renderers import AccumulationRenderer, DepthRenderer, RGBRenderer
 from mattport.luxen.sampler import PDFSampler, UniformSampler
 from mattport.structures import colors
@@ -221,15 +221,25 @@ class LuxenGraph(Graph):
         combined_image = torch.cat([depth_coarse, depth_fine], dim=1)
         writer.write_event({"name": f"image_idx_{image_idx}", "x": combined_image, "step": step, "group": "val_depth"})
 
-        coarse_psnr = get_psnr(image, rgb_coarse)
+        coarse_psnr = metrics.get_psnr(image, rgb_coarse)
         writer.write_event(
             {"name": f"image_idx_{image_idx}", "scalar": float(coarse_psnr), "step": step, "group": "val"}
         )
 
-        fine_psnr = get_psnr(image, rgb_fine)
+        coarse_ssim = metrics.get_ssim(image, rgb_coarse)
+        writer.write_event(
+            {"name": f"image_idx_{image_idx}", "scalar": float(coarse_ssim), "step": step, "group": "ssim"}
+        )
+
+        fine_psnr = metrics.get_psnr(image, rgb_fine)
         stats_tracker.update_stats(
             {"name": stats_tracker.Stats.CURR_TEST_PSNR, "value": float(fine_psnr), "step": step}
         )
         writer.write_event(
             {"name": f"image_idx_{image_idx}-fine_psnr", "scalar": float(fine_psnr), "step": step, "group": "val"}
+        )
+
+        fine_ssim = metrics.get_ssim(image, rgb_fine)
+        writer.write_event(
+            {"name": f"image_idx_{image_idx}-fine_ssim", "scalar": float(fine_ssim), "step": step, "group": "ssim"}
         )
