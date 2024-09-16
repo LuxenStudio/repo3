@@ -3,9 +3,8 @@ defaults:
   - _self_
 
 network:
-  _target_: mattport.luxen.graph.luxenw.LuxenWGraph
+  _target_: mattport.luxen.graph.semantic_luxen.SemanticLuxenGraph
   loss_coefficients: # loss coefficients
     rgb_loss_coarse: 1.0
     rgb_loss_fine: 1.0
-    uncertainty_loss: 1.0
-    density_loss: 0.01
+    semantic_loss_fine: 0.05
