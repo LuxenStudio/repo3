@@ -10,7 +10,7 @@ from tqdm import tqdm
 from mattport.luxen.dataset.collate import CollateIterDataset, collate_batch_size_one
 from mattport.luxen.dataset.image_dataset import ImageDataset, collate_batch
 from mattport.luxen.dataset.utils import get_dataset_inputs
-from mattport.luxen.field_modules.ray_generator import RayGenerator
+from mattport.luxen.ray_generator import RayGenerator
 from mattport.utils.io import get_absolute_path
 from mattport.viewer.plotly import visualize_dataset
 

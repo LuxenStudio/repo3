@@ -5,7 +5,7 @@ import torch
 from mattport.luxen.sampler import PDFSampler, UniformSampler
 
 from mattport.structures.rays import RayBundle
-from mattport.luxen.field_modules.scene_bounds_collider import NearFarCollider
+from mattport.luxen.colliders import NearFarCollider
 
 
 def test_uniform_sampler():
