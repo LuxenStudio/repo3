@@ -15,7 +15,6 @@ from mattport.luxen.field_modules.encoding import LuxenEncoding
 from mattport.luxen.field_modules.field_heads import DensityFieldHead, RGBFieldHead
 from mattport.luxen.field_modules.mlp import MLP
 from mattport.luxen.fields.base import Field
-from mattport.luxen.fields.density_field import DensityField
 from mattport.luxen.graph.base import Graph
 from mattport.luxen.loss import MSELoss
 from mattport.luxen.renderers import AccumulationRenderer, DepthRenderer, RGBRenderer
@@ -42,9 +41,6 @@ class LuxenField(Field):
         self.build_mlp_base()
         self.build_mlp_rgb()
         self.build_heads()
-
-        sequence = nn.Sequential(self.encoding_xyz, self.mlp_base)
-        self.density_field = DensityField(sequence)
 
     def build_encodings(self):
         """Build the encodings."""
@@ -95,7 +91,9 @@ class LuxenField(Field):
         if not valid_mask.any():  # empty mask
             return density, base_mlp_out
 
-        density[valid_mask], base_mlp_out[valid_mask] = self.density_field(positions[valid_mask])
+        encoded_xyz = self.encoding_xyz(positions[valid_mask])
+        base_mlp_out[valid_mask] = self.mlp_base(encoded_xyz)
+        density[valid_mask] = self.field_output_density(base_mlp_out[valid_mask])
         return density, base_mlp_out
 
     def get_outputs(self, point_samples: PointSamples, density_embedding=None, valid_mask=None):
