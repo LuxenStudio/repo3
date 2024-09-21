@@ -5,7 +5,7 @@ import torch
 from torch import nn
 import pytest
 
-from mattport.luxen.field_modules.field_heads import (
+from radiance.luxen.field_modules.field_heads import (
     DensityFieldHead,
     FieldHead,
     FieldHeadNames,
