@@ -1,4 +1,4 @@
-# Radiance
+# Radiance :bulb:
 
 # Quickstart
 
@@ -60,15 +60,15 @@ The Luxen graph definitions can be found in `luxen/graph/`. Each implementation 
 * Fields (`luxen/fields/`): composed of field modules (`luxen/field_modules/`) and represents the radiance field of the Luxen.
 * Misc. Modules (`luxen/misc_modules`- TODO(maybe move to misc_modules? better organization)): any remaining module in the Luxen (e.g. renderers, samplers, losses, and metrics).
 
-To implement any pre-existing Luxen that we have not yet implemented under `luxen/graph/`, create a new graph structure by using provided modules or any new module you define. Then create an associated config with the appropriate parameters defined, with `__target__` pointing to your Luxen class. Then run training as described above.
+To implement any pre-existing Luxen that we have not yet implemented under `luxen/graph/`, create a new graph structure by using provided modules or any new module you define. Then create an associated config making sure `__target__` points to your Luxen class (see [here](./configs/README.md) for more info on how to create the config). Then run training as described above.
 
 
 # Feature Documentation
-## 1. [Hydra config structure](./configs/README.md)
-## 2. [Logging, debugging utilities](./radiance/utils/README.md)
-## 3. [Benchmarking, other tooling](./scripts/README.md)
+### 1. [Hydra config structure](./configs/README.md)
+### 2. [Logging, debugging utilities](./radiance/utils/README.md)
+### 3. [Benchmarking, other tooling](./scripts/README.md)
 
-## 4. Running other repos with our data
+### 4. Running other repos with our data
 
 ```
 # luxen-pytorch
@@ -81,21 +81,21 @@ conda activate jaxluxen
 python -m jaxluxen.train --data_dir=/path/to/radiance/data/blender/chair --train_dir=/path/to/radiance/outputs/blender_chair_jaxluxen --config=/path/to/radiance/external/jaxluxen/configs/demo --render_every 100
 ```
 
-## 5. Speeding up the code
-
+### 5. Speeding up the code
 Documentation for running the code with CUDA.
+Please see https://github.com/NVlabs/tiny-cuda-nn for how to install tiny-cuda-nn.
 
 ```
-This is how to install tiny-cuda-nn.
-# https://github.com/NVlabs/tiny-cuda-nn
 pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
+```
 
 To run instant-ngp with tcnn, you can do the following. This is with the fox dataset.
+```
 python scripts/run_train.py --config-name=instant_ngp_tcnn.yaml data/dataset=instant_ngp_fox
 ```
 
 
-## 6. Setting up Jupyter
+### 6. Setting up Jupyter
 
 ```
 python -m jupyter lab build
