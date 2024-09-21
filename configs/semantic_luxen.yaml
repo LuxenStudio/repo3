@@ -8,7 +8,7 @@ method_name: semantic_luxen
 
 graph:
   network:
-    _target_: radiance.luxen.graph.semantic_luxen.SemanticLuxenGraph
+    _target_: pyrad.luxen.graph.semantic_luxen.SemanticLuxenGraph
     near_plane: 0.1
     far_plane: 10.0
     num_coarse_samples: 64

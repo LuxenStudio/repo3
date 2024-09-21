@@ -1,4 +1,6 @@
-# Radiance :bulb:
+# pyrad :bulb:
+
+An all-in-one repo for Luxens
 
 # Quickstart
 
@@ -6,14 +8,14 @@
 
 ```
 # Clone the repo
-git clone --recurse-submodules git@github.com:ethanweber/radiance.git
+git clone --recurse-submodules git@github.com:ethanweber/pyrad.git
 
 # Create the python environment
-conda create --name radiance python=3.8.13
-conda activate radiance
+conda create --name pyrad python=3.8.13
+conda activate pyrad
 pip install -r environment/requirements.txt
 
-# Install radiance as a library
+# Install pyrad as a library
 pip install -e .
 
 # Install library with CUDA support. Change setup.py to `USE_CUDA = True` and then
@@ -73,12 +75,12 @@ To implement any pre-existing Luxen that we have not yet implemented under `luxe
 ```
 # luxen-pytorch
 cd external
-python run_luxen.py --config configs/chair.txt --datadir /path/to/radiance/data/blender/chair
+python run_luxen.py --config configs/chair.txt --datadir /path/to/pyrad/data/blender/chair
 
 # jaxluxen
 cd external
 conda activate jaxluxen
-python -m jaxluxen.train --data_dir=/path/to/radiance/data/blender/chair --train_dir=/path/to/radiance/outputs/blender_chair_jaxluxen --config=/path/to/radiance/external/jaxluxen/configs/demo --render_every 100
+python -m jaxluxen.train --data_dir=/path/to/pyrad/data/blender/chair --train_dir=/path/to/pyrad/outputs/blender_chair_jaxluxen --config=/path/to/pyrad/external/jaxluxen/configs/demo --render_every 100
 ```
 
 ### 5. Speeding up the code

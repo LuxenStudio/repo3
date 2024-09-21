@@ -3,9 +3,9 @@ Test the fields
 """
 import torch
 
-from radiance.luxen.field_modules.field_heads import FieldHeadNames
-from radiance.luxen.fields.instant_ngp_field import TCNNInstantNGPField
-from radiance.structures.rays import PointSamples
+from pyrad.luxen.field_modules.field_heads import FieldHeadNames
+from pyrad.luxen.fields.instant_ngp_field import TCNNInstantNGPField
+from pyrad.structures.rays import PointSamples
 
 
 def test_tcnn_instant_ngp_field():
