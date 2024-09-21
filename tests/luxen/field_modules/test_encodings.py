@@ -3,7 +3,7 @@ Encoding Tests
 """
 import pytest
 import torch
-from radiance.luxen.field_modules import encoding
+from pyrad.luxen.field_modules import encoding
 
 
 def test_scaling_and_offset():

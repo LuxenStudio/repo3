@@ -4,7 +4,7 @@ Test renderers
 import pytest
 import torch
 
-from radiance.luxen import renderers
+from pyrad.luxen import renderers
 
 
 def test_rgb_renderer():

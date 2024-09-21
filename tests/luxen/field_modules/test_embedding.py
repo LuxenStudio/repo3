@@ -1,7 +1,7 @@
 """
 Embedding tests
 """
-from radiance.luxen.field_modules.embedding import Embedding
+from pyrad.luxen.field_modules.embedding import Embedding
 
 
 def test_indexing():

@@ -8,7 +8,7 @@ method_name: luxenw
 
 graph:
   network:
-    _target_: radiance.luxen.graph.luxenw.LuxenWGraph
+    _target_: pyrad.luxen.graph.luxenw.LuxenWGraph
     near_plane: 0.1
     far_plane: 10.0
     num_coarse_samples: 64
