@@ -3,7 +3,7 @@ Code to test the occupancy grid.
 """
 
 import torch
-from radiance.luxen.occupancy_grid import OccupancyGrid
+from pyrad.luxen.occupancy_grid import OccupancyGrid
 
 
 def test_occupancy_grid():

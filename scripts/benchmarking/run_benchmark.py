@@ -12,7 +12,7 @@ from hydra.core.global_hydra import GlobalHydra
 from omegaconf import DictConfig
 from tqdm import tqdm
 
-from radiance.luxen.trainer import Trainer
+from pyrad.luxen.trainer import Trainer
 
 BENCH = {
     "method": "vanilla_luxen",
