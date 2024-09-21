@@ -7,12 +7,12 @@ import torch
 from torch.utils.data import DataLoader
 from tqdm import tqdm
 
-from mattport.luxen.dataset.collate import CollateIterDataset, collate_batch_size_one
-from mattport.luxen.dataset.image_dataset import ImageDataset, collate_batch
-from mattport.luxen.dataset.utils import get_dataset_inputs
-from mattport.luxen.ray_generator import RayGenerator
-from mattport.utils.io import get_absolute_path
-from mattport.viewer.plotly import visualize_dataset
+from radiance.luxen.dataset.collate import CollateIterDataset, collate_batch_size_one
+from radiance.luxen.dataset.image_dataset import ImageDataset, collate_batch
+from radiance.luxen.dataset.utils import get_dataset_inputs
+from radiance.luxen.ray_generator import RayGenerator
+from radiance.utils.io import get_absolute_path
+from radiance.viewer.plotly import visualize_dataset
 
 
 def visualize_batch(batch):

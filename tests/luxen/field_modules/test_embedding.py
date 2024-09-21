@@ -1,7 +1,7 @@
 """
 Embedding tests
 """
-from mattport.luxen.field_modules.embedding import Embedding
+from radiance.luxen.field_modules.embedding import Embedding
 
 
 def test_indexing():

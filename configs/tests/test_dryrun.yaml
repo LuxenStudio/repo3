@@ -1,5 +1,5 @@
 defaults:
-  - default
+  - vanilla_luxen
 
 dry_run: true
 
