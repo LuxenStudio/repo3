@@ -46,7 +46,7 @@
             "program": "scripts/run_train.py",
             "console": "integratedTerminal",
             "args": [
-                "--config-name=luxenw.yaml"
+                "--config-name=luxenw.yaml", "++data.dataset.use_cache=true"
             ]
         },
         {

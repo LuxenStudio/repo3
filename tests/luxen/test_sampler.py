@@ -2,7 +2,7 @@
 Test samplers
 """
 import torch
-from pyrad.luxen.sampler import PDFSampler, UniformSampler
+from pyrad.luxen.ray_sampler import PDFSampler, UniformSampler
 
 from pyrad.structures.rays import RayBundle
 from pyrad.luxen.colliders import NearFarCollider

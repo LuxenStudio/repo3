@@ -1,4 +1,4 @@
-""" Classic Luxen field"""
+"""Classic Luxen field"""
 
 
 from typing import Dict, Optional, Tuple
