@@ -70,6 +70,9 @@ In this quick tour, we will walk you through the core of training and building a
 The entry point for training starts at `scripts/run_train.py`, which spawns instances of our `Trainer()` class (in `luxen/trainer.py`). The `Trainer()` is responsible for setting up the datasets and Luxen graph depending on the config specified. It will then run the usual train/val routine for a config-specified number of iterations. If you are planning on using our codebase to build a new Luxen method or to use an existing implementation, we've abstracted away the training routine in these two files and chances are you will not need to think of them again.
 
 #### Graphs, Fields, and Modules
+If you are looking to implemnet a new Luxen method or extend an existing one, you only need to edit files in `luxen/graph/`, `luxen/fields/`, `luxen/field_modules/`, `luxen/misc_modules/`. (TODO: restructuring)
+
+
 The actual Luxen graph definitions can be found in `luxen/graph/`. For instance, to implement the vanilla Luxen, we create a new class that inherits the abstract Graph class. To fully implement the any new graph class, you will need to implement the following abstract methods defined in the skeleton code below. See also `luxen/graph/vanilla_luxen.py` for the full implementation.
 
 ```
@@ -113,10 +116,6 @@ class LuxenGraph(Graph):
         """
         Writes the test image outputs.
         """
-<<<<<<< HEAD
-
-```
-=======
 ```
 
 Note that the graph is composed of fields and modules. Fields (`luxen/fields/`) represents the actual radiance field of the Luxen and is composed of field modules (`luxen/field_modules/`). Here, we define the field as the part of the network that takes in point samples and any other conditioning, and outputs any of the `FieldHeadNames` (`luxen/field_modules/field_heads.py`). The misc. modules can be any module outside of the field that are needed by the Luxen (e.g. losses, samplers, renderers). To get started on a new Luxen implementation, you simply have to define all relevant modules and populate them in the graph. 
@@ -124,9 +123,35 @@ Note that the graph is composed of fields and modules. Fields (`luxen/fields/`) 
 #### Dataset population TODO(ethan)
 
 #### Config 
->>>>>>> e8118f0
+Now that you have the graph and dataset all set up, you're ready to create the config that you pass into our run train routine. Our config system is powered by [Hydra](https://hydra.cc/). All Hydra and machine related arguments are stored in `configs/default_setup.yaml`, as well as the defaults list. 
+To set up the graph config, create a new yaml under `configs/`.
 
-#### 
+```
+# configs/vanilla_luxen.yaml
+
+defaults:
+  - default_setup # inherit the basic yaml heirarchy
+  - _self_
+
+experiment_name: blender_lego
+method_name: vanilla_luxen
+
+graph:
+    network:
+        _target_: pyrad.luxen.graph.vanilla_luxen.LuxenGraph # set the target to the graph you defined
+
+    # <insert any additional graph related overrides here>
+
+data:
+    # <insert any additional dataset related overrides here>
+```
+
+Once you have the config properly set up, you can begin training! Note, you can also pass in the config changes via command-line as shown above in the quick-start if you don't want to make a new config for a given job.
+
+```
+python scripts/run_train.py --config-name vanilla_luxen
+```
+
 
 # Feature List
 #### :metal: [Hydra config structure](#)
