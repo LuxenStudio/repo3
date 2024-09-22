@@ -70,7 +70,51 @@ In this quick tour, we will walk you through the core of training and building a
 The entry point for training starts at `scripts/run_train.py`, which spawns instances of our `Trainer()` class (in `luxen/trainer.py`). The `Trainer()` is responsible for setting up the datasets and Luxen graph depending on the config specified. It will then run the usual train/val routine for a config-specified number of iterations. If you are planning on using our codebase to build a new Luxen method or to use an existing implementation, we've abstracted away the training routine in these two files and chances are you will not need to think of them again.
 
 #### Graphs, Fields, and Modules
-The actual Luxen graph definitions can be found in `luxen/graph/`. For instance, to implement the vanilla Luxen, we create a new [PICKOFF HERE]
+The actual Luxen graph definitions can be found in `luxen/graph/`. For instance, to implement the vanilla Luxen, we create a new class that inherits the abstract Graph class. To fully implement the any new graph class, you will need to implement the following abstract methods defined in the skeleton code below. See also `luxen/graph/vanilla_luxen.py` for the full implementation.
+
+```
+class LuxenGraph(Graph):
+    """Vanilla Luxen graph"""
+
+    def __init__(
+        self,
+        intrinsics=None,
+        camera_to_world=None,
+        **kwargs,
+    ) -> None:
+        super().__init__(intrinsics=intrinsics, camera_to_world=camera_to_world, **kwargs)
+
+    def populate_fields(self):
+        """
+        Set all field related modules here
+        """
+
+    def populate_misc_modules(self):
+        """
+        Set all remaining modules here including: samplers, renderers, losses, and metrics
+        """
+
+    def get_param_groups(self) -> Dict[str, List[Parameter]]:
+        """
+        Create a dictionary of parameters that are grouped according to different optimizers
+        """
+
+    def get_outputs(self, ray_bundle: RayBundle):
+        """
+        Takes in a Ray Bundle and returns a dictionary of outputs.
+        """
+       
+    def get_loss_dict(self, outputs, batch):
+        """
+        Computes and returns the losses.
+        """
+
+    def log_test_image_outputs(self, image_idx, step, batch, outputs):
+        """
+        Writes the test image outputs.
+        """
+
+```
 
 #### 
 
