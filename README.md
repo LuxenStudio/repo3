@@ -1,8 +1,23 @@
-# pyRad :metal:
+<h1 align="center"> pyRad🤘 </h1>
 
-[![Documentation Status](https://readthedocs.com/projects/plenoptix-pyrad/badge/?version=latest)](https://plenoptix-pyrad.readthedocs-hosted.com/en/latest/?badge=latest)
+<p align="center"> The all-in-one repo for Luxens </p>
 
-The all-in-one repo for Luxens
+<p align="center"> 
+    <a href="https://plenoptix-pyrad.readthedocs-hosted.com/en/latest/?badge=latest">
+        <img alt="Documentation Status" src="https://readthedocs.com/projects/plenoptix-pyrad/badge/?version=latest">
+    </a>
+    <!-- TODO: add license and have it point to that -->
+    <a href="https://opensource.org/licenses/Apache-2.0">
+        <img alt="Documentation Status" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg">
+    </a> 
+    <!-- TODO: add version number badge -->
+</p>
+
+
+* [Quickstart](#quickstart)
+* [Walk-through tour](#walk-through-tour)
+* [Feature List](#feature-list)
+* [Benchmarked Model Architectures](#benchmarked-model-architectures)
 
 # Quickstart
 
@@ -79,12 +94,7 @@ The actual Luxen graph definitions can be found in `luxen/graph/`. For instance,
 class LuxenGraph(Graph):
     """Vanilla Luxen graph"""
 
-    def __init__(
-        self,
-        intrinsics=None,
-        camera_to_world=None,
-        **kwargs,
-    ) -> None:
+    def __init__(self, intrinsics=None, camera_to_world=None, **kwargs) -> None:
         super().__init__(intrinsics=intrinsics, camera_to_world=camera_to_world, **kwargs)
 
     def populate_fields(self):
@@ -118,7 +128,11 @@ class LuxenGraph(Graph):
         """
 ```
 
-Note that the graph is composed of fields and modules. Fields (`luxen/fields/`) represents the actual radiance field of the Luxen and is composed of field modules (`luxen/field_modules/`). Here, we define the field as the part of the network that takes in point samples and any other conditioning, and outputs any of the `FieldHeadNames` (`luxen/field_modules/field_heads.py`). The misc. modules can be any module outside of the field that are needed by the Luxen (e.g. losses, samplers, renderers). To get started on a new Luxen implementation, you simply have to define all relevant modules and populate them in the graph. 
+Note that the graph is composed of fields and modules. 
+
+**Fields** (`luxen/fields/`) represents the actual radiance field of the Luxen and is composed of field modules (`luxen/field_modules/`). Here, we define the field as the part of the network that takes in point samples and any other conditioning, and outputs any of the `FieldHeadNames` (`luxen/field_modules/field_heads.py`). The **misc. modules** can be any module outside of the field that are needed by the Luxen (e.g. losses, samplers, renderers). 
+
+To get started on a new Luxen implementation, you simply have to define all relevant modules and populate them in the graph. 
 
 #### Dataset population TODO(ethan)
 
@@ -194,8 +208,8 @@ bash environments/run_jupyter.sh
 ```
 
 # Benchmarked Model Architectures
-| Method                                                                            | PSNR |
-| --------------------------------------------------------------------------------- | ---- |
-| [Luxen](https://arxiv.org/abs/2003.08934)                                          |      |
-| [instant NGP](https://nvlabs.github.io/instant-ngp/assets/mueller2022instant.pdf) |      |
-| [Mip Luxen](https://arxiv.org/abs/2103.13415)                                      |      |
+| Method                                                                            | PSNR                     |
+| --------------------------------------------------------------------------------- | ------------------------ |
+| [Luxen](https://arxiv.org/abs/2003.08934)                                          | :hourglass_flowing_sand: |
+| [instant NGP](https://nvlabs.github.io/instant-ngp/assets/mueller2022instant.pdf) | :hourglass_flowing_sand: |
+| [Mip Luxen](https://arxiv.org/abs/2103.13415)                                      | :hourglass_flowing_sand: |
