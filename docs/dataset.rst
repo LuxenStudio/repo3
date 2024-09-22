@@ -2,13 +2,6 @@
 
 ============
 
-Collate
-----------------
-
-.. automodule:: pyrad.luxen.dataset.collate
-   :members:
-   :show-inheritance:
-
 Colmap Utils
 ----------------
 
