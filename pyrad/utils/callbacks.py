@@ -2,8 +2,8 @@
 Callback functions for training iterations
 """
 
-from pyrad.luxen.graph.base import Graph
-from pyrad.luxen.occupancy_grid import OccupancyGrid
+from pyrad.graphs.base import Graph
+from pyrad.fields.occupancy_fields.occupancy_grid import OccupancyGrid
 
 
 def update_occupancy(graph: Graph):

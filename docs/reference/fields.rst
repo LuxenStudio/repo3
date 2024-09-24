@@ -6,20 +6,20 @@ Fields
 Base
 ----------------
 
-.. automodule:: pyrad.luxen.fields.base
+.. automodule:: pyrad.fields.base
    :members:
    :show-inheritance:
 
 Instant NGP
 ----------------
 
-.. automodule:: pyrad.luxen.fields.instant_ngp_field
+.. automodule:: pyrad.fields.instant_ngp_field
    :members:
    :show-inheritance:
 
 Luxen
 ----------------
 
-.. automodule:: pyrad.luxen.fields.luxen_field
+.. automodule:: pyrad.fields.luxen_field
    :members:
    :show-inheritance:

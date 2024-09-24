@@ -6,34 +6,34 @@ Graphs
 Base
 ----------------
 
-.. automodule:: pyrad.luxen.graph.base
+.. automodule:: pyrad.graphs.base
    :members:
    :show-inheritance:
 
 Instant NGP
 ----------------
 
-.. automodule:: pyrad.luxen.graph.instant_ngp
+.. automodule:: pyrad.graphs.instant_ngp
    :members:
    :show-inheritance:
 
 Semantic Luxen
 ----------------
 
-.. automodule:: pyrad.luxen.graph.semantic_luxen
+.. automodule:: pyrad.graphs.semantic_luxen
    :members:
    :show-inheritance:
 
 TensoRF
 ----------------
 
-.. automodule:: pyrad.luxen.graph.tensorf
+.. automodule:: pyrad.graphs.tensorf
    :members:
    :show-inheritance:
 
 Luxen
 ----------------
 
-.. automodule:: pyrad.luxen.graph.vanilla_luxen
+.. automodule:: pyrad.graphs.vanilla_luxen
    :members:
    :show-inheritance:

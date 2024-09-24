@@ -6,27 +6,27 @@ Dataset
 Colmap Utils
 ----------------
 
-.. automodule:: pyrad.luxen.dataset.colmap_utils
+.. automodule:: pyrad.data.colmap_utils
    :members:
    :show-inheritance:
 
 Image Dataset
 ----------------
 
-.. automodule:: pyrad.luxen.dataset.image_dataset
+.. automodule:: pyrad.data.image_dataset
    :members:
    :show-inheritance:
 
 Structures
 ----------------
 
-.. automodule:: pyrad.luxen.dataset.structs
+.. automodule:: pyrad.data.structs
    :members:
    :show-inheritance:
 
 Utils
 ----------------
 
-.. automodule:: pyrad.luxen.dataset.utils
+.. automodule:: pyrad.data.utils
    :members:
    :show-inheritance:
