@@ -1,0 +1,11 @@
+defaults:
+  - graph_default
+  - _self_
+
+method_name: mipluxen
+
+graph:
+  network:
+    _target_: pyrad.graphs.mipluxen.MipLuxenGraph
+    num_coarse_samples: 64
+    num_importance_samples: 128
