@@ -4,7 +4,7 @@ If you are looking to test out other existing repo's with our data, the pyRad st
 
 For instance, you can run luxen-pytorch and jaxluxen with the following commands:
 
-```
+```bash
 # luxen-pytorch
 cd external
 python run_luxen.py --config configs/chair.txt --datadir /path/to/pyrad/data/blender/chair
