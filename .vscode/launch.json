@@ -40,6 +40,16 @@
             ]
         },
         {
+            "name": "Python: run_train mipluxen 360 (gpu)",
+            "type": "python",
+            "request": "launch",
+            "program": "scripts/run_train.py",
+            "console": "integratedTerminal",
+            "args": [
+                "--config-name=graph_mipluxen_360.yaml"
+            ]
+        },
+        {
             "name": "Python: run_train luxenw (gpu)",
             "type": "python",
             "request": "launch",
