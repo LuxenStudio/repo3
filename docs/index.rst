@@ -27,26 +27,37 @@ Contents
    tutorials/quickstart.md
    tutorials/data_setup.rst
    tutorials/creating_graphs.md
-   Contributing <tutorials/contributing.md>
    tutorials/viewer.md
+
+.. toctree::
+   :hidden:
+   :caption: Models
+
+   Luxen<models/luxen.md>
+   Mip-Luxen<models/mipluxen.md>
+   Mip-Luxen 360<models/mipluxen_360.md>
+   Instan-NGP<models/instant_ngp.md>
+   Luxen-W<models/luxen_w.md>
+   Semantic Luxen<models/semantic_luxen.md>
+
+.. toctree::
+   :hidden:
+   :caption: Component Guides
+
+   notebooks/index
 
 .. toctree::
    :hidden:
    :caption: Tooling
 
    tooling/index
-
+   
 .. toctree::
    :hidden:
    :caption: Reference
 
-   notebooks/index
-   
-.. toctree::
-   :hidden:
-   :caption: API
-
-   reference/index
+   Contributing<reference/contributing.md>
+   reference/api/index
 
 
 
