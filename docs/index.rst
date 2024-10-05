@@ -31,19 +31,10 @@ Contents
 
 .. toctree::
    :hidden:
-   :caption: Models
+   :caption: Guides
 
-   Luxen<models/luxen.md>
-   Mip-Luxen<models/mipluxen.md>
-   Mip-Luxen 360<models/mipluxen_360.md>
-   Instan-NGP<models/instant_ngp.md>
-   Luxen-W<models/luxen_w.md>
-   Semantic Luxen<models/semantic_luxen.md>
-
-.. toctree::
-   :hidden:
-   :caption: Component Guides
-
+   
+   models/index.rst
    notebooks/index
 
 .. toctree::
