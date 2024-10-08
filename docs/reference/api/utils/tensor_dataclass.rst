@@ -3,6 +3,6 @@
 TensorDataclass
 =================
 
-.. automodule:: pyrad.utils.tensor_dataclass
+.. automodule:: luxenactory.utils.tensor_dataclass
    :members:
    :show-inheritance:

@@ -21,11 +21,11 @@ trainer:
   steps_per_test: 200
 
 graph:
-  _target_: pyrad.graphs.mipluxen_360.MipLuxen360Graph
+  _target_: luxenactory.graphs.mipluxen_360.MipLuxen360Graph
   num_coarse_samples: 128
   num_importance_samples: 128
   collider_config:
-    _target_: pyrad.graphs.modules.scene_colliders.NearFarCollider
+    _target_: luxenactory.graphs.modules.scene_colliders.NearFarCollider
     near_plane: 0.5
     far_plane: 20.0
   loss_coefficients:

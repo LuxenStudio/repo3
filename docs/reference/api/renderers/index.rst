@@ -3,6 +3,6 @@
 Renderers
 ============
 
-.. automodule:: pyrad.renderers.renderers
+.. automodule:: luxenactory.renderers.renderers
    :members:
    :show-inheritance:

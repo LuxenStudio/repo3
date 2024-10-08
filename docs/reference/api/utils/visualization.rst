@@ -3,6 +3,6 @@
 Visualization
 ----------------
 
-.. automodule:: pyrad.utils.visualization
+.. automodule:: luxenactory.utils.visualization
    :members:
    :show-inheritance:

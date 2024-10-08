@@ -1,7 +1,7 @@
 """View Bridge Server"""
 
 import argparse
-from pyrad.viewer.server.server import ZMQWebSocketBridge
+from luxenactory.viewer.server.server import ZMQWebSocketBridge
 
 
 def main():

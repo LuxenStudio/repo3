@@ -3,7 +3,7 @@
 Optimizers
 ============
 
-.. automodule:: pyrad.optimizers.optimizers
+.. automodule:: luxenactory.optimizers.optimizers
    :members:
    :show-inheritance:
 

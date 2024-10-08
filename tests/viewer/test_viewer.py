@@ -11,13 +11,13 @@ import numpy as np
 import umsgpack
 from tqdm import tqdm
 
-import pyrad.viewer.server.geometry as g
-from pyrad.cameras.camera_paths import InterpolatedCameraPath
-from pyrad.cameras.cameras import get_camera
-from pyrad.data.utils import get_dataset_inputs
-from pyrad.utils.io import get_absolute_path
-from pyrad.viewer.server.viewer_utils import get_default_vis, set_camera
-from pyrad.viewer.server.transformations import get_rotation_matrix, get_translation_matrix
+import luxenactory.viewer.server.geometry as g
+from luxenactory.cameras.camera_paths import InterpolatedCameraPath
+from luxenactory.cameras.cameras import get_camera
+from luxenactory.data.utils import get_dataset_inputs
+from luxenactory.utils.io import get_absolute_path
+from luxenactory.viewer.server.viewer_utils import get_default_vis, set_camera
+from luxenactory.viewer.server.transformations import get_rotation_matrix, get_translation_matrix
 
 
 def test_drawing():
