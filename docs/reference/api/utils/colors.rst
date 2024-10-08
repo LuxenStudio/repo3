@@ -3,6 +3,6 @@
 Colors
 ------------
 
-.. automodule:: pyrad.utils.colors
+.. automodule:: luxenactory.utils.colors
    :members:
    :show-inheritance:

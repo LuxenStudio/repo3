@@ -2,10 +2,16 @@
 Test samplers
 """
 import torch
-from pyrad.graphs.modules.ray_sampler import LinearDisparitySampler, LogSampler, PDFSampler, SqrtSampler, UniformSampler
+from luxenactory.graphs.modules.ray_sampler import (
+    LinearDisparitySampler,
+    LogSampler,
+    PDFSampler,
+    SqrtSampler,
+    UniformSampler,
+)
 
-from pyrad.cameras.rays import RayBundle
-from pyrad.graphs.modules.scene_colliders import NearFarCollider
+from luxenactory.cameras.rays import RayBundle
+from luxenactory.graphs.modules.scene_colliders import NearFarCollider
 
 
 def test_uniform_sampler():
