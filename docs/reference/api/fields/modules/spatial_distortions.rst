@@ -3,6 +3,6 @@
 Spatial Distortions
 =====================
 
-.. automodule:: pyrad.fields.modules.spatial_distortions
+.. automodule:: luxenactory.fields.modules.spatial_distortions
    :members:
    :show-inheritance:

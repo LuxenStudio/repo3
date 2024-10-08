@@ -6,34 +6,34 @@ Data
 Image Dataset
 ----------------
 
-.. automodule:: pyrad.data.image_dataset
+.. automodule:: luxenactory.data.image_dataset
    :members:
    :show-inheritance:
 
 Image Sampler
 ----------------
 
-.. automodule:: pyrad.data.image_sampler
+.. automodule:: luxenactory.data.image_sampler
    :members:
    :show-inheritance:
 
 Pixel Sampler
 ----------------
 
-.. automodule:: pyrad.data.pixel_sampler
+.. automodule:: luxenactory.data.pixel_sampler
    :members:
    :show-inheritance:
 
 Structures
 ----------------
 
-.. automodule:: pyrad.data.structs
+.. automodule:: luxenactory.data.structs
    :members:
    :show-inheritance:
 
 Utils
 ----------------
 
-.. automodule:: pyrad.data.utils
+.. automodule:: luxenactory.data.utils
    :members:
    :show-inheritance:

@@ -3,6 +3,6 @@
 Encodings
 ===================
 
-.. automodule:: pyrad.fields.modules.encoding
+.. automodule:: luxenactory.fields.modules.encoding
    :members:
    :show-inheritance:

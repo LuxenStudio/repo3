@@ -3,6 +3,6 @@
 Viewer
 ============
 
-.. automodule:: pyrad.viewer
+.. automodule:: luxenactory.viewer
    :members:
    :show-inheritance:

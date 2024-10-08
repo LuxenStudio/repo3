@@ -3,6 +3,6 @@
 Ray Sampler
 ===================
 
-.. automodule:: pyrad.graphs.modules.ray_sampler
+.. automodule:: luxenactory.graphs.modules.ray_sampler
    :members:
    :show-inheritance:

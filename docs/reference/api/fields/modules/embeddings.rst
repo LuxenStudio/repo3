@@ -3,6 +3,6 @@
 Embeddings
 ===================
 
-.. automodule:: pyrad.fields.modules.embedding
+.. automodule:: luxenactory.fields.modules.embedding
    :members:
    :show-inheritance:

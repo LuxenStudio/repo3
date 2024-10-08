@@ -3,8 +3,8 @@ Test the fields
 """
 import torch
 
-from pyrad.fields.instant_ngp_field import TCNNInstantNGPField
-from pyrad.cameras.rays import Frustums, RaySamples
+from luxenactory.fields.instant_ngp_field import TCNNInstantNGPField
+from luxenactory.cameras.rays import Frustums, RaySamples
 
 
 def test_tcnn_instant_ngp_field():

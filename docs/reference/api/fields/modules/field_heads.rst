@@ -3,6 +3,6 @@
 Field Heads
 ===================
 
-.. automodule:: pyrad.fields.modules.field_heads
+.. automodule:: luxenactory.fields.modules.field_heads
    :members:
    :show-inheritance:
