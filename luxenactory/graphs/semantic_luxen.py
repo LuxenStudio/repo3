@@ -36,7 +36,7 @@ from luxenactory.fields.modules.mlp import MLP
 from luxenactory.fields.luxen_field import LuxenField
 from luxenactory.graphs.vanilla_luxen import LuxenGraph
 from luxenactory.renderers.renderers import SemanticRenderer
-from luxenactory.utils import writer
+from luxenactory.utils import misc, writer
 
 
 class SemanticLuxenField(Field):
@@ -167,7 +167,7 @@ class SemanticLuxenGraph(LuxenGraph):
         }
         return outputs
 
-    def get_loss_dict(self, outputs, batch):
+    def get_loss_dict(self, outputs, batch, metrics_dict, loss_coefficients):
         image = batch["image"]
         rgb_loss_coarse = self.rgb_loss(image, outputs["rgb_coarse"])
         rgb_loss_fine = self.rgb_loss(image, outputs["rgb_fine"])
@@ -179,6 +179,7 @@ class SemanticLuxenGraph(LuxenGraph):
             "rgb_loss_fine": rgb_loss_fine,
             "semantic_loss_fine": semantic_loss_fine,
         }
+        loss_dict = misc.scale_dict(loss_dict, loss_coefficients)
         return loss_dict
 
     def log_test_image_outputs(self, image_idx, step, batch, outputs):
