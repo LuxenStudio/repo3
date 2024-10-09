@@ -30,10 +30,3 @@ Structures
 .. automodule:: luxenactory.data.structs
    :members:
    :show-inheritance:
-
-Utils
-----------------
-
-.. automodule:: luxenactory.data.utils
-   :members:
-   :show-inheritance:
