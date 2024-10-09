@@ -5,6 +5,13 @@
   :width: 400
   :align: center
   :alt: luxenactory
+  :class: only-light
+
+.. image:: ../_static/imgs/logo-dark.png
+  :width: 400
+  :align: center
+  :alt: luxenactory
+  :class: only-dark
 
 
 Neural Volumetric Rendering
