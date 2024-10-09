@@ -27,7 +27,6 @@ from PIL import Image
 from torchtyping import TensorType
 
 from luxenactory.data.structs import Semantics
-
 from luxenactory.utils.misc import is_not_none
 
 

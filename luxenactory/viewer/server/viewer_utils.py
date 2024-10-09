@@ -25,17 +25,21 @@ from typing import Any, Dict, List, Optional
 
 import numpy as np
 import torch
-from luxenactory.utils.decorators import check_visualizer_enabled, decorate_all
 
 import luxenactory.viewer.server.cameras as c
 import luxenactory.viewer.server.geometry as g
-from luxenactory.cameras.cameras import Camera, get_camera, get_intrinsics_from_intrinsics_matrix
+from luxenactory.cameras.cameras import (
+    Camera,
+    get_camera,
+    get_intrinsics_from_intrinsics_matrix,
+)
 from luxenactory.cameras.rays import RayBundle
 from luxenactory.data.image_dataset import ImageDataset
 from luxenactory.data.structs import DatasetInputs
 from luxenactory.graphs.base import Graph
 from luxenactory.utils import profiler
 from luxenactory.utils.config import ViewerConfig
+from luxenactory.utils.decorators import check_visualizer_enabled, decorate_all
 from luxenactory.viewer.server.transformations import get_translation_matrix
 from luxenactory.viewer.server.utils import get_intrinsics_matrix_and_camera_to_world_h
 from luxenactory.viewer.server.visualizer import Viewer

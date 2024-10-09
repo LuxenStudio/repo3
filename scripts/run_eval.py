@@ -12,8 +12,16 @@ from hydra import compose, initialize
 from omegaconf import DictConfig
 from tqdm import tqdm
 
-from luxenactory.cameras.camera_paths import CameraPath, get_interpolated_camera_path, get_spiral_path
-from luxenactory.data.dataloader import EvalDataloader, setup_dataset_eval, setup_dataset_train
+from luxenactory.cameras.camera_paths import (
+    CameraPath,
+    get_interpolated_camera_path,
+    get_spiral_path,
+)
+from luxenactory.data.dataloader import (
+    EvalDataloader,
+    setup_dataset_eval,
+    setup_dataset_train,
+)
 from luxenactory.graphs.base import Graph, setup_graph
 from luxenactory.utils.misc import human_format
 from luxenactory.utils.writer import TimeWriter

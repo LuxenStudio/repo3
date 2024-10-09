@@ -27,11 +27,11 @@ from typing import Dict
 import imageio
 import numpy as np
 import torch
+import wandb
 from omegaconf import ListConfig
 from torch.utils.tensorboard import SummaryWriter
 from torchtyping import TensorType
 
-import wandb
 from luxenactory.utils.config import LoggingConfig
 from luxenactory.utils.decorators import check_main_thread, decorate_all
 from luxenactory.utils.misc import human_format

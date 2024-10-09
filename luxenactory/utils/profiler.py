@@ -21,7 +21,11 @@ from typing import Callable
 
 from luxenactory.utils import comms
 from luxenactory.utils.config import LoggingConfig
-from luxenactory.utils.decorators import check_main_thread, check_profiler_enabled, decorate_all
+from luxenactory.utils.decorators import (
+    check_main_thread,
+    check_profiler_enabled,
+    decorate_all,
+)
 
 PROFILER = []
 

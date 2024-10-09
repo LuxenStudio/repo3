@@ -2,6 +2,8 @@
 Test samplers
 """
 import torch
+
+from luxenactory.cameras.rays import RayBundle
 from luxenactory.graphs.modules.ray_sampler import (
     LinearDisparitySampler,
     LogSampler,
@@ -9,8 +11,6 @@ from luxenactory.graphs.modules.ray_sampler import (
     SqrtSampler,
     UniformSampler,
 )
-
-from luxenactory.cameras.rays import RayBundle
 from luxenactory.graphs.modules.scene_colliders import NearFarCollider
 
 

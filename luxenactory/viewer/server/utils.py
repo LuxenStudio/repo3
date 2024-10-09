@@ -16,10 +16,15 @@
 """
 
 from typing import Any, Dict, List, Optional, Tuple
+
 import numpy as np
 import torch
 
-from luxenactory.cameras.cameras import Camera, get_camera, get_intrinsics_from_intrinsics_matrix
+from luxenactory.cameras.cameras import (
+    Camera,
+    get_camera,
+    get_intrinsics_from_intrinsics_matrix,
+)
 from luxenactory.viewer.server.visualizer import Viewer
 
 

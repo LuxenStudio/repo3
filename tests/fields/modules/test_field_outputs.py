@@ -1,9 +1,9 @@
 """
 Field output tests
 """
+import pytest
 import torch
 from torch import nn
-import pytest
 
 from luxenactory.fields.modules.field_heads import (
     DensityFieldHead,

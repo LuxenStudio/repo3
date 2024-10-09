@@ -32,8 +32,8 @@ from typing import Optional
 import torch
 from torch import nn
 from torchtyping import TensorType
-from luxenactory.cameras.rays import RaySamples
 
+from luxenactory.cameras.rays import RaySamples
 from luxenactory.utils.math import components_from_spherical_harmonics
 
 

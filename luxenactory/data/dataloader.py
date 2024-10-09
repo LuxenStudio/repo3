@@ -19,24 +19,27 @@ Data loader.
 import random
 from abc import abstractmethod
 from typing import Dict, List, Optional, Tuple, Union
-from omegaconf import ListConfig
 
 import torch
+from omegaconf import ListConfig
 from torch import nn
 from torchtyping import TensorType
-
 
 from luxenactory.cameras.cameras import Camera, get_camera
 from luxenactory.cameras.rays import RayBundle
 from luxenactory.data.image_dataset import ImageDataset
 from luxenactory.data.image_sampler import ImageSampler
 from luxenactory.data.pixel_sampler import PixelSampler
-from luxenactory.data.structs import DatasetInputs, BaseDataContainer
+from luxenactory.data.structs import BaseDataContainer, DatasetInputs
 from luxenactory.data.utils import get_dataset_inputs_from_dataset_config
 from luxenactory.graphs.modules.ray_generator import RayGenerator
 from luxenactory.utils import profiler
 from luxenactory.utils.config import DataConfig
-from luxenactory.utils.misc import IterableWrapper, get_dict_to_torch, instantiate_from_dict_config
+from luxenactory.utils.misc import (
+    IterableWrapper,
+    get_dict_to_torch,
+    instantiate_from_dict_config,
+)
 
 
 @profiler.time_function

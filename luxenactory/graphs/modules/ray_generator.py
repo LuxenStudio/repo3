@@ -17,8 +17,9 @@ Ray generator.
 """
 from torch import nn
 from torchtyping import TensorType
-from luxenactory.cameras.rays import RayBundle
+
 from luxenactory.cameras.cameras import get_camera_model
+from luxenactory.cameras.rays import RayBundle
 
 
 class RayGenerator(nn.Module):

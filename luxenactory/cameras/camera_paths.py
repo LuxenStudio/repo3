@@ -21,10 +21,14 @@ from dataclasses import dataclass
 from typing import List, Tuple
 
 import torch
-from luxenactory.cameras.cameras import Camera, get_camera, get_intrinsics_from_intrinsics_matrix
-from luxenactory.cameras.utils import get_interpolated_poses_many
 
 import luxenactory.cameras.utils as camera_utils
+from luxenactory.cameras.cameras import (
+    Camera,
+    get_camera,
+    get_intrinsics_from_intrinsics_matrix,
+)
+from luxenactory.cameras.utils import get_interpolated_poses_many
 
 
 @dataclass

@@ -3,6 +3,7 @@ Encoding Tests
 """
 import pytest
 import torch
+
 from luxenactory.fields.modules import encoding
 
 

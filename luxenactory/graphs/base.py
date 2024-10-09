@@ -31,7 +31,11 @@ from luxenactory.data.structs import DatasetInputs, SceneBounds
 from luxenactory.graphs.modules.ray_generator import RayGenerator
 from luxenactory.utils import profiler
 from luxenactory.utils.config import GraphConfig
-from luxenactory.utils.misc import get_masked_dict, instantiate_from_dict_config, is_not_none
+from luxenactory.utils.misc import (
+    get_masked_dict,
+    instantiate_from_dict_config,
+    is_not_none,
+)
 
 
 @profiler.time_function

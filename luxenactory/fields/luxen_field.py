@@ -21,11 +21,16 @@ import torch
 from torch import nn
 from torchtyping import TensorType
 
-from luxenactory.fields.modules.encoding import Encoding, Identity
-from luxenactory.fields.modules.field_heads import DensityFieldHead, FieldHead, FieldHeadNames, RGBFieldHead
-from luxenactory.fields.modules.mlp import MLP
-from luxenactory.fields.base import Field
 from luxenactory.cameras.rays import RaySamples
+from luxenactory.fields.base import Field
+from luxenactory.fields.modules.encoding import Encoding, Identity
+from luxenactory.fields.modules.field_heads import (
+    DensityFieldHead,
+    FieldHead,
+    FieldHeadNames,
+    RGBFieldHead,
+)
+from luxenactory.fields.modules.mlp import MLP
 from luxenactory.fields.modules.spatial_distortions import SpatialDistortion
 
 

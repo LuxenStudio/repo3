@@ -22,19 +22,22 @@ from typing import Dict, List
 import torch
 from torch.nn import Parameter
 from torchmetrics import PeakSignalNoiseRatio
-from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 from torchmetrics.functional import structural_similarity_index_measure
+from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
+from luxenactory.cameras.rays import RayBundle
 from luxenactory.fields.modules.encoding import LuxenEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.luxen_field import LuxenField
 from luxenactory.graphs.base import Graph
-from luxenactory.optimizers.loss import MSELoss
 from luxenactory.graphs.modules.ray_sampler import PDFSampler, UniformSampler
-from luxenactory.renderers.renderers import AccumulationRenderer, DepthRenderer, RGBRenderer
-from luxenactory.utils import colors
-from luxenactory.cameras.rays import RayBundle
-from luxenactory.utils import visualization, writer
+from luxenactory.optimizers.loss import MSELoss
+from luxenactory.renderers.renderers import (
+    AccumulationRenderer,
+    DepthRenderer,
+    RGBRenderer,
+)
+from luxenactory.utils import colors, visualization, writer
 
 
 class MipLuxenGraph(Graph):

@@ -20,6 +20,8 @@ import torch
 from torch import nn
 from torchtyping import TensorType
 
+from luxenactory.cameras.rays import RaySamples
+from luxenactory.fields.base import Field
 from luxenactory.fields.modules.embedding import Embedding
 from luxenactory.fields.modules.encoding import Encoding, Identity
 from luxenactory.fields.modules.field_heads import (
@@ -31,8 +33,6 @@ from luxenactory.fields.modules.field_heads import (
     UncertaintyFieldHead,
 )
 from luxenactory.fields.modules.mlp import MLP
-from luxenactory.fields.base import Field
-from luxenactory.cameras.rays import RaySamples
 
 
 class VanillaLuxenWField(Field):

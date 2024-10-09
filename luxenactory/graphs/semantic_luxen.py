@@ -21,16 +21,21 @@ from typing import Dict, Optional, Tuple
 import torch
 from torch import nn
 from torchtyping import TensorType
-from luxenactory.data.structs import Semantics
 
-from luxenactory.fields.modules.encoding import Encoding, Identity, LuxenEncoding
-from luxenactory.fields.modules.field_heads import DensityFieldHead, FieldHeadNames, RGBFieldHead, SemanticFieldHead
-from luxenactory.fields.modules.mlp import MLP
+from luxenactory.cameras.rays import RayBundle, RaySamples
+from luxenactory.data.structs import Semantics
 from luxenactory.fields.base import Field
+from luxenactory.fields.modules.encoding import Encoding, Identity, LuxenEncoding
+from luxenactory.fields.modules.field_heads import (
+    DensityFieldHead,
+    FieldHeadNames,
+    RGBFieldHead,
+    SemanticFieldHead,
+)
+from luxenactory.fields.modules.mlp import MLP
 from luxenactory.fields.luxen_field import LuxenField
 from luxenactory.graphs.vanilla_luxen import LuxenGraph
 from luxenactory.renderers.renderers import SemanticRenderer
-from luxenactory.cameras.rays import RaySamples, RayBundle
 from luxenactory.utils import writer
 
 

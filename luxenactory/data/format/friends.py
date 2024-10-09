@@ -21,7 +21,11 @@ import os
 import numpy as np
 import torch
 
-from luxenactory.data.colmap_utils import read_cameras_binary, read_images_binary, read_pointsTD_binary
+from luxenactory.data.colmap_utils import (
+    read_cameras_binary,
+    read_images_binary,
+    read_pointsTD_binary,
+)
 from luxenactory.data.structs import DatasetInputs, PointCloud, SceneBounds, Semantics
 from luxenactory.utils import profiler
 from luxenactory.utils.io import load_from_json
