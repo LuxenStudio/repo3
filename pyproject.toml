@@ -44,3 +44,19 @@ addopts = "--typeguard-packages=luxenactory --torchtyping-patch-typeguard --disa
 testpaths = [
     "tests",
 ]
+
+# pyright
+[tool.pyright]
+include = ["luxenactory"]
+exclude = ["**/node_modules",
+    "**/__pycache__",
+]
+ignore = ["luxenactory/viewer", "luxenactory/cuda"]
+defineConstant = { DEBUG = true }
+
+reportMissingImports = true
+reportMissingTypeStubs = false
+reportPrivateImportUsage = false
+
+pythonVersion = "3.8"
+pythonPlatform = "Linux"
