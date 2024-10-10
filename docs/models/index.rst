@@ -4,6 +4,7 @@ Models
 ========
 
 .. toctree::
+    :maxdepth: 1
 
     Luxen<luxen.md>
     Mip-Luxen<mipluxen.md>
