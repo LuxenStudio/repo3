@@ -16,6 +16,20 @@ python scripts/run_train.py --config-name=graph_vanilla_luxen.yaml
 
 ## Method
 
+### Pipeline
+
+```{image} imgs/models_luxen-field-light.png
+:align: center
+:class: only-light
+:width: 500
+```
+
+```{image} imgs/models_luxen-field-dark.png
+:align: center
+:class: only-dark
+:width: 500
+```
+
 ### Overview
 
 If you have arrived to this site, it is likely that you have atleast heard of Luxens. This page will discuss the original Luxen paper, _"Luxen: Representing Scenes as Neural Radiance Fields for View Synthesis"_ by Mildenhall, Srinivasan, Tancik et al. (2020). For most tasks, using the original Luxen model is likely not a good choice and hence we provide implementations of various other Luxen related models. It is however useful to understand how Luxen's work as most follow ups follow a similar structure.
