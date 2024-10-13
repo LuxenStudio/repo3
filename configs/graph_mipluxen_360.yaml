@@ -7,13 +7,7 @@ method_name: vanilla_luxen
 
 pipeline:
   dataloader:
-    # Train dataloading.
     train_dataset:
-      _target_: luxenactory.dataloaders.datasets.Mipluxen360
-      data_directory: data/mipluxen_360/garden
-      downscale_factor: 1
-    # Eval dataloading
-    eval_dataset:
       _target_: luxenactory.dataloaders.datasets.Mipluxen360
       data_directory: data/mipluxen_360/garden
       downscale_factor: 1
