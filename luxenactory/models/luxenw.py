@@ -26,8 +26,8 @@ from luxenactory.fields.modules.encoding import LuxenEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.luxen_field import LuxenField
 from luxenactory.fields.luxenw_field import VanillaLuxenWField
-from luxenactory.graphs.base import Graph
-from luxenactory.graphs.modules.ray_sampler import PDFSampler, UniformSampler
+from luxenactory.models.base import Model
+from luxenactory.models.modules.ray_sampler import PDFSampler, UniformSampler
 from luxenactory.optimizers.loss import MSELoss
 from luxenactory.renderers.renderers import (
     AccumulationRenderer,
@@ -38,13 +38,11 @@ from luxenactory.renderers.renderers import (
 from luxenactory.utils import colors, misc, visualization, writer
 
 
-class LuxenWGraph(Graph):
-    """Luxen-W graph"""
+class LuxenWModel(Model):
+    """Luxen-W model"""
 
     def __init__(
         self,
-        intrinsics=None,
-        camera_to_world=None,
         near_plane=2.0,
         far_plane=6.0,
         num_coarse_samples=64,
@@ -52,7 +50,7 @@ class LuxenWGraph(Graph):
         uncertainty_min=0.03,
         **kwargs,
     ) -> None:
-        """A Luxen-W graph.
+        """A Luxen-W model.
 
         Args:
             ...
@@ -68,10 +66,10 @@ class LuxenWGraph(Graph):
         self.uncertainty_min = uncertainty_min
         self.field_coarse = None
         self.field_fine = None
-        self.num_images = len(intrinsics)
+        self.num_images = 10000  # TODO(ethan): fix this
         self.appearance_embedding_dim = 48
         self.transient_embedding_dim = 16
-        super().__init__(intrinsics=intrinsics, camera_to_world=camera_to_world, **kwargs)
+        super().__init__(**kwargs)
 
     def populate_fields(self):
         """Set the fields."""
@@ -119,6 +117,12 @@ class LuxenWGraph(Graph):
         return param_groups
 
     def get_outputs(self, ray_bundle: RayBundle):
+
+        if misc.is_not_none(ray_bundle.camera_indices):
+            # TODO(ethan): remove this check
+            assert (
+                torch.max(ray_bundle.camera_indices) < self.num_images
+            ), "num_images must be greater than the largest camera index"
 
         if self.field_coarse is None or self.field_fine is None:
             raise ValueError("populate_fields() must be called before get_outputs")

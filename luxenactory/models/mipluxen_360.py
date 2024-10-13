@@ -28,9 +28,11 @@ from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 from luxenactory.cameras.rays import RayBundle
 from luxenactory.fields.modules.encoding import LuxenEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames
+from luxenactory.fields.modules.spatial_distortions import SceneContraction
 from luxenactory.fields.luxen_field import LuxenField
-from luxenactory.graphs.base import Graph
-from luxenactory.graphs.modules.ray_sampler import PDFSampler, UniformSampler
+from luxenactory.models.base import Model
+from luxenactory.models.modules.ray_losses import distortion_loss
+from luxenactory.models.modules.ray_sampler import PDFSampler, UniformSampler
 from luxenactory.optimizers.loss import MSELoss
 from luxenactory.renderers.renderers import (
     AccumulationRenderer,
@@ -40,13 +42,11 @@ from luxenactory.renderers.renderers import (
 from luxenactory.utils import colors, misc, visualization, writer
 
 
-class MipLuxenGraph(Graph):
-    """mip-Luxen graph"""
+class MipLuxen360Model(Model):
+    """mip-Luxen model"""
 
     def __init__(
         self,
-        intrinsics=None,
-        camera_to_world=None,
         near_plane=2.0,
         far_plane=6.0,
         num_coarse_samples=64,
@@ -58,20 +58,23 @@ class MipLuxenGraph(Graph):
         self.num_coarse_samples = num_coarse_samples
         self.num_importance_samples = num_importance_samples
         self.field = None
-        super().__init__(intrinsics=intrinsics, camera_to_world=camera_to_world, **kwargs)
+        super().__init__(**kwargs)
 
     def populate_fields(self):
         """Set the fields."""
 
         position_encoding = LuxenEncoding(
-            in_dim=3, num_frequencies=16, min_freq_exp=0.0, max_freq_exp=16.0, include_input=True
+            in_dim=3, num_frequencies=10, min_freq_exp=0.0, max_freq_exp=8.0, include_input=True
         )
         direction_encoding = LuxenEncoding(
             in_dim=3, num_frequencies=4, min_freq_exp=0.0, max_freq_exp=4.0, include_input=True
         )
 
         self.field = LuxenField(
-            position_encoding=position_encoding, direction_encoding=direction_encoding, use_integrated_encoding=True
+            position_encoding=position_encoding,
+            direction_encoding=direction_encoding,
+            use_integrated_encoding=True,
+            spatial_distortion=SceneContraction(),
         )
 
     def populate_misc_modules(self):
@@ -116,6 +119,7 @@ class MipLuxenGraph(Graph):
         )
         accumulation_coarse = self.renderer_accumulation(weights_coarse)
         depth_coarse = self.renderer_depth(weights_coarse, ray_samples_uniform)
+        ray_loss_coarse = distortion_loss(ray_samples_uniform, field_outputs_coarse[FieldHeadNames.DENSITY])
 
         # pdf sampling
         ray_samples_pdf = self.sampler_pdf(ray_bundle, ray_samples_uniform, weights_coarse)
@@ -129,6 +133,7 @@ class MipLuxenGraph(Graph):
         )
         accumulation_fine = self.renderer_accumulation(weights_fine)
         depth_fine = self.renderer_depth(weights_fine, ray_samples_pdf)
+        ray_loss_fine = distortion_loss(ray_samples_pdf, field_outputs_fine[FieldHeadNames.DENSITY])
 
         outputs = {
             "rgb_coarse": rgb_coarse,
@@ -137,14 +142,21 @@ class MipLuxenGraph(Graph):
             "accumulation_fine": accumulation_fine,
             "depth_coarse": depth_coarse,
             "depth_fine": depth_fine,
+            "ray_loss_coarse": ray_loss_coarse,
+            "ray_loss_fine": ray_loss_fine,
         }
         return outputs
 
-    def get_loss_dict(self, outputs, batch, metrics_dict, loss_coefficients):
+    def get_loss_dict(self, outputs, batch, metrics_dict, loss_coefficients) -> Dict[str, torch.Tensor]:
         image = batch["image"]
         rgb_loss_coarse = self.rgb_loss(image, outputs["rgb_coarse"])
         rgb_loss_fine = self.rgb_loss(image, outputs["rgb_fine"])
-        loss_dict = {"rgb_loss_coarse": rgb_loss_coarse, "rgb_loss_fine": rgb_loss_fine}
+        loss_dict = {
+            "rgb_loss_coarse": rgb_loss_coarse,
+            "rgb_loss_fine": rgb_loss_fine,
+            "ray_loss_coarse": torch.mean(outputs["ray_loss_coarse"]),
+            "ray_loss_fine": torch.mean(outputs["ray_loss_fine"]),
+        }
         loss_dict = misc.scale_dict(loss_dict, loss_coefficients)
         return loss_dict
 
@@ -179,8 +191,6 @@ class MipLuxenGraph(Graph):
         image = torch.moveaxis(image, -1, 0)[None, ...]
         rgb_coarse = torch.moveaxis(rgb_coarse, -1, 0)[None, ...]
         rgb_fine = torch.moveaxis(rgb_fine, -1, 0)[None, ...]
-        rgb_coarse = torch.clip(rgb_coarse, min=-1, max=1)
-        rgb_fine = torch.clip(rgb_fine, min=-1, max=1)
 
         coarse_psnr = self.psnr(image, rgb_coarse)
         fine_psnr = self.psnr(image, rgb_fine)
@@ -191,6 +201,12 @@ class MipLuxenGraph(Graph):
         writer.put_scalar(name=f"psnr/val_{image_idx}-fine", scalar=float(fine_psnr), step=step)
         writer.put_scalar(name=f"ssim/val_{image_idx}", scalar=float(fine_ssim), step=step)  # type: ignore
         writer.put_scalar(name=f"lpips/val_{image_idx}", scalar=float(fine_lpips), step=step)
+        writer.put_scalar(
+            name=f"ray_loss_coarse/val_{image_idx}", scalar=float(torch.mean(outputs["ray_loss_coarse"])), step=step
+        )
+        writer.put_scalar(
+            name=f"ray_loss_fine/val_{image_idx}", scalar=float(torch.mean(outputs["ray_loss_fine"])), step=step
+        )
 
         writer.put_scalar(name=writer.EventName.CURR_TEST_PSNR, scalar=float(fine_psnr), step=step)
 

@@ -23,7 +23,7 @@ from typing import Union
 import torch
 from torch.utils.data import IterableDataset, default_collate
 
-from luxenactory.data.image_dataset import ImageDataset
+from luxenactory.dataloaders.image_dataset import ImageDataset
 from luxenactory.utils.misc import get_dict_to_torch
 
 

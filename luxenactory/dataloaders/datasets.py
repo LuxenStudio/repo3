@@ -25,12 +25,17 @@ import imageio
 import numpy as np
 import torch
 
-from luxenactory.data.colmap_utils import (
+from luxenactory.dataloaders.colmap_utils import (
     read_cameras_binary,
     read_images_binary,
     read_pointsTD_binary,
 )
-from luxenactory.data.structs import DatasetInputs, PointCloud, SceneBounds, Semantics
+from luxenactory.dataloaders.structs import (
+    DatasetInputs,
+    PointCloud,
+    SceneBounds,
+    Semantics,
+)
 from luxenactory.utils.colors import get_color
 from luxenactory.utils.io import (
     get_absolute_path,

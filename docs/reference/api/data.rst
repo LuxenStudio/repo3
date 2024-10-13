@@ -6,27 +6,27 @@ Data
 Image Dataset
 ----------------
 
-.. automodule:: luxenactory.data.image_dataset
+.. automodule:: luxenactory.dataloaders.image_dataset
    :members:
    :show-inheritance:
 
 Image Sampler
 ----------------
 
-.. automodule:: luxenactory.data.image_sampler
+.. automodule:: luxenactory.dataloaders.image_sampler
    :members:
    :show-inheritance:
 
 Pixel Sampler
 ----------------
 
-.. automodule:: luxenactory.data.pixel_sampler
+.. automodule:: luxenactory.dataloaders.pixel_sampler
    :members:
    :show-inheritance:
 
 Structures
 ----------------
 
-.. automodule:: luxenactory.data.structs
+.. automodule:: luxenactory.dataloaders.structs
    :members:
    :show-inheritance:

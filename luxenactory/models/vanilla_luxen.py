@@ -30,8 +30,8 @@ from luxenactory.cameras.rays import RayBundle
 from luxenactory.fields.modules.encoding import LuxenEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.luxen_field import LuxenField
-from luxenactory.graphs.base import Graph
-from luxenactory.graphs.modules.ray_sampler import PDFSampler, UniformSampler
+from luxenactory.models.base import Model
+from luxenactory.models.modules.ray_sampler import PDFSampler, UniformSampler
 from luxenactory.optimizers.loss import MSELoss
 from luxenactory.renderers.renderers import (
     AccumulationRenderer,
@@ -42,24 +42,20 @@ from luxenactory.utils import colors, misc, visualization, writer
 from luxenactory.utils.callbacks import Callback
 
 
-class LuxenGraph(Graph):
-    """Vanilla Luxen graph
+class LuxenModel(Model):
+    """Vanilla Luxen model
 
     Args:
-        intrinsics (torch.Tensor): Camera intrinsics.
-        camera_to_world (torch.Tensor): Camera to world transformation.
-        near_plane (float, optional): Where to start sampling points. Defaults to a distance of 2,
-        far_plane (float, optional): Where to stop sampling points. Defaults to a distance of 6,
-        num_coarse_samples (int, optional): Number of samples in coarse field evaluation. Defaults to 64,
-        num_importance_samples(int, optional): Number of samples in fine field evaluation. Defaults to 64,
-        enable_density_field (bool): Whether to create a density field to filter samples.
-        density_field_config (DictConfig): Configuration of density field.
+        near_plane: Where to start sampling points. Defaults to 2.0.
+        far_plane: Where to stop sampling points. Defaults to 6.0.
+        num_coarse_samples: Number of samples in coarse field evaluation. Defaults to 64,
+        num_importance_samples: Number of samples in fine field evaluation. Defaults to 64,
+        enable_density_field: Whether to create a density field to filter samples. Defaults to False.
+        density_field_config: Configuration of density field. Defaults to None.
     """
 
     def __init__(
         self,
-        intrinsics: torch.Tensor,
-        camera_to_world: torch.Tensor,
         near_plane: float = 2.0,
         far_plane: float = 6.0,
         num_coarse_samples: int = 64,
@@ -75,8 +71,6 @@ class LuxenGraph(Graph):
         self.field_coarse = None
         self.field_fine = None
         super().__init__(
-            intrinsics=intrinsics,
-            camera_to_world=camera_to_world,
             enable_density_field=enable_density_field,
             density_field_config=density_field_config,
             **kwargs,

@@ -26,7 +26,7 @@ from PIL import Image
 from torch.utils.data import Dataset
 from torchtyping import TensorType
 
-from luxenactory.data.structs import Semantics
+from luxenactory.dataloaders.structs import Semantics
 from luxenactory.utils.misc import is_not_none
 
 
