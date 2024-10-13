@@ -9,5 +9,4 @@ It can be difficult getting started with Luxens. The field is still quite new an
     Ray Samplers<visualize_samplers.ipynb>
     Spatial Distortions<visualize_spatial_distortions.ipynb>
     Encoders<visualize_encoders.ipynb>
-    Viewer<visualize_viewer.ipynb>
 ```
