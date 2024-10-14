@@ -1,6 +1,6 @@
 {
   "name": "viewer",
-  "homepage": "https://ethanweber.me/luxenactory-private/",
+  "homepage": ".",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
