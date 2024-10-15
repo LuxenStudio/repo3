@@ -20,6 +20,7 @@ from luxenactory.cameras.camera_paths import (
 )
 from luxenactory.pipelines.base import Pipeline, setup_pipeline
 from luxenactory.utils import io as io_utils
+from luxenactory.utils.config import setup_config
 from luxenactory.utils.misc import human_format
 from luxenactory.utils.writer import TimeWriter
 
@@ -164,6 +165,7 @@ def main(
 
     config.trainer.resume_train.load_dir = checkpoint_dir
     config.pipeline.dataloader.eval_image_indices = None
+    config = setup_config(config)  # converting to typed config
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # setup pipeline (which includes the dataloaders)
