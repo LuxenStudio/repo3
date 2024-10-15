@@ -19,7 +19,7 @@ In addition to their implementations, we have provided guides that walk through 
     Luxen<luxen.md>
     Mip-Luxen<mipluxen.md>
     Mip-Luxen 360<mipluxen_360.md>
-    Instan-NGP<instant_ngp.md>
+    Instant-NGP<instant_ngp.md>
     Luxen-W<luxen_w.md>
     Semantic Luxen<semantic_luxen.md>
 ```
