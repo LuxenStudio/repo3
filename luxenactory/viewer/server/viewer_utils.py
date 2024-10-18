@@ -27,11 +27,11 @@ import torch
 
 from luxenactory.cameras.cameras import get_camera, get_intrinsics_from_intrinsics_matrix
 from luxenactory.cameras.rays import RayBundle
+from luxenactory.configs import base as cfg
 from luxenactory.dataloaders.image_dataset import ImageDataset
 from luxenactory.dataloaders.structs import DatasetInputs
 from luxenactory.models.base import Model
 from luxenactory.utils import profiler, visualization
-from luxenactory.utils.config import ViewerConfig
 from luxenactory.utils.decorators import check_visualizer_enabled, decorate_all
 from luxenactory.utils.writer import GLOBAL_BUFFER, EventName
 from luxenactory.viewer.server.utils import get_intrinsics_matrix_and_camera_to_world_h
@@ -184,7 +184,7 @@ class VisualizerState:
         config: viewer setup configuration
     """
 
-    def __init__(self, config: ViewerConfig):
+    def __init__(self, config: cfg.ViewerConfig):
         self.config = config
 
         self.vis = None

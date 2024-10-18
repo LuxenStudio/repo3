@@ -15,16 +15,19 @@
 """
 Semantic Luxen implementation.
 """
+from __future__ import annotations
 
 import torch
 from torch import nn
 
 from luxenactory.cameras.rays import RayBundle
+from luxenactory.configs import base as cfg
 from luxenactory.dataloaders.structs import Semantics
 from luxenactory.fields.modules.encoding import LuxenEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.luxen_field import LuxenField
 from luxenactory.fields.semantic_luxen_field import SemanticLuxenField
+from luxenactory.models.modules.scene_colliders import AABBBoxCollider
 from luxenactory.models.vanilla_luxen import LuxenModel
 from luxenactory.renderers.renderers import SemanticRenderer
 from luxenactory.utils import misc, writer
@@ -33,10 +36,10 @@ from luxenactory.utils import misc, writer
 class SemanticLuxenModel(LuxenModel):
     """Semantic-Luxen model"""
 
-    def __init__(self, semantics: Semantics, **kwargs) -> None:
+    def __init__(self, config: cfg.ModelConfig, semantics: Semantics, **kwargs) -> None:
         self.stuff_classes = semantics.stuff_classes
         self.stuff_colors = semantics.stuff_colors
-        super().__init__(**kwargs)
+        super().__init__(config=config, **kwargs)
 
     def populate_fields(self):
         """Set the fields."""
@@ -55,8 +58,16 @@ class SemanticLuxenModel(LuxenModel):
 
     def populate_misc_modules(self):
         super().populate_misc_modules()
+
+        # renderers
         self.renderer_semantic = SemanticRenderer()
+
+        # losses
         self.cross_entropy_loss = nn.CrossEntropyLoss(reduction="mean")
+
+        # colliders
+        if self.config.enable_collider:
+            self.collider = AABBBoxCollider(scene_bounds=self.scene_bounds)
 
     def get_outputs(self, ray_bundle: RayBundle):
         # uniform sampling
