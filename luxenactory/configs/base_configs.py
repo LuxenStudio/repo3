@@ -19,16 +19,17 @@ Put all the method implementations in one location.
 from typing import Dict
 
 from luxenactory.configs.base import (
-    BlenderDataloaderConfig,
+    BlenderDatasetConfig,
     Config,
     FriendsDataloaderConfig,
     InstantNGPModelConfig,
-    MipLuxen360DataloaderConfig,
+    MipLuxen360DatasetConfig,
     ModelConfig,
     LuxenWModelConfig,
     OptimizerConfig,
     PipelineConfig,
     TrainerConfig,
+    VanillaDataloaderConfig,
 )
 from luxenactory.models.mipluxen import MipLuxenModel
 from luxenactory.models.mipluxen_360 import MipLuxen360Model
@@ -40,7 +41,11 @@ base_configs["instant_ngp"] = Config(
     method_name="instant_ngp",
     trainer=TrainerConfig(mixed_precision=True),
     pipeline=PipelineConfig(
-        dataloader=BlenderDataloaderConfig(train_num_rays_per_batch=8192, eval_num_rays_per_chunk=8192),
+        dataloader=VanillaDataloaderConfig(
+            train_dataset=BlenderDatasetConfig(),
+            train_num_rays_per_batch=8192,
+            eval_num_rays_per_chunk=8192,
+        ),
         model=InstantNGPModelConfig(),
     ),
     optimizers={
@@ -56,7 +61,11 @@ base_configs["mipluxen_360"] = Config(
     method_name="mipluxen_360",
     trainer=TrainerConfig(steps_per_test=200),
     pipeline=PipelineConfig(
-        dataloader=MipLuxen360DataloaderConfig(),
+        dataloader=VanillaDataloaderConfig(
+            train_dataset=MipLuxen360DatasetConfig(),
+            train_num_rays_per_batch=8192,
+            eval_num_rays_per_chunk=8192,
+        ),
         model=ModelConfig(
             _target=MipLuxen360Model,
             collider_params={"near_plane": 0.5, "far_plane": 20.0},
@@ -70,7 +79,11 @@ base_configs["mipluxen_360"] = Config(
 base_configs["mipluxen"] = Config(
     method_name="mipluxen",
     pipeline=PipelineConfig(
-        dataloader=BlenderDataloaderConfig(),
+        dataloader=VanillaDataloaderConfig(
+            train_dataset=BlenderDatasetConfig(),
+            train_num_rays_per_batch=8192,
+            eval_num_rays_per_chunk=8192,
+        ),
         model=ModelConfig(
             _target=MipLuxenModel,
             loss_coefficients={"rgb_loss_coarse": 0.1, "rgb_loss_fine": 1.0},
@@ -102,5 +115,10 @@ base_configs["semantic_luxen"] = Config(
 
 base_configs["vanilla_luxen"] = Config(
     method_name="vanilla_luxen",
-    pipeline=PipelineConfig(dataloader=BlenderDataloaderConfig(), model=ModelConfig(_target=LuxenModel)),
+    pipeline=PipelineConfig(
+        dataloader=VanillaDataloaderConfig(
+            train_dataset=BlenderDatasetConfig(),
+        ),
+        model=ModelConfig(_target=LuxenModel),
+    ),
 )
