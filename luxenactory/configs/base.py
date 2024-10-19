@@ -178,7 +178,7 @@ class BlenderDatasetConfig(InstantiateConfig):
     """Blender dataset config"""
 
     _target: Type = Blender
-    data_directory: str = "data/blender/lego"
+    data_directory: Path = Path("data/blender/lego")
     scale_factor: float = 1.0
     alpha_color: str = "white"
     downscale_factor: int = 1
@@ -197,7 +197,7 @@ class FriendsDatasetConfig(InstantiateConfig):
     """Friends dataset config"""
 
     _target: Type = Friends
-    data_directory: str = "data/friends/TBBT-big_living_room"
+    data_directory: Path = Path("data/friends/TBBT-big_living_room")
 
 
 @dataclass
@@ -214,7 +214,7 @@ class MipLuxen360DatasetConfig(InstantiateConfig):
     """Mipluxen 360 dataset config"""
 
     _target: Type = Mipluxen360
-    data_directory: str = "data/mipluxen_360/garden"
+    data_directory: Path = Path("data/mipluxen_360/garden")
 
 
 @dataclass
