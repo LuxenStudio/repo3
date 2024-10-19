@@ -16,6 +16,8 @@
 Put all the method implementations in one location.
 """
 
+from typing import Dict
+
 from luxenactory.configs.base import (
     BlenderDataloaderConfig,
     Config,
@@ -33,7 +35,7 @@ from luxenactory.models.mipluxen_360 import MipLuxen360Model
 from luxenactory.models.semantic_luxen import SemanticLuxenModel
 from luxenactory.models.vanilla_luxen import LuxenModel
 
-base_configs = {}
+base_configs: Dict[str, Config] = {}
 base_configs["instant_ngp"] = Config(
     method_name="instant_ngp",
     trainer=TrainerConfig(mixed_precision=True),
