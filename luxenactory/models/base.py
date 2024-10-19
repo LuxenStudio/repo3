@@ -26,7 +26,6 @@ import torch
 from torch import nn
 from torch.nn import Parameter
 
-from luxenactory.cameras.cameras import Camera
 from luxenactory.cameras.rays import RayBundle
 from luxenactory.configs import base as cfg
 from luxenactory.dataloaders.structs import SceneBounds
@@ -197,11 +196,6 @@ class Model(nn.Module):
         for output_name, outputs_list in outputs_lists.items():
             outputs[output_name] = torch.cat(outputs_list).view(image_height, image_width, -1)  # type: ignore
         return outputs
-
-    def get_outputs_for_camera(self, camera: Camera):
-        """Get the model outputs for a Camera."""
-        camera_ray_bundle = camera.get_camera_ray_bundle(device=self.device)
-        return self.get_outputs_for_camera_ray_bundle(camera_ray_bundle)
 
     @abstractmethod
     def log_test_image_outputs(self, image_idx, step, batch, outputs) -> float:
