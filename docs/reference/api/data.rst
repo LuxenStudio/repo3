@@ -3,6 +3,13 @@
 Data
 ============
 
+Data Parsers
+----------------
+
+.. automodule:: luxenactory.dataloaders.data_parsers
+   :members:
+   :show-inheritance:
+
 Image Dataset
 ----------------
 
@@ -10,10 +17,10 @@ Image Dataset
    :members:
    :show-inheritance:
 
-Image Sampler
+Image Dataloader
 ----------------
 
-.. automodule:: luxenactory.dataloaders.image_sampler
+.. automodule:: luxenactory.dataloaders.image_dataloader
    :members:
    :show-inheritance:
 
