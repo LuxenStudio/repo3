@@ -71,11 +71,8 @@ conda activate luxenactory
 # Clone the repo
 git clone git@github.com:plenoptix/luxenactory.git
 
-# Install dependencies
+# Install dependencies and luxenactory as a library
 cd luxenactory
-pip install -r environment/requirements.txt
-
-# Install luxenactory as a library
 pip install -e .
 
 # Install tiny-cuda-nn (tcnn) and apex to use with the graph_instant_ngp.yaml config

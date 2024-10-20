@@ -31,14 +31,7 @@ Clone the repo
 git clone git@github.com:plenoptix/luxenactory.git
 ```
 
-Install dependencies
-
-```bash
-cd luxenactory
-pip install -r environment/requirements.txt
-```
-
-Install luxenactory as a library
+Install dependencies and luxenactory as a library
 
 ```bash
 pip install -e .
@@ -104,13 +97,6 @@ Additionally, if you run everything with the default configuration, by default, 
 
 ```bash
 tensorboard --logdir outputs
-```
-
-Or the following:
-
-```bash
-export TENSORBOARD_PORT=<port>
-bash environment/run_tensorboard.sh
 ```
 
 # Rendering a Trajectory
