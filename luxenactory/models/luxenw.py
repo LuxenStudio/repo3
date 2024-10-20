@@ -45,6 +45,8 @@ from luxenactory.utils import colors, misc, visualization, writer
 class LuxenWModel(Model):
     """Luxen-W model"""
 
+    config: cfg.LuxenWModelConfig
+
     def __init__(
         self,
         config: cfg.LuxenWModelConfig,
