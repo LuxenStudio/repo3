@@ -30,7 +30,7 @@ from luxenactory.cameras.rays import RayBundle
 from luxenactory.configs import base as cfg
 from luxenactory.dataloaders.structs import SceneBounds
 from luxenactory.fields.density_fields.density_grid import DensityGrid
-from luxenactory.utils.callbacks import Callback
+from luxenactory.utils.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenactory.utils.misc import get_masked_dict, is_not_none
 
 
@@ -76,7 +76,9 @@ class Model(nn.Module):
         """Returns the device that the model is on."""
         return self.device_indicator_param.device
 
-    def get_training_callbacks(self) -> List[Callback]:  # pylint:disable=no-self-use
+    def get_training_callbacks(  # pylint:disable=no-self-use
+        self, training_callback_attributes: TrainingCallbackAttributes  # pylint: disable=unused-argument
+    ) -> List[TrainingCallback]:
         """Returns a list of callbacks that run functions at the specified training iterations."""
         return []
 
@@ -92,7 +94,6 @@ class Model(nn.Module):
                 update_every_num_iters=self.config.density_field_params["update_every_num_iters"],
             )
 
-    @abstractmethod
     def populate_fields(self):
         """Set the fields."""
 

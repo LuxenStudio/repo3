@@ -52,6 +52,16 @@
       "args": ["mipluxen_360"]
     },
     {
+      "name": "Python: run_train tensorf (gpu)",
+      "type": "python",
+      "request": "launch",
+      "program": "scripts/run_train.py",
+      "console": "integratedTerminal",
+      "args": [
+        "tensorf"
+      ]
+    },
+    {
       "name": "Python: run_train luxenw (gpu)",
       "type": "python",
       "request": "launch",

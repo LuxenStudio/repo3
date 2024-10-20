@@ -35,6 +35,7 @@ from luxenactory.dataloaders.datasets import (
 from luxenactory.models.base import Model
 from luxenactory.models.instant_ngp import NGPModel
 from luxenactory.models.luxenw import LuxenWModel
+from luxenactory.models.tensorf import TensoRFModel
 from luxenactory.optimizers.schedulers import ExponentialDecaySchedule
 from luxenactory.pipelines.base import Pipeline
 from luxenactory.utils import writer
@@ -291,6 +292,17 @@ class LuxenWModelConfig(ModelConfig):
     num_coarse_samples: int = 64
     num_importance_samples: int = 64
     uncertainty_min: float = 0.03
+
+
+@dataclass
+class TensoRFModelConfig(ModelConfig):
+    """TensoRF model config"""
+
+    _target: Type = TensoRFModel
+    init_resolution: int = 128
+    final_resolution: int = 200
+    upsampling_iters: Tuple[int, ...] = (5000, 5500, 7000)
+    loss_coefficients: Dict[str, float] = to_immutable_dict({"rgb_loss_coarse": 1.0, "feature_loss": 8e-5})
 
 
 # Pipeline related configs
