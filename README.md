@@ -27,12 +27,12 @@
 <p align="center"> The all-in-one repo for Luxens </p>
 
 <p align="center">
-    <picture>
-    <a herf="http://www.luxenactory.com/"><img alt="documentation" src="docs/_static/imgs/readme_documentation.png" width="150">
-    </picture>
-    <picture>
-    <a herf="https://viewer.luxenactory.com/"><img alt="viewer" src="docs/_static/imgs/readme_viewer.png" width="150">
-    </picture>
+    <a href="http://www.luxenactory.com/">
+        <img alt="documentation" src="docs/_static/imgs/readme_documentation.png" width="150">
+    </a>
+    <a href="https://viewer.luxenactory.com/">
+        <img alt="viewer" src="docs/_static/imgs/readme_viewer.png" width="150">
+    </a>
 </p>
 
 - [Quickstart](#quickstart)
