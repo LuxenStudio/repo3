@@ -34,7 +34,6 @@ from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.luxen_field import LuxenField
 from luxenactory.models.base import Model
 from luxenactory.models.modules.ray_sampler import PDFSampler, UniformSampler
-from luxenactory.models.modules.scene_colliders import NearFarCollider
 from luxenactory.optimizers.loss import L1Loss, MSELoss
 from luxenactory.optimizers.optimizers import Optimizers
 from luxenactory.renderers.renderers import (
@@ -111,8 +110,11 @@ class TensoRFModel(Model):
         ]
         return callbacks
 
-    def populate_misc_modules(self):
-        # fields
+    def populate_modules(self):
+        """Set the fields and modules"""
+        super().populate_modules()
+
+        # setting up fields
         position_encoding = TensorVMEncoding(
             resolution=self.init_resolution,
             num_components=96,
@@ -148,12 +150,6 @@ class TensoRFModel(Model):
         self.psnr = PeakSignalNoiseRatio(data_range=1.0)
         self.ssim = structural_similarity_index_measure
         self.lpips = LearnedPerceptualImagePatchSimilarity()
-
-        # colliders
-        if self.config.enable_collider:
-            self.collider = NearFarCollider(
-                near_plane=self.config.collider_params["near_plane"], far_plane=self.config.collider_params["far_plane"]
-            )
 
     def get_param_groups(self) -> Dict[str, List[Parameter]]:
         param_groups = {}
