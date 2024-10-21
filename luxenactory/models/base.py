@@ -28,7 +28,7 @@ from torch.nn import Parameter
 
 from luxenactory.cameras.rays import RayBundle
 from luxenactory.configs import base as cfg
-from luxenactory.dataloaders.structs import SceneBounds
+from luxenactory.datamanagers.structs import SceneBounds
 from luxenactory.fields.density_fields.density_grid import DensityGrid
 from luxenactory.utils.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenactory.utils.misc import get_masked_dict, is_not_none

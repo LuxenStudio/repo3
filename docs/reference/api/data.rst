@@ -6,34 +6,34 @@ Data
 Data Parsers
 ----------------
 
-.. automodule:: luxenactory.dataloaders.data_parsers
+.. automodule:: luxenactory.datamanagers.dataparsers
    :members:
    :show-inheritance:
 
-Image Dataset
+Datasets
 ----------------
 
-.. automodule:: luxenactory.dataloaders.image_dataset
+.. automodule:: luxenactory.datamanagers.datasets
    :members:
    :show-inheritance:
 
-Image Dataloader
+Dataloaders
 ----------------
 
-.. automodule:: luxenactory.dataloaders.image_dataloader
+.. automodule:: luxenactory.datamanagers.dataloaders
    :members:
    :show-inheritance:
 
-Pixel Sampler
+Pixel Samplers
 ----------------
 
-.. automodule:: luxenactory.dataloaders.pixel_sampler
+.. automodule:: luxenactory.datamanagers.pixel_sampler
    :members:
    :show-inheritance:
 
 Structures
 ----------------
 
-.. automodule:: luxenactory.dataloaders.structs
+.. automodule:: luxenactory.datamanagers.structs
    :members:
    :show-inheritance:

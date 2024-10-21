@@ -24,16 +24,18 @@ from typing import Any, Dict, List, Literal, Optional, Tuple, Type
 import torch
 
 from luxenactory.configs.utils import to_immutable_dict
-from luxenactory.dataloaders.base import VanillaDataManager
-from luxenactory.dataloaders.data_parsers import (
-    Blender,
-    DataParser,
-    Friends,
-    InstantNGP,
-    Mipluxen360,
-    Luxenactory,
-    Record3D,
-)
+
+# data instances
+from luxenactory.datamanagers.base import VanillaDataManager
+from luxenactory.datamanagers.dataparsers.base import DataParser
+from luxenactory.datamanagers.dataparsers.blender_parser import Blender
+from luxenactory.datamanagers.dataparsers.friends_parser import Friends
+from luxenactory.datamanagers.dataparsers.instant_ngp_parser import InstantNGP
+from luxenactory.datamanagers.dataparsers.mipluxen_parser import Mipluxen360
+from luxenactory.datamanagers.dataparsers.luxenactory_parser import Luxenactory
+from luxenactory.datamanagers.dataparsers.record3d_parser import Record3D
+
+# model instances
 from luxenactory.models.base import Model
 from luxenactory.models.instant_ngp import NGPModel
 from luxenactory.models.luxenw import LuxenWModel
@@ -238,11 +240,10 @@ class VanillaDataManagerConfig(InstantiateConfig):
     """Configuration for data manager instantiation"""
 
     _target: Type = VanillaDataManager
-    train_dataset: DataParserConfig = BlenderDataParserConfig()
-    image_dataset_type: str = "rgb"
+    train_dataparser: DataParserConfig = BlenderDataParserConfig()
     train_num_rays_per_batch: int = 1024
     train_num_images_to_sample_from: int = -1
-    eval_dataset: Optional[InstantiateConfig] = None
+    eval_dataparser: Optional[InstantiateConfig] = None
     eval_image_indices: Optional[Tuple[int, ...]] = (0,)
     eval_num_rays_per_chunk: int = 4096
 
@@ -252,8 +253,7 @@ class FriendsDataManagerConfig(VanillaDataManagerConfig):
     """Friends data manager config"""
 
     _target: Type = VanillaDataManager
-    train_dataset: DataParserConfig = FriendsDataParserConfig()
-    image_dataset_type: str = "panoptic"
+    train_dataparser: DataParserConfig = FriendsDataParserConfig()
 
 
 # Model related configs
@@ -322,7 +322,7 @@ class PipelineConfig(InstantiateConfig):
     """Configuration for pipeline instantiation"""
 
     _target: Type = Pipeline
-    data_manager: VanillaDataManagerConfig = VanillaDataManagerConfig()
+    datamanager: VanillaDataManagerConfig = VanillaDataManagerConfig()
     model: ModelConfig = ModelConfig()
 
 

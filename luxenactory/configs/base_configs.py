@@ -43,8 +43,8 @@ base_configs["instant_ngp"] = Config(
     method_name="instant_ngp",
     trainer=TrainerConfig(mixed_precision=True),
     pipeline=PipelineConfig(
-        data_manager=VanillaDataManagerConfig(
-            train_dataset=BlenderDataParserConfig(),
+        datamanager=VanillaDataManagerConfig(
+            train_dataparser=BlenderDataParserConfig(),
             train_num_rays_per_batch=8192,
             eval_num_rays_per_chunk=8192,
         ),
@@ -63,8 +63,8 @@ base_configs["mipluxen_360"] = Config(
     method_name="mipluxen_360",
     trainer=TrainerConfig(steps_per_test=200),
     pipeline=PipelineConfig(
-        data_manager=VanillaDataManagerConfig(
-            train_dataset=MipLuxen360DataParserConfig(),
+        datamanager=VanillaDataManagerConfig(
+            train_dataparser=MipLuxen360DataParserConfig(),
             train_num_rays_per_batch=8192,
             eval_num_rays_per_chunk=8192,
         ),
@@ -81,8 +81,8 @@ base_configs["mipluxen_360"] = Config(
 base_configs["mipluxen"] = Config(
     method_name="mipluxen",
     pipeline=PipelineConfig(
-        data_manager=VanillaDataManagerConfig(
-            train_dataset=BlenderDataParserConfig(),
+        datamanager=VanillaDataManagerConfig(
+            train_dataparser=BlenderDataParserConfig(),
             train_num_rays_per_batch=8192,
             eval_num_rays_per_chunk=8192,
         ),
@@ -98,14 +98,14 @@ base_configs["mipluxen"] = Config(
 base_configs["luxenw"] = Config(
     experiment_name="friends_TBBT-big_living_room",
     method_name="luxenw",
-    pipeline=PipelineConfig(data_manager=FriendsDataManagerConfig(), model=LuxenWModelConfig()),
+    pipeline=PipelineConfig(datamanager=FriendsDataManagerConfig(), model=LuxenWModelConfig()),
 )
 
 base_configs["semantic_luxen"] = Config(
     experiment_name="friends_TBBT-big_living_room",
     method_name="semantic_luxen",
     pipeline=PipelineConfig(
-        data_manager=FriendsDataManagerConfig(),
+        datamanager=FriendsDataManagerConfig(),
         model=ModelConfig(
             _target=SemanticLuxenModel,
             loss_coefficients={"rgb_loss_coarse": 1.0, "rgb_loss_fine": 1.0, "semantic_loss_fine": 0.05},
@@ -118,8 +118,8 @@ base_configs["semantic_luxen"] = Config(
 base_configs["vanilla_luxen"] = Config(
     method_name="vanilla_luxen",
     pipeline=PipelineConfig(
-        data_manager=VanillaDataManagerConfig(
-            train_dataset=BlenderDataParserConfig(),
+        datamanager=VanillaDataManagerConfig(
+            train_dataparser=BlenderDataParserConfig(),
         ),
         model=ModelConfig(_target=LuxenModel),
     ),
@@ -129,8 +129,8 @@ base_configs["tensorf"] = Config(
     method_name="tensorf",
     trainer=TrainerConfig(mixed_precision=True),
     pipeline=PipelineConfig(
-        data_manager=VanillaDataManagerConfig(
-            train_dataset=BlenderDataParserConfig(),
+        datamanager=VanillaDataManagerConfig(
+            train_dataparser=BlenderDataParserConfig(),
         ),
         model=TensoRFModelConfig(),
     ),

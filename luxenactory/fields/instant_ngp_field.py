@@ -24,7 +24,7 @@ from torch.nn.parameter import Parameter
 from torchtyping import TensorType
 
 from luxenactory.cameras.rays import RaySamples
-from luxenactory.dataloaders.structs import SceneBounds
+from luxenactory.datamanagers.structs import SceneBounds
 from luxenactory.fields.base import Field
 from luxenactory.fields.modules.encoding import Encoding, HashEncoding, SHEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames

@@ -22,7 +22,7 @@ from torch import nn
 
 from luxenactory.cameras.rays import RayBundle
 from luxenactory.configs import base as cfg
-from luxenactory.dataloaders.structs import Semantics
+from luxenactory.datamanagers.structs import Semantics
 from luxenactory.fields.modules.encoding import LuxenEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.luxen_field import LuxenField
