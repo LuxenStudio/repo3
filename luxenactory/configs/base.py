@@ -31,6 +31,7 @@ from luxenactory.dataloaders.data_parsers import (
     Friends,
     InstantNGP,
     Mipluxen360,
+    Luxenactory,
     Record3D,
 )
 from luxenactory.models.base import Model
@@ -170,6 +171,17 @@ class DataParserConfig(InstantiateConfig):
 
 
 @dataclass
+class LuxenactoryDataParserConfig(DataParserConfig):
+    """Luxenactory dataset config"""
+
+    _target: Type = Luxenactory
+    data_directory: Path = Path("data/ours/posterv2")
+    scale_factor: float = 1.0
+    downscale_factor: int = 1
+    scene_scale: float = 0.33
+
+
+@dataclass
 class BlenderDataParserConfig(DataParserConfig):
     """Blender dataset config"""
 
@@ -202,7 +214,7 @@ class MipLuxen360DataParserConfig(DataParserConfig):
 
 @dataclass
 class InstantNGPDataParserConfig(DataParserConfig):
-    """Mipluxen 360 dataset config"""
+    """Instant-NGP dataset config"""
 
     _target: Type = InstantNGP
     data_directory: Path = Path("data/ours/posterv2")
