@@ -29,8 +29,9 @@ from torch.nn.parallel import DistributedDataParallel as DDP
 from luxenactory.configs import base as cfg
 from luxenactory.datamanagers.base import DataManager
 from luxenactory.models.base import Model
-from luxenactory.utils import profiler
+from luxenactory.utils import profiler, writer
 from luxenactory.utils.callbacks import TrainingCallback, TrainingCallbackAttributes
+from luxenactory.utils.writer import EventName, TimeWriter
 
 
 class Pipeline(nn.Module):
@@ -122,14 +123,22 @@ class Pipeline(nn.Module):
         # NOTE(ethan): next_eval() is not being used right now
         assert self.datamanager.eval_dataloader is not None
         for camera_ray_bundle, batch in self.datamanager.eval_dataloader:
-            assert camera_ray_bundle.camera_indices is not None
-            image_idx = int(camera_ray_bundle.camera_indices[0, 0])
-            if self.world_size > 1:
-                outputs = self.model.module.get_outputs_for_camera_ray_bundle(camera_ray_bundle)
-                psnr = self.model.module.log_test_image_outputs(image_idx, step, batch, outputs)
-            else:
-                outputs = self.model.get_outputs_for_camera_ray_bundle(camera_ray_bundle)
-                psnr = self.model.log_test_image_outputs(image_idx, step, batch, outputs)
+            with TimeWriter(None, None, write=False) as test_t:
+                assert camera_ray_bundle.camera_indices is not None
+                image_idx = int(camera_ray_bundle.camera_indices[0, 0])
+                if self.world_size > 1:
+                    outputs = self.model.module.get_outputs_for_camera_ray_bundle(camera_ray_bundle)
+                    psnr = self.model.module.log_test_image_outputs(image_idx, step, batch, outputs)
+                else:
+                    outputs = self.model.get_outputs_for_camera_ray_bundle(camera_ray_bundle)
+                    psnr = self.model.log_test_image_outputs(image_idx, step, batch, outputs)
+            if step is not None:
+                writer.put_time(
+                    name=EventName.TEST_RAYS_PER_SEC,
+                    duration=len(camera_ray_bundle) / test_t.duration,
+                    step=step,
+                    avg_over_steps=True,
+                )
         # TODO(ethan): this function should probably return something?
         self.train()
 
