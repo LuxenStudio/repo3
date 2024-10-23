@@ -13,7 +13,7 @@ import luxenactory.configs.base as cfg
 from luxenactory.configs.base_configs import base_configs
 from luxenactory.engine.trainer import train_loop
 
-BLACKLIST = ["base", "semantic_luxen", "mipluxen_360", "instant_ngp"]
+BLACKLIST = ["base", "semantic_luxen", "mipluxen_360", "instant_ngp", "compound"]
 
 
 def set_reduced_config(config: cfg.Config):
