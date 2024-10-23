@@ -38,6 +38,7 @@ from luxenactory.datamanagers.dataparsers.record3d_parser import Record3D
 
 # model instances
 from luxenactory.models.base import Model
+from luxenactory.models.compound import CompoundModel
 from luxenactory.models.instant_ngp import NGPModel
 from luxenactory.models.luxenw import LuxenWModel
 from luxenactory.models.tensorf import TensoRFModel
@@ -400,6 +401,18 @@ class InstantNGPModelConfig(ModelConfig):
     """Whether to create a density field to filter samples."""
     num_samples: int = 1024  # instead of course/fine samples
     """Number of samples in field evaluation. Defaults to 1024,"""
+
+
+@dataclass
+class CompoundModelConfig(ModelConfig):
+    """Compound Model Config"""
+
+    _target: Type = CompoundModel
+    enable_density_field: bool = True
+    enable_collider: bool = False
+    field_implementation: Literal["torch", "tcnn"] = "tcnn"  # torch, tcnn, ...
+    loss_coefficients: Dict[str, float] = to_immutable_dict({"rgb_loss": 1.0})
+    num_samples: int = 1024  # instead of course/fine samples
 
 
 @dataclass
