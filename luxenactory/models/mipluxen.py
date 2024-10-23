@@ -42,7 +42,11 @@ from luxenactory.utils import colors, misc, visualization, writer
 
 
 class MipLuxenModel(Model):
-    """mip-Luxen model"""
+    """mip-Luxen model
+
+    Args:
+        config: MipLuxen configuration to instantiate model
+    """
 
     def __init__(
         self,

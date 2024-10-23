@@ -31,15 +31,7 @@ from luxenactory.utils.io import get_absolute_path, load_from_json
 
 @dataclass
 class Luxenactory(DataParser):
-    """Luxenactory Dataset
-
-    Args:
-        data_directory: Location of data
-        scale_factor: How much to scale the camera origins by.
-        downscale_factor: How much to downscale images.
-        scene_scale: How much to scale the scene.
-        orientation_method: The method to use for orientation. Either "pca" or "up".
-    """
+    """Luxenactory Dataset"""
 
     config: cfg.LuxenactoryDataParserConfig
 

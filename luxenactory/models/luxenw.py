@@ -43,7 +43,11 @@ from luxenactory.utils import colors, misc, visualization, writer
 
 
 class LuxenWModel(Model):
-    """Luxen-W model"""
+    """Luxen-W model
+
+    Args:
+        config: LuxenW configuration to instantiate model
+    """
 
     config: cfg.LuxenWModelConfig
 

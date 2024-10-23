@@ -34,7 +34,12 @@ from luxenactory.utils import misc, writer
 
 
 class SemanticLuxenModel(LuxenModel):
-    """Semantic-Luxen model"""
+    """Semantic-Luxen model
+
+    Args:
+        config: SemanticLuxen configuration to instantiate model
+        semantics: additional semantics data info
+    """
 
     def __init__(self, config: cfg.ModelConfig, semantics: Semantics, **kwargs) -> None:
         self.stuff_classes = semantics.stuff_classes
