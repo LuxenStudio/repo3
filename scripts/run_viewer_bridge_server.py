@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """View Bridge Server"""
 
 from luxenactory.viewer.server.server import run_viewer_bridge_server

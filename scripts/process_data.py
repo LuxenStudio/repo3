@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """Processes a video or image sequence to a luxenactory compatible dataset."""
 
 import json
