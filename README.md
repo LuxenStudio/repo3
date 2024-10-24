@@ -41,8 +41,8 @@
 - [Supported Features](#supported-features)
 - [See what's possible](#see-whats-possible)
 
-
 # Philosophy
+
 All-in-one repository for state-of-the-art Luxens.
 
 Luxenactory provides a simple API that allows for a seamless and simplified end-to-end process of creating, training, and visualizing Luxens. The library supports a **more interpretable implementation of Luxens by modularizing each component**. With more modular Luxens, not only does your code become far more user-friendly, but using this framework also makes it easier for the community to build upon your implementation.
@@ -64,52 +64,44 @@ For more complex changes (e.g. running with your own data/ setting up a new Luxe
 
 This repository is tested with CUDA 11.3. Make sure to install [Conda](https://docs.conda.io/en/latest/miniconda.html#linux-installers) before preceding.
 
-<details>
-<summary>Installing Conda</summary>
-
-This step is fairly self-explanatory, but here are the basic steps. You can also find countless tutorials online.
-
-```
-cd /path/to/install/miniconda
-
-mkdir -p miniconda3
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda3/miniconda.sh
-bash miniconda3/miniconda.sh -b -u -p miniconda3
-rm -rf miniconda/miniconda.sh
-```
-
 </details>
 
 Create the python environment
+
 ```
 conda create --name luxenactory python=3.8.13
 conda activate luxenactory
+python -m pip install --upgrade pip
 ```
 
 Clone the repo
+
 ```
 git clone git@github.com:plenoptix/luxenactory.git
-cd luxenactory
 ```
 
 Install dependencies and luxenactory as a library
+
 ```
-python -m pip install --upgrade pip
+cd luxenactory
 pip install -e .
 ```
 
 Install tiny-cuda-nn (tcnn) to run instant_ngp
+
 ```
 pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 -f https://download.pytorch.org/whl/torch_stable.html
 pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
 ```
 
 Experimental: install tab completion for luxenactory (bash & zsh)
+
 ```
 python scripts/completions/configure.py install
 ```
 
 Run the test cases
+
 ```
 pytest tests
 ```
@@ -210,18 +202,18 @@ python scripts/run_eval.py render-trajectory --load-config=outputs/blender_lego/
 
 For a more in-depth tutorial on how to modify/implement your own Luxen Graph, please see our [walk-through](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/pipelines/index.html).
 
-
 # Learn More
-| Section | Description |
-|-|-|
-| [Documentation](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/) | Full API documentation and tutorials |
-| [Interactive Guides](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/guides/index.html) | Go-to spot for learning how Luxens and each of its modules work.
-| [Quick tour](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/quickstart_index.html) | Example script on how to navigate Luxenactory from install, train, to test.
-| [Creating pipelines](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/pipelines/index.html) | Learn how to easily build new neural rendering pipelines by using and/or implementing new modules.
-| [Creating datsets](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/data/index.html) | Have a new dataset? Learn how to use it with Luxenactory.
-| [Mobile Capture to NerF](#) | Step-by-step tutorial on how to create beautiful renders with just your phone.
-| [Contributing](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/reference/contributing.html) | Walk-through for how you can start contributing now.
-| [Slack](https://join.slack.com/t/luxenactory/shared_invite/zt-1fwqsgjgl-OE0VUJWSPtlVtbC5YXKZrg) | Join our community to discuss more. We would love to hear from you!
+
+| Section                                                                                                            | Description                                                                                        |
+| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| [Documentation](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/)                                    | Full API documentation and tutorials                                                               |
+| [Interactive Guides](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/guides/index.html)              | Go-to spot for learning how Luxens and each of its modules work.                                    |
+| [Quick tour](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/quickstart_index.html)        | Example script on how to navigate Luxenactory from install, train, to test.                         |
+| [Creating pipelines](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/pipelines/index.html) | Learn how to easily build new neural rendering pipelines by using and/or implementing new modules. |
+| [Creating datsets](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/data/index.html)        | Have a new dataset? Learn how to use it with Luxenactory.                                           |
+| [Mobile Capture to NerF](#)                                                                                        | Step-by-step tutorial on how to create beautiful renders with just your phone.                     |
+| [Contributing](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/reference/contributing.html)          | Walk-through for how you can start contributing now.                                               |
+| [Slack](https://join.slack.com/t/luxenactory/shared_invite/zt-1fwqsgjgl-OE0VUJWSPtlVtbC5YXKZrg)                     | Join our community to discuss more. We would love to hear from you!                                |
 
 # Supported Features
 
@@ -229,16 +221,16 @@ We provide the following support strucutures to make life easier for getting sta
 
 **If you are looking for a feature that is not currently supported, please do not hesitate to contact the Plenoptix team!**
 
-* :mag_right: Web-based visualizer that allows you to:
-    * Visualize training in real-time + interact with the scene
-    * Create and render out scenes with custom camera trajectories
-    * View different output types
-    * And more!
-* :pencil2: Support for multiple logging interfaces (Tensorboard, Wandb), code profiling, and other built-in debugging tools
-* :chart_with_upwards_trend: Easy-to-use benchmarking scripts on the Blender dataset
-* :iphone: Full pipeline support (w/ Colmap or Record3D) for going from a video on your phone to a full 3D render. Follow our step-by-step tutorial. (TODO: walk-through page on end-to-end pipeline from capture -> render)
-
+- :mag_right: Web-based visualizer that allows you to:
+  - Visualize training in real-time + interact with the scene
+  - Create and render out scenes with custom camera trajectories
+  - View different output types
+  - And more!
+- :pencil2: Support for multiple logging interfaces (Tensorboard, Wandb), code profiling, and other built-in debugging tools
+- :chart_with_upwards_trend: Easy-to-use benchmarking scripts on the Blender dataset
+- :iphone: Full pipeline support (w/ Colmap or Record3D) for going from a video on your phone to a full 3D render. Follow our step-by-step tutorial. (TODO: walk-through page on end-to-end pipeline from capture -> render)
 
 # See what's possible
+
 TODO: insert some gallery stuff here (gifs/pretty pictures w/ visualizer)
 TODO: For more see gallery
