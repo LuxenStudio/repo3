@@ -27,7 +27,6 @@ from luxenactory.configs.base import (
     CompoundModelConfig,
     Config,
     FriendsDataManagerConfig,
-    InstantNGPModelConfig,
     MipLuxen360DataParserConfig,
     ModelConfig,
     LuxenWModelConfig,
@@ -38,6 +37,7 @@ from luxenactory.configs.base import (
     TrainerConfig,
     VanillaDataManagerConfig,
 )
+from luxenactory.models.instant_ngp import InstantNGPModelConfig
 from luxenactory.models.mipluxen import MipLuxenModel
 from luxenactory.models.mipluxen_360 import MipLuxen360Model
 from luxenactory.models.semantic_luxen import SemanticLuxenModel
@@ -46,7 +46,7 @@ from luxenactory.models.vanilla_luxen import LuxenModel
 base_configs: Dict[str, Config] = {}
 base_configs["instant_ngp"] = Config(
     method_name="instant_ngp",
-    trainer=TrainerConfig(mixed_precision=True),
+    trainer=TrainerConfig(steps_per_test=500, steps_per_save=2000, mixed_precision=True),
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
             train_dataparser=BlenderDataParserConfig(),
