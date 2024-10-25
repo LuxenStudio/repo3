@@ -46,8 +46,8 @@ from luxenactory.models.semantic_luxen import SemanticLuxenModel
 from luxenactory.models.vanilla_luxen import LuxenModel
 
 base_configs: Dict[str, Config] = {}
-base_configs["instant_ngp"] = Config(
-    method_name="instant_ngp",
+base_configs["instant-ngp"] = Config(
+    method_name="instant-ngp",
     trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(train_dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
@@ -63,9 +63,9 @@ base_configs["instant_ngp"] = Config(
     logging=LoggingConfig(event_writer="none"),
 )
 
-base_configs["mipluxen_360"] = Config(
-    experiment_name="mipluxen_360",
-    method_name="mipluxen_360",
+base_configs["mipluxen-360"] = Config(
+    experiment_name="mipluxen-360",
+    method_name="mipluxen-360",
     trainer=TrainerConfig(steps_per_eval_batch=200),
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
@@ -107,9 +107,9 @@ base_configs["luxenw"] = Config(
     ),
 )
 
-base_configs["semantic_luxen"] = Config(
+base_configs["semantic-luxen"] = Config(
     experiment_name="friends_TBBT-big_living_room",
-    method_name="semantic_luxen",
+    method_name="semantic-luxen",
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
             train_dataparser=FriendsDataParserConfig(),
@@ -123,8 +123,8 @@ base_configs["semantic_luxen"] = Config(
     ),
 )
 
-base_configs["vanilla_luxen"] = Config(
-    method_name="vanilla_luxen",
+base_configs["vanilla-luxen"] = Config(
+    method_name="vanilla-luxen",
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
             train_dataparser=BlenderDataParserConfig(),
