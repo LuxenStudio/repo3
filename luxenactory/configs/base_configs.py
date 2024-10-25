@@ -24,7 +24,6 @@ from typeguard import typeguard_ignore
 
 from luxenactory.configs.base import (
     BlenderDataParserConfig,
-    CompoundModelConfig,
     Config,
     FriendsDataManagerConfig,
     MipLuxen360DataParserConfig,
@@ -37,6 +36,7 @@ from luxenactory.configs.base import (
     TrainerConfig,
     VanillaDataManagerConfig,
 )
+from luxenactory.models.compound import CompoundModelConfig
 from luxenactory.models.instant_ngp import InstantNGPModelConfig
 from luxenactory.models.mipluxen import MipLuxenModel
 from luxenactory.models.mipluxen_360 import MipLuxen360Model

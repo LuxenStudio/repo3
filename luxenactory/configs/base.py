@@ -38,7 +38,6 @@ from luxenactory.datamanagers.dataparsers.record3d_parser import Record3D
 
 # model instances
 from luxenactory.models.base import Model
-from luxenactory.models.compound import CompoundModel
 from luxenactory.models.luxenw import LuxenWModel
 from luxenactory.models.tensorf import TensoRFModel
 from luxenactory.optimizers.schedulers import ExponentialDecaySchedule
@@ -396,22 +395,6 @@ class ModelConfig(InstantiateConfig):
 @dataclass
 class VanillaModelConfig(InstantiateConfig):
     """Vanilla Model Config"""
-
-
-@dataclass
-class CompoundModelConfig(ModelConfig):
-    """Compound Model Config"""
-
-    _target: Type = CompoundModel
-    enable_density_field: bool = True
-    enable_collider: bool = False
-    field_implementation: Literal["torch", "tcnn"] = "tcnn"  # torch, tcnn, ...
-    loss_coefficients: Dict[str, float] = to_immutable_dict({"rgb_loss": 1.0})
-    num_samples: int = 1024  # instead of course/fine samples
-    cone_angle: float = 0.0
-    """Should be set to 0.0 for blender scenes but 1./256 for real scenes."""
-    near_plane: float = 0.05
-    """How far along ray to start sampling."""
 
 
 @dataclass
