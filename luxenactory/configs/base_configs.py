@@ -25,6 +25,7 @@ from typeguard import typeguard_ignore
 from luxenactory.configs.base import (
     BlenderDataParserConfig,
     Config,
+    LoggingConfig,
     MipLuxen360DataParserConfig,
     ModelConfig,
     LuxenWModelConfig,
@@ -34,6 +35,7 @@ from luxenactory.configs.base import (
     TensoRFModelConfig,
     TrainerConfig,
     VanillaDataManagerConfig,
+    ViewerConfig,
 )
 from luxenactory.datamanagers.dataparsers.friends_parser import FriendsDataParserConfig
 from luxenactory.models.compound import CompoundModelConfig
@@ -57,6 +59,8 @@ base_configs["instant_ngp"] = Config(
             "scheduler": None,
         }
     },
+    viewer=ViewerConfig(enable=True),
+    logging=LoggingConfig(event_writer="none"),
 )
 
 base_configs["mipluxen_360"] = Config(
@@ -167,6 +171,8 @@ base_configs["compound"] = Config(
             "scheduler": None,
         }
     },
+    viewer=ViewerConfig(enable=True),
+    logging=LoggingConfig(event_writer="none"),
 )
 
 
