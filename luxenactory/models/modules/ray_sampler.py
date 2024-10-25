@@ -20,7 +20,7 @@ import math
 from abc import abstractmethod
 from typing import Callable, Optional, Tuple
 
-import luxenacc  # pylint: disable=import-error
+import luxenacc
 import torch
 from torch import nn
 from torchtyping import TensorType
