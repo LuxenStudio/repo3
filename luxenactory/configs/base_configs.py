@@ -27,7 +27,6 @@ from luxenactory.configs.base import (
     Config,
     LoggingConfig,
     MipLuxen360DataParserConfig,
-    ModelConfig,
     LuxenWModelConfig,
     OptimizerConfig,
     PipelineConfig,
@@ -35,6 +34,7 @@ from luxenactory.configs.base import (
     TensoRFModelConfig,
     TrainerConfig,
     VanillaDataManagerConfig,
+    VanillaModelConfig,
     ViewerConfig,
 )
 from luxenactory.datamanagers.dataparsers.friends_parser import FriendsDataParserConfig
@@ -70,7 +70,7 @@ base_configs["mipluxen-360"] = Config(
         datamanager=VanillaDataManagerConfig(
             train_dataparser=MipLuxen360DataParserConfig(), train_num_rays_per_batch=8192
         ),
-        model=ModelConfig(
+        model=VanillaModelConfig(
             _target=MipLuxen360Model,
             collider_params={"near_plane": 0.5, "far_plane": 20.0},
             loss_coefficients={"ray_loss_coarse": 1.0, "ray_loss_fine": 1.0},
@@ -85,7 +85,7 @@ base_configs["mipluxen"] = Config(
     method_name="mipluxen",
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(train_dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
-        model=ModelConfig(
+        model=VanillaModelConfig(
             _target=MipLuxenModel,
             loss_coefficients={"rgb_loss_coarse": 0.1, "rgb_loss_fine": 1.0},
             num_coarse_samples=128,
@@ -112,7 +112,7 @@ base_configs["semantic-luxen"] = Config(
         datamanager=VanillaDataManagerConfig(
             train_dataparser=FriendsDataParserConfig(),
         ),
-        model=ModelConfig(
+        model=VanillaModelConfig(
             _target=SemanticLuxenModel,
             loss_coefficients={"rgb_loss_coarse": 1.0, "rgb_loss_fine": 1.0, "semantic_loss_fine": 0.05},
             num_coarse_samples=64,
@@ -127,7 +127,7 @@ base_configs["vanilla-luxen"] = Config(
         datamanager=VanillaDataManagerConfig(
             train_dataparser=BlenderDataParserConfig(),
         ),
-        model=ModelConfig(_target=LuxenModel),
+        model=VanillaModelConfig(_target=LuxenModel),
     ),
 )
 
