@@ -26,14 +26,13 @@ import torch
 
 from luxenactory.cameras import utils as camera_utils
 from luxenactory.cameras.cameras import Cameras, CameraType
-from luxenactory.configs import base as cfg
-from luxenactory.datamanagers.dataparsers.base import DataParser
+from luxenactory.datamanagers.dataparsers.base import DataParser, DataParserConfig
 from luxenactory.datamanagers.structs import DatasetInputs, SceneBounds
 from luxenactory.utils.io import get_absolute_path, load_from_json
 
 
 @dataclass
-class InstantNGPDataParserConfig(cfg.DataParserConfig):
+class InstantNGPDataParserConfig(DataParserConfig):
     """Instant-NGP dataset parser config"""
 
     _target: Type = field(default_factory=lambda: InstantNGP)

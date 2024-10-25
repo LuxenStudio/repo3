@@ -25,7 +25,6 @@ from typeguard import typeguard_ignore
 from luxenactory.configs.base import (
     BlenderDataParserConfig,
     Config,
-    FriendsDataManagerConfig,
     MipLuxen360DataParserConfig,
     ModelConfig,
     LuxenWModelConfig,
@@ -36,6 +35,7 @@ from luxenactory.configs.base import (
     TrainerConfig,
     VanillaDataManagerConfig,
 )
+from luxenactory.datamanagers.dataparsers.friends_parser import FriendsDataParserConfig
 from luxenactory.models.compound import CompoundModelConfig
 from luxenactory.models.instant_ngp import InstantNGPModelConfig
 from luxenactory.models.mipluxen import MipLuxenModel
@@ -95,14 +95,21 @@ base_configs["mipluxen"] = Config(
 base_configs["luxenw"] = Config(
     experiment_name="friends_TBBT-big_living_room",
     method_name="luxenw",
-    pipeline=PipelineConfig(datamanager=FriendsDataManagerConfig(), model=LuxenWModelConfig()),
+    pipeline=PipelineConfig(
+        datamanager=VanillaDataManagerConfig(
+            train_dataparser=FriendsDataParserConfig(),
+        ),
+        model=LuxenWModelConfig(),
+    ),
 )
 
 base_configs["semantic_luxen"] = Config(
     experiment_name="friends_TBBT-big_living_room",
     method_name="semantic_luxen",
     pipeline=PipelineConfig(
-        datamanager=FriendsDataManagerConfig(),
+        datamanager=VanillaDataManagerConfig(
+            train_dataparser=FriendsDataParserConfig(),
+        ),
         model=ModelConfig(
             _target=SemanticLuxenModel,
             loss_coefficients={"rgb_loss_coarse": 1.0, "rgb_loss_fine": 1.0, "semantic_loss_fine": 0.05},

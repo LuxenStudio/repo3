@@ -24,14 +24,13 @@ import numpy as np
 import torch
 
 from luxenactory.cameras.cameras import Cameras, CameraType
-from luxenactory.configs import base as cfg
-from luxenactory.datamanagers.dataparsers.base import DataParser
+from luxenactory.datamanagers.dataparsers.base import DataParser, DataParserConfig
 from luxenactory.datamanagers.structs import DatasetInputs, SceneBounds
 from luxenactory.utils.io import get_absolute_path
 
 
 @dataclass
-class MipLuxen360DataParserConfig(cfg.DataParserConfig):
+class MipLuxen360DataParserConfig(DataParserConfig):
     """Mipluxen 360 dataset parser config"""
 
     _target: Type = field(default_factory=lambda: Mipluxen360)

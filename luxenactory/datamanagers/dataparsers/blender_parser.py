@@ -24,15 +24,14 @@ import numpy as np
 import torch
 
 from luxenactory.cameras.cameras import Cameras, CameraType
-from luxenactory.configs import base as cfg
-from luxenactory.datamanagers.dataparsers.base import DataParser
+from luxenactory.datamanagers.dataparsers.base import DataParser, DataParserConfig
 from luxenactory.datamanagers.structs import DatasetInputs, SceneBounds
 from luxenactory.utils.colors import get_color
 from luxenactory.utils.io import get_absolute_path, load_from_json
 
 
 @dataclass
-class BlenderDataParserConfig(cfg.DataParserConfig):
+class BlenderDataParserConfig(DataParserConfig):
     """Blender dataset parser config"""
 
     _target: Type = field(default_factory=lambda: Blender)
@@ -51,7 +50,7 @@ class Blender(DataParser):
     Some of this code comes from https://github.com/yenchenlin/luxen-pytorch/blob/master/load_blender.py#L37.
     """
 
-    config: cfg.BlenderDataParserConfig
+    config: BlenderDataParserConfig
 
     def __init__(self, config: BlenderDataParserConfig):
         super().__init__(config=config)
