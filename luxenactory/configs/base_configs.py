@@ -64,7 +64,6 @@ base_configs["instant-ngp"] = Config(
 )
 
 base_configs["mipluxen-360"] = Config(
-    experiment_name="mipluxen-360",
     method_name="mipluxen-360",
     trainer=TrainerConfig(steps_per_eval_batch=200),
     pipeline=PipelineConfig(
@@ -97,7 +96,6 @@ base_configs["mipluxen"] = Config(
 )
 
 base_configs["luxenw"] = Config(
-    experiment_name="friends_TBBT-big_living_room",
     method_name="luxenw",
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
@@ -107,8 +105,8 @@ base_configs["luxenw"] = Config(
     ),
 )
 
+
 base_configs["semantic-luxen"] = Config(
-    experiment_name="friends_TBBT-big_living_room",
     method_name="semantic-luxen",
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
@@ -193,7 +191,7 @@ def _make_base_config_subcommand_type() -> Type[Config]:
     base_configs_placeholder_timestamp = {}
     for name, config in base_configs.items():
         base_configs_placeholder_timestamp[name] = copy.deepcopy(config)
-        base_configs_placeholder_timestamp[name].populate_dynamic_fields("{timestamp}")
+        base_configs_placeholder_timestamp[name].populate_dynamic_fields(timestamp="{timestamp}")
 
     return dcargs.extras.subcommand_type_from_defaults(base_configs_placeholder_timestamp)
 
