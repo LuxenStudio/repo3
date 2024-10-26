@@ -51,7 +51,7 @@ base_configs["compound"] = Config(
     method_name="compound",
     trainer=TrainerConfig(mixed_precision=True),
     pipeline=PipelineConfig(
-        datamanager=VanillaDataManagerConfig(train_dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
+        datamanager=VanillaDataManagerConfig(dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
         model=CompoundModelConfig(eval_num_rays_per_chunk=8192),
     ),
     optimizers={
@@ -68,7 +68,7 @@ base_configs["instant-ngp"] = Config(
     method_name="instant-ngp",
     trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
     pipeline=PipelineConfig(
-        datamanager=VanillaDataManagerConfig(train_dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
+        datamanager=VanillaDataManagerConfig(dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
         model=InstantNGPModelConfig(eval_num_rays_per_chunk=8192),
     ),
     optimizers={
@@ -85,9 +85,7 @@ base_configs["mipluxen-360"] = Config(
     method_name="mipluxen-360",
     trainer=TrainerConfig(steps_per_eval_batch=200),
     pipeline=PipelineConfig(
-        datamanager=VanillaDataManagerConfig(
-            train_dataparser=MipLuxen360DataParserConfig(), train_num_rays_per_batch=8192
-        ),
+        datamanager=VanillaDataManagerConfig(dataparser=MipLuxen360DataParserConfig(), train_num_rays_per_batch=8192),
         model=VanillaModelConfig(
             _target=MipLuxen360Model,
             collider_params={"near_plane": 0.5, "far_plane": 20.0},
@@ -108,7 +106,7 @@ base_configs["mipluxen-360"] = Config(
 base_configs["mipluxen"] = Config(
     method_name="mipluxen",
     pipeline=PipelineConfig(
-        datamanager=VanillaDataManagerConfig(train_dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
+        datamanager=VanillaDataManagerConfig(dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
         model=VanillaModelConfig(
             _target=MipLuxenModel,
             loss_coefficients={"rgb_loss_coarse": 0.1, "rgb_loss_fine": 1.0},
@@ -129,7 +127,7 @@ base_configs["luxenw"] = Config(
     method_name="luxenw",
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
-            train_dataparser=FriendsDataParserConfig(),
+            dataparser=FriendsDataParserConfig(),
         ),
         model=LuxenWModelConfig(),
     ),
@@ -146,7 +144,7 @@ base_configs["semantic-luxen"] = Config(
     method_name="semantic-luxen",
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
-            train_dataparser=FriendsDataParserConfig(),
+            dataparser=FriendsDataParserConfig(),
         ),
         model=VanillaModelConfig(
             _target=SemanticLuxenModel,
@@ -167,7 +165,7 @@ base_configs["vanilla-luxen"] = Config(
     method_name="vanilla-luxen",
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
-            train_dataparser=BlenderDataParserConfig(),
+            dataparser=BlenderDataParserConfig(),
         ),
         model=VanillaModelConfig(_target=LuxenModel),
     ),
@@ -184,7 +182,7 @@ base_configs["tensorf"] = Config(
     trainer=TrainerConfig(mixed_precision=True),
     pipeline=PipelineConfig(
         datamanager=VanillaDataManagerConfig(
-            train_dataparser=BlenderDataParserConfig(),
+            dataparser=BlenderDataParserConfig(),
         ),
         model=TensoRFModelConfig(),
     ),
