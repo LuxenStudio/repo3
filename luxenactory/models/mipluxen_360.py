@@ -27,12 +27,11 @@ from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenactory.cameras.rays import RayBundle
-from luxenactory.configs import base as cfg
 from luxenactory.fields.modules.encoding import LuxenEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.modules.spatial_distortions import SceneContraction
 from luxenactory.fields.luxen_field import LuxenField
-from luxenactory.models.base import Model
+from luxenactory.models.base import Model, ModelConfig
 from luxenactory.models.modules.ray_losses import distortion_loss
 from luxenactory.models.modules.ray_sampler import PDFSampler, UniformSampler
 from luxenactory.optimizers.loss import MSELoss
@@ -53,7 +52,7 @@ class MipLuxen360Model(Model):
 
     def __init__(
         self,
-        config: cfg.ModelConfig,
+        config: ModelConfig,
         **kwargs,
     ) -> None:
         self.field = None

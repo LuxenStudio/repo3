@@ -18,7 +18,8 @@ Luxen-W (Luxen in the wild) implementation.
 
 from __future__ import annotations
 
-from typing import Dict, Tuple
+from dataclasses import dataclass, field
+from typing import Dict, Tuple, Type
 
 import torch
 from torchmetrics import PeakSignalNoiseRatio
@@ -26,12 +27,12 @@ from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenactory.cameras.rays import RayBundle
-from luxenactory.configs import base as cfg
+from luxenactory.configs.utils import to_immutable_dict
 from luxenactory.fields.modules.encoding import LuxenEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.luxen_field import LuxenField
 from luxenactory.fields.luxenw_field import VanillaLuxenWField
-from luxenactory.models.base import Model
+from luxenactory.models.base import Model, VanillaModelConfig
 from luxenactory.models.modules.ray_sampler import PDFSampler, UniformSampler
 from luxenactory.models.modules.scene_colliders import AABBBoxCollider
 from luxenactory.optimizers.loss import MSELoss
@@ -44,6 +45,33 @@ from luxenactory.renderers.renderers import (
 from luxenactory.utils import colors, misc, visualization
 
 
+@dataclass
+class LuxenWModelConfig(VanillaModelConfig):
+    """LuxenW model config"""
+
+    _target: Type = field(default_factory=lambda: LuxenWModel)
+    """target class to instantiate"""
+    loss_coefficients: Dict[str, float] = to_immutable_dict(
+        {"rgb_loss_coarse": 1.0, "rgb_loss_fine": 1.0, "uncertainty_loss": 1.0, "density_loss": 0.01}
+    )
+    """Loss specific weights."""
+    num_coarse_samples: int = 64
+    """Number of samples in coarse field evaluation."""
+    num_importance_samples: int = 64
+    """Number of samples in fine field evaluation."""
+    uncertainty_min: float = 0.03
+    """This is added to the end of the uncertainty
+    rendering operation. It's called 'beta_min' in other repos.
+    This avoids calling torch.log() on a zero value, which would be undefined.
+    """
+    num_images: int = 10000  # TODO: don't hardcode this
+    """How many images exist in the dataset."""
+    appearance_embedding_dim: int = 48
+    """Dimension of appearance embedding."""
+    transient_embedding_dim: int = 16
+    """Dimension of transient embedding."""
+
+
 class LuxenWModel(Model):
     """Luxen-W model
 
@@ -51,11 +79,11 @@ class LuxenWModel(Model):
         config: LuxenW configuration to instantiate model
     """
 
-    config: cfg.LuxenWModelConfig
+    config: LuxenWModelConfig
 
     def __init__(
         self,
-        config: cfg.LuxenWModelConfig,
+        config: LuxenWModelConfig,
         **kwargs,
     ) -> None:
         """A Luxen-W model.

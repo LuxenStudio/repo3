@@ -23,12 +23,12 @@ import torch
 from torch import nn
 
 from luxenactory.cameras.rays import RayBundle
-from luxenactory.configs import base as cfg
 from luxenactory.datamanagers.structs import Semantics
 from luxenactory.fields.modules.encoding import LuxenEncoding
 from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.luxen_field import LuxenField
 from luxenactory.fields.semantic_luxen_field import SemanticLuxenField
+from luxenactory.models.base import ModelConfig
 from luxenactory.models.modules.scene_colliders import AABBBoxCollider
 from luxenactory.models.vanilla_luxen import LuxenModel
 from luxenactory.renderers.renderers import SemanticRenderer
@@ -43,7 +43,7 @@ class SemanticLuxenModel(LuxenModel):
         semantics: additional semantics data info
     """
 
-    def __init__(self, config: cfg.ModelConfig, semantics: Semantics, **kwargs) -> None:
+    def __init__(self, config: ModelConfig, semantics: Semantics, **kwargs) -> None:
         self.stuff_classes = semantics.stuff_classes
         self.stuff_colors = semantics.stuff_colors
         super().__init__(config=config, **kwargs)

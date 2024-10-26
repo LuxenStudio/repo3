@@ -39,10 +39,9 @@ from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenactory.cameras.rays import RayBundle
-from luxenactory.configs import base as cfg
 from luxenactory.fields.compound_field import field_implementation_to_class
 from luxenactory.fields.modules.field_heads import FieldHeadNames
-from luxenactory.models.base import Model
+from luxenactory.models.base import Model, ModelConfig
 from luxenactory.models.modules.ray_sampler import VolumetricSampler
 from luxenactory.optimizers.loss import MSELoss
 from luxenactory.renderers.renderers import (
@@ -59,7 +58,7 @@ from luxenactory.utils.callbacks import (
 
 
 @dataclass
-class CompoundModelConfig(cfg.ModelConfig):
+class CompoundModelConfig(ModelConfig):
     """Compound Model Config"""
 
     _target: Type = field(

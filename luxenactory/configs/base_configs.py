@@ -16,6 +16,8 @@
 Put all the method implementations in one location.
 """
 
+from __future__ import annotations
+
 import copy
 from typing import Dict, Type
 
@@ -24,27 +26,30 @@ from typeguard import typeguard_ignore
 
 from luxenactory.configs.base import (
     AdamOptimizerConfig,
-    BlenderDataParserConfig,
     Config,
     LoggingConfig,
-    MipLuxen360DataParserConfig,
-    LuxenWModelConfig,
     RAdamOptimizerConfig,
     SchedulerConfig,
-    TensoRFModelConfig,
     TrainerConfig,
-    VanillaDataManagerConfig,
-    VanillaModelConfig,
-    VanillaPipelineConfig,
     ViewerConfig,
 )
+from luxenactory.datamanagers.base import VanillaDataManagerConfig
+from luxenactory.datamanagers.dataparsers.blender_parser import BlenderDataParserConfig
 from luxenactory.datamanagers.dataparsers.friends_parser import FriendsDataParserConfig
+from luxenactory.datamanagers.dataparsers.mipluxen_parser import (
+    MipLuxen360DataParserConfig,
+)
+from luxenactory.models.base import VanillaModelConfig
 from luxenactory.models.compound import CompoundModelConfig
 from luxenactory.models.instant_ngp import InstantNGPModelConfig
 from luxenactory.models.mipluxen import MipLuxenModel
 from luxenactory.models.mipluxen_360 import MipLuxen360Model
+from luxenactory.models.luxenw import LuxenWModelConfig
 from luxenactory.models.semantic_luxen import SemanticLuxenModel
+from luxenactory.models.tensorf import TensoRFModelConfig
 from luxenactory.models.vanilla_luxen import LuxenModel
+from luxenactory.pipelines.base import VanillaPipelineConfig
+from luxenactory.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 
 base_configs: Dict[str, Config] = {}
 base_configs["compound"] = Config(
@@ -67,7 +72,7 @@ base_configs["compound"] = Config(
 base_configs["instant-ngp"] = Config(
     method_name="instant-ngp",
     trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
-    pipeline=VanillaPipelineConfig(
+    pipeline=DynamicBatchPipelineConfig(
         datamanager=VanillaDataManagerConfig(dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
         model=InstantNGPModelConfig(eval_num_rays_per_chunk=8192),
     ),
