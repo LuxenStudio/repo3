@@ -31,7 +31,7 @@ from torch.cuda.amp.grad_scaler import GradScaler
 
 from luxenactory.configs import base as cfg
 from luxenactory.optimizers.optimizers import Optimizers, setup_optimizers
-from luxenactory.pipelines.base import Pipeline
+from luxenactory.pipelines.base import VanillaPipeline
 from luxenactory.utils import profiler, writer
 from luxenactory.utils.callbacks import (
     TrainingCallback,
@@ -79,7 +79,7 @@ class Trainer:
         callbacks: The callbacks object.
     """
 
-    pipeline: Pipeline
+    pipeline: VanillaPipeline
     optimizers: Optimizers
     callbacks: List[TrainingCallback]
 
@@ -119,7 +119,7 @@ class Trainer:
         Args:
             test_mode: Whether to setup for testing. Defaults to False.
         """
-        self.pipeline: Pipeline = self.config.pipeline.setup(
+        self.pipeline: VanillaPipeline = self.config.pipeline.setup(
             device=self.device, test_mode=test_mode, world_size=self.world_size, local_rank=self.local_rank
         )
         self.optimizers = setup_optimizers(self.config.optimizers, self.pipeline.get_param_groups())

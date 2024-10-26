@@ -34,7 +34,7 @@ from luxenactory.models.base import Model
 from luxenactory.models.luxenw import LuxenWModel
 from luxenactory.models.tensorf import TensoRFModel
 from luxenactory.optimizers.schedulers import ExponentialDecaySchedule
-from luxenactory.pipelines.base import Pipeline
+from luxenactory.pipelines.base import VanillaPipeline
 from luxenactory.utils import writer
 
 
@@ -296,10 +296,10 @@ class TensoRFModelConfig(VanillaModelConfig):
 
 # Pipeline related configs
 @dataclass
-class PipelineConfig(InstantiateConfig):
+class VanillaPipelineConfig(InstantiateConfig):
     """Configuration for pipeline instantiation"""
 
-    _target: Type = Pipeline
+    _target: Type = VanillaPipeline
     """target class to instantiate"""
     datamanager: VanillaDataManagerConfig = VanillaDataManagerConfig()
     """specifies the datamanager config"""
@@ -390,7 +390,7 @@ class Config(PrintableConfig):
     logging: LoggingConfig = LoggingConfig()
     viewer: ViewerConfig = ViewerConfig()
     trainer: TrainerConfig = TrainerConfig()
-    pipeline: PipelineConfig = PipelineConfig()
+    pipeline: VanillaPipelineConfig = VanillaPipelineConfig()
     optimizers: Dict[str, Any] = to_immutable_dict(
         {
             "fields": {
