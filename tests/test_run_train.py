@@ -14,7 +14,7 @@ from luxenactory.configs.base_configs import base_configs
 from luxenactory.datamanagers.dataparsers.blender_parser import BlenderDataParserConfig
 from luxenactory.engine.trainer import train_loop
 
-BLACKLIST = ["base", "semantic-luxen", "mipluxen-360", "instant-ngp", "compound"]
+BLACKLIST = ["base", "semantic-luxen", "mipluxen-360", "instant-ngp", "compound", "proposal"]
 
 
 def set_reduced_config(config: Config):
