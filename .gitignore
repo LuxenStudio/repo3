@@ -187,3 +187,4 @@ scripts/colmap2luxen.py
 bash/
 luxenactory/ngp_pl/
 cache/
+renders/
