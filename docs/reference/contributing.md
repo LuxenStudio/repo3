@@ -1,4 +1,4 @@
-# Contributing to luxenactory workflow
+# Contributing to luxenstudio workflow
 
 The project is set up for development in VSCode, we recommend using it if you plan to contribute.
 

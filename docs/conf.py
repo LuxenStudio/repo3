@@ -15,14 +15,14 @@ import os
 import sys
 
 sys.path.insert(0, os.path.abspath(".."))
-import luxenactory.configs.base
-import luxenactory.datamanagers.base
+import luxenstudio.configs.base
+import luxenstudio.datamanagers.base
 
 # -- Project information -----------------------------------------------------
 
-project = "luxenactory"
-copyright = "2022, luxenactory Team"
-author = "luxenactory Team"
+project = "luxenstudio"
+copyright = "2022, luxenstudio Team"
+author = "luxenstudio Team"
 
 # The full version, including alpha/beta/rc tags
 release = "0.0.0"

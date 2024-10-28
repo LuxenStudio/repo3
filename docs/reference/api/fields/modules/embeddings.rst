@@ -3,6 +3,6 @@
 Embeddings
 ===================
 
-.. automodule:: luxenactory.fields.modules.embedding
+.. automodule:: luxenstudio.fields.modules.embedding
    :members:
    :show-inheritance:

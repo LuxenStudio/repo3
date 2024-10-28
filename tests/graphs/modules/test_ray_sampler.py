@@ -4,15 +4,15 @@ Test samplers
 
 import torch
 
-from luxenactory.cameras.rays import RayBundle
-from luxenactory.models.modules.ray_sampler import (
+from luxenstudio.cameras.rays import RayBundle
+from luxenstudio.models.modules.ray_sampler import (
     LinearDisparitySampler,
     LogSampler,
     PDFSampler,
     SqrtSampler,
     UniformSampler,
 )
-from luxenactory.models.modules.scene_colliders import NearFarCollider
+from luxenstudio.models.modules.scene_colliders import NearFarCollider
 
 
 def test_uniform_sampler():

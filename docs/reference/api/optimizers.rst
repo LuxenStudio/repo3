@@ -3,7 +3,7 @@
 Optimizers
 ============
 
-.. automodule:: luxenactory.optimizers.optimizers
+.. automodule:: luxenstudio.optimizers.optimizers
    :members:
    :show-inheritance:
 

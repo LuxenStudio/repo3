@@ -170,7 +170,7 @@ events.out.*
 # Data
 data
 data_*/
-!luxenactory/data
+!luxenstudio/data
 !configs/data
 configs_custom
 !docs/tutorials/data
@@ -183,8 +183,6 @@ external/
 __MACOSX/
 outputs*/
 node_modules/
-scripts/colmap2luxen.py
 bash/
-luxenactory/ngp_pl/
 cache/
 renders/

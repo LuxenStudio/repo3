@@ -3,6 +3,6 @@
 Ray Losses
 ===================
 
-.. automodule:: luxenactory.models.modules.ray_losses
+.. automodule:: luxenstudio.models.modules.ray_losses
    :members:
    :show-inheritance:

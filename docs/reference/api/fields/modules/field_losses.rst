@@ -3,6 +3,6 @@
 Field Losses
 ===================
 
-.. automodule:: luxenactory.fields.modules.field_losses
+.. automodule:: luxenstudio.fields.modules.field_losses
    :members:
    :show-inheritance:

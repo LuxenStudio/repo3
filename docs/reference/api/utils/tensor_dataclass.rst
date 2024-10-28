@@ -3,6 +3,6 @@
 TensorDataclass
 =================
 
-.. automodule:: luxenactory.utils.tensor_dataclass
+.. automodule:: luxenstudio.utils.tensor_dataclass
    :members:
    :show-inheritance:

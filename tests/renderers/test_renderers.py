@@ -4,8 +4,8 @@ Test renderers
 import pytest
 import torch
 
-from luxenactory.cameras.rays import Frustums, RaySamples
-from luxenactory.renderers import renderers
+from luxenstudio.cameras.rays import Frustums, RaySamples
+from luxenstudio.renderers import renderers
 
 
 def test_rgb_renderer():

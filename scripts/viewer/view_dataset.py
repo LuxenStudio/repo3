@@ -11,10 +11,10 @@ from pathlib import Path
 import dcargs
 import torch
 
-from luxenactory.configs import base as cfg
-from luxenactory.datamanagers.base import AnnotatedDataParserUnion
-from luxenactory.datamanagers.datasets import InputDataset
-from luxenactory.viewer.server import viewer_utils
+from luxenstudio.configs import base as cfg
+from luxenstudio.datamanagers.base import AnnotatedDataParserUnion
+from luxenstudio.datamanagers.datasets import InputDataset
+from luxenstudio.viewer.server import viewer_utils
 
 logging.basicConfig(format="[%(filename)s:%(lineno)d] %(message)s", level=logging.INFO)
 
@@ -27,7 +27,7 @@ torch.backends.cudnn.benchmark = True  # type: ignore
 def main(
     dataparser: AnnotatedDataParserUnion,
     viewer: cfg.ViewerConfig,
-    log_base_dir: Path = Path("/tmp/luxenactory_viewer_logs"),
+    log_base_dir: Path = Path("/tmp/luxenstudio_viewer_logs"),
 ) -> None:
     """Main function."""
     viewer_state = viewer_utils.ViewerState(config.viewer)

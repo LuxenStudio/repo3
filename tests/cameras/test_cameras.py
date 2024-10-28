@@ -4,8 +4,8 @@ Test the camera classes.
 
 import torch
 
-from luxenactory.cameras.cameras import Cameras
-from luxenactory.cameras.rays import RayBundle
+from luxenstudio.cameras.cameras import Cameras
+from luxenstudio.cameras.rays import RayBundle
 
 
 def test_pinhole_camera():

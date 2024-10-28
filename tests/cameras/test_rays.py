@@ -5,7 +5,7 @@ Test the ray classes.
 import pytest
 import torch
 
-from luxenactory.cameras.rays import Frustums
+from luxenstudio.cameras.rays import Frustums
 
 
 def test_frustum_get_position():

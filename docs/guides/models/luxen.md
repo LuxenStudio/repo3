@@ -70,10 +70,10 @@ Luxens are a volumetric representation encoded into a neural network. They are n
 :width: 400
 ```
 
-The associated Luxen fields can be instantiated with the following Luxenactory code (encoding described in next section):
+The associated Luxen fields can be instantiated with the following luxenstudio code (encoding described in next section):
 
 ```python
-from luxenactory.fields.luxen_field import LuxenField
+from luxenstudio.fields.luxen_field import LuxenField
 
 field_coarse = LuxenField(position_encoding=pos_enc, direction_encoding=dir_enc)
 field_fine = LuxenField(position_encoding=pos_enc, direction_encoding=dir_enc)
@@ -84,7 +84,7 @@ field_fine = LuxenField(position_encoding=pos_enc, direction_encoding=dir_enc)
 An extra trick is necessary to make the neural network expressive enough to represent fine details in the scene. The input coordinates $(x,y,z,\theta,\phi)$ need to be encoded to a higher dimensional space prior to being input into the network. You can learn more about encodings [here](../model_components/visualize_encoders.ipynb).
 
 ```python
-from luxenactory.fields.modules.encoding import LuxenEncoding
+from luxenstudio.fields.modules.encoding import LuxenEncoding
 
 pos_enc = LuxenEncoding(
     in_dim=3, num_frequencies=10, min_freq_exp=0.0, max_freq_exp=8.0, include_input=True
@@ -110,10 +110,10 @@ Now that we have a representation of space, we need some way to render new image
 
 Rending RGB images is not the only type of output render supported. It is possible to render other output types such as depth and semantics. Additional renderers can be found [Here](../../reference/api/renderers/index.rst).
 
-Associated Luxenactory code:
+Associated luxenstudio code:
 
 ```python
-from luxenactory.renderers.renderers import RGBRenderer
+from luxenstudio.renderers.renderers import RGBRenderer
 
 renderer_rgb = RGBRenderer(background_color=colors.WHITE)
 # Ray samples discussed in the next section
@@ -142,7 +142,7 @@ How we sample points along rays in space is an important design decision. Variou
 Associated code:
 
 ```python
-from luxenactory.models.modules.ray_sampler import PDFSampler, UniformSampler
+from luxenstudio.models.modules.ray_sampler import PDFSampler, UniformSampler
 
 sampler_uniform = UniformSampler(num_samples=num_coarse_samples)
 ray_samples_uniform = sampler_uniform(ray_bundle)
@@ -167,6 +167,6 @@ For all sampling, we use _Stratified_ samples during optimization and unmodified
 
 | Implementation                                                                    |    Mic    | Ficus     |   Chair   | Hotdog    | Materials | Drums     | Ship      | Lego      | Average   |
 | --------------------------------------------------------------------------------- | :-------: | --------- | :-------: | --------- | --------- | --------- | --------- | --------- | --------- |
-| luxenactory                                                                        |   33.76   | **31.98** | **34.35** | 36.57     | **31.00** | **25.11** | 29.87     | **34.46** | **32.14** |
+| luxenstudio                                                                        |   33.76   | **31.98** | **34.35** | 36.57     | **31.00** | **25.11** | 29.87     | **34.46** | **32.14** |
 | [TF Luxen](https://github.com/bmild/luxen)                                          |   32.91   | 30.13     |   33.00   | 36.18     | 29.62     | 25.01     | 28.65     | 32.54     | 31.04     |
 | [JaxLuxen](https://github.com/google-research/google-research/tree/master/jaxluxen) | **34.53** | 30.43     |   34.08   | **36.92** | 29.91     | 25.03     | **29.36** | 33.28     | 31.69     |

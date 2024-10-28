@@ -3,6 +3,6 @@
 MLP
 ===================
 
-.. automodule:: luxenactory.fields.modules.mlp
+.. automodule:: luxenstudio.fields.modules.mlp
    :members:
    :show-inheritance:

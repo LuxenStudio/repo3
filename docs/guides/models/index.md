@@ -1,6 +1,6 @@
 # Models
 
-We provide a set of pre implemented luxenactory models. One of the goals of luxenactory is to modularize the various Luxen techniques as much as possible. As a result, many of the techniques from these pre-implemented models can be mixed.
+We provide a set of pre implemented luxenstudio models. One of the goals of luxenstudio is to modularize the various Luxen techniques as much as possible. As a result, many of the techniques from these pre-implemented models can be mixed.
 
 ## Running a model
 

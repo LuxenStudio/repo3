@@ -3,6 +3,6 @@
 Spatial Distortions
 =====================
 
-.. automodule:: luxenactory.fields.modules.spatial_distortions
+.. automodule:: luxenstudio.fields.modules.spatial_distortions
    :members:
    :show-inheritance:

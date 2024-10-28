@@ -3,6 +3,6 @@
 Colors
 ------------
 
-.. automodule:: luxenactory.utils.colors
+.. automodule:: luxenstudio.utils.colors
    :members:
    :show-inheritance:

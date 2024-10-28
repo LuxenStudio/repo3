@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Configuration script for setting up tab completion for luxenactory in bash and zsh."""
+"""Configuration script for setting up tab completion for luxenstudio in bash and zsh."""
 
 import concurrent.futures
 import itertools
@@ -126,7 +126,7 @@ def _update_rc(
     source_lines = "\n".join(
         [
             "",
-            "# Source luxenactory autocompletions.",
+            "# Source luxenstudio autocompletions.",
             f"source {completions_dir / 'setup'}.{shell}",
         ]
     )

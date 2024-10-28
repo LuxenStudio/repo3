@@ -3,6 +3,6 @@
 Math
 ============
 
-.. automodule:: luxenactory.utils.math
+.. automodule:: luxenstudio.utils.math
    :members:
    :show-inheritance:

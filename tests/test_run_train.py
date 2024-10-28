@@ -9,10 +9,10 @@ from pathlib import Path
 
 import pytest
 
-from luxenactory.configs.base import Config
-from luxenactory.configs.base_configs import base_configs
-from luxenactory.datamanagers.dataparsers.blender_parser import BlenderDataParserConfig
-from luxenactory.engine.trainer import train_loop
+from luxenstudio.configs.base import Config
+from luxenstudio.configs.base_configs import base_configs
+from luxenstudio.datamanagers.dataparsers.blender_parser import BlenderDataParserConfig
+from luxenstudio.engine.trainer import train_loop
 
 BLACKLIST = ["base", "semantic-luxen", "mipluxen-360", "instant-ngp", "proposal"]
 

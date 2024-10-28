@@ -3,6 +3,6 @@
 Visualization
 ----------------
 
-.. automodule:: luxenactory.utils.visualization
+.. automodule:: luxenstudio.utils.visualization
    :members:
    :show-inheritance:

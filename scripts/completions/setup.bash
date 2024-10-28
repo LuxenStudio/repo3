@@ -1,4 +1,4 @@
-# Luxenactory completions for bash.
+# luxenstudio completions for bash.
 #
 # This should generally be installed automatically by `configure.py`.
 
@@ -6,7 +6,7 @@ completions_dir="$(dirname "$BASH_SOURCE")"/bash
 
 if [ ! -d "${completions_dir}" ]; then
   echo "$0: Completions are missing!"
-  echo "Please generate them with luxenactory/scripts/completions/generate.py!"
+  echo "Please generate them with luxenstudio/scripts/completions/generate.py!"
   return 1
 fi
 

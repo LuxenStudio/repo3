@@ -3,7 +3,7 @@ Test visualizations
 """
 import torch
 
-from luxenactory.utils import visualization
+from luxenstudio.utils import visualization
 
 
 def test_apply_colormap():

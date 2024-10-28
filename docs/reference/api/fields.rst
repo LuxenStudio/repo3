@@ -6,20 +6,20 @@ Fields
 Base
 ----------------
 
-.. automodule:: luxenactory.fields.base
+.. automodule:: luxenstudio.fields.base
    :members:
    :show-inheritance:
 
 Instant NGP
 ----------------
 
-.. automodule:: luxenactory.fields.instant_ngp_field
+.. automodule:: luxenstudio.fields.instant_ngp_field
    :members:
    :show-inheritance:
 
 Luxen
 ----------------
 
-.. automodule:: luxenactory.fields.luxen_field
+.. automodule:: luxenstudio.fields.luxen_field
    :members:
    :show-inheritance:

@@ -9,7 +9,7 @@
       "request": "launch",
       "type": "chrome",
       "url": "http://localhost:4000",
-      "webRoot": "${workspaceFolder}/luxenactory/viewer/app"
+      "webRoot": "${workspaceFolder}/luxenstudio/viewer/app"
     },
     {
       "name": "Python: Attach using Process ID",
@@ -44,9 +44,7 @@
       "request": "launch",
       "program": "scripts/train.py",
       "console": "integratedTerminal",
-      "args": [
-        "instant_ngp"
-      ]
+      "args": ["instant_ngp"]
     },
     {
       "name": "Python: train ngp luxenactory",
@@ -93,9 +91,7 @@
       "request": "launch",
       "program": "scripts/train.py",
       "console": "integratedTerminal",
-      "args": [
-        "mipluxen_360"
-      ]
+      "args": ["mipluxen_360"]
     },
     {
       "name": "Python: train tensorf",
@@ -103,9 +99,7 @@
       "request": "launch",
       "program": "scripts/train.py",
       "console": "integratedTerminal",
-      "args": [
-        "tensorf"
-      ]
+      "args": ["tensorf"]
     },
     {
       "name": "Python: train luxenw",
@@ -113,9 +107,7 @@
       "request": "launch",
       "program": "scripts/train.py",
       "console": "integratedTerminal",
-      "args": [
-        "luxenw"
-      ]
+      "args": ["luxenw"]
     },
     {
       "name": "Python: train semantic_luxen",
@@ -123,9 +115,7 @@
       "request": "launch",
       "program": "scripts/train.py",
       "console": "integratedTerminal",
-      "args": [
-        "semantic_luxen"
-      ]
+      "args": ["semantic_luxen"]
     }
   ]
 }

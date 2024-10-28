@@ -26,11 +26,11 @@ from rich.progress import (
 )
 from typing_extensions import assert_never
 
-from luxenactory.cameras.camera_paths import get_path_from_json, get_spiral_path
-from luxenactory.cameras.cameras import Cameras
-from luxenactory.configs import base as cfg
-from luxenactory.pipelines.base import Pipeline
-from luxenactory.utils.rich import ItersPerSecColumn
+from luxenstudio.cameras.camera_paths import get_path_from_json, get_spiral_path
+from luxenstudio.cameras.cameras import Cameras
+from luxenstudio.configs import base as cfg
+from luxenstudio.pipelines.base import Pipeline
+from luxenstudio.utils.rich import ItersPerSecColumn
 
 console = Console(width=120)
 

@@ -3,6 +3,6 @@
 Renderers
 ============
 
-.. automodule:: luxenactory.renderers.renderers
+.. automodule:: luxenstudio.renderers.renderers
    :members:
    :show-inheritance:

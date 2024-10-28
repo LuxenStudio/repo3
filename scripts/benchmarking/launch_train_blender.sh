@@ -57,7 +57,7 @@ for dataset in ${DATASETS[@]}; do
            --logging.writer.2.no-enable \
            --pipeline.datamanager.train-dataset.data-directory=data/blender/${dataset} \
            --experiment-name=blender_${dataset}_${tag} \
-           --trainer.model-dir=luxenactory_models/ \
+           --trainer.model-dir=luxenstudio_models/ \
            --trainer.steps-per-save=16000 \
            --trainer.max-num-iterations=16500 \
            --logging.no-enable-profiler &

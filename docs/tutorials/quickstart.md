@@ -7,21 +7,21 @@ This repository is tested with CUDA 11.3. Make sure to install [Conda](https://d
 Create the python environment
 
 ```bash
-conda create --name luxenactory python=3.8.13
-conda activate luxenactory
+conda create --name luxenstudio python=3.8.13
+conda activate luxenstudio
 python -m pip install --upgrade pip
 ```
 
 Clone the repo
 
 ```bash
-git clone git@github.com:plenoptix/luxenactory.git
+git clone git@github.com:plenoptix/luxenstudio.git
 ```
 
-Install dependencies and luxenactory as a library
+Install dependencies and luxenstudio as a library
 
 ```bash
-cd luxenactory
+cd luxenstudio
 pip install -e .
 ```
 
@@ -32,7 +32,7 @@ pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 -f https://download.py
 pip install git+https://github.com/NVlabs/tiny-cuda-nn/#subdirectory=bindings/torch
 ```
 
-Install tab completion for luxenactory (bash and zsh)
+Install tab completion for luxenstudio (bash and zsh)
 
 ```bash
 # If the CLI changes, we can also re-install to synchronize completions
@@ -50,7 +50,7 @@ python scripts/downloads/download_data.py --dataset=blender
 Use `--help` to view all currently available datasets. The resulting script should download and unpack the dataset as follows:
 
 ```
-|─ luxenactory/
+|─ luxenstudio/
    ├─ data/
    |  ├─ blender/
    |     ├─ fern/
@@ -127,7 +127,7 @@ pip install torch==1.12.1+cu113 torchvision==0.13.1+cu113 -f https://download.py
 
 #### Installation errors, File "setup.py" not found
 
-When installing dependencies and luxenactory with `pip install -e .`, you run into: `ERROR: File "setup.py" not found. Directory cannot be installed in editable mode`
+When installing dependencies and luxenstudio with `pip install -e .`, you run into: `ERROR: File "setup.py" not found. Directory cannot be installed in editable mode`
 
 **Solution**:
 This can be fixed by upgrading pip to the latest version:

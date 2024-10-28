@@ -7,7 +7,7 @@ from typing import Dict
 import pytest
 import torch
 
-from luxenactory.utils.tensor_dataclass import TensorDataclass
+from luxenstudio.utils.tensor_dataclass import TensorDataclass
 
 
 @dataclass

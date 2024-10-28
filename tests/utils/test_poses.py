@@ -4,7 +4,7 @@ Test pose utils
 
 import torch
 
-from luxenactory.utils import poses
+from luxenstudio.utils import poses
 
 
 def test_to4x4():

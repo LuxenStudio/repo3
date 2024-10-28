@@ -4,7 +4,7 @@ Test communications with the viewer.
 
 import time
 
-from luxenactory.viewer.server.subprocess import run_viewer_bridge_server_as_subprocess
+from luxenstudio.viewer.server.subprocess import run_viewer_bridge_server_as_subprocess
 
 
 def test_run_subprocess():

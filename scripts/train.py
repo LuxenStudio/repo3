@@ -19,10 +19,10 @@ import torch.distributed as dist
 import torch.multiprocessing as mp
 import yaml
 
-from luxenactory.configs import base as cfg
-from luxenactory.configs.base_configs import AnnotatedBaseConfigUnion
-from luxenactory.engine.trainer import train_loop
-from luxenactory.utils import comms, profiler
+from luxenstudio.configs import base as cfg
+from luxenstudio.configs.base_configs import AnnotatedBaseConfigUnion
+from luxenstudio.engine.trainer import train_loop
+from luxenstudio.utils import comms, profiler
 
 logging.basicConfig(format="[%(filename)s:%(lineno)d] %(message)s", level=logging.DEBUG)
 

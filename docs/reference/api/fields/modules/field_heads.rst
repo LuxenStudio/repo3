@@ -3,6 +3,6 @@
 Field Heads
 ===================
 
-.. automodule:: luxenactory.fields.modules.field_heads
+.. automodule:: luxenstudio.fields.modules.field_heads
    :members:
    :show-inheritance:
