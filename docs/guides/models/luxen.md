@@ -11,7 +11,7 @@ Paper Website
 ### Running the Model
 
 ```bash
-python scripts/run_train.py --config-name=graph_vanilla_luxen.yaml
+python scripts/train.py --config-name=graph_vanilla_luxen.yaml
 ```
 
 ## Method

@@ -7,7 +7,7 @@ We provide a set of pre implemented luxenactory models. One of the goals of luxe
 It's easy!
 
 ```bash
-python scripts/run_train.py --config-name MODEL_CONFIG
+python scripts/train.py --config-name MODEL_CONFIG
 ```
 
 ## Guides
