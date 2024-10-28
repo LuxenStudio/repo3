@@ -37,7 +37,6 @@ from luxenactory.datamanagers.dataparsers.mipluxen_parser import (
     MipLuxen360DataParserConfig,
 )
 from luxenactory.models.base import VanillaModelConfig
-from luxenactory.models.compound import CompoundModelConfig
 from luxenactory.models.instant_ngp import InstantNGPModelConfig
 from luxenactory.models.mipluxen import MipLuxenModel
 from luxenactory.models.mipluxen_360 import MipLuxen360Model
@@ -50,37 +49,6 @@ from luxenactory.pipelines.base import VanillaPipelineConfig
 from luxenactory.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 
 base_configs: Dict[str, Config] = {}
-base_configs["compound"] = Config(
-    method_name="compound",
-    trainer=TrainerConfig(mixed_precision=True),
-    pipeline=DynamicBatchPipelineConfig(
-        datamanager=VanillaDataManagerConfig(dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
-        model=CompoundModelConfig(eval_num_rays_per_chunk=8192),
-    ),
-    optimizers={
-        "fields": {
-            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
-            "scheduler": None,
-        }
-    },
-    vis=["viewer"],
-)
-
-base_configs["instant-ngp"] = Config(
-    method_name="instant-ngp",
-    trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
-    pipeline=DynamicBatchPipelineConfig(
-        datamanager=VanillaDataManagerConfig(dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
-        model=InstantNGPModelConfig(eval_num_rays_per_chunk=8192),
-    ),
-    optimizers={
-        "fields": {
-            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
-            "scheduler": None,
-        }
-    },
-    vis=["viewer"],
-)
 
 base_configs["proposal"] = Config(
     method_name="proposal",
@@ -102,6 +70,23 @@ base_configs["proposal"] = Config(
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=2 << 15),
+    vis=["viewer"],
+)
+
+base_configs["instant-ngp"] = Config(
+    method_name="instant-ngp",
+    trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
+    pipeline=DynamicBatchPipelineConfig(
+        datamanager=VanillaDataManagerConfig(dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
+        model=InstantNGPModelConfig(eval_num_rays_per_chunk=8192),
+    ),
+    optimizers={
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        }
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=64000),
     vis=["viewer"],
 )
 

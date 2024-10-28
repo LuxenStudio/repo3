@@ -31,7 +31,6 @@ from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 from luxenactory.cameras.rays import RayBundle
 from luxenactory.fields.compound_field import TCNNCompoundField
 from luxenactory.fields.density_field import DensityField
-from luxenactory.fields.instant_ngp_field import TCNNInstantNGPField
 from luxenactory.fields.modules.field_heads import FieldHeadNames
 from luxenactory.fields.modules.spatial_distortions import SceneContraction
 from luxenactory.models.base import Model, ModelConfig
@@ -106,7 +105,7 @@ class ProposalModel(Model):
                 self.scene_bounds.aabb, spatial_distortion=scene_contraction, num_images=self.num_train_data
             )
         else:
-            self.field = TCNNInstantNGPField(self.scene_bounds.aabb, spatial_distortion=scene_contraction)
+            raise NotImplementedError("Only appearance conditioning is supported.")
 
         # Build the proposal network(s)
         self.proposal_networks = torch.nn.ModuleList()
