@@ -2,10 +2,17 @@
 """Download datasets"""
 import zipfile
 from pathlib import Path
-from typing import Literal
+from typing import Literal, Optional
 
 import dcargs
 import gdown
+
+luxenactory_file_ids = {
+    "dozer": "1-OR5F_V5S4s-yzxohbwTylaXjzYLu8ZR",
+    "sf_street": "1DbLyptL6my2QprEVtYuW2uzgp9JAK5Wz",
+    "poster": "1dmjWGXlJnUxwosN6MVooCDQe970PkD-1",
+    "lion": "1bx0aDtHoqB3xTAVHL9UIrlTL_vqC6vaH",
+}
 
 
 def download_friends():
@@ -63,7 +70,20 @@ def download_blender():
     download_path.unlink(missing_ok=True)
 
 
-def main(dataset: Literal["blender", "friends"]):
+def download_luxenactory(dataset_name: str):
+    """Download a zipped luxenactory dataset"""
+    url = f"https://drive.google.com/uc?id={luxenactory_file_ids[dataset_name]}"
+    download_path = Path(f"data/{dataset_name}.zip")
+    gdown.download(url, output=str(download_path), quiet=False)
+    with zipfile.ZipFile(download_path, "r") as zip_ref:
+        zip_ref.extractall(f"data/ours/{dataset_name}")
+    download_path.unlink(missing_ok=True)
+
+
+def main(
+    dataset: Literal["blender", "friends", "luxenactory"],
+    dataset_name: Optional[str] = None,
+):
     """Main download script to download all data"""
     save_dir = Path("data/")
     save_dir.mkdir(parents=True, exist_ok=True)
@@ -72,6 +92,12 @@ def main(dataset: Literal["blender", "friends"]):
         download_blender()
     if dataset == "friends":
         download_friends()
+    if dataset == "luxenactory":
+        if dataset_name is None or dataset_name not in luxenactory_file_ids:
+            raise ValueError(
+                f"must pass in dataset_name when downloading luxenactory data, options: {luxenactory_file_ids.keys()}"
+            )
+        download_luxenactory(dataset_name)
 
 
 if __name__ == "__main__":
