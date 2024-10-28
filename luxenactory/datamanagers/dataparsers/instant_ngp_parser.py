@@ -28,7 +28,7 @@ from luxenactory.cameras import utils as camera_utils
 from luxenactory.cameras.cameras import Cameras, CameraType
 from luxenactory.datamanagers.dataparsers.base import DataParser, DataParserConfig
 from luxenactory.datamanagers.structs import DatasetInputs, SceneBounds
-from luxenactory.utils.io import get_absolute_path, load_from_json
+from luxenactory.utils.io import load_from_json
 
 
 @dataclass
@@ -53,14 +53,12 @@ class InstantNGP(DataParser):
 
     def _generate_dataset_inputs(self, split="train"):
 
-        abs_dir = get_absolute_path(self.config.data_directory)
-
-        meta = load_from_json(abs_dir / "transforms.json")
+        meta = load_from_json(self.config.data_directory / "transforms.json")
         image_filenames = []
         poses = []
         num_skipped_image_filenames = 0
         for frame in meta["frames"]:
-            fname = abs_dir / Path(frame["file_path"])
+            fname = self.config.data_directory / Path(frame["file_path"])
             if not fname:
                 num_skipped_image_filenames += 1
             else:
