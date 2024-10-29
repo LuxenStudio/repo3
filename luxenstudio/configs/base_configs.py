@@ -40,8 +40,8 @@ from luxenstudio.models.base import VanillaModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.mipluxen_360 import MipLuxen360Model
+from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.luxenw import LuxenWModelConfig
-from luxenstudio.models.proposal import ProposalModelConfig
 from luxenstudio.models.semantic_luxen import SemanticLuxenModel
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel
@@ -50,14 +50,14 @@ from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 
 base_configs: Dict[str, Config] = {}
 
-base_configs["proposal"] = Config(
-    method_name="proposal",
+base_configs["luxenacto"] = Config(
+    method_name="luxenacto",
     trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
             dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=4096, eval_num_rays_per_batch=8192
         ),
-        model=ProposalModelConfig(eval_num_rays_per_chunk=1 << 16),
+        model=LuxenactoModelConfig(eval_num_rays_per_chunk=1 << 16),
     ),
     optimizers={
         "proposal_networks": {
