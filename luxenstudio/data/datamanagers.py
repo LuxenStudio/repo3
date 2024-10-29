@@ -50,17 +50,19 @@ from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttri
 from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import IterableWrapper
 
-AnnotatedDataParserUnion = dcargs.extras.subcommand_type_from_defaults(
-    {
-        "luxenstudio-data": LuxenstudioDataParserConfig(),
-        "blender-data": BlenderDataParserConfig(),
-        "friends-data": FriendsDataParserConfig(),
-        "mipluxen-360-data": MipLuxen360DataParserConfig(),
-        "instant-ngp-data": InstantNGPDataParserConfig(),
-        "record3d-data": Record3DDataParserConfig(),
-    },
-    prefix_names=False,
-)
+AnnotatedDataParserUnion = dcargs.conf.OmitSubcommandPrefixes[  # Omit prefixes of flags in subcommands.
+    dcargs.extras.subcommand_type_from_defaults(
+        {
+            "luxenstudio-data": LuxenstudioDataParserConfig(),
+            "blender-data": BlenderDataParserConfig(),
+            "friends-data": FriendsDataParserConfig(),
+            "mipluxen-360-data": MipLuxen360DataParserConfig(),
+            "instant-ngp-data": InstantNGPDataParserConfig(),
+            "record3d-data": Record3DDataParserConfig(),
+        },
+        prefix_names=False,  # Omit prefixes in subcommands themselves.
+    )
+]
 """Union over possible dataparser types, annotated with metadata for dcargs. This is the
 same as the vanilla union, but results in shorter subcommand names."""
 
