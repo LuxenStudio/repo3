@@ -6,7 +6,7 @@
         <img src='https://readthedocs.com/projects/plenoptix-luxenstudio/badge/?version=latest' alt='Documentation Status' />
     </a>
     <!-- pi package badge -->
-    <a href="https://badge.fury.io/py/luxenstudio"><img src="https://badge.fury.io/py/luxenstudio.svg" alt="PyPI version" height="18"></a>
+    <a href="https://badge.fury.io/py/luxenstudio"><img src="https://badge.fury.io/py/luxenstudio.svg" alt="PyPI version"></a>
     <!-- code check badges -->
     <a href='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/core_code_checks.yml'>
         <img src='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/core_code_checks.yml/badge.svg' alt='Test Status' />
