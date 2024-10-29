@@ -42,6 +42,17 @@ from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 
 model_configs: Dict[str, Config] = {}
+descriptions = {
+    "luxenacto": "[bold green]Recommended[/bold green] Real-time model tuned for real captures. "
+    + "This model will be continually updated.",
+    "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for bounded synthetic data.",
+    "mipluxen-360": "High quality model for unbounded 360 degree scenes. [red]*slow*",
+    "mipluxen": "High quality model for bounded scenes. [red]*slow*",
+    "luxenw": "Model designed to handle inconsistent appearance between images. [red]*slow*",
+    "semantic-luxen": "Model that predicts dense semantic segmentations. [red]*slow*",
+    "vanilla-luxen": "Original Luxen model. [red]*slow*",
+    "tensorf": "Fast model designed for bounded scenes.",
+}
 
 model_configs["luxenacto"] = Config(
     method_name="luxenacto",
@@ -205,7 +216,9 @@ model_configs["tensorf"] = Config(
 )
 
 
-AnnotatedBaseConfigUnion = dcargs.extras.subcommand_type_from_defaults(model_configs)
+AnnotatedBaseConfigUnion = dcargs.extras.subcommand_type_from_defaults(
+    defaults=model_configs, descriptions=descriptions
+)
 """Union[] type over config types, annotated with default instances for use with
 dcargs.cli(). Allows the user to pick between one of several base configurations, and
 then override values in it."""
