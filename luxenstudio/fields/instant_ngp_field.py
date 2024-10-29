@@ -26,10 +26,10 @@ from torchtyping import TensorType
 
 from luxenstudio.cameras.rays import RaySamples
 from luxenstudio.data.scene_box import SceneBox
+from luxenstudio.field_components.activations import trunc_exp
 from luxenstudio.field_components.embedding import Embedding
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.base_field import Field
-from luxenstudio.utils.activations import trunc_exp
 
 try:
     import tinycudann as tcnn

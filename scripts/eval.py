@@ -30,7 +30,7 @@ from luxenstudio.cameras.camera_paths import get_path_from_json, get_spiral_path
 from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.configs import base_config as cfg
 from luxenstudio.pipelines.base import Pipeline
-from luxenstudio.utils.rich import ItersPerSecColumn
+from luxenstudio.utils.rich_utils import ItersPerSecColumn
 
 console = Console(width=120)
 
