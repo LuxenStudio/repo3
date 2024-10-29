@@ -12,8 +12,8 @@ import dcargs
 import torch
 
 from luxenstudio.configs import base as cfg
-from luxenstudio.datamanagers.base import AnnotatedDataParserUnion
-from luxenstudio.datamanagers.datasets import InputDataset
+from luxenstudio.data.base import AnnotatedDataParserUnion
+from luxenstudio.data.datasets import InputDataset
 from luxenstudio.viewer.server import viewer_utils
 
 logging.basicConfig(format="[%(filename)s:%(lineno)d] %(message)s", level=logging.INFO)

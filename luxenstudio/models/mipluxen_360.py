@@ -27,19 +27,19 @@ from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.fields.modules.encoding import LuxenEncoding
-from luxenstudio.fields.modules.field_heads import FieldHeadNames
-from luxenstudio.fields.modules.spatial_distortions import SceneContraction
+from luxenstudio.field_components.encoding import LuxenEncoding
+from luxenstudio.field_components.field_heads import FieldHeadNames
+from luxenstudio.field_components.spatial_distortions import SceneContraction
 from luxenstudio.fields.luxen_field import LuxenField
-from luxenstudio.models.base import Model, ModelConfig
-from luxenstudio.models.modules.ray_losses import distortion_loss
-from luxenstudio.models.modules.ray_sampler import PDFSampler, UniformSampler
-from luxenstudio.optimizers.loss import MSELoss
-from luxenstudio.renderers.renderers import (
+from luxenstudio.model_components.loss import MSELoss
+from luxenstudio.model_components.ray_losses import distortion_loss
+from luxenstudio.model_components.ray_sampler import PDFSampler, UniformSampler
+from luxenstudio.model_components.renderers import (
     AccumulationRenderer,
     DepthRenderer,
     RGBRenderer,
 )
+from luxenstudio.models.base import Model, ModelConfig
 from luxenstudio.utils import colors, misc, visualization
 
 

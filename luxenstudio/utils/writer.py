@@ -30,7 +30,7 @@ from rich import console
 from torch.utils.tensorboard import SummaryWriter
 from torchtyping import TensorType
 
-from luxenstudio.configs import base as cfg
+from luxenstudio.configs import base_config as cfg
 from luxenstudio.utils.decorators import check_main_thread, decorate_all
 from luxenstudio.utils.misc import human_format
 

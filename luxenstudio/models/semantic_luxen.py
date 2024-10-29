@@ -23,15 +23,15 @@ import torch
 from torch import nn
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.datamanagers.structs import Semantics
-from luxenstudio.fields.modules.encoding import LuxenEncoding
-from luxenstudio.fields.modules.field_heads import FieldHeadNames
+from luxenstudio.data.dataparsers.base_dataparser import Semantics
+from luxenstudio.field_components.encoding import LuxenEncoding
+from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.luxen_field import LuxenField
 from luxenstudio.fields.semantic_luxen_field import SemanticLuxenField
+from luxenstudio.model_components.renderers import SemanticRenderer
+from luxenstudio.model_components.scene_colliders import AABBBoxCollider
 from luxenstudio.models.base import ModelConfig
-from luxenstudio.models.modules.scene_colliders import AABBBoxCollider
 from luxenstudio.models.vanilla_luxen import LuxenModel
-from luxenstudio.renderers.renderers import SemanticRenderer
 from luxenstudio.utils import misc
 
 

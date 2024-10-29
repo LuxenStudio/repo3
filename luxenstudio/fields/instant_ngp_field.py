@@ -25,10 +25,10 @@ from torch.nn.parameter import Parameter
 from torchtyping import TensorType
 
 from luxenstudio.cameras.rays import RaySamples
-from luxenstudio.datamanagers.structs import SceneBounds
-from luxenstudio.fields.base import Field
-from luxenstudio.fields.modules.embedding import Embedding
-from luxenstudio.fields.modules.field_heads import FieldHeadNames
+from luxenstudio.data.scene_box import SceneBounds
+from luxenstudio.field_components.embedding import Embedding
+from luxenstudio.field_components.field_heads import FieldHeadNames
+from luxenstudio.fields.base_field import Field
 from luxenstudio.utils.activations import trunc_exp
 
 try:

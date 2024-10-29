@@ -29,19 +29,19 @@ from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.fields.compound_field import TCNNCompoundField
-from luxenstudio.fields.density_field import DensityField
-from luxenstudio.fields.modules.field_heads import FieldHeadNames
-from luxenstudio.fields.modules.spatial_distortions import SceneContraction
-from luxenstudio.models.base import Model, ModelConfig
-from luxenstudio.models.modules.ray_sampler import ProposalNetworkSampler
-from luxenstudio.models.modules.scene_colliders import NearFarCollider
-from luxenstudio.optimizers.loss import MSELoss, distortion_loss, interlevel_loss
-from luxenstudio.renderers.renderers import (
+from luxenstudio.field_components.field_heads import FieldHeadNames
+from luxenstudio.field_components.spatial_distortions import SceneContraction
+from luxenstudio.fields.density_fields import HashMLPDensityField
+from luxenstudio.fields.luxenacto_field import TCNNLuxenactoField
+from luxenstudio.model_components.loss import MSELoss, distortion_loss, interlevel_loss
+from luxenstudio.model_components.ray_sampler import ProposalNetworkSampler
+from luxenstudio.model_components.renderers import (
     AccumulationRenderer,
     DepthRenderer,
     RGBRenderer,
 )
+from luxenstudio.model_components.scene_colliders import NearFarCollider
+from luxenstudio.models.base import Model, ModelConfig
 from luxenstudio.utils import colors, visualization
 from luxenstudio.utils.callbacks import (
     TrainingCallback,
@@ -104,7 +104,7 @@ class LuxenactoModel(Model):
 
         # Fields
         if self.config.use_appearance_conditioning:
-            self.field = TCNNCompoundField(
+            self.field = TCNNLuxenactoField(
                 self.scene_bounds.aabb,
                 spatial_distortion=scene_contraction,
                 num_images=self.num_train_data,
@@ -116,12 +116,12 @@ class LuxenactoModel(Model):
         # Build the proposal network(s)
         self.proposal_networks = torch.nn.ModuleList()
         if self.config.use_same_proposal_network:
-            network = DensityField(self.scene_bounds.aabb, spatial_distortion=scene_contraction)
+            network = HashMLPDensityField(self.scene_bounds.aabb, spatial_distortion=scene_contraction)
             self.proposal_networks.append(network)
             self.density_fns = [network.density_fn for _ in range(self.config.num_proposal_network_iterations)]
         else:
             for _ in range(self.config.num_proposal_network_iterations):
-                network = DensityField(self.scene_bounds.aabb, spatial_distortion=scene_contraction)
+                network = HashMLPDensityField(self.scene_bounds.aabb, spatial_distortion=scene_contraction)
                 self.proposal_networks.append(network)
             self.density_fns = [network.density_fn for network in self.proposal_networks]
 

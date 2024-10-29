@@ -30,8 +30,8 @@ from rich.console import Console
 
 from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.configs import base as cfg
-from luxenstudio.datamanagers.datasets import InputDataset
+from luxenstudio.configs import base_config as cfg
+from luxenstudio.data.utils.datasets import InputDataset
 from luxenstudio.models.base import Model
 from luxenstudio.utils import profiler, visualization, writer
 from luxenstudio.utils.io import load_from_json, write_to_json

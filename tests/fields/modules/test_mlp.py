@@ -4,7 +4,7 @@ MLP Test
 import torch
 from torch import nn
 
-from luxenstudio.fields.modules import MLP
+from luxenstudio.field_components import MLP
 
 
 def test_mlp():

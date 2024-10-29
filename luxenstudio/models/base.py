@@ -28,10 +28,10 @@ from torch import nn
 from torch.nn import Parameter
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.configs.base import InstantiateConfig
-from luxenstudio.configs.utils import to_immutable_dict
-from luxenstudio.datamanagers.structs import SceneBounds
-from luxenstudio.models.modules.scene_colliders import NearFarCollider
+from luxenstudio.configs.base_config import InstantiateConfig
+from luxenstudio.configs.config_utils import to_immutable_dict
+from luxenstudio.data.scene_box import SceneBounds
+from luxenstudio.model_components.scene_colliders import NearFarCollider
 from luxenstudio.utils.callbacks import TrainingCallback, TrainingCallbackAttributes
 
 

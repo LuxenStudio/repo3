@@ -20,10 +20,10 @@ from typing import Any, Dict, Optional, Tuple
 
 import torch
 
-import luxenstudio.cameras.utils as camera_utils
 import luxenstudio.utils.poses as pose_utils
+from luxenstudio.cameras import camera_utils
+from luxenstudio.cameras.camera_utils import get_interpolated_poses_many
 from luxenstudio.cameras.cameras import Cameras
-from luxenstudio.cameras.utils import get_interpolated_poses_many
 from luxenstudio.viewer.server.utils import three_js_perspective_camera_focal_length
 
 

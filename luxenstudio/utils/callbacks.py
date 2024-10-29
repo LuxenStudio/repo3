@@ -21,7 +21,7 @@ from enum import Enum, auto
 from inspect import signature
 from typing import Callable, Dict, List, Optional, Tuple
 
-from luxenstudio.configs.base import TrainerConfig
+from luxenstudio.configs.base_config import TrainerConfig
 
 
 @dataclass

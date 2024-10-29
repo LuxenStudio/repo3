@@ -6,34 +6,34 @@ Data
 Data Parsers
 ----------------
 
-.. automodule:: luxenstudio.datamanagers.dataparsers
+.. automodule:: luxenstudio.data.dataparsers
    :members:
    :show-inheritance:
 
 Datasets
 ----------------
 
-.. automodule:: luxenstudio.datamanagers.datasets
+.. automodule:: luxenstudio.data.utils.datasets
    :members:
    :show-inheritance:
 
 Dataloaders
 ----------------
 
-.. automodule:: luxenstudio.datamanagers.dataloaders
+.. automodule:: luxenstudio.data.utils.dataloaders
    :members:
    :show-inheritance:
 
 Pixel Samplers
 ----------------
 
-.. automodule:: luxenstudio.datamanagers.pixel_sampler
+.. automodule:: luxenstudio.data.pixel_samplers
    :members:
    :show-inheritance:
 
-Structures
+Scene Box
 ----------------
 
-.. automodule:: luxenstudio.datamanagers.structs
+.. automodule:: luxenstudio.data.scene_box
    :members:
    :show-inheritance:

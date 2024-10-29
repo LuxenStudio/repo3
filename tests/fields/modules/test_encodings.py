@@ -4,7 +4,7 @@ Encoding Tests
 import pytest
 import torch
 
-from luxenstudio.fields.modules import encoding
+from luxenstudio.field_components import encoding
 
 
 def test_scaling_and_offset():

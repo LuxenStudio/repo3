@@ -3,6 +3,6 @@
 Configs
 ============
 
-.. automodule:: luxenstudio.configs.base
+.. automodule:: luxenstudio.configs.base_config
    :members:
    :show-inheritance:

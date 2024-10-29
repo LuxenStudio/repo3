@@ -26,7 +26,7 @@ import torchvision
 from torch.nn.functional import normalize
 from torchtyping import TensorType
 
-from luxenstudio.cameras import utils as camera_utils
+from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.rays import RayBundle
 
 

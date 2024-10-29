@@ -36,8 +36,8 @@ from torch import nn
 from torch.nn import Parameter
 from torch.nn.parallel import DistributedDataParallel as DDP
 
-from luxenstudio.configs import base as cfg
-from luxenstudio.datamanagers.base import (
+from luxenstudio.configs import base_config as cfg
+from luxenstudio.data.datamanagers import (
     DataManager,
     VanillaDataManager,
     VanillaDataManagerConfig,

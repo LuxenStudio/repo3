@@ -30,16 +30,16 @@ from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
+from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.instant_ngp_field import TCNNInstantNGPField
-from luxenstudio.fields.modules.field_heads import FieldHeadNames
-from luxenstudio.models.base import Model, ModelConfig
-from luxenstudio.models.modules.ray_sampler import VolumetricSampler
-from luxenstudio.optimizers.loss import MSELoss
-from luxenstudio.renderers.renderers import (
+from luxenstudio.model_components.loss import MSELoss
+from luxenstudio.model_components.ray_sampler import VolumetricSampler
+from luxenstudio.model_components.renderers import (
     AccumulationRenderer,
     DepthRenderer,
     RGBRenderer,
 )
+from luxenstudio.models.base import Model, ModelConfig
 from luxenstudio.utils import colors, visualization
 from luxenstudio.utils.callbacks import (
     TrainingCallback,

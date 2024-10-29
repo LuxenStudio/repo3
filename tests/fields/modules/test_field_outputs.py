@@ -5,7 +5,7 @@ import pytest
 import torch
 from torch import nn
 
-from luxenstudio.fields.modules.field_heads import (
+from luxenstudio.field_components.field_heads import (
     DensityFieldHead,
     FieldHead,
     FieldHeadNames,

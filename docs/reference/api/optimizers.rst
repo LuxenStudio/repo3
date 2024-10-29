@@ -1,9 +1,18 @@
-.. _optimizers:
+.. _engine:
 
-Optimizers
+Engine
 ============
 
-.. automodule:: luxenstudio.optimizers.optimizers
+Optimizers
+----------------
+
+.. automodule:: luxenstudio.engine.optimizers
    :members:
    :show-inheritance:
 
+Schedulers
+----------------
+
+.. automodule:: luxenstudio.engine.schedulers
+   :members:
+   :show-inheritance:

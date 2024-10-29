@@ -28,8 +28,8 @@ import torch
 from rich import console
 from torch.cuda.amp.grad_scaler import GradScaler
 
-from luxenstudio.configs import base as cfg
-from luxenstudio.optimizers.optimizers import Optimizers, setup_optimizers
+from luxenstudio.configs import base_config as cfg
+from luxenstudio.engine.optimizers import Optimizers, setup_optimizers
 from luxenstudio.pipelines.base import VanillaPipeline
 from luxenstudio.utils import profiler, writer
 from luxenstudio.utils.callbacks import (

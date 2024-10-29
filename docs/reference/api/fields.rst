@@ -6,7 +6,7 @@ Fields
 Base
 ----------------
 
-.. automodule:: luxenstudio.fields.base
+.. automodule:: luxenstudio.fields.base_field
    :members:
    :show-inheritance:
 

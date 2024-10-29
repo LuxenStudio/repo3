@@ -5,7 +5,7 @@ import pytest
 import torch
 
 from luxenstudio.cameras.rays import Frustums, RaySamples
-from luxenstudio.renderers import renderers
+from luxenstudio.model_components import renderers
 
 
 def test_rgb_renderer():

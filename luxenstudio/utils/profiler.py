@@ -21,7 +21,7 @@ import logging
 import time
 from typing import Callable
 
-from luxenstudio.configs import base as cfg
+from luxenstudio.configs import base_config as cfg
 from luxenstudio.utils import comms
 from luxenstudio.utils.decorators import (
     check_main_thread,

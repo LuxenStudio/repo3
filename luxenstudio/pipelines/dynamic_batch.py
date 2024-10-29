@@ -21,7 +21,7 @@ from typing import Type
 
 import torch
 
-from luxenstudio.datamanagers.base import VanillaDataManager
+from luxenstudio.data.datamanagers import VanillaDataManager
 from luxenstudio.pipelines.base import VanillaPipeline, VanillaPipelineConfig
 
 

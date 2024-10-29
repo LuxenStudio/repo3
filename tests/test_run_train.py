@@ -9,9 +9,9 @@ from pathlib import Path
 
 import pytest
 
-from luxenstudio.configs.base import Config
-from luxenstudio.configs.base_configs import base_configs
-from luxenstudio.datamanagers.dataparsers.blender_parser import BlenderDataParserConfig
+from luxenstudio.configs.base_config import Config
+from luxenstudio.configs.model_configs import model_configs
+from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.engine.trainer import train_loop
 
 BLACKLIST = ["base", "semantic-luxen", "mipluxen-360", "instant-ngp", "luxenacto"]
@@ -48,13 +48,13 @@ def set_reduced_config(config: Config):
 @pytest.mark.filterwarnings("ignore::DeprecationWarning")
 def test_train():
     """test run train script works properly"""
-    all_config_names = base_configs.keys()
+    all_config_names = model_configs.keys()
     for config_name in all_config_names:
         if config_name in BLACKLIST:
             print("skipping", config_name)
             continue
         print(f"testing run for: {config_name}")
-        config = base_configs[config_name]
+        config = model_configs[config_name]
         config = set_reduced_config(config)
 
         train_loop(local_rank=0, world_size=0, config=config)

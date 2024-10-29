@@ -1,7 +1,7 @@
 """
 Embedding tests
 """
-from luxenstudio.fields.modules.embedding import Embedding
+from luxenstudio.field_components.embedding import Embedding
 
 
 def test_indexing():

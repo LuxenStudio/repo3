@@ -21,10 +21,9 @@ from torch import nn
 from torchtyping import TensorType
 
 from luxenstudio.cameras.rays import RaySamples
-from luxenstudio.fields.base import Field
-from luxenstudio.fields.modules.embedding import Embedding
-from luxenstudio.fields.modules.encoding import Encoding, Identity
-from luxenstudio.fields.modules.field_heads import (
+from luxenstudio.field_components.embedding import Embedding
+from luxenstudio.field_components.encoding import Encoding, Identity
+from luxenstudio.field_components.field_heads import (
     DensityFieldHead,
     FieldHeadNames,
     RGBFieldHead,
@@ -32,7 +31,8 @@ from luxenstudio.fields.modules.field_heads import (
     TransientRGBFieldHead,
     UncertaintyFieldHead,
 )
-from luxenstudio.fields.modules.mlp import MLP
+from luxenstudio.field_components.mlp import MLP
+from luxenstudio.fields.base_field import Field
 
 
 class VanillaLuxenWField(Field):
