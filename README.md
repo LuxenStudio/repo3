@@ -1,20 +1,20 @@
 <p align="center">
     <a href="https://discord.gg/NHGtYRAW"><img src="https://img.shields.io/badge/Join-Discord-blue.svg"/></a>
-    <a href='https://github.com/plenoptix/luxenactory/actions/workflows/core_code_checks.yml'>
-        <img src='https://github.com/plenoptix/luxenactory/actions/workflows/core_code_checks.yml/badge.svg' alt='Test Status' />
+    <a href='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/core_code_checks.yml'>
+        <img src='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/core_code_checks.yml/badge.svg' alt='Test Status' />
     </a>
-    <a href='https://github.com/plenoptix/luxenactory/actions/workflows/viewer_build_deploy.yml'>
-        <img src='https://github.com/plenoptix/luxenactory/actions/workflows/viewer_build_deploy.yml/badge.svg' alt='Viewer build Status' />
+    <a href='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/viewer_build_deploy.yml'>
+        <img src='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/viewer_build_deploy.yml/badge.svg' alt='Viewer build Status' />
     </a>
-    <a href='https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/?badge=latest'>
-        <img src='https://readthedocs.com/projects/plenoptix-luxenactory/badge/?version=latest&token=2c5ba6bdd52600523fa8a8513170ae7170fd927a8c9dfbcf7c03af7ede551f96' alt='Documentation Status' />
+    <a href='https://plenoptix-luxenstudio.readthedocs-hosted.com/en/latest/?badge=latest'>
+        <img src='https://readthedocs.com/projects/plenoptix-luxenstudio/badge/?version=latest' alt='Documentation Status' />
     </a>
     <!-- TODO: add license and have it point to that -->
-    <a href="https://github.com/plenoptix/luxenactory/blob/master/LICENSE">
+    <a href="https://github.com/luxenstudio-project/luxenstudio/blob/master/LICENSE">
         <img alt="Documentation Status" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg">
     </a>
     <!-- TODO: add version number badge -->
-    <a href="https://badge.fury.io/py/luxenactory"><img src="https://badge.fury.io/py/luxenstudio.svg" alt="PyPI version" height="18"></a>
+    <a href="https://badge.fury.io/py/luxenstudio"><img src="https://badge.fury.io/py/luxenstudio.svg" alt="PyPI version" height="18"></a>
 </p>
 
 <p align="center">
@@ -28,10 +28,10 @@
 <p align="center"> The all-in-one repo for Luxens </p>
 
 <p align="center">
-    <a href="http://www.luxenactory.com/">
+    <a href="https://docs.luxen.studio">
         <img alt="documentation" src="docs/_static/imgs/readme_documentation.png" width="150">
     </a>
-    <a href="https://viewer.luxenactory.com/">
+    <a href="https://viewer.luxen.studio/">
         <img alt="viewer" src="docs/_static/imgs/readme_viewer.png" width="150">
     </a>
 </p>
@@ -155,7 +155,7 @@ ns-train vanilla-luxen
 ns-train luxenacto
 
 # Run with luxenstudio data. You'll may have to change the ports, and be sure to forward the "websocket-port".
-ns-train luxenacto --vis viewer --viewer.zmq-port 8001 --viewer.websocket-port 8002 luxenactory-data --pipeline.datamanager.dataparser.data-directory data/luxenstudio/poster --pipeline.datamanager.dataparser.downscale-factor 4
+ns-train luxenacto --vis viewer --viewer.zmq-port 8001 --viewer.websocket-port 8002 luxenstudio-data --pipeline.datamanager.dataparser.data-directory data/luxenstudio/poster --pipeline.datamanager.dataparser.downscale-factor 4
 ```
 
 ### 3.x Training a model with the viewer
@@ -172,12 +172,12 @@ ns-train luxenacto --vis viewer --viewer.websocket-port=7008
 
 ### 4. Visualizing training runs
 
-We support multiple methods to visualize training, the default configuration uses Tensorboard. More information on logging can be found [here](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tooling/logging_profiling.html).
+We support multiple methods to visualize training, the default configuration uses Tensorboard. More information on logging can be found [here](https://docs.luxen.studio/en/latest/tooling/logging_profiling.html).
 
 <details>
 <summary>Real-time Viewer</summary>
 
-We have developed our own Real-time web viewer, more information can be found [here](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/viewer/index.html). This viewer runs during training and is designed to work with models that have fast rendering pipelines.
+We have developed our own Real-time web viewer, more information can be found [here](https://docs.luxen.studio/en/latest/tutorials/viewer/index.html). This viewer runs during training and is designed to work with models that have fast rendering pipelines.
 
 To turn on the viewer, simply add the flag `--vis viewer`.
 
@@ -209,20 +209,20 @@ ns-eval render-trajectory --load-config=outputs/blender_lego/instant_ngp/2022-07
 
 ## 6. In-depth guide
 
-For a more in-depth tutorial on how to modify/implement your own Luxen Graph, please see our [walk-through](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/pipelines/index.html).
+For a more in-depth tutorial on how to modify/implement your own Luxen Graph, please see our [walk-through](https://docs.luxen.studio/en/latest/tutorials/pipelines/index.html).
 
 # Learn More
 
-| Section                                                                                                            | Description                                                                                        |
-| ------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| [Documentation](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/)                                    | Full API documentation and tutorials                                                               |
-| [Interactive Guides](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/guides/index.html)              | Go-to spot for learning how Luxens and each of its modules work.                                    |
-| [Quick tour](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/quickstart_index.html)        | Example script on how to navigate Luxenactory from install, train, to test.                         |
-| [Creating pipelines](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/pipelines/index.html) | Learn how to easily build new neural rendering pipelines by using and/or implementing new modules. |
-| [Creating datsets](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/tutorials/data/index.html)        | Have a new dataset? Learn how to use it with Luxenactory.                                           |
-| [Mobile Capture to NerF](#)                                                                                        | Step-by-step tutorial on how to create beautiful renders with just your phone.                     |
-| [Contributing](https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/reference/contributing.html)          | Walk-through for how you can start contributing now.                                               |
-| [Discord](https://discord.gg/NHGtYRAW)                     | Join our community to discuss more. We would love to hear from you!                                |
+| Section                                                                                 | Description                                                                                        |
+| --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| [Documentation](https://docs.luxen.studio/en/latest/)                                    | Full API documentation and tutorials                                                               |
+| [Interactive Guides](https://docs.luxen.studio/en/latest/guides/index.html)              | Go-to spot for learning how Luxens and each of its modules work.                                    |
+| [Quick tour](https://docs.luxen.studio/en/latest/tutorials/quickstart_index.html)        | Example script on how to navigate luxenstudio from install, train, to test.                         |
+| [Creating pipelines](https://docs.luxen.studio/en/latest/tutorials/pipelines/index.html) | Learn how to easily build new neural rendering pipelines by using and/or implementing new modules. |
+| [Creating datsets](https://docs.luxen.studio/en/latest/tutorials/data/index.html)        | Have a new dataset? Learn how to use it with luxenstudio.                                           |
+| [Mobile Capture to NerF](#)                                                             | Step-by-step tutorial on how to create beautiful renders with just your phone.                     |
+| [Contributing](https://docs.luxen.studio/en/latest/reference/contributing.html)          | Walk-through for how you can start contributing now.                                               |
+| [Discord](https://discord.gg/NHGtYRAW)                                                  | Join our community to discuss more. We would love to hear from you!                                |
 
 # Supported Features
 

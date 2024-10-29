@@ -47,7 +47,7 @@ dependencies = [
 ]
 
 [project.urls]
-"Documentation" = "https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/?badge=latest"
+"Documentation" = "https://docs.luxen.studio"
 
 
 [project.optional-dependencies]

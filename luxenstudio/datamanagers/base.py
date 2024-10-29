@@ -42,8 +42,8 @@ from luxenstudio.datamanagers.dataparsers.instant_ngp_parser import (
 from luxenstudio.datamanagers.dataparsers.mipluxen_parser import (
     MipLuxen360DataParserConfig,
 )
-from luxenstudio.datamanagers.dataparsers.luxenactory_parser import (
-    LuxenactoryDataParserConfig,
+from luxenstudio.datamanagers.dataparsers.luxenstudio_parser import (
+    LuxenstudioDataParserConfig,
 )
 from luxenstudio.datamanagers.dataparsers.record3d_parser import Record3DDataParserConfig
 from luxenstudio.datamanagers.datasets import InputDataset
@@ -54,7 +54,7 @@ from luxenstudio.utils.misc import IterableWrapper
 
 AnnotatedDataParserUnion = dcargs.extras.subcommand_type_from_defaults(
     {
-        "luxenactory-data": LuxenactoryDataParserConfig(),
+        "luxenstudio-data": LuxenstudioDataParserConfig(),
         "blender-data": BlenderDataParserConfig(),
         "friends-data": FriendsDataParserConfig(),
         "mipluxen-360-data": MipLuxen360DataParserConfig(),

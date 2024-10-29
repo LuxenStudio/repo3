@@ -380,7 +380,7 @@ def main(
     gpu: bool = True,
     verbose: bool = False,
 ):
-    """Process images or videos into a Luxenactory dataset.
+    """Process images or videos into a luxenstudio dataset.
 
     This script does the following:
     1) Converts the video into images (if video is provided).

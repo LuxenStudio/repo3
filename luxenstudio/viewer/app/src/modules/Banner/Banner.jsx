@@ -44,7 +44,7 @@ export default function Banner() {
         variant="outlined"
         startIcon={<GitHubIcon />}
         target="_blank"
-        href="https://github.com/plenoptix/luxenactory"
+        href="https://github.com/luxenstudio-project/luxenstudio"
         size="small"
       >
         Github
@@ -54,7 +54,7 @@ export default function Banner() {
         variant="outlined"
         startIcon={<DescriptionRoundedIcon />}
         target="_blank"
-        href="https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/"
+        href="https://docs.luxen.studio"
         size="small"
       >
         Documentation
@@ -63,7 +63,7 @@ export default function Banner() {
       <div className="banner-logo">
         <img
           style={{ height: 30, margin: 'auto' }}
-          src="https://plenoptix-luxenactory.readthedocs-hosted.com/en/latest/_images/logo-dark.png"
+          src="https://docs.luxen.studio/en/latest/_images/logo-dark.png"
           alt="The favicon."
         />
       </div>

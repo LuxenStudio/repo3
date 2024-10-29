@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" Data parser for luxenactory datasets. """
+""" Data parser for luxenstudio datasets. """
 
 from __future__ import annotations
 
@@ -32,10 +32,10 @@ from luxenstudio.utils.io import load_from_json
 
 
 @dataclass
-class LuxenactoryDataParserConfig(DataParserConfig):
-    """Luxenactory dataset config"""
+class LuxenstudioDataParserConfig(DataParserConfig):
+    """Luxenstudio dataset config"""
 
-    _target: Type = field(default_factory=lambda: Luxenactory)
+    _target: Type = field(default_factory=lambda: Luxenstudio)
     """target class to instantiate"""
     data_directory: Path = Path("data/luxenstudio/poster")
     """directory specifying location of data"""
@@ -53,10 +53,10 @@ class LuxenactoryDataParserConfig(DataParserConfig):
 
 
 @dataclass
-class Luxenactory(DataParser):
-    """Luxenactory Dataset"""
+class Luxenstudio(DataParser):
+    """Luxenstudio Dataset"""
 
-    config: LuxenactoryDataParserConfig
+    config: LuxenstudioDataParserConfig
 
     def _generate_dataset_inputs(self, split="train"):
         # pylint: disable=too-many-statements
