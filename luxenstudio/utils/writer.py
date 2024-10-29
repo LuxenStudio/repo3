@@ -32,7 +32,7 @@ from torchtyping import TensorType
 
 from luxenstudio.configs import base_config as cfg
 from luxenstudio.utils.decorators import check_main_thread, decorate_all
-from luxenstudio.utils.misc import human_format
+from luxenstudio.utils.printing import human_format
 
 CONSOLE = console.Console()
 

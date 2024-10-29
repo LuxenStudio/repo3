@@ -5,7 +5,7 @@ Test samplers
 import torch
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.model_components.ray_sampler import (
+from luxenstudio.model_components.ray_samplers import (
     LinearDisparitySampler,
     LogSampler,
     PDFSampler,

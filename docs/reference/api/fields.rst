@@ -17,9 +17,9 @@ Instant NGP
    :members:
    :show-inheritance:
 
-Luxen
+Vanilla Luxen
 ----------------
 
-.. automodule:: luxenstudio.fields.luxen_field
+.. automodule:: luxenstudio.fields.vanilla_luxen_field
    :members:
    :show-inheritance:

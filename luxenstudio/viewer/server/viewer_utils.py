@@ -32,8 +32,8 @@ from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.configs import base_config as cfg
 from luxenstudio.data.utils.datasets import InputDataset
-from luxenstudio.models.base import Model
-from luxenstudio.utils import profiler, visualization, writer
+from luxenstudio.models.base_model import Model
+from luxenstudio.utils import colormaps, profiler, writer
 from luxenstudio.utils.decorators import check_main_thread, decorate_all
 from luxenstudio.utils.io import load_from_json, write_to_json
 from luxenstudio.utils.misc import get_dict_to_torch
@@ -407,15 +407,13 @@ class ViewerState:
                 if OutputTypes.ACCUMULATION in self.output_list
                 else OutputTypes.ACCUMULATION_FINE
             )
-            return visualization.apply_depth_colormap(
-                outputs[reformatted_output], accumulation=outputs[accumulation_str]
-            )
+            return colormaps.apply_depth_colormap(outputs[reformatted_output], accumulation=outputs[accumulation_str])
 
         # rendering accumulation outputs
         if self.prev_colormap_type == ColormapTypes.TURBO or (
             self.prev_colormap_type == ColormapTypes.DEFAULT and outputs[reformatted_output].dtype == torch.float
         ):
-            return visualization.apply_colormap(outputs[reformatted_output])
+            return colormaps.apply_colormap(outputs[reformatted_output])
 
         # rendering semantic outputs
         if self.prev_colormap_type == ColormapTypes.SEMANTIC or (
@@ -430,7 +428,7 @@ class ViewerState:
         if self.prev_colormap_type == ColormapTypes.BOOLEAN or (
             self.prev_colormap_type == ColormapTypes.DEFAULT and outputs[reformatted_output].dtype == torch.bool
         ):
-            return visualization.apply_boolean_colormap(outputs[reformatted_output])
+            return colormaps.apply_boolean_colormap(outputs[reformatted_output])
 
         raise NotImplementedError
 

@@ -42,9 +42,9 @@ from luxenstudio.data.datamanagers import (
     VanillaDataManager,
     VanillaDataManagerConfig,
 )
-from luxenstudio.models.base import Model, ModelConfig
+from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
+from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.utils import profiler
-from luxenstudio.utils.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.utils.misc import get_masked_dict
 
 

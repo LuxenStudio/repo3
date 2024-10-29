@@ -176,7 +176,7 @@ class ViewerConfig(PrintableConfig):
 
 from luxenstudio.engine.optimizers import OptimizerConfig
 from luxenstudio.engine.schedulers import SchedulerConfig
-from luxenstudio.pipelines.base import VanillaPipelineConfig
+from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 
 
 @dataclass

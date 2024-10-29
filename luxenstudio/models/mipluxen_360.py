@@ -27,20 +27,19 @@ from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.field_components.encoding import LuxenEncoding
+from luxenstudio.field_components.encodings import LuxenEncoding
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SceneContraction
-from luxenstudio.fields.luxen_field import LuxenField
-from luxenstudio.model_components.loss import MSELoss
-from luxenstudio.model_components.ray_losses import distortion_loss
-from luxenstudio.model_components.ray_sampler import PDFSampler, UniformSampler
+from luxenstudio.fields.vanilla_luxen_field import LuxenField
+from luxenstudio.model_components.losses import MSELoss, distortion_loss
+from luxenstudio.model_components.ray_samplers import PDFSampler, UniformSampler
 from luxenstudio.model_components.renderers import (
     AccumulationRenderer,
     DepthRenderer,
     RGBRenderer,
 )
-from luxenstudio.models.base import Model, ModelConfig
-from luxenstudio.utils import colors, misc, visualization
+from luxenstudio.models.base_model import Model, ModelConfig
+from luxenstudio.utils import colormaps, colors, misc
 
 
 class MipLuxen360Model(Model):
@@ -165,15 +164,15 @@ class MipLuxen360Model(Model):
         image = batch["image"].to(outputs["rgb_coarse"].device)
         rgb_coarse = outputs["rgb_coarse"]
         rgb_fine = outputs["rgb_fine"]
-        acc_coarse = visualization.apply_colormap(outputs["accumulation_coarse"])
-        acc_fine = visualization.apply_colormap(outputs["accumulation_fine"])
-        depth_coarse = visualization.apply_depth_colormap(
+        acc_coarse = colormaps.apply_colormap(outputs["accumulation_coarse"])
+        acc_fine = colormaps.apply_colormap(outputs["accumulation_fine"])
+        depth_coarse = colormaps.apply_depth_colormap(
             outputs["depth_coarse"],
             accumulation=outputs["accumulation_coarse"],
             near_plane=self.config.collider_params["near_plane"],
             far_plane=self.config.collider_params["far_plane"],
         )
-        depth_fine = visualization.apply_depth_colormap(
+        depth_fine = colormaps.apply_depth_colormap(
             outputs["depth_fine"],
             accumulation=outputs["accumulation_fine"],
             near_plane=self.config.collider_params["near_plane"],

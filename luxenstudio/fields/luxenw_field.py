@@ -22,7 +22,7 @@ from torchtyping import TensorType
 
 from luxenstudio.cameras.rays import RaySamples
 from luxenstudio.field_components.embedding import Embedding
-from luxenstudio.field_components.encoding import Encoding, Identity
+from luxenstudio.field_components.encodings import Encoding, Identity
 from luxenstudio.field_components.field_heads import (
     DensityFieldHead,
     FieldHeadNames,

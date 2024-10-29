@@ -29,7 +29,7 @@ from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserCon
 from luxenstudio.data.dataparsers.mipluxen_dataparser import MipLuxen360DataParserConfig
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
 from luxenstudio.engine.schedulers import SchedulerConfig
-from luxenstudio.models.base import VanillaModelConfig
+from luxenstudio.models.base_model import VanillaModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.mipluxen_360 import MipLuxen360Model
@@ -38,7 +38,7 @@ from luxenstudio.models.luxenw import LuxenWModelConfig
 from luxenstudio.models.semantic_luxen import SemanticLuxenModel
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel
-from luxenstudio.pipelines.base import VanillaPipelineConfig
+from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 
 model_configs: Dict[str, Config] = {}

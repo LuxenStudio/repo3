@@ -45,8 +45,8 @@ from luxenstudio.data.utils.dataloaders import (
     RandIndicesEvalDataloader,
 )
 from luxenstudio.data.utils.datasets import InputDataset
-from luxenstudio.model_components.ray_generator import RayGenerator
-from luxenstudio.utils.callbacks import TrainingCallback, TrainingCallbackAttributes
+from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
+from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import IterableWrapper
 
 AnnotatedDataParserUnion = dcargs.extras.subcommand_type_from_defaults(

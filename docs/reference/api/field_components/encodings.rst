@@ -3,6 +3,6 @@
 Encodings
 ===================
 
-.. automodule:: luxenstudio.field_components.encoding
+.. automodule:: luxenstudio.field_components.encodings
    :members:
    :show-inheritance:

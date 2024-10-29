@@ -30,24 +30,24 @@ from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.configs.config_utils import to_immutable_dict
+from luxenstudio.engine.callbacks import (
+    TrainingCallback,
+    TrainingCallbackAttributes,
+    TrainingCallbackLocation,
+)
 from luxenstudio.engine.optimizers import Optimizers
-from luxenstudio.field_components.encoding import TensorVMEncoding
+from luxenstudio.field_components.encodings import TensorVMEncoding
 from luxenstudio.field_components.field_heads import FieldHeadNames
-from luxenstudio.fields.luxen_field import LuxenField
-from luxenstudio.model_components.loss import L1Loss, MSELoss
-from luxenstudio.model_components.ray_sampler import PDFSampler, UniformSampler
+from luxenstudio.fields.vanilla_luxen_field import LuxenField
+from luxenstudio.model_components.losses import L1Loss, MSELoss
+from luxenstudio.model_components.ray_samplers import PDFSampler, UniformSampler
 from luxenstudio.model_components.renderers import (
     AccumulationRenderer,
     DepthRenderer,
     RGBRenderer,
 )
-from luxenstudio.models.base import Model, VanillaModelConfig
-from luxenstudio.utils import colors, misc, visualization
-from luxenstudio.utils.callbacks import (
-    TrainingCallback,
-    TrainingCallbackAttributes,
-    TrainingCallbackLocation,
-)
+from luxenstudio.models.base_model import Model, VanillaModelConfig
+from luxenstudio.utils import colormaps, colors, misc
 
 
 @dataclass
@@ -215,8 +215,8 @@ class TensoRFModel(Model):
     ) -> Tuple[Dict[str, float], Dict[str, torch.Tensor]]:
         image = batch["image"].to(outputs["rgb"].device)
         rgb = outputs["rgb"]
-        acc = visualization.apply_colormap(outputs["accumulation"])
-        depth = visualization.apply_depth_colormap(
+        acc = colormaps.apply_colormap(outputs["accumulation"])
+        depth = colormaps.apply_depth_colormap(
             outputs["depth"],
             accumulation=outputs["accumulation"],
             near_plane=self.config.collider_params["near_plane"],

@@ -30,22 +30,22 @@ from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
+from luxenstudio.engine.callbacks import (
+    TrainingCallback,
+    TrainingCallbackAttributes,
+    TrainingCallbackLocation,
+)
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.instant_ngp_field import TCNNInstantNGPField
-from luxenstudio.model_components.loss import MSELoss
-from luxenstudio.model_components.ray_sampler import VolumetricSampler
+from luxenstudio.model_components.losses import MSELoss
+from luxenstudio.model_components.ray_samplers import VolumetricSampler
 from luxenstudio.model_components.renderers import (
     AccumulationRenderer,
     DepthRenderer,
     RGBRenderer,
 )
-from luxenstudio.models.base import Model, ModelConfig
-from luxenstudio.utils import colors, visualization
-from luxenstudio.utils.callbacks import (
-    TrainingCallback,
-    TrainingCallbackAttributes,
-    TrainingCallbackLocation,
-)
+from luxenstudio.models.base_model import Model, ModelConfig
+from luxenstudio.utils import colormaps, colors
 
 
 @dataclass
@@ -223,12 +223,12 @@ class NGPModel(Model):
 
         image = batch["image"].to(self.device)
         rgb = outputs["rgb"]
-        acc = visualization.apply_colormap(outputs["accumulation"])
-        depth = visualization.apply_depth_colormap(
+        acc = colormaps.apply_colormap(outputs["accumulation"])
+        depth = colormaps.apply_depth_colormap(
             outputs["depth"],
             accumulation=outputs["accumulation"],
         )
-        alive_ray_mask = visualization.apply_colormap(outputs["alive_ray_mask"])
+        alive_ray_mask = colormaps.apply_colormap(outputs["alive_ray_mask"])
 
         combined_rgb = torch.cat([image, rgb], dim=1)
         combined_acc = torch.cat([acc], dim=1)

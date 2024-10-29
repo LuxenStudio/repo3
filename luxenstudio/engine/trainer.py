@@ -29,14 +29,14 @@ from rich import console
 from torch.cuda.amp.grad_scaler import GradScaler
 
 from luxenstudio.configs import base_config as cfg
-from luxenstudio.engine.optimizers import Optimizers, setup_optimizers
-from luxenstudio.pipelines.base import VanillaPipeline
-from luxenstudio.utils import profiler, writer
-from luxenstudio.utils.callbacks import (
+from luxenstudio.engine.callbacks import (
     TrainingCallback,
     TrainingCallbackAttributes,
     TrainingCallbackLocation,
 )
+from luxenstudio.engine.optimizers import Optimizers, setup_optimizers
+from luxenstudio.pipelines.base_pipeline import VanillaPipeline
+from luxenstudio.utils import profiler, writer
 from luxenstudio.utils.decorators import (
     check_eval_enabled,
     check_main_thread,

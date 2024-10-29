@@ -3,6 +3,6 @@
 Ray Sampler
 ===================
 
-.. automodule:: luxenstudio.model_components.ray_sampler
+.. automodule:: luxenstudio.model_components.ray_samplers
    :members:
    :show-inheritance:

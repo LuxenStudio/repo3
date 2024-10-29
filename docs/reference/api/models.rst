@@ -1,12 +1,12 @@
 .. _graphs:
 
-Graphs
+Models
 ============
 
 Base
 ----------------
 
-.. automodule:: luxenstudio.models.base
+.. automodule:: luxenstudio.models.base_model
    :members:
    :show-inheritance:
 

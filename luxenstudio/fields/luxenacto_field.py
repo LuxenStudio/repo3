@@ -29,7 +29,7 @@ from luxenstudio.cameras.rays import RaySamples
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.field_components.activations import trunc_exp
 from luxenstudio.field_components.embedding import Embedding
-from luxenstudio.field_components.encoding import Encoding, HashEncoding, SHEncoding
+from luxenstudio.field_components.encodings import Encoding, HashEncoding, SHEncoding
 from luxenstudio.field_components.field_heads import (
     DensityFieldHead,
     FieldHead,
