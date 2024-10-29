@@ -37,7 +37,7 @@ class LuxenactoryDataParserConfig(DataParserConfig):
 
     _target: Type = field(default_factory=lambda: Luxenactory)
     """target class to instantiate"""
-    data_directory: Path = Path("data/luxenstudio/posters_v3")
+    data_directory: Path = Path("data/luxenstudio/poster")
     """directory specifying location of data"""
     scale_factor: float = 1.0
     """How much to scale the camera origins by."""
