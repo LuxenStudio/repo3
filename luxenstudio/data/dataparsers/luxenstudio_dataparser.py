@@ -31,7 +31,7 @@ from luxenstudio.data.dataparsers.base_dataparser import (
     DataParserConfig,
     DataparserOutputs,
 )
-from luxenstudio.data.scene_box import SceneBounds
+from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.utils.io import load_from_json
 
 
@@ -123,7 +123,7 @@ class Luxenstudio(DataParser):
         # in x,y,z order
         # assumes that the scene is centered at the origin
         aabb_scale = self.config.scene_scale
-        scene_bounds = SceneBounds(
+        scene_box = SceneBox(
             aabb=torch.tensor(
                 [[-aabb_scale, -aabb_scale, -aabb_scale], [aabb_scale, aabb_scale, aabb_scale]], dtype=torch.float32
             )
@@ -160,6 +160,6 @@ class Luxenstudio(DataParser):
         dataset_inputs = DataparserOutputs(
             image_filenames=image_filenames,
             cameras=cameras,
-            scene_bounds=scene_bounds,
+            scene_box=scene_box,
         )
         return dataset_inputs
