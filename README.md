@@ -123,6 +123,7 @@ Download the original Luxen Blender dataset. We support the major datasets and a
 
 ```
 ns-download-data --dataset=blender
+ns-download-data --dataset=luxenstudio --capture=poster
 ```
 
 Use `--help` to view all currently available datasets. The resulting script should download and unpack the dataset as follows:
@@ -150,8 +151,11 @@ ns-train --help
 # Run a vanilla luxen model.
 ns-train vanilla-luxen
 
-#
+# Run with luxenacto model.
 ns-train luxenacto
+
+# Run with luxenstudio data. You'll may have to change the ports, and be sure to forward the "websocket-port".
+ns-train luxenacto --vis viewer --viewer.zmq-port 8001 --viewer.websocket-port 8002 luxenactory-data --pipeline.datamanager.dataparser.data-directory data/luxenstudio/poster --pipeline.datamanager.dataparser.downscale-factor 4
 ```
 
 ### 3.x Training a model with the viewer
