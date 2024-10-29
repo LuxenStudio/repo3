@@ -46,8 +46,6 @@
 
 # About
 
-All-in-one repository for state-of-the-art Luxens.
-
 Luxenstudio provides a simple API that allows for a simplified end-to-end process of creating, training, and testing Luxens.
 The library supports a **more interpretable implementation of Luxens by modularizing each component.**
 With more modular Luxens, we hope to create a more user-friendly experience in exploring the technology. 
