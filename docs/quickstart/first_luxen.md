@@ -60,6 +60,39 @@ ns-train luxenacto --vis viewer --data data/luxenstudio/poster --viewer.websocke
 * All data configurations must go at the end. In this case, `luxenstudio-data` and all of its corresponding configurations come at the end after the model and viewer specification.
   :::
 
+## Intro to luxenstudio CLI and Configs
+Luxenstudio allows for customizing your training runs, eval runs, configs from the CLI in a powerful way, but there are some things to understand.
+
+The most demonstrative and helpful example of this in action is the difference in output between the following commands:
+```bash
+ns-train -h
+```
+```bash
+ns-train luxenacto -h luxenstudio-data
+```
+```bash
+ns-train luxenacto luxenstudio-data -h
+```
+
+In each of these examples, the -h applies to the previous subcommand (`ns-train`, `luxenacto`, and `luxenstudio-data`). 
+
+In the first example, this shows us the help menu for the `ns-train` script. 
+
+In the second examples, we will get the help menu for the `luxenacto` model. 
+
+In the third examples, we will get the help menu for the `luxenstudio-data` dataparser.
+
+With our scripts, your arguments will apply to the previous subcommand in your command, and thus where you put your arguments matters! Any optional arguments you discover while doing
+```bash
+ns-train luxenacto -h luxenstudio-data
+```
+need to come directly after the `luxenacto` subcommand since these optional arguments only belong to the `luxenacto` subcommand:
+```bash
+ns-train luxenacto <luxenacto optional args> luxenstudio-data
+```
+
+Each script will have some other minor quirks (like the training script dataparser subcommand needing to come after the model subcommand), read up on them [here](../reference/cli/index.md).
+
 ## Visualizing training runs
 
 If you are using a fast Luxen variant (ie. Luxenacto/Instant-NGP), we recommend using our viewer. See our [viewer docs](viewer_quickstart.md) for a tutorial on using the viewer. The viewer will allow interactive, real-time visualization of training.
