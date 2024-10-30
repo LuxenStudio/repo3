@@ -20,7 +20,7 @@ from __future__ import annotations
 import os
 import sys
 from pathlib import Path
-from typing import Tuple
+from typing import Optional, Tuple
 
 import torch
 import yaml
@@ -63,7 +63,9 @@ def eval_load_checkpoint(config: cfg.TrainerConfig, pipeline: Pipeline) -> Path:
     return load_path
 
 
-def eval_setup(config_path: Path) -> Tuple[cfg.Config, Pipeline, Path]:
+def eval_setup(
+    config_path: Path, double_luxenacto_luxen_samples: bool = False, eval_num_rays_per_chunk: Optional[int] = None
+) -> Tuple[cfg.Config, Pipeline, Path]:
     """Shared setup for loading a saved pipeline for evaluation.
 
     Args:
@@ -75,6 +77,17 @@ def eval_setup(config_path: Path) -> Tuple[cfg.Config, Pipeline, Path]:
     # load save config
     config = yaml.load(config_path.read_text(), Loader=yaml.Loader)
     assert isinstance(config, cfg.Config)
+
+    if eval_num_rays_per_chunk:
+        config.pipeline.model.eval_num_rays_per_chunk = eval_num_rays_per_chunk
+
+    if config.method_name == "luxenacto" and double_luxenacto_luxen_samples:
+        config.pipeline.model.num_luxen_samples_per_ray *= 2
+        console.print(
+            "[bold yellow]Warning: doubling the number of luxenacto luxen samples to "
+            f"{config.pipeline.model.num_luxen_samples_per_ray} for improved quality."
+        )
+        console.print("[bold yellow]This logic is a hack and will be removed in the future.")
 
     # load checkpoints from wherever they were saved
     # TODO: expose the ability to choose an arbitrary checkpoint
