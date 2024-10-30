@@ -86,23 +86,7 @@
       ]
     },
     {
-      "name": "Python: train tensorf",
-      "type": "python",
-      "request": "launch",
-      "program": "scripts/train.py",
-      "console": "integratedTerminal",
-      "args": ["tensorf"]
-    },
-    {
-      "name": "Python: train luxenw",
-      "type": "python",
-      "request": "launch",
-      "program": "scripts/train.py",
-      "console": "integratedTerminal",
-      "args": ["luxenw"]
-    },
-    {
-      "name": "Python: train semantic_luxen",
+      "name": "Python: train semantic_luxenw",
       "type": "python",
       "request": "launch",
       "program": "scripts/train.py",

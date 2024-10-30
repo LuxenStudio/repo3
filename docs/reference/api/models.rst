@@ -24,13 +24,6 @@ Semantic Luxen-W
    :members:
    :show-inheritance:
 
-TensoRF
-----------------
-
-.. automodule:: luxenstudio.models.tensorf
-   :members:
-   :show-inheritance:
-
 Luxen
 ----------------
 

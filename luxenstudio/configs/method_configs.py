@@ -28,13 +28,11 @@ from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserCon
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
-from luxenstudio.engine.schedulers import SchedulerConfig
 from luxenstudio.models.base_model import VanillaModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
-from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
@@ -47,7 +45,6 @@ descriptions = {
     "mipluxen": "High quality model for bounded scenes. [red]*slow*",
     "semantic-luxenw": "Predicts semantic segmentations and filters out transient objects.",
     "vanilla-luxen": "Original Luxen model. [red]*slow*",
-    "tensorf": "Fast model designed for bounded scenes.",
 }
 
 method_configs["luxenacto"] = Config(
@@ -146,31 +143,6 @@ method_configs["vanilla-luxen"] = Config(
             "optimizer": RAdamOptimizerConfig(lr=5e-4, eps=1e-08),
             "scheduler": None,
         }
-    },
-)
-
-method_configs["tensorf"] = Config(
-    method_name="tensorf",
-    trainer=TrainerConfig(mixed_precision=True),
-    pipeline=VanillaPipelineConfig(
-        datamanager=VanillaDataManagerConfig(
-            dataparser=BlenderDataParserConfig(),
-        ),
-        model=TensoRFModelConfig(),
-    ),
-    optimizers={
-        "fields": {
-            "optimizer": RAdamOptimizerConfig(lr=0.001),
-            "scheduler": SchedulerConfig(lr_final=0.00005, max_steps=15000),
-        },
-        "position_encoding": {
-            "optimizer": RAdamOptimizerConfig(lr=0.02),
-            "scheduler": SchedulerConfig(lr_final=0.005, max_steps=15000),
-        },
-        "direction_encoding": {
-            "optimizer": RAdamOptimizerConfig(lr=0.02),
-            "scheduler": SchedulerConfig(lr_final=0.005, max_steps=15000),
-        },
     },
 )
 

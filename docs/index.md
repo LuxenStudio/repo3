@@ -85,7 +85,6 @@ This documentation is organized into 3 parts:
 - [Mipluxen](https://jonbarron.info/mipluxen/): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
 - [LuxenW](https://luxen-w.github.io/): Neural Radiance Fields for Unconstrained Photo Collections
 - [Semantic Luxen](https://shuaifengzhi.com/Semantic-Luxen/): In-Place Scene Labelling and Understanding with Implicit Scene Representation
-- [TensoRF](https://apchenstu.github.io/TensoRF/): Tensorial Radiance Fields
 
 We'll be constantly growing this list! So make sure to check back in to see our updates.
 
