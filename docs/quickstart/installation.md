@@ -32,7 +32,7 @@ pip install luxenstudio
 If you want the latest and greatest:
 
 ```bash
-git clone git@github.com:plenoptix/luxenstudio.git
+git clone git@github.com:luxenstudio-project/luxenstudio.git
 cd luxenstudio
 pip install -e .
 
@@ -85,7 +85,6 @@ This can be fixed by upgrading pip to the latest version:
 ```
 python -m pip install --upgrade pip
 ```
-
 
 (cuda-sources-error)=
 

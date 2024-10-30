@@ -1,4 +1,4 @@
-# Copyright 2022 The Plenoptix Team. All rights reserved.
+# Copyright 2022 The luxenstudio Team. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -51,7 +51,7 @@ from luxenstudio.model_components.renderers import (
 from luxenstudio.model_components.scene_colliders import NearFarCollider
 from luxenstudio.models.base_model import Model
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
-from luxenstudio.utils import colormaps, colors
+from luxenstudio.utils import colormaps
 
 
 @dataclass
@@ -121,8 +121,7 @@ class SemanticLuxenWModel(Model):
         )
 
         # renderers
-        background_color = None if self.config.randomize_background else colors.WHITE
-        self.renderer_rgb = RGBRenderer(background_color=background_color)
+        self.renderer_rgb = RGBRenderer(background_color=self.config.background_color)
         self.renderer_accumulation = AccumulationRenderer()
         self.renderer_depth = DepthRenderer()
         self.renderer_uncertainty = UncertaintyRenderer()
