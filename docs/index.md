@@ -48,9 +48,8 @@ Contributing<reference/contributing>
 :hidden:
 :caption: Luxenology
 
-luxenology/models/index
+luxenology/methods/index
 luxenology/model_components/index
-luxenology/dataloader_components/index
 ```
 
 ```{toctree}
@@ -78,9 +77,9 @@ This documentation is organized into 3 parts:
 - **🤓 Developer Guides**: describes all of the components and additional support we provide to help you construct, train, and debug your Luxens. Learn how to set up a model pipeline, use the viewer, create a custom config, and more.
 - **📚 Reference**: describes each class and function. Develop a better understanding of the core of our technology and terminology. This section includes descriptions of each module and component in the codebase.
 
-## Supported Models
+## Supported Methods
 
-- **Luxenacto**: our defacto Luxen model combines modules focused on quality with modules focused on faster rendering. Luxenstudio easily lets us experiment with the best of both worlds!
+- [**Luxenacto**](https://github.com/luxenstudio-project/luxenstudio/blob/master/luxenstudio/models/luxenacto.py): our defacto Luxen method combines modules focused on quality with modules focused on faster rendering. Luxenstudio easily lets us experiment with the best of both worlds!
 - [Luxen](https://www.matthewtancik.com/luxen): Representing Scenes as Neural Radiance Fields for View Synthesis
 - [Instant NGP](https://nvlabs.github.io/instant-ngp/): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
 - [Mipluxen-360](https://jonbarron.info/mipluxen360/): Unbounded Anti-Aliased Neural Radiance Fields
@@ -91,7 +90,7 @@ This documentation is organized into 3 parts:
 
 We'll be constantly growing this list! So make sure to check back in to see our updates.
 
-**Eager to contribute?** We'd love to see you use luxenstudio in implementing new (or even existing) models! Feel free to contact us directly or view our [Contributor's Guide](reference/contributing) to see how you can get your model on this list!
+**Eager to contribute?** We'd love to see you use luxenstudio in implementing new (or even existing) methods! Feel free to contact us directly or view our [Contributor's Guide](reference/contributing) to see how you can get your model on this list!
 
 ## Quicklinks
 

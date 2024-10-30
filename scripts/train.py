@@ -20,7 +20,7 @@ import torch.multiprocessing as mp
 import yaml
 
 from luxenstudio.configs import base_config as cfg
-from luxenstudio.configs.model_configs import AnnotatedBaseConfigUnion
+from luxenstudio.configs.method_configs import AnnotatedBaseConfigUnion
 from luxenstudio.engine.trainer import train_loop
 from luxenstudio.utils import comms, profiler
 

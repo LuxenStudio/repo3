@@ -41,7 +41,7 @@ from luxenstudio.models.vanilla_luxen import LuxenModel
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 
-model_configs: Dict[str, Config] = {}
+method_configs: Dict[str, Config] = {}
 descriptions = {
     "luxenacto": "[bold green]Recommended[/bold green] Real-time model tuned for real captures. "
     + "This model will be continually updated.",
@@ -53,7 +53,7 @@ descriptions = {
     "tensorf": "Fast model designed for bounded scenes.",
 }
 
-model_configs["luxenacto"] = Config(
+method_configs["luxenacto"] = Config(
     method_name="luxenacto",
     trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
     pipeline=VanillaPipelineConfig(
@@ -76,7 +76,7 @@ model_configs["luxenacto"] = Config(
     vis="viewer",
 )
 
-model_configs["instant-ngp"] = Config(
+method_configs["instant-ngp"] = Config(
     method_name="instant-ngp",
     trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
     pipeline=DynamicBatchPipelineConfig(
@@ -93,7 +93,7 @@ model_configs["instant-ngp"] = Config(
     vis="viewer",
 )
 
-model_configs["mipluxen-360"] = Config(
+method_configs["mipluxen-360"] = Config(
     method_name="mipluxen-360",
     trainer=TrainerConfig(steps_per_eval_batch=200),
     pipeline=VanillaPipelineConfig(
@@ -115,7 +115,7 @@ model_configs["mipluxen-360"] = Config(
     },
 )
 
-model_configs["mipluxen"] = Config(
+method_configs["mipluxen"] = Config(
     method_name="mipluxen",
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
@@ -135,7 +135,7 @@ model_configs["mipluxen"] = Config(
     },
 )
 
-model_configs["semantic-luxenw"] = Config(
+method_configs["semantic-luxenw"] = Config(
     method_name="semantic-luxenw",
     trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
     pipeline=VanillaPipelineConfig(
@@ -158,7 +158,7 @@ model_configs["semantic-luxenw"] = Config(
     vis="viewer",
 )
 
-model_configs["vanilla-luxen"] = Config(
+method_configs["vanilla-luxen"] = Config(
     method_name="vanilla-luxen",
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
@@ -174,7 +174,7 @@ model_configs["vanilla-luxen"] = Config(
     },
 )
 
-model_configs["tensorf"] = Config(
+method_configs["tensorf"] = Config(
     method_name="tensorf",
     trainer=TrainerConfig(mixed_precision=True),
     pipeline=VanillaPipelineConfig(
@@ -201,7 +201,7 @@ model_configs["tensorf"] = Config(
 
 
 AnnotatedBaseConfigUnion = dcargs.extras.subcommand_type_from_defaults(
-    defaults=model_configs, descriptions=descriptions
+    defaults=method_configs, descriptions=descriptions
 )
 """Union[] type over config types, annotated with default instances for use with
 dcargs.cli(). Allows the user to pick between one of several base configurations, and
