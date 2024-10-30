@@ -56,7 +56,7 @@
 Luxenstudio provides a simple API that allows for a simplified end-to-end process of creating, training, and testing Luxens.
 The library supports a **more interpretable implementation of Luxens by modularizing each component.**
 With more modular Luxens, we hope to create a more user-friendly experience in exploring the technology.
-Luxenstudio is a contributer friendly repo with the goal of buiding a community where users can more easily build upon each other's contributions.
+Luxenstudio is a contributor-friendly repo with the goal of building a community where users can more easily build upon each other's contributions.
 
 It’s as simple as plug and play with luxenstudio!
 
@@ -68,8 +68,8 @@ We hope luxenstudio enables you to build faster :hammer: learn together :books: 
 
 # Quickstart
 
-The quickstart will help you get started with the default vanilla luxen trained on the classic blender lego scene.
-For more complex changes (e.g. running with your own data/setting up a new Luxen graph, please refer to our [references](#learn-more).
+The quickstart will help you get started with the default vanilla Luxen trained on the classic Blender Lego scene.
+For more complex changes (e.g., running with your own data/setting up a new Luxen graph, please refer to our [references](#learn-more).
 
 ## 1. Installation: Setup the environment
 
@@ -132,7 +132,7 @@ ns-process-data --data FOLDER_OR_VIDEO --output-dir {PROCESSED_DATA_DIR} --no-gp
 
 ## 3. Training a model
 
-To run with all the defaults, e.g. vanilla luxen method with the blender lego image
+To run with all the defaults, e.g., vanilla Luxen method with the Blender Lego image
 
 ```bash
 # To see what models are available.
@@ -144,7 +144,7 @@ ns-train luxenacto --help
 # Run with luxenacto model.
 ns-train luxenacto
 
-# We provide support for other models. E.g. to run instant-ngp.
+# We provide support for other models. E.g., to run instant-ngp.
 ns-train instant-ngp
 
 # To train on your custom data.
@@ -168,7 +168,7 @@ ns-train luxenacto --vis viewer --viewer.websocket-port=7008
 ssh -L localhost:7008:localhost:7008 {REMOTE HOST}
 ```
 
-For more details on how to interact with the visualizer, please visit our viewer [walk-through]().
+For more details on how to interact with the visualizer, please visit our viewer [walk-through](https://docs.luxen.studio/en/latest/quickstart/viewer_quickstart.html).
 
 ## 4. Rendering a trajectory during inference
 
@@ -202,11 +202,11 @@ If you're interested in learning more on how to create your own pipelines, devel
 | 💖 **Community**                                                                                   |
 | [Discord](https://discord.gg/NHGtYRAW)                                                             | Join our community to discuss more. We would love to hear from you!                                |
 | [Twitter](https://twitter.com/luxenstudioteam)                                                      | Follow us on Twitter @luxenstudioteam to see cool updates and announcements                                         |
-| [TikTok](#)                                                                                        | Comming soon! Follow us on TikTok to see some of our fan favorite results                          |
+| [TikTok](#)                                                                                        | Coming soon! Follow us on TikTok to see some of our fan favorite results                          |
 
 # Supported Features
 
-We provide the following support strucutures to make life easier for getting started with Luxens. For a full description, please refer to our [features page](#).
+We provide the following support structures to make life easier for getting started with Luxens. For a full description, please refer to our [features page](#).
 
 **If you are looking for a feature that is not currently supported, please do not hesitate to contact the Luxenstudio Team on [Discord](https://discord.gg/NHGtYRAW)!**
 
@@ -233,7 +233,7 @@ We provide the following support strucutures to make life easier for getting sta
 
 # Citation
 
-If you use this library or find the doumentation useful for your research, please consider citing:
+If you use this library or find the documentation useful for your research, please consider citing:
 
 ```
 @misc{luxenstudio,
