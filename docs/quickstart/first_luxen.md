@@ -61,9 +61,9 @@ ns-train luxenacto --vis viewer --data data/luxenstudio/poster --viewer.websocke
   :::
 
 ## Intro to luxenstudio CLI and Configs
-Luxenstudio allows for customizing your training runs, eval runs, configs from the CLI in a powerful way, but there are some things to understand.
+Luxenstudio allows customization of training and eval configs from the CLI in a powerful way, but there are some things to understand.
 
-The most demonstrative and helpful example of this in action is the difference in output between the following commands:
+The most demonstrative and helpful example of the CLI structure is the difference in output between the following commands:
 ```bash
 ns-train -h
 ```
@@ -76,13 +76,13 @@ ns-train luxenacto luxenstudio-data -h
 
 In each of these examples, the -h applies to the previous subcommand (`ns-train`, `luxenacto`, and `luxenstudio-data`). 
 
-In the first example, this shows us the help menu for the `ns-train` script. 
+In the first example, we get the help menu for the `ns-train` script. 
 
-In the second examples, we will get the help menu for the `luxenacto` model. 
+In the second example, we get the help menu for the `luxenacto` model. 
 
-In the third examples, we will get the help menu for the `luxenstudio-data` dataparser.
+In the third example, we get the help menu for the `luxenstudio-data` dataparser.
 
-With our scripts, your arguments will apply to the previous subcommand in your command, and thus where you put your arguments matters! Any optional arguments you discover while doing
+With our scripts, your arguments will apply to the preceding subcommand in your command, and thus where you put your arguments matters! Any optional arguments you discover from running
 ```bash
 ns-train luxenacto -h luxenstudio-data
 ```

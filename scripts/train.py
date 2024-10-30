@@ -1,6 +1,32 @@
 #!/usr/bin/env python
-"""
-train.py
+"""Train a radiance field with luxenstudio.
+For real captures, we recommend using the [bright_yellow]luxenacto[/bright_yellow] model.
+
+Luxenstudio allows for customizing your training and eval configs from the CLI in a powerful way, but there are some
+things to understand.
+
+The most demonstrative and helpful example of the CLI structure is the difference in output between the following
+commands:
+
+    ns-train -h
+    ns-train luxenacto -h luxenstudio-data
+    ns-train luxenacto luxenstudio-data -h
+
+In each of these examples, the -h applies to the previous subcommand (ns-train, luxenacto, and luxenstudio-data).
+
+In the first example, we get the help menu for the ns-train script.
+In the second example, we get the help menu for the luxenacto model.
+In the third example, we get the help menu for the luxenstudio-data dataparser.
+
+With our scripts, your arguments will apply to the preceding subcommand in your command, and thus where you put your
+arguments matters! Any optional arguments you discover from running
+
+    ns-train luxenacto -h luxenstudio-data
+
+need to come directly after the luxenacto subcommand, since these optional arguments only belong to the luxenacto
+subcommand:
+
+    ns-train luxenacto {luxenacto optional args} luxenstudio-data
 """
 
 from __future__ import annotations
@@ -20,6 +46,7 @@ import tyro
 import yaml
 
 from luxenstudio.configs import base_config as cfg
+from luxenstudio.configs.config_utils import convert_markup_to_ansi
 from luxenstudio.configs.method_configs import AnnotatedBaseConfigUnion
 from luxenstudio.engine.trainer import train_loop
 from luxenstudio.utils import comms, profiler
@@ -213,7 +240,12 @@ def entrypoint():
     """Entrypoint for use with pyproject scripts."""
     # Choose a base configuration and override values.
     tyro.extras.set_accent_color("bright_yellow")
-    main(tyro.cli(AnnotatedBaseConfigUnion))
+    main(
+        tyro.cli(
+            AnnotatedBaseConfigUnion,
+            description=convert_markup_to_ansi(__doc__),
+        )
+    )
 
 
 if __name__ == "__main__":

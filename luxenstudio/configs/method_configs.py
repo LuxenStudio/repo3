@@ -23,7 +23,6 @@ from typing import Dict
 import tyro
 
 from luxenstudio.configs.base_config import Config, TrainerConfig, ViewerConfig
-from luxenstudio.configs.config_utils import convert_markup_to_ansi
 from luxenstudio.data.datamanagers import VanillaDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
@@ -40,15 +39,12 @@ from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 
 method_configs: Dict[str, Config] = {}
 descriptions = {
-    "luxenacto": "[bold green]Recommended[/bold green] Real-time model tuned for real captures. "
-    + "This model will be continually updated.",
+    "luxenacto": "Recommended real-time model tuned for real captures. This model will be continually updated.",
     "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for bounded synthetic data.",
-    "mipluxen": "High quality model for bounded scenes. [red]*slow*",
+    "mipluxen": "High quality model for bounded scenes. (slow)",
     "semantic-luxenw": "Predicts semantic segmentations and filters out transient objects.",
-    "vanilla-luxen": "Original Luxen model. [red]*slow*",
+    "vanilla-luxen": "Original Luxen model. (slow)",
 }
-descriptions = {k: convert_markup_to_ansi(v) for k, v in descriptions.items()}
-
 
 method_configs["luxenacto"] = Config(
     method_name="luxenacto",
