@@ -21,7 +21,6 @@ from __future__ import annotations
 from typing import Dict
 
 import dcargs
-from rich.console import Console
 
 from luxenstudio.configs.base_config import Config, TrainerConfig, ViewerConfig
 from luxenstudio.configs.config_utils import convert_markup_to_ansi
