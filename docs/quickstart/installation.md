@@ -5,7 +5,7 @@
 We recommend using conda to manage dependencies. Make sure to install [Conda](https://docs.conda.io/en/latest/miniconda.html) before preceding.
 
 ```bash
-conda create --name luxenstudio -y python=3.8.13
+conda create --name luxenstudio -y python=3.8
 conda activate luxenstudio
 python -m pip install --upgrade pip
 
