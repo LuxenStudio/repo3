@@ -1,3 +1,8 @@
+```{eval-rst}
+:og:description: Luxenstudio Documentation
+:og:image: https://assets.luxen.studio/opg.png
+```
+
 <br/>
 
 ```{image} _static/imgs/logo.png
