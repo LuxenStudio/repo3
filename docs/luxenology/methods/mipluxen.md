@@ -11,7 +11,7 @@ Paper Website
 ### Running Model
 
 ```bash
-python scripts/train.py --config-name=graph_mipluxen.yaml
+ns-train mipluxen
 ```
 
 ## Overview

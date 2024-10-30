@@ -18,7 +18,7 @@ This guide is coming soon. This is our flagship method that we encourage creator
 
 Most of the code for this method takes place in the `LuxenactoModel` class.
 
-```{button-link} https://www.matthewtancik.com/luxen
+```{button-link} https://github.com/luxenstudio-project/luxenstudio/blob/main/luxenstudio/models/luxenacto.py
 :color: primary
 :outline:
 See the code!
