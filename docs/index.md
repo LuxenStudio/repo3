@@ -28,11 +28,11 @@
 Luxenstudio provides a simple API that allows for a simplified end-to-end process of creating, training, and visualizing Luxens.
 The library supports an **interpretable implementation of Luxens by modularizing each component.**
 With modular Luxen components, we hope to create a user-friendly experience in exploring the technology.
-Luxenstudio is a contributer friendly repo with the goal of building a community where users can easily build upon each other's contributions.
+Luxenstudio is a contributor-friendly repo with the goal of building a community where users can easily build upon each other's contributions.
 
 It's as simple as plug and play with luxenstudio!
 
-On top of our API, we are commited to providing learning resources to help you understand the basics of (if you're just getting start), and keep up-to-date with (if you're a seasoned veteran) all things Luxen.
+On top of our API, we are committed to providing learning resources to help you understand the basics of (if you're just getting started), and keep up-to-date with (if you're a seasoned veteran) all things Luxen.
 As researchers, we know just how hard it is to get onboarded with this next-gen technology. So we're here to help with tutorials, documentation, and more!
 
 Finally, have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome any and all [contributions](reference/contributing)!**
@@ -83,12 +83,12 @@ This documentation is organized into 3 parts:
 
 - **🏃‍♀️ Getting Started**: a great place to start if you are new to luxenstudio. Contains a quick tour, installation, and an overview of the core structures that will allow you to get up and running with luxenstudio.
 - **🧪 Luxenology**: want to learn more about the tech itself? We're here to help with our educational guides. We've provided some interactive notebooks that walk you through what each component is all about.
-- **🤓 Developer Guides**: describes all of the components and additional support we provide to help you construct, train, and debug your Luxens. Learn how to set up a model pipeline, use the viewer, create a custom config, and more.
+- **🤓 Developer Guides**: describe all of the components and additional support we provide to help you construct, train, and debug your Luxens. Learn how to set up a model pipeline, use the viewer, create a custom config, and more.
 - **📚 Reference**: describes each class and function. Develop a better understanding of the core of our technology and terminology. This section includes descriptions of each module and component in the codebase.
 
 ## Supported Methods
 
-- [**Luxenacto**](https://github.com/luxenstudio-project/luxenstudio/blob/master/luxenstudio/models/luxenacto.py): our defacto Luxen method combines modules focused on quality with modules focused on faster rendering. Luxenstudio easily lets us experiment with the best of both worlds!
+- [**Luxenacto**](https://github.com/luxenstudio-project/luxenstudio/blob/master/luxenstudio/models/luxenacto.py): our de facto Luxen method combines modules focused on quality with modules focused on faster rendering. Luxenstudio easily lets us experiment with the best of both worlds!
 - [Luxen](https://www.matthewtancik.com/luxen): Representing Scenes as Neural Radiance Fields for View Synthesis
 - [Instant NGP](https://nvlabs.github.io/instant-ngp/): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
 - [Mipluxen](https://jonbarron.info/mipluxen/): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
@@ -121,7 +121,7 @@ We'll be constantly growing this list! So make sure to check back in to see our 
 
 ## Citation
 
-If you use this library or find the documentation useful for your research, please conside citing:
+If you use this library or find the documentation useful for your research, please consider citing:
 
 ```none
 @misc{luxenstudio,
