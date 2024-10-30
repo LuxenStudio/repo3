@@ -181,7 +181,7 @@ And that's it for getting started with the basics of luxenstudio.
 If you're interested in learning more on how to create your own pipelines, develop with the viewer, run benchmarks, and more, please check out some of the qucklinks below or visit our [documentation](https://docs.luxen.studio/en/latest/) directly.
 
 | Section                                                                                            | Description                                                                                        |
-| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | --- |
+| -------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | [Documentation](https://docs.luxen.studio/en/latest/)                                               | Full API documentation and tutorials                                                               |
 | [Viewer](https://viewer.luxen.studio/)                                                              | Home page for our web viewer                                                                       |
 | 🎒 **Educational**                                                                                 |
