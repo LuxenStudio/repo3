@@ -7,7 +7,13 @@ We provide a set of pre implemented luxenstudio models. One of the goals of luxe
 It's easy!
 
 ```bash
-python scripts/train.py --config-name MODEL_CONFIG
+ns-train MODEL_NAME
+```
+
+To list the available models run:
+
+```bash
+ns-train --help
 ```
 
 ## Guides
@@ -16,9 +22,9 @@ In addition to their implementations, we have provided guides that walk through 
 
 ```{toctree}
     :maxdepth: 1
-    Luxen<luxen.md>
-    Mip-Luxen<mipluxen.md>
-    Mip-Luxen 360<mipluxen_360.md>
-    Instant-NGP<instant_ngp.md>
-    Semantic Luxen-W<semantic_luxenw.md>
+    Luxen<luxen>
+    Mip-Luxen<mipluxen>
+    Mip-Luxen 360<mipluxen_360>
+    Instant-NGP<instant_ngp>
+    Semantic Luxen-W<semantic_luxenw>
 ```
