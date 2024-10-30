@@ -25,7 +25,7 @@ A full set of arguments can be found {doc}`here</reference/cli/ns_process_data>`
 Simply specify that you are using the `luxenstudio` dataparser and point the data directory to your processed data.
 
 ```bash
-ns-train instant-ngp luxenstudio-data --data {PROCESSED_DATA_DIR}
+ns-train luxenacto luxenstudio-data --data {PROCESSED_DATA_DIR}
 ```
 
 ### Installing COLMAP
@@ -119,5 +119,5 @@ Record a video and export with the EXR + JPG sequence format.
 
 Then, move the exported capture folder from your iPhone to your computer.
 ```
-ns-train instant-ngp record3d-data --data {RECORD3D_CAPTURE_DIR/EXR_RGBD}
+ns-train luxenacto record3d-data --data {RECORD3D_CAPTURE_DIR/EXR_RGBD}
 ```
