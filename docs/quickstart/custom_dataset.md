@@ -25,7 +25,7 @@ A full set of arguments can be found {doc}`here</reference/cli/ns_process_data>`
 Simply specify that you are using the `luxenstudio` dataparser and point the data directory to your processed data.
 
 ```bash
-python scripts/train.py instant-ngp luxenstudio-data --pipeline.datamanager.dataparser.data-directory PROCESSED_DATA_DIR
+ns-train instant-ngp luxenstudio-data --data PROCESSED_DATA_DIR
 ```
 
 ### Installing COLMAP
