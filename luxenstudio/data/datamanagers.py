@@ -21,8 +21,8 @@ from abc import abstractmethod
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple, Type, Union
 
-import dcargs
 import torch
+import tyro
 from torch import nn
 from torch.nn import Parameter
 from torch.utils.data import Dataset
@@ -49,8 +49,8 @@ from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttri
 from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import IterableWrapper
 
-AnnotatedDataParserUnion = dcargs.conf.OmitSubcommandPrefixes[  # Omit prefixes of flags in subcommands.
-    dcargs.extras.subcommand_type_from_defaults(
+AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of flags in subcommands.
+    tyro.extras.subcommand_type_from_defaults(
         {
             "luxenstudio-data": LuxenstudioDataParserConfig(),
             "blender-data": BlenderDataParserConfig(),
@@ -61,7 +61,7 @@ AnnotatedDataParserUnion = dcargs.conf.OmitSubcommandPrefixes[  # Omit prefixes 
         prefix_names=False,  # Omit prefixes in subcommands themselves.
     )
 ]
-"""Union over possible dataparser types, annotated with metadata for dcargs. This is the
+"""Union over possible dataparser types, annotated with metadata for tyro. This is the
 same as the vanilla union, but results in shorter subcommand names."""
 
 
