@@ -34,8 +34,8 @@ pip install luxenstudio
 ```bash
 git clone git@github.com:luxenstudio-project/luxenstudio.git
 cd luxenstudio
+pip install --upgrade pip setuptools
 pip install -e .
-
 ```
 
 :::{admonition} Note
@@ -54,8 +54,8 @@ ns-install-cli
 **Development packages**
 
 ```bash
-pip install -e.[dev]
-pip install -e.[docs]
+pip install -e .[dev]
+pip install -e .[docs]
 ```
 
 ## Installation FAQ
