@@ -28,6 +28,7 @@ from luxenstudio.cameras.camera_paths import get_path_from_json, get_spiral_path
 from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.configs.base_config import Config  # pylint: disable=unused-import
 from luxenstudio.pipelines.base_pipeline import Pipeline
+from luxenstudio.utils import install_checks
 from luxenstudio.utils.eval_utils import eval_setup
 from luxenstudio.utils.rich_utils import ItersPerSecColumn
 
@@ -115,6 +116,8 @@ class RenderTrajectory:
             double_luxenacto_luxen_samples=self.double_luxenacto_luxen_samples,
             eval_num_rays_per_chunk=self.eval_num_rays_per_chunk,
         )
+
+        install_checks.check_ffmpeg_installed()
 
         seconds = self.seconds
 
