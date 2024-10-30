@@ -12,7 +12,7 @@ ns-train luxenacto --help
 
 ### Overview
 
-```{admonition} Note
+```{admonition} Coming Soon
 This guide is coming soon. This is our flagship method that we encourage creators to use when making videos. It uses techniques from [Mip-Luxen 360](https://jonbarron.info/mipluxen360/) and [Instant-NGP](https://nvlabs.github.io/instant-ngp/).
 ```
 

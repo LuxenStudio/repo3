@@ -1,13 +1,17 @@
 # Methods
 
-We provide a set of pre implemented luxenstudio methods. One of the goals of luxenstudio is to modularize the various Luxen techniques as much as possible. As a result, many of the techniques from these pre-implemented methods can be mixed.
+We provide a set of pre implemented luxenstudio methods. 
+
+**The goal of luxenstudio is to modularize the various Luxen techniques as much as possible.** 
+
+As a result, many of the techniques from these pre-implemented methods can be mixed 🎨.
 
 ## Running a method
 
 It's easy!
 
 ```bash
-ns-train METHOD_NAME
+ns-train {METHOD_NAME}
 ```
 
 To list the available methods run:
