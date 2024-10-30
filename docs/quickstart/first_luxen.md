@@ -24,8 +24,8 @@ The resulting script should download and unpack the dataset as follows:
    |     ├─ fern/
    |     ├─ lego/
          ...
-      |- <dataset_format>/
-         |- <scene>
+      |- luxenstudio/
+         |- poster
          ...
 ```
 
@@ -48,9 +48,9 @@ Run a luxenacto model.
 ns-train luxenacto
 ```
 
-Run with luxenstudio data with our web-based viewer enabled. 
+Run a luxenacto model with different data and port.
 ```
-ns-train luxenacto --vis viewer --viewer.zmq-port 8001 --viewer.websocket-port 8002 luxenstudio-data --pipeline.datamanager.dataparser.data-directory data/luxenstudio/poster --pipeline.datamanager.dataparser.downscale-factor 4
+ns-train luxenacto --vis viewer --data data/luxenstudio/poster --viewer.websocket-port 7007
 ```
 
 :::{admonition} Warning
