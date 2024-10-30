@@ -60,16 +60,16 @@ Luxenstudio is a contributer friendly repo with the goal of buiding a community 
 
 It’s as simple as plug and play with luxenstudio!
 
-On top of our API, we are committed to providing learning resources to help you understand the basics of (if you're just getting start), and keep up-to-date with (if you're a seasoned veteran) all things Luxen. As researchers, we know just how hard it is to get onboarded with this next-gen technology. So we're here to help with tutorials, documentation, and more!
+We are committed to providing learning resources to help you understand the basics of (if you're just getting start), and keep up-to-date with (if you're a seasoned veteran) all things Luxen. As researchers, we know just how hard it is to get onboarded with this next-gen technology. So we're here to help with tutorials, documentation, and more!
 
-Finally, have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome any and all [contributions](https://docs.luxen.studio/en/latest/reference/contributing.html)!** Please do not hesitate to reach out to the luxenstudio team with any questions via [Discord](https://discord.gg/NHGtYRAW).
+Have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome any and all [contributions](https://docs.luxen.studio/en/latest/reference/contributing.html)!** Please do not hesitate to reach out to the luxenstudio team with any questions via [Discord](https://discord.gg/NHGtYRAW).
 
 We hope luxenstudio enables you to build faster :hammer: learn together :books: and contribute to our Luxen community :sparkling_heart:.
 
 # Quickstart
 
 The quickstart will help you get started with the default vanilla luxen trained on the classic blender lego scene.
-For more complex changes (e.g. running with your own data/ setting up a new Luxen graph, please refer to our [references](#learn-more).
+For more complex changes (e.g. running with your own data/setting up a new Luxen graph, please refer to our [references](#learn-more).
 
 ## 1. Installation: Setup the environment
 
@@ -103,7 +103,7 @@ pip install luxenstudio
 If you would want the latest and greatest:
 
 ```bash
-git clone git@github.com:luxenstudio-project/luxenstudio.git
+git clone https://github.com/luxenstudio-project/luxenstudio.git
 cd luxenstudio
 pip install --upgrade pip setuptools
 pip install -e .
