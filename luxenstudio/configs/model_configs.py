@@ -35,8 +35,7 @@ from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.mipluxen_360 import MipLuxen360Model
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
-from luxenstudio.models.luxenw import LuxenWModelConfig
-from luxenstudio.models.semantic_luxen import SemanticLuxenModel
+from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
@@ -49,8 +48,7 @@ descriptions = {
     "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for bounded synthetic data.",
     "mipluxen-360": "High quality model for unbounded 360 degree scenes. [red]*slow*",
     "mipluxen": "High quality model for bounded scenes. [red]*slow*",
-    "luxenw": "Model designed to handle inconsistent appearance between images. [red]*slow*",
-    "semantic-luxen": "Model that predicts dense semantic segmentations. [red]*slow*",
+    "semantic-luxenw": "Predicts semantic segmentations and filters out transient objects.",
     "vanilla-luxen": "Original Luxen model. [red]*slow*",
     "tensorf": "Fast model designed for bounded scenes.",
 }
@@ -137,42 +135,27 @@ model_configs["mipluxen"] = Config(
     },
 )
 
-model_configs["luxenw"] = Config(
-    method_name="luxenw",
+model_configs["semantic-luxenw"] = Config(
+    method_name="semantic-luxenw",
+    trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
-            dataparser=FriendsDataParserConfig(),
+            dataparser=FriendsDataParserConfig(), train_num_rays_per_batch=4096, eval_num_rays_per_batch=8192
         ),
-        model=LuxenWModelConfig(),
+        model=SemanticLuxenWModelConfig(eval_num_rays_per_chunk=1 << 16),
     ),
     optimizers={
-        "fields": {
-            "optimizer": RAdamOptimizerConfig(lr=5e-4, eps=1e-08),
+        "proposal_networks": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
             "scheduler": None,
-        }
-    },
-)
-
-
-model_configs["semantic-luxen"] = Config(
-    method_name="semantic-luxen",
-    pipeline=VanillaPipelineConfig(
-        datamanager=VanillaDataManagerConfig(
-            dataparser=FriendsDataParserConfig(),
-        ),
-        model=VanillaModelConfig(
-            _target=SemanticLuxenModel,
-            loss_coefficients={"rgb_loss_coarse": 1.0, "rgb_loss_fine": 1.0, "semantic_loss_fine": 0.05},
-            num_coarse_samples=64,
-            num_importance_samples=64,
-        ),
-    ),
-    optimizers={
+        },
         "fields": {
-            "optimizer": RAdamOptimizerConfig(lr=5e-4, eps=1e-08),
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
             "scheduler": None,
-        }
+        },
     },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 16),
+    vis="viewer",
 )
 
 model_configs["vanilla-luxen"] = Config(

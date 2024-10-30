@@ -17,10 +17,10 @@ Instant NGP
    :members:
    :show-inheritance:
 
-Semantic Luxen
+Semantic Luxen-W
 ----------------
 
-.. automodule:: luxenstudio.models.semantic_luxen
+.. automodule:: luxenstudio.models.semantic_luxenw
    :members:
    :show-inheritance:
 
