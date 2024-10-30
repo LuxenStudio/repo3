@@ -16,10 +16,10 @@
 
 <br/>
 
-Luxenstudio provides a simple API that allows for a simplified end-to-end process of creating, training, and testing Luxens.
-The library supports a **more interpretable implementation of Luxens by modularizing each component.**
-With more modular Luxens, we hope to create a more user-friendly experience in exploring the technology.
-Luxenstudio is a contributer friendly repo with the goal of buiding a community where users can more easily build upon each other's contributions.
+Luxenstudio provides a simple API that allows for a simplified end-to-end process of creating, training, and visualizing Luxens.
+The library supports an **interpretable implementation of Luxens by modularizing each component.**
+With modular Luxen components, we hope to create a user-friendly experience in exploring the technology.
+Luxenstudio is a contributer friendly repo with the goal of building a community where users can easily build upon each other's contributions.
 
 It's as simple as plug and play with luxenstudio!
 
