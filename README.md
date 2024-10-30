@@ -179,13 +179,13 @@ If you're interested in learning more on how to create your own pipelines, devel
 | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
 | [Documentation](https://docs.luxen.studio/en/latest/)                                     | Full API documentation and tutorials                                                               |
 | [Viewer](https://viewer.luxen.studio/)                                     | Home page for our web viewer                                                               |
-| 🎒 **Educational Guides** |
+| 🎒 **Educational** |
 | [Model Descriptions](https://docs.luxen.studio/en/latest/guides/index.html)               | Description of all the models supported by luxenstudio and explanations of component parts.                                    |
 | [Component Descriptions](https://docs.luxen.studio/en/latest/luxenology/model_components/index.html) | Interactive notebooks that explain notable/commonly used modules in various models. |
 | 🏃 **Tutorials** |
 | [Getting Started](https://docs.luxen.studio/en/latest/quickstart/installation.html)         | A more in-depth guide on how to get started with luxenstudio from installation to contributing.                         |
 | [Using the Viewer](https://docs.luxen.studio/en/latest/quickstart/viewer_quickstart.html) | A quick demo video on how to navigate the viewer. |
-| 💻 **Developer Resources** |
+| 💻 **For Developers** |
 | [Creating pipelines](https://docs.luxen.studio/en/latest/developer_guides/pipelines/index.html)  | Learn how to easily build new neural rendering pipelines by using and/or implementing new modules. |
 | [Creating datasets](https://docs.luxen.studio/en/latest/quickstart/custom_dataset.html)        | Have a new dataset? Learn how to run it with luxenstudio.                                           |        |        
 | [Contributing](https://docs.luxen.studio/en/latest/reference/contributing.html)           | Walk-through for how you can start contributing now.                                               |
