@@ -14,7 +14,7 @@ from luxenstudio.configs.method_configs import method_configs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.engine.trainer import train_loop
 
-BLACKLIST = ["base", "semantic-luxenw", "mipluxen-360", "instant-ngp", "luxenacto"]
+BLACKLIST = ["base", "semantic-luxenw", "instant-ngp", "luxenacto"]
 
 
 def set_reduced_config(config: Config):

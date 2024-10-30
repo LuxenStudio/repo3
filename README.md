@@ -139,7 +139,7 @@ ns-train luxenacto --help
 # Run with luxenacto model.
 ns-train luxenacto
 
-# We provide support for many existing models. E.g. to run mipluxen.
+# We provide support for other models. E.g. to run instant-ngp.
 ns-train instant-ngp
 
 # To train on your custom data.

@@ -86,14 +86,6 @@
       ]
     },
     {
-      "name": "Python: train mipluxen 360",
-      "type": "python",
-      "request": "launch",
-      "program": "scripts/train.py",
-      "console": "integratedTerminal",
-      "args": ["mipluxen_360"]
-    },
-    {
       "name": "Python: train tensorf",
       "type": "python",
       "request": "launch",

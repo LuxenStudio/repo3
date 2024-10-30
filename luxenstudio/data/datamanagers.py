@@ -36,7 +36,6 @@ from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserCon
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
-from luxenstudio.data.dataparsers.mipluxen_dataparser import MipLuxen360DataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.record3d_dataparser import Record3DDataParserConfig
 from luxenstudio.data.pixel_samplers import PixelSampler
@@ -56,7 +55,6 @@ AnnotatedDataParserUnion = dcargs.conf.OmitSubcommandPrefixes[  # Omit prefixes 
             "luxenstudio-data": LuxenstudioDataParserConfig(),
             "blender-data": BlenderDataParserConfig(),
             "friends-data": FriendsDataParserConfig(),
-            "mipluxen-360-data": MipLuxen360DataParserConfig(),
             "instant-ngp-data": InstantNGPDataParserConfig(),
             "record3d-data": Record3DDataParserConfig(),
         },

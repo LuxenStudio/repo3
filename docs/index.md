@@ -82,7 +82,6 @@ This documentation is organized into 3 parts:
 - [**Luxenacto**](https://github.com/luxenstudio-project/luxenstudio/blob/master/luxenstudio/models/luxenacto.py): our defacto Luxen method combines modules focused on quality with modules focused on faster rendering. Luxenstudio easily lets us experiment with the best of both worlds!
 - [Luxen](https://www.matthewtancik.com/luxen): Representing Scenes as Neural Radiance Fields for View Synthesis
 - [Instant NGP](https://nvlabs.github.io/instant-ngp/): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
-- [Mipluxen-360](https://jonbarron.info/mipluxen360/): Unbounded Anti-Aliased Neural Radiance Fields
 - [Mipluxen](https://jonbarron.info/mipluxen/): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
 - [LuxenW](https://luxen-w.github.io/): Neural Radiance Fields for Unconstrained Photo Collections
 - [Semantic Luxen](https://shuaifengzhi.com/Semantic-Luxen/): In-Place Scene Labelling and Understanding with Implicit Scene Representation
