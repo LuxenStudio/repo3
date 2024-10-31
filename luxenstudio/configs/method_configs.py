@@ -22,6 +22,7 @@ from typing import Dict
 
 import tyro
 
+from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import Config, TrainerConfig, ViewerConfig
 from luxenstudio.data.datamanagers import VanillaDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
@@ -53,7 +54,10 @@ method_configs["luxenacto"] = Config(
     ),
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
-            dataparser=LuxenstudioDataParserConfig(), train_num_rays_per_batch=4096, eval_num_rays_per_batch=8192
+            dataparser=LuxenstudioDataParserConfig(),
+            train_num_rays_per_batch=4096,
+            eval_num_rays_per_batch=8192,
+            camera_optimizer=CameraOptimizerConfig(mode="SO3xR3"),
         ),
         model=LuxenactoModelConfig(eval_num_rays_per_chunk=1 << 14),
     ),
