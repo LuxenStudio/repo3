@@ -190,7 +190,7 @@ If you're interested in learning more on how to create your own pipelines, devel
 | [Documentation](https://docs.luxen.studio/en/latest/)                                               | Full API documentation and tutorials                                                               |
 | [Viewer](https://viewer.luxen.studio/)                                                              | Home page for our web viewer                                                                       |
 | 🎒 **Educational**                                                                                 |
-| [Model Descriptions](https://docs.luxen.studio/en/latest/guides/index.html)                         | Description of all the models supported by luxenstudio and explanations of component parts.         |
+| [Model Descriptions](https://docs.luxen.studio/en/latest/luxenology/methods/index.html)                         | Description of all the models supported by luxenstudio and explanations of component parts.         |
 | [Component Descriptions](https://docs.luxen.studio/en/latest/luxenology/model_components/index.html) | Interactive notebooks that explain notable/commonly used modules in various models.                |
 | 🏃 **Tutorials**                                                                                   |
 | [Getting Started](https://docs.luxen.studio/en/latest/quickstart/installation.html)                 | A more in-depth guide on how to get started with luxenstudio from installation to contributing.     |
