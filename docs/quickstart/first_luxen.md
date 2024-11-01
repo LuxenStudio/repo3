@@ -55,6 +55,12 @@ Run a luxenacto model with different data and port.
 ns-train luxenacto --vis viewer --data data/luxenstudio/poster --viewer.websocket-port 7007
 ```
 
+Run a luxenacto model and load the latest checkpoint to resume training.
+
+```
+ns-train luxenacto --vis viewer --data data/luxenstudio/poster --trainer.load_dir outputs/data-luxenstudio-poster/luxenacto/{timestamp}/luxenstudio_models
+```
+
 :::{admonition} Warning
 :class: warning
 
