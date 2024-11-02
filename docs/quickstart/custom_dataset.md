@@ -25,7 +25,7 @@ A full set of arguments can be found {doc}`here</reference/cli/ns_process_data>`
 Simply specify that you are using the `luxenstudio` dataparser and point the data directory to your processed data.
 
 ```bash
-ns-train luxenacto luxenstudio-data --data {PROCESSED_DATA_DIR}
+ns-train luxenacto --data {PROCESSED_DATA_DIR} luxenstudio-data
 ```
 
 ### Installing COLMAP
@@ -127,10 +127,10 @@ At a high level, you can follow these 3 steps:
 2. Then, move the exported capture folder from your iPhone to your computer.
 
 3. Train with luxenstudio!
-  ```
-  ns-train luxenacto record3d-data --data {RECORD3D_CAPTURE_DIR/EXR_RGBD}
-  ```
 
+  ```
+  ns-train luxenacto --data {RECORD3D_CAPTURE_DIR/EXR_RGBD} record3d-data
+  ```
 
 We provide some example recordings for you to try out and to see the correct formatting.
 
