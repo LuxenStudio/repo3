@@ -13,7 +13,7 @@ from pathlib import Path
 import torch
 import tyro
 
-from luxenstudio.configs import method_configs as cfg
+from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.data.datamanagers import AnnotatedDataParserUnion
 from luxenstudio.data.utils.datasets import InputDataset
 from luxenstudio.viewer.server import viewer_utils
@@ -26,7 +26,7 @@ torch.backends.cudnn.benchmark = True  # type: ignore
 
 def main(
     dataparser: AnnotatedDataParserUnion,
-    viewer: cfg.ViewerConfig,
+    viewer: ViewerConfig,
     log_base_dir: Path = Path("/tmp/luxenstudio_viewer_logs"),
 ) -> None:
     """Main function."""
@@ -34,7 +34,7 @@ def main(
         viewer,
         log_filename=log_base_dir / viewer.relative_log_filename,
     )
-    dataset = InputDataset(dataparser.setup().get_dataset_inputs(split="train"))
+    dataset = InputDataset(dataparser.setup().get_dataparser_outputs(split="train"))
     viewer_state.init_scene(dataset=dataset, start_train=False)
     CONSOLE.log("Please refresh and load page at: %s", viewer_state.viewer_url)
     time.sleep(30)  # allowing time to refresh page
