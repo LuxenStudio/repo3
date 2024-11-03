@@ -27,12 +27,13 @@ Example:
 
 """
 import math
-from typing import Literal, Optional, Union
+from typing import Optional, Union
 
 import luxenacc
 import torch
 from torch import nn
 from torchtyping import TensorType
+from typing_extensions import Literal
 
 from luxenstudio.cameras.rays import RaySamples
 from luxenstudio.utils.math import components_from_spherical_harmonics
