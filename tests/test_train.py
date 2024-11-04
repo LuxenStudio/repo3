@@ -12,7 +12,7 @@ import pytest
 from luxenstudio.configs.base_config import Config
 from luxenstudio.configs.method_configs import method_configs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
-from luxenstudio.engine.trainer import train_loop
+from scripts.train import train_loop
 
 BLACKLIST = ["base", "semantic-luxenw", "instant-ngp", "luxenacto"]
 
