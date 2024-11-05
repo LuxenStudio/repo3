@@ -32,7 +32,8 @@ def download_blender(save_dir: Path):
     unzip_path = save_dir / Path("luxen_synthetic")
     final_path = save_dir / Path("blender")
     unzip_path.rename(final_path)
-    download_path.unlink(missing_ok=True)
+    if download_path.exists():
+        download_path.unlink()
 
 
 def download_friends(save_dir: Path):
@@ -123,7 +124,8 @@ def download_dluxen(save_dir: Path):
     unzip_path = save_dir / Path("data")
     final_path = save_dir / Path("dluxen")
     unzip_path.rename(final_path)
-    download_path.unlink(missing_ok=True)
+    if download_path.exists():
+        download_path.unlink()
 
 
 def main(
