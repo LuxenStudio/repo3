@@ -34,6 +34,7 @@ from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
+from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
@@ -61,6 +62,7 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
             "friends-data": FriendsDataParserConfig(),
             "instant-ngp-data": InstantNGPDataParserConfig(),
             "record3d-data": Record3DDataParserConfig(),
+            "dluxen-data": DLuxenDataParserConfig(),
         },
         prefix_names=False,  # Omit prefixes in subcommands themselves.
     )
