@@ -23,7 +23,12 @@ from typing import Dict
 import tyro
 
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
-from luxenstudio.configs.base_config import Config, TrainerConfig, ViewerConfig
+from luxenstudio.configs.base_config import (
+    Config,
+    SchedulerConfig,
+    TrainerConfig,
+    ViewerConfig,
+)
 from luxenstudio.data.datamanagers import VanillaDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
@@ -34,6 +39,7 @@ from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
+from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
@@ -45,6 +51,7 @@ descriptions = {
     "mipluxen": "High quality model for bounded scenes. (slow)",
     "semantic-luxenw": "Predicts semantic segmentations and filters out transient objects.",
     "vanilla-luxen": "Original Luxen model. (slow)",
+    "tensorf": "tensorf",
 }
 
 method_configs["luxenacto"] = Config(
@@ -155,6 +162,26 @@ method_configs["vanilla-luxen"] = Config(
     },
 )
 
+method_configs["tensorf"] = Config(
+    method_name="tensorf",
+    trainer=TrainerConfig(mixed_precision=False),
+    pipeline=VanillaPipelineConfig(
+        datamanager=VanillaDataManagerConfig(
+            dataparser=BlenderDataParserConfig(),
+        ),
+        model=TensoRFModelConfig(),
+    ),
+    optimizers={
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=0.001),
+            "scheduler": SchedulerConfig(lr_final=0.0001, max_steps=30000),
+        },
+        "encodings": {
+            "optimizer": AdamOptimizerConfig(lr=0.02),
+            "scheduler": SchedulerConfig(lr_final=0.002, max_steps=30000),
+        },
+    },
+)
 
 AnnotatedBaseConfigUnion = tyro.conf.SuppressFixed[  # Don't show unparseable (fixed) arguments in helptext.
     tyro.extras.subcommand_type_from_defaults(defaults=method_configs, descriptions=descriptions)
