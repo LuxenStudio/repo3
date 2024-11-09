@@ -37,7 +37,7 @@ from torch.nn import Parameter
 from torch.nn.parallel import DistributedDataParallel as DDP
 
 from luxenstudio.configs import base_config as cfg
-from luxenstudio.data.datamanagers import (
+from luxenstudio.data.datamanagers.base_datamanager import (
     DataManager,
     VanillaDataManager,
     VanillaDataManagerConfig,
@@ -220,8 +220,7 @@ class VanillaPipeline(Pipeline):
         self._model = config.model.setup(
             scene_box=self.datamanager.train_dataset.dataparser_outputs.scene_box,
             num_train_data=len(self.datamanager.train_dataset),
-            semantics=self.datamanager.train_dataset.dataparser_outputs.semantics,
-            device=device,
+            metadata=self.datamanager.train_dataset.dataparser_outputs.metadata,
         )
         self.model.to(device)
 

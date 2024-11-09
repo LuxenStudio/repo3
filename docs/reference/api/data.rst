@@ -13,7 +13,7 @@ Data Parsers
 Datasets
 ----------------
 
-.. automodule:: luxenstudio.data.utils.datasets
+.. automodule:: luxenstudio.data.datasets
    :members:
    :show-inheritance:
 

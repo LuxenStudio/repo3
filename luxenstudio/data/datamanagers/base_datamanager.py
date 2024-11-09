@@ -41,13 +41,13 @@ from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
 )
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.record3d_dataparser import Record3DDataParserConfig
+from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.pixel_samplers import PixelSampler
 from luxenstudio.data.utils.dataloaders import (
     CacheDataloader,
     FixedIndicesEvalDataloader,
     RandIndicesEvalDataloader,
 )
-from luxenstudio.data.utils.datasets import InputDataset
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import IterableWrapper
@@ -296,12 +296,21 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
         self.world_size = world_size
         self.local_rank = local_rank
         self.sampler = None
+        self.test_mode = test_mode
 
-        self.train_dataset = InputDataset(config.dataparser.setup().get_dataparser_outputs(split="train"))
-        self.eval_dataset = InputDataset(
-            config.dataparser.setup().get_dataparser_outputs(split="val" if not test_mode else "test")
-        )
+        self.train_dataset = self.create_train_dataset()
+        self.eval_dataset = self.create_eval_dataset()
         super().__init__()
+
+    def create_train_dataset(self) -> InputDataset:
+        """Sets up the data loaders for training"""
+        return InputDataset(self.config.dataparser.setup().get_dataparser_outputs(split="train"))
+
+    def create_eval_dataset(self) -> InputDataset:
+        """Sets up the data loaders for evaluation"""
+        return InputDataset(
+            self.config.dataparser.setup().get_dataparser_outputs(split="val" if not self.test_mode else "test")
+        )
 
     def setup_train(self):
         """Sets up the data loaders for training"""

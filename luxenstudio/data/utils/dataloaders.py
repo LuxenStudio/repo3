@@ -27,7 +27,7 @@ from torch.utils.data.dataloader import DataLoader
 
 from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.data.utils.datasets import InputDataset
+from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.utils.misc import get_dict_to_torch
 
 CONSOLE = Console(width=120)

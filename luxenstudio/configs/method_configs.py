@@ -29,7 +29,8 @@ from luxenstudio.configs.base_config import (
     TrainerConfig,
     ViewerConfig,
 )
-from luxenstudio.data.datamanagers import VanillaDataManagerConfig
+from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
+from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
@@ -127,7 +128,7 @@ method_configs["semantic-luxenw"] = Config(
     method_name="semantic-luxenw",
     trainer=TrainerConfig(steps_per_eval_batch=500, steps_per_save=2000, mixed_precision=True),
     pipeline=VanillaPipelineConfig(
-        datamanager=VanillaDataManagerConfig(
+        datamanager=SemanticDataManagerConfig(
             dataparser=FriendsDataParserConfig(), train_num_rays_per_batch=4096, eval_num_rays_per_batch=8192
         ),
         model=SemanticLuxenWModelConfig(eval_num_rays_per_chunk=1 << 16),
