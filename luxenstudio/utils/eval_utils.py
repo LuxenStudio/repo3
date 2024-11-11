@@ -20,11 +20,12 @@ from __future__ import annotations
 import os
 import sys
 from pathlib import Path
-from typing import Literal, Optional, Tuple
+from typing import Optional, Tuple
 
 import torch
 import yaml
 from rich.console import Console
+from typing_extensions import Literal
 
 from luxenstudio.configs import base_config as cfg
 from luxenstudio.pipelines.base_pipeline import Pipeline

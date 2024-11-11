@@ -17,9 +17,10 @@ A pipeline that dynamically chooses the number of rays to sample.
 """
 
 from dataclasses import dataclass, field
-from typing import Literal, Type
+from typing import Type
 
 import torch
+from typing_extensions import Literal
 
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager
 from luxenstudio.pipelines.base_pipeline import VanillaPipeline, VanillaPipelineConfig
