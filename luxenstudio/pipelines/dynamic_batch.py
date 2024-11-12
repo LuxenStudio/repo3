@@ -20,8 +20,9 @@ from dataclasses import dataclass, field
 from typing import Type
 
 import torch
+from typing_extensions import Literal
 
-from luxenstudio.data.datamanagers import VanillaDataManager
+from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager
 from luxenstudio.pipelines.base_pipeline import VanillaPipeline, VanillaPipelineConfig
 
 
@@ -49,7 +50,7 @@ class DynamicBatchPipeline(VanillaPipeline):
         self,
         config: DynamicBatchPipelineConfig,
         device: str,
-        test_mode: bool = False,
+        test_mode: Literal["test", "val", "inference"] = "val",
         world_size: int = 1,
         local_rank: int = 0,
     ):

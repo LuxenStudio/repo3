@@ -15,7 +15,7 @@ import tyro
 
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.data.datamanagers import AnnotatedDataParserUnion
-from luxenstudio.data.utils.datasets import InputDataset
+from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.viewer.server import viewer_utils
 
 DEFAULT_TIMEOUT = timedelta(minutes=30)

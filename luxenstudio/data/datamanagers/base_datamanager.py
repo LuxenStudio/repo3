@@ -13,8 +13,9 @@
 # limitations under the License.
 
 """
-Data loader.
+Datamanager.
 """
+
 from __future__ import annotations
 
 from abc import abstractmethod
@@ -23,31 +24,37 @@ from typing import Dict, List, Optional, Tuple, Type, Union
 
 import torch
 import tyro
+from rich.progress import Console
 from torch import nn
 from torch.nn import Parameter
 from torch.utils.data import Dataset
 from torch.utils.data.distributed import DistributedSampler
+from typing_extensions import Literal
 
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
+from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
+from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
 from luxenstudio.data.dataparsers.record3d_dataparser import Record3DDataParserConfig
+from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.pixel_samplers import PixelSampler
 from luxenstudio.data.utils.dataloaders import (
     CacheDataloader,
     FixedIndicesEvalDataloader,
     RandIndicesEvalDataloader,
 )
-from luxenstudio.data.utils.datasets import InputDataset
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import IterableWrapper
+
+CONSOLE = Console(width=120)
 
 AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of flags in subcommands.
     tyro.extras.subcommand_type_from_defaults(
@@ -56,7 +63,9 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
             "blender-data": BlenderDataParserConfig(),
             "friends-data": FriendsDataParserConfig(),
             "instant-ngp-data": InstantNGPDataParserConfig(),
+            "nuscenes-data": NuScenesDataParserConfig(),
             "record3d-data": Record3DDataParserConfig(),
+            "dluxen-data": DLuxenDataParserConfig(),
         },
         prefix_names=False,  # Omit prefixes in subcommands themselves.
     )
@@ -128,9 +137,9 @@ class DataManager(nn.Module):
         super().__init__()
         self.train_count = 0
         self.eval_count = 0
-        if self.train_dataset:
+        if self.train_dataset and self.test_mode != "inference":
             self.setup_train()
-        if self.eval_dataset:
+        if self.eval_dataset and self.test_mode != "inference":
             self.setup_eval()
 
     def forward(self):
@@ -242,10 +251,16 @@ class VanillaDataManagerConfig(InstantiateConfig):
     """Number of rays per batch to use per training iteration."""
     train_num_images_to_sample_from: int = -1
     """Number of images to sample during training iteration."""
+    train_num_times_to_repeat_images: int = -1
+    """When not training on all images, number of iterations before picking new
+    images. If -1, never pick new images."""
     eval_num_rays_per_batch: int = 1024
     """Number of rays per batch to use per eval iteration."""
     eval_num_images_to_sample_from: int = -1
     """Number of images to sample during eval iteration."""
+    eval_num_times_to_repeat_images: int = -1
+    """When not evaluating on all images, number of iterations before picking
+    new images. If -1, never pick new images."""
     eval_image_indices: Optional[Tuple[int, ...]] = (0,)
     """Specifies the image indices to use during eval; if None, uses all."""
     camera_optimizer: CameraOptimizerConfig = CameraOptimizerConfig()
@@ -274,7 +289,7 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
         self,
         config: VanillaDataManagerConfig,
         device: Union[torch.device, str] = "cpu",
-        test_mode: bool = False,
+        test_mode: Literal["test", "val", "inference"] = "val",
         world_size: int = 1,
         local_rank: int = 0,
         **kwargs,  # pylint: disable=unused-argument
@@ -284,19 +299,29 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
         self.world_size = world_size
         self.local_rank = local_rank
         self.sampler = None
+        self.test_mode = test_mode
+        self.test_split = "test" if test_mode in ["test", "inference"] else "val"
 
-        self.train_dataset = InputDataset(config.dataparser.setup().get_dataparser_outputs(split="train"))
-        self.eval_dataset = InputDataset(
-            config.dataparser.setup().get_dataparser_outputs(split="val" if not test_mode else "test")
-        )
+        self.train_dataset = self.create_train_dataset()
+        self.eval_dataset = self.create_eval_dataset()
         super().__init__()
+
+    def create_train_dataset(self) -> InputDataset:
+        """Sets up the data loaders for training"""
+        return InputDataset(self.config.dataparser.setup().get_dataparser_outputs(split="train"))
+
+    def create_eval_dataset(self) -> InputDataset:
+        """Sets up the data loaders for evaluation"""
+        return InputDataset(self.config.dataparser.setup().get_dataparser_outputs(split=self.test_split))
 
     def setup_train(self):
         """Sets up the data loaders for training"""
         assert self.train_dataset is not None
+        CONSOLE.print("Setting up training dataset...")
         self.train_image_dataloader = CacheDataloader(
             self.train_dataset,
             num_images_to_sample_from=self.config.train_num_images_to_sample_from,
+            num_times_to_repeat_images=self.config.train_num_times_to_repeat_images,
             device=self.device,
             num_workers=self.world_size * 4,
             pin_memory=True,
@@ -314,9 +339,11 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
     def setup_eval(self):
         """Sets up the data loader for evaluation"""
         assert self.eval_dataset is not None
+        CONSOLE.print("Setting up evaluation dataset...")
         self.eval_image_dataloader = CacheDataloader(
             self.eval_dataset,
             num_images_to_sample_from=self.config.eval_num_images_to_sample_from,
+            num_times_to_repeat_images=self.config.eval_num_times_to_repeat_images,
             device=self.device,
             num_workers=self.world_size * 4,
             pin_memory=True,
@@ -339,9 +366,6 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
             device=self.device,
             num_workers=self.world_size * 4,
         )
-
-        # TODO: eval dataloader should be separate from train
-        self.iter_eval_dataloader = iter(self.eval_image_dataloader)
 
     def next_train(self, step: int) -> Tuple[RayBundle, Dict]:
         """Returns the next batch of data from the train dataloader."""
