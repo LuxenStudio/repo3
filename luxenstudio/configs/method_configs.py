@@ -32,9 +32,11 @@ from luxenstudio.configs.base_config import (
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
 from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
+from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
+from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.models.base_model import VanillaModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
@@ -53,6 +55,7 @@ descriptions = {
     "semantic-luxenw": "Predicts semantic segmentations and filters out transient objects.",
     "vanilla-luxen": "Original Luxen model. (slow)",
     "tensorf": "tensorf",
+    "dluxen": "Dynamic-Luxen model. (slow)",
 }
 
 method_configs["luxenacto"] = Config(
@@ -159,7 +162,11 @@ method_configs["vanilla-luxen"] = Config(
         "fields": {
             "optimizer": RAdamOptimizerConfig(lr=5e-4, eps=1e-08),
             "scheduler": None,
-        }
+        },
+        "temporal_distortion": {
+            "optimizer": RAdamOptimizerConfig(lr=5e-4, eps=1e-08),
+            "scheduler": None,
+        },
     },
 )
 
@@ -180,6 +187,28 @@ method_configs["tensorf"] = Config(
         "encodings": {
             "optimizer": AdamOptimizerConfig(lr=0.02),
             "scheduler": SchedulerConfig(lr_final=0.002, max_steps=30000),
+        },
+    },
+)
+
+method_configs["dluxen"] = Config(
+    method_name="dluxen",
+    pipeline=VanillaPipelineConfig(
+        datamanager=VanillaDataManagerConfig(dataparser=DLuxenDataParserConfig()),
+        model=VanillaModelConfig(
+            _target=LuxenModel,
+            enable_temporal_distortion=True,
+            temporal_distortion_params={"kind": TemporalDistortionKind.DNERF},
+        ),
+    ),
+    optimizers={
+        "fields": {
+            "optimizer": RAdamOptimizerConfig(lr=5e-4, eps=1e-08),
+            "scheduler": None,
+        },
+        "temporal_distortion": {
+            "optimizer": RAdamOptimizerConfig(lr=5e-4, eps=1e-08),
+            "scheduler": None,
         },
     },
 )
