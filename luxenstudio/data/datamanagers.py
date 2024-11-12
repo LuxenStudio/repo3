@@ -38,7 +38,7 @@ from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
 )
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.record3d_dataparser import Record3DDataParserConfig
-from luxenstudio.data.pixel_samplers import EquirectangularSampler, PixelSampler
+from luxenstudio.data.pixel_samplers import PixelSampler
 from luxenstudio.data.utils.dataloaders import (
     CacheDataloader,
     FixedIndicesEvalDataloader,
