@@ -37,13 +37,12 @@ from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserCon
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
-from luxenstudio.models.base_model import VanillaModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
-from luxenstudio.models.vanilla_luxen import LuxenModel
+from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 

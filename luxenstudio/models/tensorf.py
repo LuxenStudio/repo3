@@ -46,12 +46,12 @@ from luxenstudio.model_components.renderers import (
     RGBRenderer,
 )
 from luxenstudio.model_components.scene_colliders import AABBBoxCollider
-from luxenstudio.models.base_model import Model, VanillaModelConfig
+from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.utils import colormaps, colors, misc
 
 
 @dataclass
-class TensoRFModelConfig(VanillaModelConfig):
+class TensoRFModelConfig(ModelConfig):
     """TensoRF model config"""
 
     _target: Type = field(default_factory=lambda: TensoRFModel)
