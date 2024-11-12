@@ -31,7 +31,7 @@ from luxenstudio.data.dataparsers.base_dataparser import (
     DataparserOutputs,
 )
 from luxenstudio.data.scene_box import SceneBox
-from luxenstudio.utils.colmap_utils import qvec2rotmat
+from luxenstudio.process_data.colmap_utils import qvec2rotmat
 
 
 def rotation_translation_to_pose(r_vec, t_vec):
