@@ -1,72 +1,68 @@
 # Training your first model
 
-## Downloading data
+## Train and run viewer
 
-Download datasets provided by luxenstudio. We support the major datasets and allow users to create their own dataset, described in detail [here](./custom_dataset.md).
+The following will train a _luxenacto_ model, our recommended model for real world scenes.
 
-```
-ns-download-data --dataset=blender
+```bash
+# Download some test data:
 ns-download-data --dataset=luxenstudio --capture=poster
+# Train model
+ns-train luxenacto --data data/luxenstudio/poster
 ```
 
-:::{admonition} Tip
-:class: info
+If everything works, you should see training progress like the following:
 
-Use `ns-download-data --help` to view all currently available datasets.
-:::
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/3310961/202766069-cadfd34f-8833-4156-88b7-ad406d688fc0.png">
+</p>
 
-The resulting script should download and unpack the dataset as follows:
+Navigating to the link at the end of the terminal will load the webviewer. If you are running on a remote machine, you will need to port forward the websocket port (defaults to 7007).
 
-```
-|─ luxenstudio/
-   ├─ data/
-   |  ├─ blender/
-   |     ├─ fern/
-   |     ├─ lego/
-         ...
-      |- luxenstudio/
-         |- poster
-         ...
-```
+<p align="center">
+    <img width="800" alt="image" src="https://user-images.githubusercontent.com/3310961/202766653-586a0daa-466b-4140-a136-6b02f2ce2c54.png">
+</p>
 
-## Training a model
+:::{admonition} Note
+:class: note
 
-See which models are available.
-
-```bash
-ns-train --help
-```
-
-Run a vanilla luxen model.
-
-```bash
-ns-train vanilla-luxen
-```
-
-Run a luxenacto model.
-
-```bash
-ns-train luxenacto
-```
-
-Run a luxenacto model with different data and port.
-
-```
-ns-train luxenacto --vis viewer --data data/luxenstudio/poster --viewer.websocket-port 7007
-```
-
-Run a luxenacto model and load the latest checkpoint to resume training.
-
-```
-ns-train luxenacto --vis viewer --data data/luxenstudio/poster --trainer.load_dir outputs/data-luxenstudio-poster/luxenacto/{timestamp}/luxenstudio_models
-```
-
-:::{admonition} Warning
-:class: warning
-
-- You may have to change the ports, and be sure to forward the "websocket-port".
+- You may have to change the port using `--viewer.websocket-port`.
 - All data configurations must go at the end. In this case, `luxenstudio-data` and all of its corresponding configurations come at the end after the model and viewer specification.
   :::
+
+## Resume from checkpoint / visualize existing run
+
+It is possible to load a pretrained model by running
+
+```bash
+ns-train luxenacto --data data/luxenstudio/poster --trainer.load_dir {outputs/.../luxenstudio_models}
+```
+
+This will automatically start training. If you do not want it to train, add `--viewer.start-train False` to your training command.
+
+## Exporting Results
+
+Once you have a Luxen model you can either render out a video or export a point cloud.
+
+### Render Video
+
+First we must create a path for the camera to follow. This can be done in the viewer under the "RENDER" tab. Orient your 3D view to the location where you wish the video to start, then press "ADD CAMERA". This will set the first camera key frame. Continue to new viewpoints adding additional cameras to create the camera path. We provide other parameters to further refine your camera path. Once satisfied, press "RENDER" which will display a modal that contains the command needed to render the video. Kill the training job (or create a new terminal if you have lots of compute) and the command to generate the video.
+
+Other video export options are available, learn more by running,
+
+```bash
+ns-render --help
+```
+
+### Generate Point Cloud
+
+While Luxen models are not designed to generate point clouds, it is still possible. Navigate to the "EXPORT" tab in the 3D viewer and select "POINT CLOUD". If the crop option is selected, everything in the yellow square will be exported into a point cloud. Modify the settings as desired then run the command at the bottom of the panel in your command line.
+
+Alternatively you can use the CLI without the viewer. Learn about the export options by running,
+
+```bash
+ns-export pointcloud --help
+```
 
 ## Intro to luxenstudio CLI and Configs
 
@@ -74,74 +70,29 @@ Luxenstudio allows customization of training and eval configs from the CLI in a 
 
 The most demonstrative and helpful example of the CLI structure is the difference in output between the following commands:
 
+The following will list the supported models,
+
 ```bash
-ns-train -h
+ns-train --help
 ```
 
+Applying `--help` after the model specification will provide the model and training specific arguments.
+
 ```bash
-ns-train luxenacto -h luxenstudio-data
+ns-train luxenacto --help
 ```
 
-```bash
-ns-train luxenacto luxenstudio-data -h
-```
-
-In each of these examples, the -h applies to the previous subcommand (`ns-train`, `luxenacto`, and `luxenstudio-data`).
-
-In the first example, we get the help menu for the `ns-train` script.
-
-In the second example, we get the help menu for the `luxenacto` model.
-
-In the third example, we get the help menu for the `luxenstudio-data` dataparser.
-
-With our scripts, your arguments will apply to the preceding subcommand in your command, and thus where you put your arguments matters! Any optional arguments you discover from running
+At the end of the command you can specify the dataparser used. By default we use the _luxenstudio-data_ dataparser. We include other dataparsers such as _Blender_, _NuScenes_, ect. For a list of dataparse specific arguments, add `--help` to the end of the command,
 
 ```bash
-ns-train luxenacto -h luxenstudio-data
-```
-
-need to come directly after the `luxenacto` subcommand since these optional arguments only belong to the `luxenacto` subcommand:
-
-```bash
-ns-train luxenacto <luxenacto optional args> luxenstudio-data
+ns-train luxenacto <luxenacto optional args> luxenstudio-data --help
 ```
 
 Each script will have some other minor quirks (like the training script dataparser subcommand needing to come after the model subcommand), read up on them [here](../reference/cli/index.md).
 
-## Visualizing training runs
+## Tensorboard / WandB
 
-If you are using a fast Luxen variant (ie. Luxenacto/Instant-NGP), we recommend using our viewer. See our [viewer docs](viewer_quickstart.md) for a tutorial on using the viewer. The viewer will allow interactive, real-time visualization of training.
-
-For slower methods where the viewer is not recommended, we default to [Wandb](https://wandb.ai/site) to log all training curves, test images, and other stats. We also support logging with [Tensorboard](https://www.tensorflow.org/tensorboard). We pre-specify default `--vis` options depending on the model.
-
-:::{admonition} Attention
-:class: attention
-
-- Currently we only support using a single viewer at a time.
-- To toggle between Wandb, Tensorboard, or our Web-based Viewer, you can specify `--vis VIS_OPTION`, where `VIS_OPTION` is one of {viewer,wandb,tensorboard}.
-  :::
-
-#### Rendering videos
-
-We also provide options to render out the scene of a trained model with a custom trajectory and save the output to a video.
-
-```bash
-ns-render --load-config={PATH_TO_CONFIG} --traj=spiral --output-path=renders/output.mp4
-```
-
-While we provide pre-specified trajectory options, `--traj={spiral, interp, filename}` we can also specify a custom trajectory if we specify `--traj=filename --camera-path-filename {PATH}`.
-
-:::{admonition} Tip
-:class: info
-After running the training, the config path is logged to the terminal under "[base_config.py:263] Saving config to:"
-:::
-
-:::{admonition} See Also
-:class: seealso
-This quickstart allows you to preform everything in a headless manner.
-We also provide a web-based viewer that allows you to easily monitor training or render out custom trajectories.
-See our [viewer docs](viewer_quickstart.md) for more.
-:::
+We support three different methods to track training progress, using the viewer, [tensorboard](https://www.tensorflow.org/tensorboard), and [Weights and Biases](https://wandb.ai/site). You can specify which visualizer to use by appending `--vis {viewer, tensorboard, wandb}` to the training command. Note that only one may be used at a time. Additionally the viewer only works for methods that are fast (ie. luxenacto, instant-ngp), for slower methods like Luxen, use the other loggers.
 
 ## Evaluating Runs
 

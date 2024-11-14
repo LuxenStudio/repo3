@@ -34,6 +34,7 @@ pip install luxenstudio
 ```
 
 **From source**
+Optional, use this command if you want the latest development version.
 
 ```bash
 git clone git@github.com:luxenstudio-project/luxenstudio.git
