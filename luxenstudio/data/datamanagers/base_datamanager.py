@@ -42,6 +42,9 @@ from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
 )
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
+from luxenstudio.data.dataparsers.phototourism_dataparser import (
+    PhototourismDataParserConfig,
+)
 from luxenstudio.data.dataparsers.record3d_dataparser import Record3DDataParserConfig
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.pixel_samplers import PixelSampler
@@ -50,6 +53,7 @@ from luxenstudio.data.utils.dataloaders import (
     FixedIndicesEvalDataloader,
     RandIndicesEvalDataloader,
 )
+from luxenstudio.data.utils.luxenstudio_collate import luxenstudio_collate
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import IterableWrapper
@@ -66,6 +70,7 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
             "nuscenes-data": NuScenesDataParserConfig(),
             "record3d-data": Record3DDataParserConfig(),
             "dluxen-data": DLuxenDataParserConfig(),
+            "phototourism-data": PhototourismDataParserConfig(),
         },
         prefix_names=False,  # Omit prefixes in subcommands themselves.
     )
@@ -266,6 +271,8 @@ class VanillaDataManagerConfig(InstantiateConfig):
     camera_optimizer: CameraOptimizerConfig = CameraOptimizerConfig()
     """Specifies the camera pose optimizer used during training. Helpful if poses are noisy, such as for data from
     Record3D."""
+    collate_fn = staticmethod(luxenstudio_collate)
+    """Specifies the collate function to use for the train and eval dataloaders."""
     camera_res_scale_factor: float = 1.0
     """The scale factor for scaling spatial data such as images, mask, semantics
     along with relevant information about camera intrinsics
@@ -336,6 +343,7 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
             device=self.device,
             num_workers=self.world_size * 4,
             pin_memory=True,
+            collate_fn=self.config.collate_fn,
         )
         self.iter_train_image_dataloader = iter(self.train_image_dataloader)
         self.train_pixel_sampler = PixelSampler(self.config.train_num_rays_per_batch)
@@ -358,6 +366,7 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
             device=self.device,
             num_workers=self.world_size * 4,
             pin_memory=True,
+            collate_fn=self.config.collate_fn,
         )
         self.iter_eval_image_dataloader = iter(self.eval_image_dataloader)
         self.eval_pixel_sampler = PixelSampler(self.config.eval_num_rays_per_batch)
