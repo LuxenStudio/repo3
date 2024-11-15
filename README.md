@@ -125,7 +125,7 @@ The following will train a _luxenacto_ model, our recommended model for real wor
 
 ```bash
 # Download some test data:
-ns-download-data --dataset=luxenstudio --capture=poster
+ns-download-data luxenstudio --capture-name=poster
 # Train model
 ns-train luxenacto --data data/luxenstudio/poster
 ```
