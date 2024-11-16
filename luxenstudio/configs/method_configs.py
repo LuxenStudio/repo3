@@ -43,6 +43,7 @@ from luxenstudio.data.dataparsers.phototourism_dataparser import (
 )
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
+from luxenstudio.models.dreamfusion import DreamFusionModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
@@ -62,6 +63,7 @@ descriptions = {
     "tensorf": "tensorf",
     "dluxen": "Dynamic-Luxen model. (slow)",
     "phototourism": "Uses the Phototourism data.",
+    "dreamfusion": "Luxen Model used in implementation of stable dreamfusion.",
 }
 
 method_configs["luxenacto"] = Config(
@@ -248,6 +250,37 @@ method_configs["phototourism"] = Config(
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
     vis="viewer",
 )
+
+method_configs["dreamfusion"] = Config(
+    method_name="dreamfusion",
+    trainer=TrainerConfig(
+        steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
+    ),
+    pipeline=VanillaPipelineConfig(
+        datamanager=VanillaDataManagerConfig(
+            dataparser=LuxenstudioDataParserConfig(),
+            train_num_rays_per_batch=4096,
+            eval_num_rays_per_batch=4096,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="SO3xR3", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
+            ),
+        ),
+        model=DreamFusionModelConfig(),
+    ),
+    optimizers={
+        "proposal_networks": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
+
 
 AnnotatedBaseConfigUnion = tyro.conf.SuppressFixed[  # Don't show unparseable (fixed) arguments in helptext.
     tyro.conf.FlagConversionOff[
