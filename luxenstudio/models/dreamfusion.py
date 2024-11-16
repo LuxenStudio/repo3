@@ -30,7 +30,7 @@ from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
 
-from luxenstudio.field_components.encodings import LuxenEncoding, 
+# from luxenstudio.field_components.encodings import LuxenEncoding,
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.dreamfusion_field import DreamFusionField
 from luxenstudio.model_components.losses import MSELoss
