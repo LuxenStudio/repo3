@@ -18,64 +18,24 @@ Data manager for dreamfusion
 
 from __future__ import annotations
 
-import random
-from abc import abstractmethod
-from copy import deepcopy
 from dataclasses import dataclass, field
-from typing import Dict, List, Optional, Tuple, Type, Union
+from typing import Dict, List, Tuple, Type, Union
 
-import numpy as np
-import numpy.typing as npt
 import torch
-import torch.nn.functional as F
-import tyro
-from PIL import Image
 from rich.progress import Console
-from torch import nn
 from torch.nn import Parameter
-from torch.utils.data import Dataset
-from torch.utils.data.distributed import DistributedSampler
-from torchtyping import TensorType
 from typing_extensions import Literal
 
-import luxenstudio.utils.profiler as profiler
-from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.configs.config_utils import to_immutable_dict
 from luxenstudio.data.datamanagers.base_datamanager import (
     DataManager,
     VanillaDataManager,
     VanillaDataManagerConfig,
 )
-from luxenstudio.data.dataparsers.base_dataparser import DataparserOutputs
-from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
-from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
-from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
-from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
-    InstantNGPDataParserConfig,
-)
-from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
-from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
-from luxenstudio.data.dataparsers.phototourism_dataparser import (
-    PhototourismDataParserConfig,
-)
-from luxenstudio.data.dataparsers.record3d_dataparser import Record3DDataParserConfig
 from luxenstudio.data.datasets.base_dataset import InputDataset
-from luxenstudio.data.pixel_samplers import PixelSampler
 from luxenstudio.data.scene_box import SceneBox
-from luxenstudio.data.utils.data_utils import get_image_mask_tensor_from_path
-from luxenstudio.data.utils.dataloaders import (
-    CacheDataloader,
-    FixedIndicesEvalDataloader,
-    RandIndicesEvalDataloader,
-)
-from luxenstudio.data.utils.luxenstudio_collate import luxenstudio_collate
-from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
-from luxenstudio.engine.optimizers import AdamOptimizerConfig
-from luxenstudio.model_components.ray_generators import RayGenerator
-from luxenstudio.utils.misc import IterableWrapper
 
 CONSOLE = Console(width=120)
 
@@ -104,9 +64,9 @@ def random_train_pose(
     device,
     radius_mean=1.0,
     radius_std=0.1,
-    central_rotation_range=[0, 360],
-    vertical_rotation_range=[-90, 10],
-    focal_range=[0.75, 1.35],
+    central_rotation_range=(0, 360),
+    vertical_rotation_range=(-90, 10),
+    focal_range=(0.75, 1.35),
     jitter_std=0.01,
 ):
     """generate random poses from an orbit camera
