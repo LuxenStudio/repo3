@@ -14,7 +14,7 @@ from luxenstudio.configs.method_configs import method_configs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from scripts.train import train_loop
 
-BLACKLIST = ["base", "semantic-luxenw", "instant-ngp", "luxenacto", "phototourism"]
+BLACKLIST = ["base", "semantic-luxenw", "instant-ngp", "instant-ngp-bounded", "luxenacto", "phototourism"]
 
 
 def set_reduced_config(config: ExperimentConfig):
