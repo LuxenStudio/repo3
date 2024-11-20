@@ -13,7 +13,7 @@ from transformers import CLIPTextModel, CLIPTokenizer, logging
 CONSOLE = Console(width=120)
 logging.set_verbosity_error()
 IMG_DIM = 512
-const_scale = 0.15#8215
+const_scale = 0.18215
 
 class StableDiffusion(nn.Module):
     """Stable Diffusion implementation
@@ -81,6 +81,8 @@ class StableDiffusion(nn.Module):
         luxen_output_np = np.clip(luxen_output_np, 0.0, 1.0)
         plt.imsave('luxen_output.png', luxen_output_np)
         luxen_output = F.interpolate(luxen_output, (IMG_DIM, IMG_DIM), mode='bilinear')
+
+        print(torch.max(luxen_output), torch.min(luxen_output))
 
         t = torch.randint(self.min_step, self.max_step + 1, [1], dtype=torch.long, device=self.device)
         latents = self.imgs_to_latent(luxen_output)
