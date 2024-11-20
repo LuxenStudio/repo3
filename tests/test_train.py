@@ -9,15 +9,15 @@ from pathlib import Path
 
 import pytest
 
-from luxenstudio.configs.base_config import Config
+from luxenstudio.configs.experiment_config import ExperimentConfig
 from luxenstudio.configs.method_configs import method_configs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from scripts.train import train_loop
 
-BLACKLIST = ["base", "semantic-luxenw", "instant-ngp", "luxenacto", "phototourism"]
+BLACKLIST = ["base", "semantic-luxenw", "instant-ngp", "instant-ngp-bounded", "luxenacto", "phototourism"]
 
 
-def set_reduced_config(config: Config):
+def set_reduced_config(config: ExperimentConfig):
     """Reducing the config settings to speedup test"""
     config.machine.num_gpus = 0
     config.trainer.max_num_iterations = 2
