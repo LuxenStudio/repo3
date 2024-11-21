@@ -86,3 +86,8 @@ with Pool() as p:
 
 # --load-config outputs/luxenacto-no-pose-plane/luxenacto/2022-12-16_194940/config.yml
 # start train but run eval on all images at the start...
+
+# DATASET="plane" METHOD="luxenacto-none" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}" --experiment-name "${METHOD}-${DATASET}" --trainer.load-dir outputs/luxenacto-no-pose-plane/luxenacto/2022-12-16_220419/luxenstudio_models --trainer.steps-per-eval-all-images 10 --pipeline.eval_optimize_cameras False --pipeline.eval_optimize_appearance False
+# DATASET="plane" METHOD="luxenacto-pose" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}" --experiment-name "${METHOD}-${DATASET}" --trainer.load-dir outputs/luxenacto-no-pose-plane/luxenacto/2022-12-16_220419/luxenstudio_models --trainer.steps-per-eval-all-images 10 --pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance False
+# DATASET="plane" METHOD="luxenacto-pose-app" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}" --experiment-name "${METHOD}-${DATASET}" --trainer.load-dir outputs/luxenacto-no-pose-plane/luxenacto/2022-12-16_220419/luxenstudio_models --trainer.steps-per-eval-all-images 10 --pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance True
+# DATASET="plane" METHOD="luxenacto-app" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}" --experiment-name "${METHOD}-${DATASET}" --trainer.load-dir outputs/luxenacto-no-pose-plane/luxenacto/2022-12-16_220419/luxenstudio_models --trainer.steps-per-eval-all-images 10 --pipeline.eval_optimize_cameras False --pipeline.eval_optimize_appearance True
