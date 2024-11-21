@@ -12,6 +12,7 @@ import pytest
 from luxenstudio.configs.experiment_config import ExperimentConfig
 from luxenstudio.configs.method_configs import method_configs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
+from luxenstudio.data.dataparsers.minimal_dataparser import MinimalDataParserConfig
 from scripts.train import train_loop
 
 BLACKLIST = ["base", "semantic-luxenw", "instant-ngp", "instant-ngp-bounded", "luxenacto", "phototourism"]
@@ -60,5 +61,14 @@ def test_train():
         train_loop(local_rank=0, world_size=0, config=config)
 
 
+def test_simple_io():
+    """test to check minimal data IO works correctly"""
+    config = method_configs["vanilla-luxen"]
+    config.pipeline.datamanager.dataparser = MinimalDataParserConfig(data=Path("tests/data/minimal_parser"))
+    config = set_reduced_config(config)
+    train_loop(local_rank=0, world_size=0, config=config)
+
+
 if __name__ == "__main__":
     test_train()
+    test_simple_io()
