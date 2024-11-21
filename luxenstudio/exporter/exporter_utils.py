@@ -39,7 +39,6 @@ from rich.progress import (
 from torchtyping import TensorType
 
 from luxenstudio.cameras.cameras import Cameras
-from luxenstudio.configs.base_config import Config  # pylint: disable=unused-import
 from luxenstudio.pipelines.base_pipeline import Pipeline
 from luxenstudio.utils.rich_utils import ItersPerSecColumn
 

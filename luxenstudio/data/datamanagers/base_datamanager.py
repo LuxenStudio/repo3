@@ -35,6 +35,7 @@ from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.cameras.cameras import CameraType
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.configs.base_config import InstantiateConfig
+from luxenstudio.data.dataparsers.base_dataparser import DataparserOutputs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
@@ -46,7 +47,6 @@ from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserC
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
-from luxenstudio.data.dataparsers.record3d_dataparser import Record3DDataParserConfig
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.pixel_samplers import EquirectangularPixelSampler, PixelSampler
 from luxenstudio.data.utils.dataloaders import CacheDataloader
@@ -66,7 +66,6 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
             "friends-data": FriendsDataParserConfig(),
             "instant-ngp-data": InstantNGPDataParserConfig(),
             "nuscenes-data": NuScenesDataParserConfig(),
-            "record3d-data": Record3DDataParserConfig(),
             "dluxen-data": DLuxenDataParserConfig(),
             "phototourism-data": PhototourismDataParserConfig(),
         },
@@ -293,6 +292,7 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
     config: VanillaDataManagerConfig
     train_dataset: InputDataset
     eval_dataset: InputDataset
+    train_dataparser_outputs: DataparserOutputs
 
     def __init__(
         self,
@@ -311,6 +311,7 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
         self.test_mode = test_mode
         self.test_split = "test" if test_mode in ["test", "inference"] else "val"
         self.dataparser = self.config.dataparser.setup()
+        self.train_dataparser_outputs = self.dataparser.get_dataparser_outputs(split="train")
 
         self.train_dataset = self.create_train_dataset()
         self.eval_dataset = self.create_eval_dataset()
@@ -319,7 +320,7 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
     def create_train_dataset(self) -> InputDataset:
         """Sets up the data loaders for training"""
         return InputDataset(
-            dataparser_outputs=self.dataparser.get_dataparser_outputs(split="train"),
+            dataparser_outputs=self.train_dataparser_outputs,
             scale_factor=self.config.camera_res_scale_factor,
         )
 

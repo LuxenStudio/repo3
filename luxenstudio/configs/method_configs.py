@@ -21,14 +21,11 @@ from __future__ import annotations
 from typing import Dict
 
 import tyro
+from luxenacc import ContractionType
 
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
-from luxenstudio.configs.base_config import (
-    Config,
-    SchedulerConfig,
-    TrainerConfig,
-    ViewerConfig,
-)
+from luxenstudio.configs.base_config import TrainerConfig, ViewerConfig
+from luxenstudio.configs.experiment_config import ExperimentConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
 from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
 from luxenstudio.data.datamanagers.variable_res_datamanager import (
@@ -37,11 +34,15 @@ from luxenstudio.data.datamanagers.variable_res_datamanager import (
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
+from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
+    InstantNGPDataParserConfig,
+)
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
+from luxenstudio.engine.schedulers import SchedulerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
@@ -52,10 +53,11 @@ from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 
-method_configs: Dict[str, Config] = {}
+method_configs: Dict[str, ExperimentConfig] = {}
 descriptions = {
     "luxenacto": "Recommended real-time model tuned for real captures. This model will be continually updated.",
-    "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for bounded synthetic data.",
+    "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for unbounded scenes.",
+    "instant-ngp-bounded": "Implementation of Instant-NGP. Recommended for bounded real and synthetic scenes",
     "mipluxen": "High quality model for bounded scenes. (slow)",
     "semantic-luxenw": "Predicts semantic segmentations and filters out transient objects.",
     "vanilla-luxen": "Original Luxen model. (slow)",
@@ -64,7 +66,7 @@ descriptions = {
     "phototourism": "Uses the Phototourism data.",
 }
 
-method_configs["luxenacto"] = Config(
+method_configs["luxenacto"] = ExperimentConfig(
     method_name="luxenacto",
     trainer=TrainerConfig(
         steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
@@ -94,7 +96,7 @@ method_configs["luxenacto"] = Config(
     vis="viewer",
 )
 
-method_configs["instant-ngp"] = Config(
+method_configs["instant-ngp"] = ExperimentConfig(
     method_name="instant-ngp",
     trainer=TrainerConfig(
         steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
@@ -113,16 +115,44 @@ method_configs["instant-ngp"] = Config(
     vis="viewer",
 )
 
-method_configs["mipluxen"] = Config(
+
+method_configs["instant-ngp-bounded"] = ExperimentConfig(
+    method_name="instant-ngp-bounded",
+    trainer=TrainerConfig(
+        steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
+    ),
+    pipeline=DynamicBatchPipelineConfig(
+        datamanager=VanillaDataManagerConfig(dataparser=InstantNGPDataParserConfig(), train_num_rays_per_batch=8192),
+        model=InstantNGPModelConfig(
+            eval_num_rays_per_chunk=8192,
+            contraction_type=ContractionType.AABB,
+            render_step_size=0.001,
+            max_num_samples_per_ray=48,
+            near_plane=0.01,
+            background_color="black",
+        ),
+    ),
+    optimizers={
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        }
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=64000),
+    vis="viewer",
+)
+
+
+method_configs["mipluxen"] = ExperimentConfig(
     method_name="mipluxen",
     pipeline=VanillaPipelineConfig(
-        datamanager=VanillaDataManagerConfig(dataparser=BlenderDataParserConfig(), train_num_rays_per_batch=8192),
+        datamanager=VanillaDataManagerConfig(dataparser=LuxenstudioDataParserConfig(), train_num_rays_per_batch=1024),
         model=VanillaModelConfig(
             _target=MipLuxenModel,
             loss_coefficients={"rgb_loss_coarse": 0.1, "rgb_loss_fine": 1.0},
             num_coarse_samples=128,
             num_importance_samples=128,
-            eval_num_rays_per_chunk=8192,
+            eval_num_rays_per_chunk=1024,
         ),
     ),
     optimizers={
@@ -133,7 +163,7 @@ method_configs["mipluxen"] = Config(
     },
 )
 
-method_configs["semantic-luxenw"] = Config(
+method_configs["semantic-luxenw"] = ExperimentConfig(
     method_name="semantic-luxenw",
     trainer=TrainerConfig(
         steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
@@ -158,7 +188,7 @@ method_configs["semantic-luxenw"] = Config(
     vis="viewer",
 )
 
-method_configs["vanilla-luxen"] = Config(
+method_configs["vanilla-luxen"] = ExperimentConfig(
     method_name="vanilla-luxen",
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
@@ -178,7 +208,7 @@ method_configs["vanilla-luxen"] = Config(
     },
 )
 
-method_configs["tensorf"] = Config(
+method_configs["tensorf"] = ExperimentConfig(
     method_name="tensorf",
     trainer=TrainerConfig(mixed_precision=False),
     pipeline=VanillaPipelineConfig(
@@ -199,7 +229,7 @@ method_configs["tensorf"] = Config(
     },
 )
 
-method_configs["dluxen"] = Config(
+method_configs["dluxen"] = ExperimentConfig(
     method_name="dluxen",
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(dataparser=DLuxenDataParserConfig()),
@@ -221,7 +251,7 @@ method_configs["dluxen"] = Config(
     },
 )
 
-method_configs["phototourism"] = Config(
+method_configs["phototourism"] = ExperimentConfig(
     method_name="phototourism",
     trainer=TrainerConfig(
         steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
