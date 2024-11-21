@@ -79,4 +79,10 @@ with Pool() as p:
 # the default method
 # DATASET="person" METHOD="luxenacto-default" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}-${DATASET}" --experiment-name "${METHOD}-${DATASET}"
 # without pose optimization
-# DATASET="person" METHOD="luxenacto-no-pose" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}-${DATASET}" --experiment-name "${METHOD}-${DATASET}" --pipeline.datamanager.camera-optimizer.mode off
+# DATASET="plane" METHOD="luxenacto-no-pose" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}-${DATASET}" --experiment-name "${METHOD}-${DATASET}" --pipeline.datamanager.camera-optimizer.mode off
+
+# debugging the evaluation method
+# --trainer.steps-per-eval-all-images 5000
+
+# --load-config outputs/luxenacto-no-pose-plane/luxenacto/2022-12-16_194940/config.yml
+# start train but run eval on all images at the start...
