@@ -32,8 +32,8 @@ from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.utils.luxenstudio_collate import luxenstudio_collate
-from luxenstudio.utils.misc import get_dict_to_torch
 from luxenstudio.model_components.ray_generators import RayGenerator
+from luxenstudio.utils.misc import get_dict_to_torch
 
 CONSOLE = Console(width=120)
 
