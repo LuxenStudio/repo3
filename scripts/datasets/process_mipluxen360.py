@@ -91,3 +91,38 @@ with Pool() as p:
 # DATASET="plane" METHOD="luxenacto-pose" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}" --experiment-name "${METHOD}-${DATASET}" --trainer.load-dir outputs/luxenacto-no-pose-plane/luxenacto/2022-12-16_220419/luxenstudio_models --trainer.steps-per-eval-all-images 10 --pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance False
 # DATASET="plane" METHOD="luxenacto-pose-app" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}" --experiment-name "${METHOD}-${DATASET}" --trainer.load-dir outputs/luxenacto-no-pose-plane/luxenacto/2022-12-16_220419/luxenstudio_models --trainer.steps-per-eval-all-images 10 --pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance True
 # DATASET="plane" METHOD="luxenacto-app" && ns-train luxenacto --vis wandb --data "data/luxenstudio/${DATASET}" --wandb-name "${METHOD}" --experiment-name "${METHOD}-${DATASET}" --trainer.load-dir outputs/luxenacto-no-pose-plane/luxenacto/2022-12-16_220419/luxenstudio_models --trainer.steps-per-eval-all-images 10 --pipeline.eval_optimize_cameras False --pipeline.eval_optimize_appearance True
+
+
+capture_names = [
+    "Egypt",
+    "person",
+    "kitchen",
+    "plane",
+    "dozer",
+    "floating-tree",
+    "aspen",
+    "stump",
+    "sculpture",
+    "Giannini-Hall",
+]
+table_row = [
+    ("luxenacto", ""),
+    ("w/o-pose", "--pipeline.datamanager.camera-optimizer.mode off"),
+    ("w/o-app", "--pipeline.model.use-appearance-embedding False"),
+    (
+        "w/o-pose-app",
+        "--pipeline.datamanager.camera-optimizer.mode off --pipeline.model.use-appearance-embedding False",
+    ),
+    ("1-prop-network", "--pipeline.model.num_proposal_samples_per_ray (256,) --pipeline.model.num_proposal_iterations 1"),
+]
+
+# 30K iterations
+
+command = """
+CAPTURE_NAME="plane"
+TABLE_ROW="luxenacto-app"
+&&
+ns-train luxenacto --vis wandb --data "data/luxenstudio/${CAPTURE_NAME}" --wandb-name "${DATASET}-${TABLE_ROW}" --experiment-name "${DATASET}-${TABLE_ROW}"
+--pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance True
+--trainer.steps-per-eval-all-images 30000 --trainer.max-num-iterations 30001
+"""
