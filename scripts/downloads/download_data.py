@@ -97,6 +97,15 @@ luxenstudio_dataset = [
     "sculpture",
     "Giannini-Hall",
 ]
+mipluxen360_dataset = [
+    "mipluxen-360-bicycle",
+    "mipluxen-360-garden",
+    "mipluxen-360-stump",
+    "mipluxen-360-room",
+    "mipluxen-360-counter",
+    "mipluxen-360-kitchen",
+    "mipluxen-360-bonsai",
+]
 luxenstudio_file_ids = {
     "bww_entrance": grab_file_id("https://drive.google.com/file/d/1ylkRHtfB3n3IRLf2wplpfxzPTq7nES9I/view?usp=sharing"),
     "campanile": grab_file_id("https://drive.google.com/file/d/13aOfGJRRH05pOOk9ikYGTwqFc2L1xskU/view?usp=sharing"),
@@ -106,6 +115,7 @@ luxenstudio_file_ids = {
     "redwoods2": grab_file_id("https://drive.google.com/file/d/1rg-4NoXT8p6vkmbWxMOY6PSG4j3rfcJ8/view?usp=sharing"),
     "storefront": grab_file_id("https://drive.google.com/file/d/16b792AguPZWDA_YC4igKCwXJqW0Tb21o/view?usp=sharing"),
     "vegetation": grab_file_id("https://drive.google.com/file/d/1wBhLQ2odycrtU39y2akVurXEAt9SsVI3/view?usp=sharing"),
+    # Luxenstudio Dataset
     "Egypt": "https://data.luxen.studio/luxenstudio/Egypt.zip",
     "person": "https://data.luxen.studio/luxenstudio/person.zip",
     "kitchen": "https://data.luxen.studio/luxenstudio/kitchen.zip",
@@ -116,8 +126,17 @@ luxenstudio_file_ids = {
     "stump": "https://data.luxen.studio/luxenstudio/stump.zip",
     "sculpture": "https://data.luxen.studio/luxenstudio/sculpture.zip",
     "Giannini-Hall": "https://data.luxen.studio/luxenstudio/Giannini-Hall.zip",
+    # MipLuxen-360 Dataset. TODO: add these links
+    "mipluxen360-bicycle": "",
+    "mipluxen360-garden": "",
+    "mipluxen360-stump": "",
+    "mipluxen360-room": "",
+    "mipluxen360-counter": "",
+    "mipluxen360-kitchen": "",
+    "mipluxen360-bonsai": "",
     "all": None,
     "luxenstudio-dataset": luxenstudio_dataset,
+    "mipluxen360-dataset": mipluxen360_dataset,
 }
 
 LuxenstudioCaptureName = tyro.extras.literal_type_from_choices(luxenstudio_file_ids.keys())
