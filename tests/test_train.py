@@ -9,19 +9,19 @@ from pathlib import Path
 
 import pytest
 
-from luxenstudio.configs.experiment_config import ExperimentConfig
 from luxenstudio.configs.method_configs import method_configs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.minimal_dataparser import MinimalDataParserConfig
+from luxenstudio.engine.trainer import TrainerConfig
 from scripts.train import train_loop
 
 BLACKLIST = ["base", "semantic-luxenw", "instant-ngp", "instant-ngp-bounded", "luxenacto", "phototourism"]
 
 
-def set_reduced_config(config: ExperimentConfig):
+def set_reduced_config(config: TrainerConfig):
     """Reducing the config settings to speedup test"""
     config.machine.num_gpus = 0
-    config.trainer.max_num_iterations = 2
+    config.max_num_iterations = 2
     # reduce dataset factors; set dataset to test
     config.pipeline.datamanager.dataparser = BlenderDataParserConfig(data=Path("tests/data/lego_test"))
     config.pipeline.datamanager.train_num_images_to_sample_from = 1
