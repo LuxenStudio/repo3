@@ -43,7 +43,7 @@ from luxenstudio.model_components.losses import (
     orientation_loss,
     pred_normal_loss,
 )
-from luxenstudio.model_components.ray_samplers import PDFSampler, UniformSampler
+from luxenstudio.model_components.ray_samplers import UniformSampler
 from luxenstudio.model_components.renderers import (
     AccumulationRenderer,
     DepthRenderer,
