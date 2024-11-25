@@ -105,8 +105,7 @@ class StableDiffusion(nn.Module):
         return text_embeddings
 
     def sds_loss(self, text_embeddings, luxen_output, guidance_scale=100):
-
-        luxen_output_np = luxen_output.view(3, 64, 64).permute(1, 2, 0).detach().cpu().numpy()
+        luxen_output_np = luxen_output.squeeze(0).permute(1, 2, 0).detach().cpu().numpy()
         luxen_output_np = np.clip(luxen_output_np, 0.0, 1.0)
         plt.imsave("luxen_output.png", luxen_output_np)
         luxen_output = F.interpolate(luxen_output, (IMG_DIM, IMG_DIM), mode="bilinear")
@@ -215,7 +214,7 @@ class StableDiffusion(nn.Module):
             latents=latents,
             num_inference_steps=num_inference_steps,
             guidance_scale=guidance_scale,
-        )  # [1, 4, 64, 64]
+        )  # [1, 4, resolution, resolution]
 
         diffused_img = self.latents_to_img(latents)
         diffused_img = diffused_img.detach().cpu().permute(0, 2, 3, 1).numpy()
