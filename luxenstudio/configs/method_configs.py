@@ -26,6 +26,7 @@ from luxenacc import ContractionType
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
+from luxenstudio.data.datamanagers.depth_datamanager import DepthDataManagerConfig
 from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
 from luxenstudio.data.datamanagers.variable_res_datamanager import (
     VariableResDataManagerConfig,
@@ -44,6 +45,7 @@ from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerCon
 from luxenstudio.engine.schedulers import SchedulerConfig
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
+from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
@@ -56,6 +58,7 @@ from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 method_configs: Dict[str, TrainerConfig] = {}
 descriptions = {
     "luxenacto": "Recommended real-time model tuned for real captures. This model will be continually updated.",
+    "depth-luxenacto": "Luxenacto with depth supervision.",
     "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for unbounded scenes.",
     "instant-ngp-bounded": "Implementation of Instant-NGP. Recommended for bounded real and synthetic scenes",
     "mipluxen": "High quality model for bounded scenes. (slow)",
@@ -82,6 +85,37 @@ method_configs["luxenacto"] = TrainerConfig(
             ),
         ),
         model=LuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
+    ),
+    optimizers={
+        "proposal_networks": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
+
+method_configs["depth-luxenacto"] = TrainerConfig(
+    method_name="depth-luxenacto",
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
+    pipeline=VanillaPipelineConfig(
+        datamanager=DepthDataManagerConfig(
+            dataparser=LuxenstudioDataParserConfig(),
+            train_num_rays_per_batch=4096,
+            eval_num_rays_per_batch=4096,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="SO3xR3", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
+            ),
+        ),
+        model=DepthLuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
     ),
     optimizers={
         "proposal_networks": {
