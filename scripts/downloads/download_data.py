@@ -79,6 +79,25 @@ class FriendsDownload(DatasetDownload):
         os.remove(download_path)
 
 
+@dataclass
+class Mipluxen360Download(DatasetDownload):
+    """Download the friends dataset."""
+
+    def download(self, save_dir: Path):
+        """Download the friends dataset."""
+
+        # https://drive.google.com/file/d/1sgKr0ZO7BQC0FYinAnRSxobIWNucAST5/view?usp=sharing
+        friends_file_id = "1sgKr0ZO7BQC0FYinAnRSxobIWNucAST5"
+
+        # Download the files
+        url = "https://data.luxen.studio/luxenstudio-data-mipluxen360.zip"
+        download_path = str(save_dir / "luxenstudio-data-mipluxen360.zip")
+        gdown.download(url, output=download_path)
+        with zipfile.ZipFile(download_path, "r") as zip_ref:
+            zip_ref.extractall(str(save_dir))
+        os.remove(download_path)
+
+
 def grab_file_id(zip_url: str) -> str:
     """Get the file id from the google drive zip url."""
     s = zip_url.split("/d/")[1]
@@ -306,6 +325,7 @@ class PhototourismDownload(DatasetDownload):
 Commands = Union[
     Annotated[BlenderDownload, tyro.conf.subcommand(name="blender")],
     Annotated[FriendsDownload, tyro.conf.subcommand(name="friends")],
+    Annotated[Mipluxen360Download, tyro.conf.subcommand(name="mipluxen360")],
     Annotated[LuxenstudioDownload, tyro.conf.subcommand(name="luxenstudio")],
     Annotated[Record3dDownload, tyro.conf.subcommand(name="record3d")],
     Annotated[DLuxenDownload, tyro.conf.subcommand(name="dluxen")],
