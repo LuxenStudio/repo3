@@ -21,12 +21,12 @@ mipluxen360_table_rows = [
         "luxenacto",
         "--pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance False --pipeline.datamanager.camera-optimizer.mode off --pipeline.model.use-appearance-embedding False luxenstudio-data --downscale-factor 4 --train-split-percentage 0.875",
     ),
-    # TODO: instant-ngp method
-    # (
-    #     "instant-ngp-w/o-pose-app",
-    #     "instant-ngp",
-    #     "--pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance False --pipeline.datamanager.camera-optimizer.mode off --pipeline.model.use-appearance-embedding False luxenstudio-data --downscale-factor 4 --train-split-percentage 0.875",
-    # ),
+    # instant-ngp method
+    (
+        "instant-ngp-w/o-pose-app",
+        "instant-ngp",
+        "--pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance False --pipeline.datamanager.camera-optimizer.mode off --pipeline.model.use-appearance-embedding False luxenstudio-data --downscale-factor 4 --train-split-percentage 0.875",
+    ),
 ]
 
 
@@ -133,7 +133,7 @@ def main(capture_names, table_rows, data_path: Path = Path("data/luxenstudio")):
 
             def task():
                 print("Starting command: ", command)
-                out = run_command(command, verbose=False)
+                # out = run_command(command, verbose=False)
                 # time.sleep(5)
                 print("Finished command: ", command)
 
@@ -152,5 +152,6 @@ def main(capture_names, table_rows, data_path: Path = Path("data/luxenstudio")):
 
 
 if __name__ == "__main__":
-    main(mipluxen360_capture_names, mipluxen360_table_rows, data_path=Path("data/luxenstudio-data-mipluxen360"))
+    pass
+    # main(mipluxen360_capture_names, mipluxen360_table_rows, data_path=Path("data/luxenstudio-data-mipluxen360"))
     # main(ablations_capture_names, ablations_table_rows)
