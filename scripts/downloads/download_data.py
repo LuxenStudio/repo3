@@ -145,17 +145,8 @@ luxenstudio_file_ids = {
     "stump": "https://data.luxen.studio/luxenstudio/stump.zip",
     "sculpture": "https://data.luxen.studio/luxenstudio/sculpture.zip",
     "Giannini-Hall": "https://data.luxen.studio/luxenstudio/Giannini-Hall.zip",
-    # MipLuxen-360 Dataset. TODO: add these links
-    "mipluxen360-bicycle": "",
-    "mipluxen360-garden": "",
-    "mipluxen360-stump": "",
-    "mipluxen360-room": "",
-    "mipluxen360-counter": "",
-    "mipluxen360-kitchen": "",
-    "mipluxen360-bonsai": "",
     "all": None,
     "luxenstudio-dataset": luxenstudio_dataset,
-    "mipluxen360-dataset": mipluxen360_dataset,
 }
 
 LuxenstudioCaptureName = tyro.extras.literal_type_from_choices(luxenstudio_file_ids.keys())
