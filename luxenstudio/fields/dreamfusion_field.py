@@ -17,31 +17,18 @@ Field for dreamfusion model
 """
 
 
-from typing import Dict, Optional, Tuple
+from typing import Optional
 
 import numpy as np
 import torch
-from torch import nn
 from torch.nn.parameter import Parameter
 from torchtyping import TensorType
 
 from luxenstudio.cameras.rays import RayBundle, RaySamples
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.field_components.activations import trunc_exp
-from luxenstudio.field_components.embedding import Embedding
-from luxenstudio.field_components.encodings import Encoding, HashEncoding, SHEncoding
-from luxenstudio.field_components.field_heads import (
-    DensityFieldHead,
-    FieldHead,
-    FieldHeadNames,
-    PredNormalsFieldHead,
-    RGBFieldHead,
-)
-from luxenstudio.field_components.mlp import MLP
-from luxenstudio.field_components.spatial_distortions import (
-    SceneContraction,
-    SpatialDistortion,
-)
+from luxenstudio.field_components.field_heads import FieldHeadNames, PredNormalsFieldHead
+from luxenstudio.field_components.spatial_distortions import SpatialDistortion
 from luxenstudio.fields.base_field import Field
 from luxenstudio.utils import math
 

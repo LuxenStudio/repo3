@@ -47,6 +47,7 @@ from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataP
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
+from luxenstudio.engine.dreamfusion_trainer import DreamfusionTrainerConfig
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
 from luxenstudio.engine.schedulers import SchedulerConfig
 from luxenstudio.engine.trainer import TrainerConfig
@@ -332,11 +333,12 @@ method_configs["phototourism"] = TrainerConfig(
     vis="viewer",
 )
 
-method_configs["dreamfusion"] = ExperimentConfig(
+method_configs["dreamfusion"] = DreamfusionTrainerConfig(
     method_name="dreamfusion",
-    trainer=TrainerConfig(
-        steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
-    ),
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
     pipeline=DreamfusionPipelineConfig(
         datamanager=DreamFusionDataManagerConfig(
             dataparser=LuxenstudioDataParserConfig(),
