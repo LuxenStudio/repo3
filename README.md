@@ -245,7 +245,7 @@ If you're interested in learning more on how to create your own pipelines, devel
 
 # Supported Features
 
-We provide the following support structures to make life easier for getting started with Luxens. For a full description, please refer to our [features page](#).
+We provide the following support structures to make life easier for getting started with Luxens.
 
 **If you are looking for a feature that is not currently supported, please do not hesitate to contact the Luxenstudio Team on [Discord](https://discord.gg/uMbNqcraFc)!**
 
