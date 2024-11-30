@@ -129,7 +129,7 @@ The following will train a _luxenacto_ model, our recommended model for real wor
 
 ```bash
 # Download some test data:
-ns-download-data luxenstudio --capture-name=poster
+ns-download-data --dataset luxenstudio --capture-name=poster
 # Train model
 ns-train luxenacto --data data/luxenstudio/poster
 ```
@@ -151,7 +151,7 @@ Navigating to the link at the end of the terminal will load the webviewer. If yo
 It is possible to load a pretrained model by running
 
 ```bash
-ns-train luxenacto --data data/luxenstudio/poster --trainer.load-dir {outputs/.../luxenstudio_models}
+ns-train luxenacto --data data/luxenstudio/poster --load-dir {outputs/.../luxenstudio_models}
 ```
 
 This will automatically start training. If you do not want it to train, add `--viewer.start-train False` to your training command.
@@ -245,7 +245,7 @@ If you're interested in learning more on how to create your own pipelines, devel
 
 # Supported Features
 
-We provide the following support structures to make life easier for getting started with Luxens. For a full description, please refer to our [features page](#).
+We provide the following support structures to make life easier for getting started with Luxens.
 
 **If you are looking for a feature that is not currently supported, please do not hesitate to contact the Luxenstudio Team on [Discord](https://discord.gg/uMbNqcraFc)!**
 
