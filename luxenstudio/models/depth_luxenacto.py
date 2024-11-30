@@ -13,7 +13,7 @@
 # limitations under the License.
 
 """
-Luxenacto augumented with depth supervision.
+Luxenacto augmented with depth supervision.
 """
 
 from __future__ import annotations
@@ -45,13 +45,13 @@ class DepthLuxenactoModelConfig(LuxenactoModelConfig):
     starting_depth_sigma: float = 0.2
     """Starting uncertainty around depth values in meters (defaults to 0.2m)."""
     sigma_decay_rate: float = 0.99985
-    """Rate of exponetial decay."""
+    """Rate of exponential decay."""
     depth_loss_type: DephtLossType = DephtLossType.DS_NERF
     """Depth loss type."""
 
 
 class DepthLuxenactoModel(LuxenactoModel):
-    """Depth loss augumented luxenacto model.
+    """Depth loss augmented luxenacto model.
 
     Args:
         config: Luxenacto configuration to instantiate model
