@@ -13,6 +13,7 @@ import time
 import threading
 
 mipluxen360_capture_names = ["bicycle", "garden", "stump", "room", "counter", "kitchen", "bonsai"]  # 7 splits
+# mipluxen360_capture_names = ["bicycle", "bonsai"]  # 7 splits
 # 1/8 of input images used in the paper = 0.125 -> 1 - this = 0.875
 mipluxen360_table_rows = [
     # luxenacto method
@@ -22,11 +23,11 @@ mipluxen360_table_rows = [
         "--pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance False --pipeline.datamanager.camera-optimizer.mode off --pipeline.model.use-appearance-embedding False luxenstudio-data --downscale-factor 4 --train-split-percentage 0.875",
     ),
     # instant-ngp method
-    (
-        "instant-ngp-w/o-pose-app",
-        "instant-ngp",
-        "--pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance False --pipeline.datamanager.camera-optimizer.mode off --pipeline.model.use-appearance-embedding False luxenstudio-data --downscale-factor 4 --train-split-percentage 0.875",
-    ),
+    # (
+    #     "instant-ngp-w/o-pose-app",
+    #     "instant-ngp",
+    #     "--pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance False --pipeline.datamanager.camera-optimizer.mode off --pipeline.model.use-appearance-embedding False luxenstudio-data --downscale-factor 4 --train-split-percentage 0.875",
+    # ),
 ]
 
 
@@ -109,7 +110,7 @@ def main(capture_names, table_rows, data_path: Path = Path("data/luxenstudio")):
                     f"--data { data_path / capture_name}",
                     "--output-dir outputs/luxenacto-ablations",
                     "--trainer.steps-per-eval-batch 0 --trainer.steps-per-eval-image 0",
-                    "--trainer.steps-per-eval-all-images 5000 --trainer.max-num-iterations 30001",
+                    "--trainer.steps-per-eval-all-images 5000 --trainer.max-num-iterations 300001",
                     f"--wandb-name {capture_name}_{table_row_name}",
                     f"--experiment-name {capture_name}_{table_row_name}",
                     table_row_command,
@@ -133,7 +134,7 @@ def main(capture_names, table_rows, data_path: Path = Path("data/luxenstudio")):
 
             def task():
                 print("Starting command: ", command)
-                # out = run_command(command, verbose=False)
+                out = run_command(command, verbose=False)
                 # time.sleep(5)
                 print("Finished command: ", command)
 
@@ -152,6 +153,6 @@ def main(capture_names, table_rows, data_path: Path = Path("data/luxenstudio")):
 
 
 if __name__ == "__main__":
-    pass
-    # main(mipluxen360_capture_names, mipluxen360_table_rows, data_path=Path("data/luxenstudio-data-mipluxen360"))
+    # pass
+    main(mipluxen360_capture_names, mipluxen360_table_rows, data_path=Path("data/luxenstudio-data-mipluxen360"))
     # main(ablations_capture_names, ablations_table_rows)
