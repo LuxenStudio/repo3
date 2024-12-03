@@ -11,7 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" Data parser for luxenstudio datasets. """
+""" Data parser for mipluxen360 datasets. """
 
 from __future__ import annotations
 
@@ -41,12 +41,12 @@ MAX_AUTO_RESOLUTION = 1600
 
 
 @dataclass
-class LuxenstudioDataParserConfig(DataParserConfig):
-    """Luxenstudio dataset config"""
+class Mipluxen360DataParserConfig(DataParserConfig):
+    """Mipluxen360 dataset config"""
 
-    _target: Type = field(default_factory=lambda: Luxenstudio)
+    _target: Type = field(default_factory=lambda: Mipluxen360)
     """target class to instantiate"""
-    data: Path = Path("data/luxenstudio/poster")
+    data: Path = Path("data/luxenstudio-data-mipluxen360/garden")
     """Directory or explicit json file path specifying location of data."""
     scale_factor: float = 1.0
     """How much to scale the camera origins by."""
@@ -65,8 +65,8 @@ class LuxenstudioDataParserConfig(DataParserConfig):
 
 
 @dataclass
-class Luxenstudio(DataParser):
-    """Luxenstudio DatasetParser"""
+class Mipluxen360(DataParser):
+    """Mipluxen360 DatasetParser"""
 
     config: LuxenstudioDataParserConfig
     downscale_factor: Optional[int] = None
@@ -105,7 +105,16 @@ class Luxenstudio(DataParser):
         width = []
         distort = []
 
+        # sort the frames by fname
+        fnames = []
         for frame in meta["frames"]:
+            filepath = PurePath(frame["file_path"])
+            fname = self._get_fname(filepath, data_dir)
+            fnames.append(fname)
+        inds = np.argsort(fnames)
+        frames = [meta["frames"][ind] for ind in inds]
+
+        for frame in frames:
             filepath = PurePath(frame["file_path"])
             fname = self._get_fname(filepath, data_dir)
             if not fname.exists():
@@ -167,16 +176,20 @@ class Luxenstudio(DataParser):
         You should check that mask_path is specified for every frame (or zero frames) in transforms.json.
         """
 
+        # sort the filenames according to image_filenames
+
+
         # filter image_filenames and poses based on train/eval split percentage
         num_images = len(image_filenames)
-        num_train_images = math.ceil(num_images * self.config.train_split_percentage)
-        num_eval_images = num_images - num_train_images
-        i_all = np.arange(num_images)
-        i_train = np.linspace(
-            0, num_images - 1, num_train_images, dtype=int
-        )  # equally spaced training images starting and ending at 0 and num_images-1
-        i_eval = np.setdiff1d(i_all, i_train)  # eval images are the remaining images
-        assert len(i_eval) == num_eval_images
+        
+        # mipluxen360 code...
+        # TODO: add parameters for this...
+        all_indices = np.arange(num_images)
+        train_indices = all_indices[all_indices % 8 != 0]
+        eval_indices = all_indices[all_indices % 8 == 0]
+        i_train = train_indices
+        i_eval = eval_indices
+        
         if split == "train":
             indices = i_train
         elif split in ["val", "test"]:
@@ -271,6 +284,7 @@ class Luxenstudio(DataParser):
     def _get_fname(self, filepath: PurePath, data_dir: PurePath, downsample_folder_prefix="images_") -> Path:
         """Get the filename of the image file.
         downsample_folder_prefix can be used to point to auxillary image data, e.g. masks
+
         filepath: the base file name of the transformations.
         data_dir: the directory of the data that contains the transform file
         downsample_folder_prefix: prefix of the newly generated downsampled images
