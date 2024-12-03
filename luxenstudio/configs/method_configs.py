@@ -26,13 +26,10 @@ from luxenacc import ContractionType
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
-<<<<<<< HEAD
+from luxenstudio.data.datamanagers.depth_datamanager import DepthDataManagerConfig
 from luxenstudio.data.datamanagers.dreamfusion_datamanager import (
     DreamFusionDataManagerConfig,
 )
-=======
-from luxenstudio.data.datamanagers.depth_datamanager import DepthDataManagerConfig
->>>>>>> 34b453a288df0ad4d5ce429d464b65199bcfea2b
 from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
 from luxenstudio.data.datamanagers.variable_res_datamanager import (
     VariableResDataManagerConfig,
@@ -52,11 +49,8 @@ from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerCon
 from luxenstudio.engine.schedulers import SchedulerConfig
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
-<<<<<<< HEAD
-from luxenstudio.models.dreamfusion import DreamFusionModelConfig
-=======
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
->>>>>>> 34b453a288df0ad4d5ce429d464b65199bcfea2b
+from luxenstudio.models.dreamfusion import DreamFusionModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
