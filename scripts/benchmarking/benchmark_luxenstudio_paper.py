@@ -12,9 +12,8 @@ from pathlib import Path
 import time
 import threading
 
+# for the mipluxen360 experiments
 mipluxen360_capture_names = ["bicycle", "garden", "stump", "room", "counter", "kitchen", "bonsai"]  # 7 splits
-# mipluxen360_capture_names = ["bicycle", "bonsai"]  # 7 splits
-# 1/8 of input images used in the paper = 0.125 -> 1 - this = 0.875
 mipluxen360_table_rows = [
     # luxenacto method
     (
@@ -24,7 +23,7 @@ mipluxen360_table_rows = [
     ),
 ]
 
-
+# for the ablation experiments
 ablations_capture_names = [
     "Egypt",
     "person",
@@ -80,7 +79,6 @@ ablations_table_rows = [
         "luxenacto",
         "--pipeline.eval_optimize_cameras True --pipeline.eval_optimize_appearance True --pipeline.model.use-bounded True --pipeline.model.use-scene-contraction False luxenstudio-data --scale_factor 0.125",
     ),
-    # experiment with synthetic dataset settings
     (
         "synthetic-on-real",
         "luxenacto",
