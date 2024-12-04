@@ -24,9 +24,9 @@ import tyro
 from luxenacc import ContractionType
 
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
-from luxenstudio.configs.base_config import TrainerConfig, ViewerConfig
-from luxenstudio.configs.experiment_config import ExperimentConfig
+from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
+from luxenstudio.data.datamanagers.depth_datamanager import DepthDataManagerConfig
 from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
 from luxenstudio.data.datamanagers.variable_res_datamanager import (
     VariableResDataManagerConfig,
@@ -43,7 +43,9 @@ from luxenstudio.data.dataparsers.phototourism_dataparser import (
 )
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
 from luxenstudio.engine.schedulers import SchedulerConfig
+from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
+from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
@@ -53,9 +55,10 @@ from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 
-method_configs: Dict[str, ExperimentConfig] = {}
+method_configs: Dict[str, TrainerConfig] = {}
 descriptions = {
     "luxenacto": "Recommended real-time model tuned for real captures. This model will be continually updated.",
+    "depth-luxenacto": "Luxenacto with depth supervision.",
     "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for unbounded scenes.",
     "instant-ngp-bounded": "Implementation of Instant-NGP. Recommended for bounded real and synthetic scenes",
     "mipluxen": "High quality model for bounded scenes. (slow)",
@@ -66,11 +69,12 @@ descriptions = {
     "phototourism": "Uses the Phototourism data.",
 }
 
-method_configs["luxenacto"] = ExperimentConfig(
+method_configs["luxenacto"] = TrainerConfig(
     method_name="luxenacto",
-    trainer=TrainerConfig(
-        steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
-    ),
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
             dataparser=LuxenstudioDataParserConfig(),
@@ -96,11 +100,43 @@ method_configs["luxenacto"] = ExperimentConfig(
     vis="viewer",
 )
 
-method_configs["instant-ngp"] = ExperimentConfig(
-    method_name="instant-ngp",
-    trainer=TrainerConfig(
-        steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
+method_configs["depth-luxenacto"] = TrainerConfig(
+    method_name="depth-luxenacto",
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
+    pipeline=VanillaPipelineConfig(
+        datamanager=DepthDataManagerConfig(
+            dataparser=LuxenstudioDataParserConfig(),
+            train_num_rays_per_batch=4096,
+            eval_num_rays_per_batch=4096,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="SO3xR3", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
+            ),
+        ),
+        model=DepthLuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
     ),
+    optimizers={
+        "proposal_networks": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
+
+method_configs["instant-ngp"] = TrainerConfig(
+    method_name="instant-ngp",
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
     pipeline=DynamicBatchPipelineConfig(
         datamanager=VanillaDataManagerConfig(dataparser=LuxenstudioDataParserConfig(), train_num_rays_per_batch=8192),
         model=InstantNGPModelConfig(eval_num_rays_per_chunk=8192),
@@ -116,11 +152,12 @@ method_configs["instant-ngp"] = ExperimentConfig(
 )
 
 
-method_configs["instant-ngp-bounded"] = ExperimentConfig(
+method_configs["instant-ngp-bounded"] = TrainerConfig(
     method_name="instant-ngp-bounded",
-    trainer=TrainerConfig(
-        steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
-    ),
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
     pipeline=DynamicBatchPipelineConfig(
         datamanager=VanillaDataManagerConfig(dataparser=InstantNGPDataParserConfig(), train_num_rays_per_batch=8192),
         model=InstantNGPModelConfig(
@@ -143,7 +180,7 @@ method_configs["instant-ngp-bounded"] = ExperimentConfig(
 )
 
 
-method_configs["mipluxen"] = ExperimentConfig(
+method_configs["mipluxen"] = TrainerConfig(
     method_name="mipluxen",
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(dataparser=LuxenstudioDataParserConfig(), train_num_rays_per_batch=1024),
@@ -163,11 +200,12 @@ method_configs["mipluxen"] = ExperimentConfig(
     },
 )
 
-method_configs["semantic-luxenw"] = ExperimentConfig(
+method_configs["semantic-luxenw"] = TrainerConfig(
     method_name="semantic-luxenw",
-    trainer=TrainerConfig(
-        steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
-    ),
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
     pipeline=VanillaPipelineConfig(
         datamanager=SemanticDataManagerConfig(
             dataparser=FriendsDataParserConfig(), train_num_rays_per_batch=4096, eval_num_rays_per_batch=8192
@@ -188,7 +226,7 @@ method_configs["semantic-luxenw"] = ExperimentConfig(
     vis="viewer",
 )
 
-method_configs["vanilla-luxen"] = ExperimentConfig(
+method_configs["vanilla-luxen"] = TrainerConfig(
     method_name="vanilla-luxen",
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
@@ -208,9 +246,12 @@ method_configs["vanilla-luxen"] = ExperimentConfig(
     },
 )
 
-method_configs["tensorf"] = ExperimentConfig(
+method_configs["tensorf"] = TrainerConfig(
     method_name="tensorf",
-    trainer=TrainerConfig(mixed_precision=False),
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=False,
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
             dataparser=BlenderDataParserConfig(),
@@ -227,9 +268,11 @@ method_configs["tensorf"] = ExperimentConfig(
             "scheduler": SchedulerConfig(lr_final=0.002, max_steps=30000),
         },
     },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
 )
 
-method_configs["dluxen"] = ExperimentConfig(
+method_configs["dluxen"] = TrainerConfig(
     method_name="dluxen",
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(dataparser=DLuxenDataParserConfig()),
@@ -251,11 +294,12 @@ method_configs["dluxen"] = ExperimentConfig(
     },
 )
 
-method_configs["phototourism"] = ExperimentConfig(
+method_configs["phototourism"] = TrainerConfig(
     method_name="phototourism",
-    trainer=TrainerConfig(
-        steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
-    ),
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
     pipeline=VanillaPipelineConfig(
         datamanager=VariableResDataManagerConfig(  # NOTE: one of the only differences with luxenacto
             dataparser=PhototourismDataParserConfig(),  # NOTE: one of the only differences with luxenacto
