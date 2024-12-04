@@ -21,7 +21,7 @@ from typing import Optional, Tuple, Type
 
 import numpy as np
 import torch
-from nuscenes.nuscenes import NuScenes as NuScenesDatabase
+# from nuscenes.nuscenes import NuScenes as NuScenesDatabase
 from typing_extensions import Literal
 
 from luxenstudio.cameras.cameras import Cameras, CameraType
