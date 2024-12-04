@@ -47,6 +47,7 @@ from luxenstudio.field_components.temporal_distortions import TemporalDistortion
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
+from luxenstudio.models.luxenacto_4k import Luxenacto4KModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
@@ -68,7 +69,7 @@ descriptions = {
 }
 
 method_configs["luxenacto-4k"] = ExperimentConfig(
-    method_name="luxenacto",
+    method_name="luxenacto-4k",
     trainer=TrainerConfig(
         steps_per_eval_batch=500, steps_per_save=2000, max_num_iterations=30000, mixed_precision=True
     ),
@@ -83,7 +84,7 @@ method_configs["luxenacto-4k"] = ExperimentConfig(
             pixel_sampling="patch",
             pixel_patch_size=8,
         ),
-        model=LuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
+        model=Luxenacto4KModelConfig(eval_num_rays_per_chunk=1 << 15),
     ),
     optimizers={
         "proposal_networks": {
