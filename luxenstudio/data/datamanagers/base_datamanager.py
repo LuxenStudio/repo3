@@ -45,11 +45,8 @@ from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserCon
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
-<<<<<<< HEAD
-from luxenstudio.data.dataparsers.mipluxen360_dataparser import Mipluxen360DataParserConfig
-=======
 from luxenstudio.data.dataparsers.minimal_dataparser import MinimalDataParserConfig
->>>>>>> main
+from luxenstudio.data.dataparsers.mipluxen360_dataparser import Mipluxen360DataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
