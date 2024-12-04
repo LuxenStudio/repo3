@@ -44,8 +44,8 @@ from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserCon
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
-from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.mipluxen360_dataparser import Mipluxen360DataParserConfig
+from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
@@ -414,7 +414,7 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
 
     def get_eval_image(self, idx: int, scale_factor: float = 1.0) -> Tuple[RayBundle, Dict]:
         """Returns the full image at the given index.
-        
+
         Args:
             idx: index of the image to get
             scale_factor: scale factor to apply to the image

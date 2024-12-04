@@ -20,19 +20,14 @@ Code for sampling images from a dataset of images.
 import concurrent.futures
 import multiprocessing
 import random
-from abc import abstractmethod
-from typing import Dict, Optional, Tuple, Union
+from typing import Union
 
 import torch
 from rich.progress import Console, track
 from torch.utils.data import Dataset
 from torch.utils.data.dataloader import DataLoader
 
-from luxenstudio.cameras.cameras import Cameras
-from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.utils.luxenstudio_collate import luxenstudio_collate
-from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import get_dict_to_torch
 
 CONSOLE = Console(width=120)
