@@ -45,6 +45,7 @@ from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
+from luxenstudio.data.dataparsers.mipluxen360_dataparser import Mipluxen360DataParserConfig
 from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
@@ -63,6 +64,7 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
     tyro.extras.subcommand_type_from_defaults(
         {
             "luxenstudio-data": LuxenstudioDataParserConfig(),
+            "mipluxen360-data": Mipluxen360DataParserConfig(),
             "blender-data": BlenderDataParserConfig(),
             "friends-data": FriendsDataParserConfig(),
             "instant-ngp-data": InstantNGPDataParserConfig(),
