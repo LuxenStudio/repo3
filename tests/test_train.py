@@ -23,6 +23,8 @@ BLACKLIST = [
     "luxenacto",
     "phototourism",
     "depth-luxenacto",
+    "luxenplayer-ngp",
+    "luxenplayer-luxenacto",
 ]
 
 
