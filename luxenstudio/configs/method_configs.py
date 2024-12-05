@@ -36,6 +36,7 @@ from luxenstudio.data.datamanagers.variable_res_datamanager import (
 )
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
+from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
 from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
@@ -54,6 +55,8 @@ from luxenstudio.models.dreamfusion import DreamFusionModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
+from luxenstudio.models.luxenplayer_luxenacto import LuxenplayerLuxenactoModelConfig
+from luxenstudio.models.luxenplayer_ngp import LuxenplayerNGPModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
@@ -73,7 +76,9 @@ descriptions = {
     "tensorf": "tensorf",
     "dluxen": "Dynamic-Luxen model. (slow)",
     "phototourism": "Uses the Phototourism data.",
-    "dreamfusion": "Luxen Model used in implementation of stable dreamfusion.",
+    "dreamfusion": "Generative Text to Luxen model",
+    "luxenplayer-luxenacto": "LuxenPlayer with luxenacto backbone.",
+    "luxenplayer-ngp": "LuxenPlayer with InstantNGP backbone.",
 }
 
 method_configs["luxenacto"] = TrainerConfig(
@@ -356,6 +361,58 @@ method_configs["dreamfusion"] = DreamfusionTrainerConfig(
     vis="viewer",
 )
 
+method_configs["luxenplayer-luxenacto"] = TrainerConfig(
+    method_name="luxenplayer-luxenacto",
+    pipeline=VanillaPipelineConfig(
+        datamanager=DepthDataManagerConfig(
+            dataparser=DycheckDataParserConfig(),
+            train_num_rays_per_batch=4096,
+            eval_num_rays_per_batch=4096,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="SO3xR3", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
+            ),
+        ),
+        model=LuxenplayerLuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
+    ),
+    optimizers={
+        "proposal_networks": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
+
+method_configs["luxenplayer-ngp"] = TrainerConfig(
+    method_name="luxenplayer-ngp",
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
+    pipeline=DynamicBatchPipelineConfig(
+        datamanager=DepthDataManagerConfig(dataparser=DycheckDataParserConfig(), train_num_rays_per_batch=8192),
+        model=LuxenplayerNGPModelConfig(
+            eval_num_rays_per_chunk=8192,
+            contraction_type=ContractionType.AABB,
+            render_step_size=0.001,
+            max_num_samples_per_ray=48,
+            near_plane=0.01,
+        ),
+    ),
+    optimizers={
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        }
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=64000),
+    vis="viewer",
+)
 
 AnnotatedBaseConfigUnion = tyro.conf.SuppressFixed[  # Don't show unparseable (fixed) arguments in helptext.
     tyro.conf.FlagConversionOff[

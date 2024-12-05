@@ -15,7 +15,18 @@ from luxenstudio.data.dataparsers.minimal_dataparser import MinimalDataParserCon
 from luxenstudio.engine.trainer import TrainerConfig
 from scripts.train import train_loop
 
-BLACKLIST = ["base", "semantic-luxenw", "instant-ngp", "instant-ngp-bounded", "luxenacto", "phototourism", "dreamfusion"]
+BLACKLIST = [
+    "base",
+    "semantic-luxenw",
+    "instant-ngp",
+    "instant-ngp-bounded",
+    "luxenacto",
+    "phototourism",
+    "depth-luxenacto",
+    "luxenplayer-ngp",
+    "luxenplayer-luxenacto",
+    "dreamfusion",
+]
 
 
 def set_reduced_config(config: TrainerConfig):
