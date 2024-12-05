@@ -105,7 +105,7 @@ dependency_links = [
 ]
 
 [tool.setuptools.packages.find]
-include = ["luxenstudio*","scripts*"]
+include = ["luxenstudio*","scripts*","projects*"]
 
 [tool.setuptools.package-data]
 "*" = ["*.json", "py.typed", "setup.bash", "setup.zsh"]
