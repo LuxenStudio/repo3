@@ -55,7 +55,7 @@ from luxenstudio.model_components.renderers import (
 )
 from luxenstudio.model_components.scene_colliders import AABBBoxCollider, NearFarCollider
 from luxenstudio.models.base_model import Model, ModelConfig
-from luxenstudio.utils import colormaps, colors
+from luxenstudio.utils import colormaps
 
 
 @dataclass
