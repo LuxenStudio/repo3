@@ -48,7 +48,6 @@ from luxenstudio.models.base_model import Model
 from luxenstudio.utils import colormaps, profiler, writer
 from luxenstudio.utils.decorators import check_main_thread, decorate_all
 from luxenstudio.utils.io import load_from_json, write_to_json
-from luxenstudio.utils.misc import get_dict_to_torch
 from luxenstudio.utils.writer import GLOBAL_BUFFER, EventName, TimeWriter
 from luxenstudio.viewer.server.subprocess import run_viewer_bridge_server_as_subprocess
 from luxenstudio.viewer.server.utils import (
@@ -163,7 +162,6 @@ class RenderThread(threading.Thread):
             self.exc = e
 
         if outputs:
-            outputs = get_dict_to_torch(outputs)
             self.vis_outputs = outputs
 
         self.state.check_done_render = True
