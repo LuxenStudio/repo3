@@ -147,6 +147,8 @@ class Cameras(TensorDataclass):
 
         self.__post_init__()  # This will do the dataclass post_init and broadcast all the tensors
 
+        self._use_luxenacc = strtobool(os.environ.get("INTERSECT_WITH_NERFACC", "TRUE"))
+
     def _init_get_fc_xy(self, fc_xy, name):
         """
         Parses the input focal length / principle point x or y and returns a tensor of the correct shape
@@ -470,9 +472,13 @@ class Cameras(TensorDataclass):
                 rays_o = rays_o.reshape((-1, 3))
                 rays_d = rays_d.reshape((-1, 3))
 
-                if strtobool(os.environ.get("INTERSECT_WITH_NERFACC", "TRUE")):
-                    luxenacc = importlib.import_module("luxenacc")
-                    t_min, t_max = luxenacc.ray_aabb_intersect(rays_o, rays_d, tensor_aabb)
+                if self._use_luxenacc:
+                    try:
+                        luxenacc = importlib.import_module("luxenacc")
+                        t_min, t_max = luxenacc.ray_aabb_intersect(rays_o, rays_d, tensor_aabb)
+                    except:  # pylint: disable=bare-except
+                        t_min, t_max = luxenstudio.utils.math.intersect_aabb(rays_o, rays_d, tensor_aabb)
+                        self._use_luxenacc = False
                 else:
                     t_min, t_max = luxenstudio.utils.math.intersect_aabb(rays_o, rays_d, tensor_aabb)
 
