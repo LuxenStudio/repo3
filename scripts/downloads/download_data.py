@@ -15,6 +15,7 @@ from rich.console import Console
 from typing_extensions import Annotated
 
 from luxenstudio.configs.base_config import PrintableConfig
+from luxenstudio.utils import install_checks
 from luxenstudio.utils.scripts import run_command
 
 CONSOLE = Console(width=120)
@@ -212,6 +213,7 @@ class DLuxenDownload(DatasetDownload):
         """Download the D-Luxen dataset (https://github.com/albertpumarola/D-Luxen)."""
         # TODO: give this code the same structure as download_luxenstudio
 
+        install_checks.check_curl_installed()
         final_path = save_dir / Path("dluxen")
         if os.path.exists(final_path):
             shutil.rmtree(str(final_path))
@@ -253,6 +255,7 @@ class PhototourismDownload(DatasetDownload):
     def download(self, save_dir: Path):
         """Download a PhotoTourism dataset: https://www.cs.ubc.ca/~kmyi/imw2020/data.html"""
 
+        install_checks.check_curl_installed()
         if self.capture_name == "all":
             for capture_name in phototourism_downloads:
                 if capture_name != "all":
