@@ -63,6 +63,7 @@ from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dreamfusion_pipeline import DreamfusionPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
+from luxenstudio.plugins.registry import discover_methods
 
 method_configs: Dict[str, TrainerConfig] = {}
 descriptions = {
@@ -430,6 +431,10 @@ method_configs["luxenplayer-ngp"] = TrainerConfig(
     viewer=ViewerConfig(num_rays_per_chunk=64000),
     vis="viewer",
 )
+
+external_methods, external_descriptions = discover_methods()
+method_configs.update(external_methods)
+descriptions.update(external_descriptions)
 
 AnnotatedBaseConfigUnion = tyro.conf.SuppressFixed[  # Don't show unparseable (fixed) arguments in helptext.
     tyro.conf.FlagConversionOff[
