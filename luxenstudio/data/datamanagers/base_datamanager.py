@@ -49,6 +49,7 @@ from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserC
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
+from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.pixel_samplers import EquirectangularPixelSampler, PixelSampler
 from luxenstudio.data.utils.dataloaders import (
@@ -75,6 +76,7 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
             "dluxen-data": DLuxenDataParserConfig(),
             "phototourism-data": PhototourismDataParserConfig(),
             "dycheck-data": DycheckDataParserConfig(),
+            "sdfstudio-data": SDFStudioDataParserConfig(),
         },
         prefix_names=False,  # Omit prefixes in subcommands themselves.
     )
