@@ -46,7 +46,7 @@ from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
-from luxenstudio.engine.schedulers import SchedulerConfig
+from luxenstudio.engine.schedulers import SchedulerConfig,WarmupScheduler
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
@@ -376,7 +376,7 @@ method_configs["dreamfusion"] = TrainerConfig(
         },
         "fields": {
             "optimizer": AdamOptimizerConfig(lr=5e-3, eps=1e-15),
-            "scheduler": None,
+            "scheduler": WarmupScheduler(lr_init=1e-9,lr_max=1e-4,lr_final=1e-6,warmup_steps=3000,max_steps=10000),
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
