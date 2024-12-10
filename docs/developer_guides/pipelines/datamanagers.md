@@ -87,7 +87,7 @@ def next_train(self, step: int) -> Tuple[RayBundle, Dict]:
 
 You can see our code for more details.
 
-```{button-link} https://github.com/luxenstudio-project/luxenstudio/blob/master/luxenstudio/data/datamanagers.py
+```{button-link} https://github.com/luxenstudio-project/luxenstudio/blob/main/luxenstudio/data/datamanagers/base_datamanager.py
 :color: primary
 :outline:
 See the code!
