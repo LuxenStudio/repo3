@@ -28,7 +28,7 @@ fi
 method_opts=()
 if [ "$method_name" = "luxenacto" ]; then
     # https://github.com/luxenstudio-project/luxenstudio/issues/806#issuecomment-1284327844
-    method_opts=(--pipeline.model.background-color white --pipeline.model.near-plane 2. --pipeline.model.far-plane 6. --pipeline.datamanager.camera-optimizer.mode off --pipeline.model.use-average-appearance-embedding False)
+    method_opts=(--pipeline.model.background-color white --pipeline.model.proposal-initial-sampler uniform --pipeline.model.near-plane 2. --pipeline.model.far-plane 6. --pipeline.datamanager.camera-optimizer.mode off --pipeline.model.use-average-appearance-embedding False)
 fi
 
 shift $((OPTIND-1))
