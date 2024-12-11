@@ -51,7 +51,11 @@ from luxenstudio.data.dataparsers.phototourism_dataparser import (
 )
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.datasets.base_dataset import InputDataset
-from luxenstudio.data.pixel_samplers import EquirectangularPixelSampler, PixelSampler
+from luxenstudio.data.pixel_samplers import (
+    EquirectangularPixelSampler,
+    PatchPixelSampler,
+    PixelSampler,
+)
 from luxenstudio.data.utils.dataloaders import (
     CacheDataloader,
     FixedIndicesEvalDataloader,
@@ -283,6 +287,8 @@ class VanillaDataManagerConfig(InstantiateConfig):
     """The scale factor for scaling spatial data such as images, mask, semantics
     along with relevant information about camera intrinsics
     """
+    patch_size: int = 1
+    """Size of patch to sample from. If >1, patch-based sampling will be used."""
 
 
 class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
@@ -346,6 +352,9 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
         self, dataset: InputDataset, *args: Any, **kwargs: Any
     ) -> PixelSampler:
         """Infer pixel sampler to use."""
+        if self.config.patch_size > 1:
+            return PatchPixelSampler(*args, **kwargs, patch_size=self.config.patch_size)
+
         # If all images are equirectangular, use equirectangular pixel sampler
         is_equirectangular = dataset.cameras.camera_type == CameraType.EQUIRECTANGULAR.value
         if is_equirectangular.all():
