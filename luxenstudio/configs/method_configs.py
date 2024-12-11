@@ -46,7 +46,7 @@ from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
-from luxenstudio.engine.schedulers import SchedulerConfig
+from luxenstudio.engine.schedulers import ExponentialDecaySchedulerConfig
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
@@ -272,11 +272,11 @@ method_configs["tensorf"] = TrainerConfig(
     optimizers={
         "fields": {
             "optimizer": AdamOptimizerConfig(lr=0.001),
-            "scheduler": SchedulerConfig(lr_final=0.0001, max_steps=30000),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=0.0001, max_steps=30000),
         },
         "encodings": {
             "optimizer": AdamOptimizerConfig(lr=0.02),
-            "scheduler": SchedulerConfig(lr_final=0.002, max_steps=30000),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=0.002, max_steps=30000),
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
