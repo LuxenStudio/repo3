@@ -29,7 +29,6 @@ from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.field_components.activations import trunc_exp
 from luxenstudio.field_components.field_heads import FieldHeadNames, PredNormalsFieldHead
 from luxenstudio.fields.base_field import Field
-from luxenstudio.utils import math
 
 try:
     import tinycudann as tcnn
