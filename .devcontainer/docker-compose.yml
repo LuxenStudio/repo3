@@ -3,7 +3,7 @@ version: "3.8"
 services:
   luxenstudio:
     shm_size: '12gb'
-    image: dromni/luxenstudio:0.1.17
+    image: dromni/luxenstudio:0.1.18
     # build:
     #   context: ..
     #   dockerfile: ./Dockerfile
