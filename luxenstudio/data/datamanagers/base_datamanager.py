@@ -35,6 +35,9 @@ from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.cameras.cameras import CameraType
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.configs.base_config import InstantiateConfig
+from luxenstudio.data.dataparsers.arkitscenes_dataparser import (
+    ARKitScenesDataParserConfig,
+)
 from luxenstudio.data.dataparsers.base_dataparser import DataparserOutputs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
@@ -48,6 +51,7 @@ from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserC
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
+from luxenstudio.data.dataparsers.scannet_dataparser import ScanNetDataParserConfig
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
 from luxenstudio.data.datasets.base_dataset import InputDataset
@@ -73,12 +77,14 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
         {
             "luxenstudio-data": LuxenstudioDataParserConfig(),
             "minimal-parser": MinimalDataParserConfig(),
+            "arkit-data": ARKitScenesDataParserConfig(),
             "blender-data": BlenderDataParserConfig(),
             "instant-ngp-data": InstantNGPDataParserConfig(),
             "nuscenes-data": NuScenesDataParserConfig(),
             "dluxen-data": DLuxenDataParserConfig(),
             "phototourism-data": PhototourismDataParserConfig(),
             "dycheck-data": DycheckDataParserConfig(),
+            "scannet-data": ScanNetDataParserConfig(),
             "sdfstudio-data": SDFStudioDataParserConfig(),
             "sitcoms3d-data": Sitcoms3DDataParserConfig(),
         },
