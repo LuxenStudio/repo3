@@ -39,7 +39,6 @@ from luxenstudio.data.dataparsers.base_dataparser import DataparserOutputs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
-from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
@@ -50,6 +49,7 @@ from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
+from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.pixel_samplers import (
     EquirectangularPixelSampler,
@@ -74,13 +74,13 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
             "luxenstudio-data": LuxenstudioDataParserConfig(),
             "minimal-parser": MinimalDataParserConfig(),
             "blender-data": BlenderDataParserConfig(),
-            "friends-data": FriendsDataParserConfig(),
             "instant-ngp-data": InstantNGPDataParserConfig(),
             "nuscenes-data": NuScenesDataParserConfig(),
             "dluxen-data": DLuxenDataParserConfig(),
             "phototourism-data": PhototourismDataParserConfig(),
             "dycheck-data": DycheckDataParserConfig(),
             "sdfstudio-data": SDFStudioDataParserConfig(),
+            "sitcoms3d-data": Sitcoms3DDataParserConfig(),
         },
         prefix_names=False,  # Omit prefixes in subcommands themselves.
     )
