@@ -36,24 +36,17 @@ from luxenstudio.model_components.renderers import (
     DepthRenderer,
     RGBRenderer,
 )
-from luxenstudio.models.base_model import Model, ModelConfig
+from luxenstudio.models.base_model import Model
+from luxenstudio.models.vanilla_luxen import VanillaModelConfig
 from luxenstudio.utils import colormaps, colors, misc
 
 
-class MipLuxenModel(Model):
+class MipLuxenModel(Model[VanillaModelConfig]):
     """mip-Luxen model
 
     Args:
         config: MipLuxen configuration to instantiate model
     """
-
-    def __init__(
-        self,
-        config: ModelConfig,
-        **kwargs,
-    ) -> None:
-        self.field = None
-        super().__init__(config=config, **kwargs)
 
     def populate_modules(self):
         """Set the fields and modules"""

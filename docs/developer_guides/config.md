@@ -31,14 +31,8 @@ class LuxenactoModelConfig(ModelConfig):
     _target: Type = field(default_factory=lambda: LuxenactoModel)
     ...
 
-class LuxenactoModel(Model):
-     """Luxenacto model
-
-    Args:
-        config: Luxenacto configuration to instantiate model
-    """
-
-    config: LuxenactoModelConfig
+class LuxenactoModel(Model[LuxenactoModelConfig]):
+     """Luxenacto model"""
     ...
 ```
 

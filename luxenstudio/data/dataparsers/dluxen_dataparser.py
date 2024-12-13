@@ -49,10 +49,8 @@ class DLuxenDataParserConfig(DataParserConfig):
 
 
 @dataclass
-class DLuxen(DataParser):
+class DLuxen(DataParser[DLuxenDataParserConfig]):
     """DLuxen Dataset"""
-
-    config: DLuxenDataParserConfig
 
     def __init__(self, config: DLuxenDataParserConfig):
         super().__init__(config=config)

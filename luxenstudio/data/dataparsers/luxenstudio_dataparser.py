@@ -67,10 +67,9 @@ class LuxenstudioDataParserConfig(DataParserConfig):
 
 
 @dataclass
-class Luxenstudio(DataParser):
+class Luxenstudio(DataParser[LuxenstudioDataParserConfig]):
     """Luxenstudio DatasetParser"""
 
-    config: LuxenstudioDataParserConfig
     downscale_factor: Optional[int] = None
 
     def _generate_dataparser_outputs(self, split="train"):

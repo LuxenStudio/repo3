@@ -73,10 +73,8 @@ class LuxenstudioDataParserConfig(DataParserConfig):
     """The fraction of images to use for training. The remaining images are for eval."""
 
 @dataclass
-class Luxenstudio(DataParser):
+class Luxenstudio(DataParser[LuxenstudioDataParserConfig]):
     """Luxenstudio DatasetParser"""
-
-    config: LuxenstudioDataParserConfig
 
     def _generate_dataparser_outputs(self, split="train"):
         meta = load_from_json(self.config.data / "transforms.json")

@@ -61,7 +61,7 @@ from luxenstudio.data.utils.dataloaders import (
     FixedIndicesEvalDataloader,
     RandIndicesEvalDataloader,
 )
-from luxenstudio.data.utils.luxenstudio_collate import luxenstudio_collate
+from luxenstudio.data.utils.luxenstudio_collate import CollateFunction, luxenstudio_collate
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import IterableWrapper
@@ -281,7 +281,7 @@ class VanillaDataManagerConfig(InstantiateConfig):
     camera_optimizer: CameraOptimizerConfig = CameraOptimizerConfig()
     """Specifies the camera pose optimizer used during training. Helpful if poses are noisy, such as for data from
     Record3D."""
-    collate_fn = staticmethod(luxenstudio_collate)
+    collate_fn: CollateFunction = field(default_factory=lambda: luxenstudio_collate)
     """Specifies the collate function to use for the train and eval dataloaders."""
     camera_res_scale_factor: float = 1.0
     """The scale factor for scaling spatial data such as images, mask, semantics

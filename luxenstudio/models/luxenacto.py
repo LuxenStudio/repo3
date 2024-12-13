@@ -130,14 +130,12 @@ class LuxenactoModelConfig(ModelConfig):
     """Whether to disable scene contraction or not."""
 
 
-class LuxenactoModel(Model):
+class LuxenactoModel(Model[LuxenactoModelConfig]):
     """Luxenacto model
 
     Args:
         config: Luxenacto configuration to instantiate model
     """
-
-    config: LuxenactoModelConfig
 
     def populate_modules(self):
         """Set the fields and modules."""

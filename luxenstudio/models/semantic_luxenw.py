@@ -65,14 +65,12 @@ class SemanticLuxenWModelConfig(LuxenactoModelConfig):
     pass_semantic_gradients: bool = False
 
 
-class SemanticLuxenWModel(Model):
+class SemanticLuxenWModel(Model[SemanticLuxenWModelConfig]):
     """Luxenacto model
 
     Args:
         config: Luxenacto configuration to instantiate model
     """
-
-    config: SemanticLuxenWModelConfig
 
     def __init__(self, config: SemanticLuxenWModelConfig, metadata: Dict, **kwargs) -> None:
         assert "semantics" in metadata.keys() and isinstance(metadata["semantics"], Semantics)
