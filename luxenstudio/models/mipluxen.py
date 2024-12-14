@@ -17,7 +17,8 @@ Implementation of mip-Luxen.
 """
 from __future__ import annotations
 
-from typing import Dict, List, Tuple
+import dataclasses
+from typing import Dict, List, Tuple, Type
 
 import torch
 from torch.nn import Parameter
@@ -36,12 +37,19 @@ from luxenstudio.model_components.renderers import (
     DepthRenderer,
     RGBRenderer,
 )
-from luxenstudio.models.base_model import Model
+from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.models.vanilla_luxen import VanillaModelConfig
 from luxenstudio.utils import colormaps, colors, misc
 
 
-class MipLuxenModel(Model[VanillaModelConfig]):
+class MipLuxenModelConfig(VanillaModelConfig):
+    _target: Type = dataclasses.field(default_factory=lambda: MipLuxenModel)
+
+    def setup(self, **kwargs) -> MipLuxenModel:
+        return typing.cast(MipLuxenModel, super().setup(**kwargs))
+
+
+class MipLuxenModel(Model[MipLuxenModelConfig]):
     """mip-Luxen model
 
     Args:

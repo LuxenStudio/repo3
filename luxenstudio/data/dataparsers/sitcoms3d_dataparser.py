@@ -28,6 +28,7 @@ import torch
 from rich.console import Console
 
 from luxenstudio.cameras.cameras import Cameras, CameraType
+from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.data.dataparsers.base_dataparser import (
     DataParser,
     DataParserConfig,
@@ -41,11 +42,9 @@ CONSOLE = Console()
 
 
 @dataclass
-class Sitcoms3DDataParserConfig(DataParserConfig):
+class Sitcoms3DDataParserConfig(DataParserConfig, InstantiateConfig["Sitcoms3D"]):
     """sitcoms3D dataset parser config"""
 
-    _target: Type = field(default_factory=lambda: Sitcoms3D)
-    """target class to instantiate"""
     data: Path = Path("data/sitcoms3d/TBBT-big_living_room")
     """Directory specifying location of data."""
     include_semantics: bool = True

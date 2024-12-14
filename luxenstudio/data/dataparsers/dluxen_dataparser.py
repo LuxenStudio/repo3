@@ -24,6 +24,7 @@ import numpy as np
 import torch
 
 from luxenstudio.cameras.cameras import Cameras, CameraType
+from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.data.dataparsers.base_dataparser import (
     DataParser,
     DataParserConfig,
@@ -35,11 +36,9 @@ from luxenstudio.utils.io import load_from_json
 
 
 @dataclass
-class DLuxenDataParserConfig(DataParserConfig):
+class DLuxenDataParserConfig(DataParserConfig, InstantiateConfig["DLuxen"]):
     """D-Luxen dataset parser config"""
 
-    _target: Type = field(default_factory=lambda: DLuxen)
-    """target class to instantiate"""
     data: Path = Path("data/dluxen/lego")
     """Directory specifying location of data."""
     scale_factor: float = 1.0

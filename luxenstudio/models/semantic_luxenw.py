@@ -18,6 +18,7 @@ Semantic Luxen-W implementation which should be fast enough to view in the viewe
 
 from __future__ import annotations
 
+import typing
 from dataclasses import dataclass, field
 from typing import Dict, List, Tuple, Type
 
@@ -63,6 +64,9 @@ class SemanticLuxenWModelConfig(LuxenactoModelConfig):
     """Whether to use transient embedding."""
     semantic_loss_weight: float = 1.0
     pass_semantic_gradients: bool = False
+
+    def setup(self, **kwargs) -> SemanticLuxenWModel:
+        return typing.cast(SemanticLuxenWModel, super().setup(**kwargs))
 
 
 class SemanticLuxenWModel(Model[SemanticLuxenWModelConfig]):

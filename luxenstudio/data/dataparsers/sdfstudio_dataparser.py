@@ -24,6 +24,7 @@ from rich.console import Console
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType
+from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.data.dataparsers.base_dataparser import (
     DataParser,
     DataParserConfig,
@@ -36,11 +37,9 @@ CONSOLE = Console()
 
 
 @dataclass
-class SDFStudioDataParserConfig(DataParserConfig):
+class SDFStudioDataParserConfig(DataParserConfig, InstantiateConfig["SDFStudio"]):
     """Scene dataset parser config"""
 
-    _target: Type = field(default_factory=lambda: SDFStudio)
-    """target class to instantiate"""
     data: Path = Path("data/DTU/scan65")
     """Directory specifying location of data."""
     include_mono_prior: bool = False

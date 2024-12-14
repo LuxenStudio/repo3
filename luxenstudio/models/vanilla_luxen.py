@@ -45,10 +45,9 @@ from luxenstudio.utils import colormaps, colors, misc
 
 
 @dataclass
-class VanillaModelConfig(ModelConfig):
+class VanillaModelConfig(ModelConfig["LuxenModel"]):
     """Vanilla Model Config"""
 
-    _target: Type = field(default_factory=lambda: LuxenModel)
     num_coarse_samples: int = 64
     """Number of samples in coarse field evaluation"""
     num_importance_samples: int = 128

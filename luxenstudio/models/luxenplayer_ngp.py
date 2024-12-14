@@ -18,6 +18,7 @@ Implementation of LuxenPlayer (https://arxiv.org/abs/2210.15947) with InstantNGP
 
 from __future__ import annotations
 
+import typing
 from dataclasses import dataclass, field
 from typing import Type
 
@@ -80,6 +81,9 @@ class LuxenplayerNGPModelConfig(InstantNGPModelConfig):
     """The training background color that is given to untrained areas."""
     disable_viewing_dependent: bool = True
     """Disable viewing dependent effects."""
+
+    def setup(self, **kwargs) -> LuxenplayerNGPModel:
+        return typing.cast(LuxenplayerNGPModel, super().setup(**kwargs))
 
 
 class LuxenplayerNGPModel(NGPModel):

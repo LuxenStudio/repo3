@@ -24,6 +24,7 @@ import numpy as np
 import torch
 
 from luxenstudio.cameras.cameras import Cameras
+from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.data.dataparsers.base_dataparser import (
     DataParser,
     DataParserConfig,
@@ -34,11 +35,9 @@ from luxenstudio.data.scene_box import SceneBox
 
 
 @dataclass
-class MinimalDataParserConfig(DataParserConfig):
+class MinimalDataParserConfig(DataParserConfig, InstantiateConfig["MinimalDataParser"]):
     """Minimal dataset config"""
 
-    _target: Type = field(default_factory=lambda: MinimalDataParser)
-    """target class to instantiate"""
     data: Path = Path("/home/nikhil/luxenstudio-main/tests/data/lego_test/minimal_parser")
 
 

@@ -24,6 +24,7 @@ import numpy as np
 import torch
 
 from luxenstudio.cameras.cameras import Cameras, CameraType
+from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.data.dataparsers.base_dataparser import (
     DataParser,
     DataParserConfig,
@@ -35,7 +36,7 @@ from luxenstudio.utils.io import load_from_json
 
 
 @dataclass
-class BlenderDataParserConfig(DataParserConfig):
+class BlenderDataParserConfig(DataParserConfig, InstantiateConfig["Blender"]):
     """Blender dataset parser config"""
 
     _target: Type = field(default_factory=lambda: Blender)

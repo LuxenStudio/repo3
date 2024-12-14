@@ -28,6 +28,7 @@ from typing_extensions import Literal
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import CAMERA_MODEL_TO_TYPE, Cameras, CameraType
+from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.data.dataparsers.base_dataparser import (
     DataParser,
     DataParserConfig,
@@ -41,11 +42,9 @@ MAX_AUTO_RESOLUTION = 1600
 
 
 @dataclass
-class LuxenstudioDataParserConfig(DataParserConfig):
+class LuxenstudioDataParserConfig(DataParserConfig, InstantiateConfig["Luxenstudio"]):
     """Luxenstudio dataset config"""
 
-    _target: Type = field(default_factory=lambda: Luxenstudio)
-    """target class to instantiate"""
     data: Path = Path("data/luxenstudio/poster")
     """Directory or explicit json file path specifying location of data."""
     scale_factor: float = 1.0

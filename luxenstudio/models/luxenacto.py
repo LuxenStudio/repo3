@@ -63,10 +63,9 @@ from luxenstudio.utils import colormaps
 
 
 @dataclass
-class LuxenactoModelConfig(ModelConfig):
+class LuxenactoModelConfig(ModelConfig["LuxenactoModel"]):
     """Luxenacto Model Config"""
 
-    _target: Type = field(default_factory=lambda: LuxenactoModel)
     near_plane: float = 0.05
     """How far along the ray to start sampling."""
     far_plane: float = 1000.0

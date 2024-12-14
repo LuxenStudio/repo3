@@ -18,6 +18,7 @@ Luxenacto augmented with depth supervision.
 
 from __future__ import annotations
 
+import typing
 from dataclasses import dataclass, field
 from typing import Dict, Tuple, Type
 
@@ -49,6 +50,9 @@ class DepthLuxenactoModelConfig(LuxenactoModelConfig):
     depth_loss_type: DepthLossType = DepthLossType.DS_NERF
     """Depth loss type."""
 
+    def setup(self, **kwargs) -> DepthLuxenactoModel:
+        return typing.cast(DepthLuxenactoModel, super().setup(**kwargs))
+
 
 class DepthLuxenactoModel(LuxenactoModel):
     """Depth loss augmented luxenacto model.
@@ -58,6 +62,9 @@ class DepthLuxenactoModel(LuxenactoModel):
     """
 
     config: DepthLuxenactoModelConfig
+
+    def __init__(self, config: DepthLuxenactoModelConfig, scene_box: SceneBox, num_train_data: int, **kwargs) -> None:
+        super().__init__(config, scene_box, num_train_data, **kwargs)
 
     def populate_modules(self):
         """Set the fields and modules."""

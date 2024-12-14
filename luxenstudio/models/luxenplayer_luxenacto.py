@@ -19,6 +19,7 @@ LuxenPlayer (https://arxiv.org/abs/2210.15947) implementation with luxenacto bac
 from __future__ import annotations
 
 import functools
+import typing
 from dataclasses import dataclass, field
 from typing import Dict, List, Type
 
@@ -60,6 +61,7 @@ class LuxenplayerLuxenactoModelConfig(LuxenactoModelConfig):
     """Luxenplayer Model Config with Luxenacto backbone"""
 
     _target: Type = field(default_factory=lambda: LuxenplayerLuxenactoModel)
+
     near_plane: float = 0.05
     """How far along the ray to start sampling."""
     far_plane: float = 1000.0
@@ -87,6 +89,9 @@ class LuxenplayerLuxenactoModelConfig(LuxenactoModelConfig):
     """Temporal TV balancing weight for feature channels."""
     depth_weight: float = 1e-1
     """depth loss balancing weight for feature channels."""
+
+    def setup(self, **kwargs) -> LuxenplayerLuxenactoModel:
+        return typing.cast(LuxenplayerLuxenactoModel, super().setup(**kwargs))
 
 
 class LuxenplayerLuxenactoModel(LuxenactoModel):
