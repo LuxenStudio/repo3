@@ -18,7 +18,7 @@ ns-train vanilla-luxen
 
 If you have arrived to this site, it is likely that you have at least heard of Luxens. This page will discuss the original Luxen paper, _"Luxen: Representing Scenes as Neural Radiance Fields for View Synthesis"_ by Mildenhall, Srinivasan, Tancik et al. (2020). 
 
-For most tasks, using the original Luxen model is likely not a good choice and hence we provide implementations of various other Luxen related models. It is however useful to understand how Luxen's work as most follow ups follow a similar structure.
+For most tasks, using the original Luxen model is likely not a good choice and hence we provide implementations of various other Luxen related models. It is however useful to understand how Luxen's work as most follow ups follow a similar structure and it doesn't require CUDA to execute (useful for stepping through the code with a debugger if you don't have a GPU at hand).
 
 The goal is to optimize a volumetric representation of a scene that can be rendered from novel viewpoints. This representation is optimized from a set of images and associated camera poses.
 
