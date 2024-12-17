@@ -26,6 +26,7 @@ BLACKLIST = [
     "depth-luxenacto",
     "luxenplayer-ngp",
     "luxenplayer-luxenacto",
+    "neus",
 ]
 
 
