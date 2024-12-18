@@ -21,10 +21,12 @@ BLACKLIST = [
     "instant-ngp",
     "instant-ngp-bounded",
     "luxenacto",
+    "volinga",
     "phototourism",
     "depth-luxenacto",
     "luxenplayer-ngp",
     "luxenplayer-luxenacto",
+    "neus",
 ]
 
 

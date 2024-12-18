@@ -27,6 +27,7 @@ from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
 from luxenstudio.data.datamanagers.depth_datamanager import DepthDataManagerConfig
+from luxenstudio.data.datamanagers.sdf_datamanager import SDFDataManagerConfig
 from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
 from luxenstudio.data.datamanagers.variable_res_datamanager import (
     VariableResDataManagerConfig,
@@ -34,7 +35,6 @@ from luxenstudio.data.datamanagers.variable_res_datamanager import (
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
-from luxenstudio.data.dataparsers.friends_dataparser import FriendsDataParserConfig
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
@@ -42,8 +42,13 @@ from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataP
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
+from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
+from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
-from luxenstudio.engine.schedulers import ExponentialDecaySchedulerConfig
+from luxenstudio.engine.schedulers import (
+    CosineDecaySchedulerConfig,
+    ExponentialDecaySchedulerConfig,
+)
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
@@ -52,6 +57,7 @@ from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.luxenplayer_luxenacto import LuxenplayerLuxenactoModelConfig
 from luxenstudio.models.luxenplayer_ngp import LuxenplayerNGPModelConfig
+from luxenstudio.models.neus import NeuSModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
@@ -63,6 +69,7 @@ method_configs: Dict[str, TrainerConfig] = {}
 descriptions = {
     "luxenacto": "Recommended real-time model tuned for real captures. This model will be continually updated.",
     "depth-luxenacto": "Luxenacto with depth supervision.",
+    "volinga": "Real-time rendering model from Volinga. Directly exportable to NVOL format at https://volinga.ai/",
     "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for unbounded scenes.",
     "instant-ngp-bounded": "Implementation of Instant-NGP. Recommended for bounded real and synthetic scenes",
     "mipluxen": "High quality model for bounded scenes. (slow)",
@@ -73,6 +80,7 @@ descriptions = {
     "phototourism": "Uses the Phototourism data.",
     "luxenplayer-luxenacto": "LuxenPlayer with luxenacto backbone.",
     "luxenplayer-ngp": "LuxenPlayer with InstantNGP backbone.",
+    "neus": "Implementation of NeuS. (slow)",
 }
 
 method_configs["luxenacto"] = TrainerConfig(
@@ -122,6 +130,47 @@ method_configs["depth-luxenacto"] = TrainerConfig(
             ),
         ),
         model=DepthLuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
+    ),
+    optimizers={
+        "proposal_networks": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
+
+method_configs["volinga"] = TrainerConfig(
+    method_name="volinga",
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=30000,
+    mixed_precision=True,
+    pipeline=VanillaPipelineConfig(
+        datamanager=VanillaDataManagerConfig(
+            dataparser=LuxenstudioDataParserConfig(),
+            train_num_rays_per_batch=4096,
+            eval_num_rays_per_batch=4096,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="SO3xR3", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
+            ),
+        ),
+        model=LuxenactoModelConfig(
+            eval_num_rays_per_chunk=1 << 15,
+            hidden_dim=32,
+            hidden_dim_color=32,
+            hidden_dim_transient=32,
+            num_luxen_samples_per_ray=24,
+            proposal_net_args_list=[
+                {"hidden_dim": 16, "log2_hashmap_size": 17, "num_levels": 5, "max_res": 128, "use_linear": True},
+                {"hidden_dim": 16, "log2_hashmap_size": 17, "num_levels": 5, "max_res": 256, "use_linear": True},
+            ],
+        ),
     ),
     optimizers={
         "proposal_networks": {
@@ -214,7 +263,7 @@ method_configs["semantic-luxenw"] = TrainerConfig(
     mixed_precision=True,
     pipeline=VanillaPipelineConfig(
         datamanager=SemanticDataManagerConfig(
-            dataparser=FriendsDataParserConfig(), train_num_rays_per_batch=4096, eval_num_rays_per_batch=8192
+            dataparser=Sitcoms3DDataParserConfig(), train_num_rays_per_batch=4096, eval_num_rays_per_batch=8192
         ),
         model=SemanticLuxenWModelConfig(eval_num_rays_per_chunk=1 << 16),
     ),
@@ -385,6 +434,39 @@ method_configs["luxenplayer-ngp"] = TrainerConfig(
         }
     },
     viewer=ViewerConfig(num_rays_per_chunk=64000),
+    vis="viewer",
+)
+
+method_configs["neus"] = TrainerConfig(
+    method_name="neus",
+    steps_per_eval_image=500,
+    steps_per_eval_batch=5000,
+    steps_per_save=20000,
+    steps_per_eval_all_images=1000000,  # set to a very large number so we don't eval with all images
+    max_num_iterations=100000,
+    mixed_precision=False,
+    pipeline=VanillaPipelineConfig(
+        datamanager=SDFDataManagerConfig(
+            dataparser=SDFStudioDataParserConfig(),
+            train_num_rays_per_batch=1024,
+            eval_num_rays_per_batch=1024,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="off", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
+            ),
+        ),
+        model=NeuSModelConfig(eval_num_rays_per_chunk=1024),
+    ),
+    optimizers={
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=5e-4, eps=1e-15),
+            "scheduler": CosineDecaySchedulerConfig(warm_up_end=5000, learning_rate_alpha=0.05, max_steps=300000),
+        },
+        "field_background": {
+            "optimizer": AdamOptimizerConfig(lr=5e-4, eps=1e-15),
+            "scheduler": CosineDecaySchedulerConfig(warm_up_end=5000, learning_rate_alpha=0.05, max_steps=300000),
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
     vis="viewer",
 )
 
