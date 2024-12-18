@@ -27,6 +27,7 @@ from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
 from luxenstudio.data.datamanagers.depth_datamanager import DepthDataManagerConfig
+from luxenstudio.data.datamanagers.sdf_datamanager import SDFDataManagerConfig
 from luxenstudio.data.datamanagers.dreamfusion_datamanager import (
     DreamFusionDataManagerConfig,
 )
@@ -44,9 +45,13 @@ from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataP
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
     PhototourismDataParserConfig,
 )
+from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
-from luxenstudio.engine.schedulers import ExponentialDecaySchedulerConfig
+from luxenstudio.engine.schedulers import (
+    CosineDecaySchedulerConfig,
+    ExponentialDecaySchedulerConfig,
+)
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
@@ -56,6 +61,7 @@ from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.luxenplayer_luxenacto import LuxenplayerLuxenactoModelConfig
 from luxenstudio.models.luxenplayer_ngp import LuxenplayerNGPModelConfig
+from luxenstudio.models.neus import NeuSModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
@@ -79,6 +85,7 @@ descriptions = {
     "dreamfusion": "Generative Text to Luxen model",
     "luxenplayer-luxenacto": "LuxenPlayer with luxenacto backbone.",
     "luxenplayer-ngp": "LuxenPlayer with InstantNGP backbone.",
+    "neus": "Implementation of NeuS. (slow)",
 }
 
 method_configs["luxenacto"] = TrainerConfig(
@@ -476,6 +483,39 @@ method_configs["luxenplayer-ngp"] = TrainerConfig(
         }
     },
     viewer=ViewerConfig(num_rays_per_chunk=64000),
+    vis="viewer",
+)
+
+method_configs["neus"] = TrainerConfig(
+    method_name="neus",
+    steps_per_eval_image=500,
+    steps_per_eval_batch=5000,
+    steps_per_save=20000,
+    steps_per_eval_all_images=1000000,  # set to a very large number so we don't eval with all images
+    max_num_iterations=100000,
+    mixed_precision=False,
+    pipeline=VanillaPipelineConfig(
+        datamanager=SDFDataManagerConfig(
+            dataparser=SDFStudioDataParserConfig(),
+            train_num_rays_per_batch=1024,
+            eval_num_rays_per_batch=1024,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="off", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
+            ),
+        ),
+        model=NeuSModelConfig(eval_num_rays_per_chunk=1024),
+    ),
+    optimizers={
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=5e-4, eps=1e-15),
+            "scheduler": CosineDecaySchedulerConfig(warm_up_end=5000, learning_rate_alpha=0.05, max_steps=300000),
+        },
+        "field_background": {
+            "optimizer": AdamOptimizerConfig(lr=5e-4, eps=1e-15),
+            "scheduler": CosineDecaySchedulerConfig(warm_up_end=5000, learning_rate_alpha=0.05, max_steps=300000),
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
     vis="viewer",
 )
 

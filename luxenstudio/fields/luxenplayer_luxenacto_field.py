@@ -38,22 +38,13 @@ from luxenstudio.field_components.field_heads import (
 )
 from luxenstudio.field_components.spatial_distortions import SpatialDistortion
 from luxenstudio.field_components.temporal_grid import TemporalGridEncoder
-from luxenstudio.fields.base_field import Field
+from luxenstudio.fields.base_field import Field, shift_directions_for_tcnn
 
 try:
     import tinycudann as tcnn
 except ImportError:
     # tinycudann module doesn't exist
     pass
-
-
-def get_normalized_directions(directions: TensorType["bs":..., 3]) -> TensorType["bs":..., 3]:
-    """SH encoding must be in the range [0, 1]
-
-    Args:
-        directions: batch of directions
-    """
-    return (directions + 1.0) / 2.0
 
 
 class TemporalHashMLPDensityField(Field):
@@ -347,7 +338,7 @@ class LuxenplayerLuxenactoField(Field):
         if ray_samples.camera_indices is None:
             raise AttributeError("Camera indices are not provided.")
         camera_indices = ray_samples.camera_indices.squeeze()
-        directions = get_normalized_directions(ray_samples.frustums.directions)
+        directions = shift_directions_for_tcnn(ray_samples.frustums.directions)
         directions_flat = directions.view(-1, 3)
         d = self.direction_encoding(directions_flat)
 
