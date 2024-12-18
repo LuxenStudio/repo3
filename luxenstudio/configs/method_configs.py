@@ -27,6 +27,7 @@ from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
 from luxenstudio.data.datamanagers.depth_datamanager import DepthDataManagerConfig
+from luxenstudio.data.datamanagers.sdf_datamanager import SDFDataManagerConfig
 from luxenstudio.data.datamanagers.dreamfusion_datamanager import (
     DreamFusionDataManagerConfig,
 )
