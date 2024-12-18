@@ -27,6 +27,7 @@ BLACKLIST = [
     "luxenplayer-ngp",
     "luxenplayer-luxenacto",
     "dreamfusion",
+    "neus",
 ]
 
 
