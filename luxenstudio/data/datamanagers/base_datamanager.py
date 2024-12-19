@@ -47,6 +47,7 @@ from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
 from luxenstudio.data.dataparsers.minimal_dataparser import MinimalDataParserConfig
+from luxenstudio.data.dataparsers.luxenosr_dataparser import LuxenOSRDataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
@@ -87,6 +88,7 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
             "dycheck-data": DycheckDataParserConfig(),
             "scannet-data": ScanNetDataParserConfig(),
             "sdfstudio-data": SDFStudioDataParserConfig(),
+            "luxenosr-data": LuxenOSRDataParserConfig(),
             "sitcoms3d-data": Sitcoms3DDataParserConfig(),
         },
         prefix_names=False,  # Omit prefixes in subcommands themselves.
