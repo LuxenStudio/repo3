@@ -32,6 +32,7 @@ from luxenstudio.data.datamanagers.dreamfusion_datamanager import (
 )
 from luxenstudio.data.datamanagers.sdf_datamanager import SDFDataManagerConfig
 from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
+from luxenstudio.data.datamanagers.iterative_datamanager import IterativeDataManagerConfig
 from luxenstudio.data.datamanagers.variable_res_datamanager import (
     VariableResDataManagerConfig,
 )
@@ -68,6 +69,7 @@ from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
+from luxenstudio.pipelines.iterative_pipeline import IterativePipelineConfig
 from luxenstudio.plugins.registry import discover_methods
 
 method_configs: Dict[str, TrainerConfig] = {}
@@ -86,7 +88,7 @@ descriptions = {
     "dreamfusion": "Generative Text to Luxen model",
     "luxenplayer-luxenacto": "LuxenPlayer with luxenacto backbone.",
     "luxenplayer-ngp": "LuxenPlayer with InstantNGP backbone.",
-    "neus": "Implementation of NeuS. (slow)",
+    "neus": "Implementation of NeuS. (slow)"
 }
 
 method_configs["luxenacto"] = TrainerConfig(
@@ -430,6 +432,34 @@ method_configs["dreamfusion"] = TrainerConfig(
             "scheduler": ExponentialDecaySchedulerConfig(
                 warmup_steps=2000, lr_final=1e-6, max_steps=20000, ramp="linear"
             ),
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
+
+method_configs["iter_test"] = TrainerConfig(
+    method_name="iter_test",
+    experiment_name="iter_test",
+    steps_per_eval_batch=50,
+    steps_per_eval_image=50,
+    steps_per_save=200,
+    max_num_iterations=20000,
+    mixed_precision=True,
+    pipeline=IterativePipelineConfig(
+        generative=True,
+        datamanager=IterativeDataManagerConfig(
+        ),
+        model=LuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
+    ),
+    optimizers={
+        "proposal_networks": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
