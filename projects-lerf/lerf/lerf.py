@@ -5,6 +5,10 @@ from typing import Dict, List, Tuple, Type
 import numpy as np
 import open_clip
 import torch
+from lerf.encoders.image_encoder import BaseImageEncoder
+from lerf.lerf_field import LERFField
+from lerf.lerf_fieldheadnames import LERFFieldHeadNames
+from lerf.lerf_renderers import CLIPRenderer, MeanRenderer
 from torch.nn import Parameter
 
 from luxenstudio.cameras.rays import RayBundle, RaySamples
@@ -14,11 +18,6 @@ from luxenstudio.field_components.spatial_distortions import SceneContraction
 from luxenstudio.model_components.ray_samplers import PDFSampler
 from luxenstudio.model_components.renderers import DepthRenderer
 from luxenstudio.models.luxenacto import LuxenactoModel, LuxenactoModelConfig
-
-from lerf.encoders.image_encoder import BaseImageEncoder
-from lerf.lerf_field import LERFField
-from lerf.lerf_renderers import CLIPRenderer, MeanRenderer
-from lerf.lerf_fieldheadnames import LERFFieldHeadNames
 
 
 @dataclass
@@ -30,6 +29,9 @@ class LERFModelConfig(LuxenactoModelConfig):
     """maximum scale used to compute relevancy with"""
     specify_scale: bool = False
     num_lerf_samples: int = 12
+    hashgrid_layers: Tuple[int] = (12, 12)
+    hashgrid_resolutions: Tuple[Tuple[int]] = ((16, 128), (128, 512))
+    hashgrid_sizes: Tuple[int] = (19, 19)
 
 
 class LERFModel(LuxenactoModel):
@@ -42,7 +44,12 @@ class LERFModel(LuxenactoModel):
         self.renderer_mean = MeanRenderer()
 
         self.image_encoder: BaseImageEncoder = self.kwargs["image_encoder"]
-        self.lerf_field = LERFField(clip_n_dims=self.image_encoder.embedding_dim)
+        self.lerf_field = LERFField(
+            self.config.hashgrid_layers,
+            self.config.hashgrid_sizes,
+            self.config.hashgrid_resolutions,
+            clip_n_dims=self.image_encoder.embedding_dim,
+        )
 
     def get_max_across(self, ray_samples, weights, hashgrid_field, scales_shape, preset_scales=None):
         # TODO smoothen this out
