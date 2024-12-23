@@ -12,14 +12,13 @@ from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SceneContraction
 from luxenstudio.model_components.ray_samplers import PDFSampler
-from luxenstudio.model_components.renderers import (
-    CLIPRenderer,
-    DepthRenderer,
-    MeanRenderer,
-)
+from luxenstudio.model_components.renderers import DepthRenderer
 from luxenstudio.models.luxenacto import LuxenactoModel, LuxenactoModelConfig
+
 from lerf.encoders.image_encoder import BaseImageEncoder
 from lerf.lerf_field import LERFField
+from lerf.lerf_renderers import CLIPRenderer, MeanRenderer
+from lerf.lerf_fieldheadnames import LERFFieldHeadNames
 
 
 @dataclass
@@ -108,15 +107,15 @@ class LERFModel(LuxenactoModel):
 
         if self.training:
             outputs["clip"] = self.renderer_clip(
-                embeds=lerf_field_outputs[FieldHeadNames.CLIP], weights=lerf_weights.detach()
+                embeds=lerf_field_outputs[LERFFieldHeadNames.CLIP], weights=lerf_weights.detach()
             )
             outputs["dino"] = self.renderer_mean(
-                embeds=lerf_field_outputs[FieldHeadNames.DINO], weights=lerf_weights.detach()
+                embeds=lerf_field_outputs[LERFFieldHeadNames.DINO], weights=lerf_weights.detach()
             )
 
         if not self.training:
             max_across, best_scales = self.get_max_across(
-                lerf_samples, lerf_weights, lerf_field_outputs[FieldHeadNames.HASHGRID], clip_scales.shape
+                lerf_samples, lerf_weights, lerf_field_outputs[LERFFieldHeadNames.HASHGRID], clip_scales.shape
             )
             multiphrase = max_across[0]
             # normalization for sanity check TODO(cmk) remove
