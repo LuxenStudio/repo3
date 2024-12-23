@@ -11,7 +11,6 @@ from luxenstudio.cameras.rays import RayBundle, RaySamples
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SceneContraction
-from luxenstudio.fields.lerf_field import LERFField
 from luxenstudio.model_components.ray_samplers import PDFSampler
 from luxenstudio.model_components.renderers import (
     CLIPRenderer,
@@ -19,7 +18,8 @@ from luxenstudio.model_components.renderers import (
     MeanRenderer,
 )
 from luxenstudio.models.luxenacto import LuxenactoModel, LuxenactoModelConfig
-from luxenstudio.pipelines.lerf_encoders import ImageEncoder
+from lerf.lerf_encoders import ImageEncoder
+from lerf.lerf_field import LERFField
 
 
 @dataclass

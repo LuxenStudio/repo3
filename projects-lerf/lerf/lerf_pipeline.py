@@ -1,41 +1,23 @@
 import typing
-from abc import abstractmethod, abstractproperty
 from dataclasses import dataclass, field
-from typing import List, Literal, Tuple, Type
+from typing import Literal, Type
 
 import torch.distributed as dist
-import torchvision
 from torch.nn.parallel import DistributedDataParallel as DDP
 
 from luxenstudio.configs import base_config as cfg
-from luxenstudio.data.datamanagers.base_datamanager import (
-    DataManagerConfig,
-    VanillaDataManagerConfig,
-)
-from luxenstudio.data.datamanagers.lerf_datamanager import (
-    LERFDataManager,
-    LERFDataManagerConfig,
-)
 from luxenstudio.models.base_model import ModelConfig
-from luxenstudio.models.lerf import LERFModel, LERFModelConfig
 from luxenstudio.pipelines.base_pipeline import (
-    Pipeline,
     VanillaPipeline,
     VanillaPipelineConfig,
 )
 
-try:
-    import open_clip
-except ImportError:
-    assert False, "open_clip is not installed, install it with `pip install open-clip-torch`"
-
-import torch
-
-from luxenstudio.pipelines.lerf_encoders import (
-    ImageEncoder,
-    OpenCLIPNetwork,
-    OpenCLIPNetworkConfig,
+from lerf.data.lerf_datamanager import (
+    LERFDataManager,
+    LERFDataManagerConfig,
 )
+from lerf.lerf import LERFModel, LERFModelConfig
+from lerf.lerf_encoders import OpenCLIPNetwork, OpenCLIPNetworkConfig
 
 
 @dataclass
