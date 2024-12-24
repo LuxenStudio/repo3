@@ -112,6 +112,46 @@ method_configs["luxenacto"] = TrainerConfig(
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
     vis="viewer",
 )
+method_configs["luxenacto-big"] = TrainerConfig(
+    method_name="luxenacto",
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=100000,
+    mixed_precision=True,
+    pipeline=VanillaPipelineConfig(
+        datamanager=VanillaDataManagerConfig(
+            dataparser=LuxenstudioDataParserConfig(),
+            train_num_rays_per_batch=4096,
+            eval_num_rays_per_batch=4096,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="SO3xR3", optimizer=RAdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-3)
+            ),
+        ),
+        model=LuxenactoModelConfig(
+            eval_num_rays_per_chunk=1 << 15,
+            num_luxen_samples_per_ray=128,
+            num_proposal_samples_per_ray=(512, 256),
+            hidden_dim=128,
+            hidden_dim_color=128,
+            hidden_dim_transient=128,
+            max_res=3000,
+            proposal_weights_anneal_max_num_iters=5000,
+            log2_hashmap_size=21,
+        ),
+    ),
+    optimizers={
+        "proposal_networks": {
+            "optimizer": RAdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+        "fields": {
+            "optimizer": RAdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-4, max_steps=100000),
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
 
 method_configs["depth-luxenacto"] = TrainerConfig(
     method_name="depth-luxenacto",
