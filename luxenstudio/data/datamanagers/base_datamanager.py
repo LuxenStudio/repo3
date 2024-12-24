@@ -47,6 +47,7 @@ from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
 from luxenstudio.data.dataparsers.minimal_dataparser import MinimalDataParserConfig
+from luxenstudio.data.dataparsers.luxenosr_dataparser import LuxenOSRDataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
 from luxenstudio.data.dataparsers.phototourism_dataparser import (
@@ -73,6 +74,31 @@ from luxenstudio.utils.misc import IterableWrapper
 
 CONSOLE = Console(width=120)
 
+
+def variable_res_collate(batch: List[Dict]) -> Dict:
+    """Default collate function for the cached dataloader.
+    Args:
+        batch: Batch of samples from the dataset.
+    Returns:
+        Collated batch.
+    """
+    images = []
+    masks = []
+    for data in batch:
+        image = data.pop("image")
+        mask = data.pop("mask", None)
+        images.append(image)
+        if mask:
+            masks.append(mask)
+
+    new_batch: dict = luxenstudio_collate(batch)
+    new_batch["image"] = images
+    if masks:
+        new_batch["mask"] = masks
+
+    return new_batch
+
+
 AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of flags in subcommands.
     tyro.extras.subcommand_type_from_defaults(
         {
@@ -87,6 +113,7 @@ AnnotatedDataParserUnion = tyro.conf.OmitSubcommandPrefixes[  # Omit prefixes of
             "dycheck-data": DycheckDataParserConfig(),
             "scannet-data": ScanNetDataParserConfig(),
             "sdfstudio-data": SDFStudioDataParserConfig(),
+            "luxenosr-data": LuxenOSRDataParserConfig(),
             "sitcoms3d-data": Sitcoms3DDataParserConfig(),
         },
         prefix_names=False,  # Omit prefixes in subcommands themselves.
@@ -383,6 +410,16 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
 
         self.train_dataset = self.create_train_dataset()
         self.eval_dataset = self.create_eval_dataset()
+
+        if self.train_dataparser_outputs is not None:
+            cameras = self.train_dataparser_outputs.cameras
+            if len(cameras) > 1:
+                for i in range(1, len(cameras)):
+                    if cameras[0].width != cameras[i].width or cameras[0].height != cameras[i].height:
+                        CONSOLE.print("Variable resolution, using variable_res_collate")
+                        self.config.collate_fn = variable_res_collate
+                        break
+
         super().__init__()
 
     def create_train_dataset(self) -> InputDataset:

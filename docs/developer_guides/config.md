@@ -118,33 +118,3 @@ Often times, you just want to play with the parameters of an existing model with
   # NOTE: the dataparser and associated configurations go at the end of the command
   ns-train {METHOD_NAME} --vis viewer {DATA_PARSER} --scale-factor 0.5
   ```
-  
-### Extending Luxenstudio with custom methods
-In order to extend the Luxenstudio and register your own methods, you can package your code as a python package
-and register it with Luxenstudio as a `luxenstudio.method_configs` entrypoint in the `pyproject.toml` file.
-The Luxenstudio will automatically look for all registered methods and will register them to be used
-by method such as `ns-train`.
-
-Here is an example:
-```python
-"""my_package/my_config.py"""
-
-from luxenstudio.engine.trainer import TrainerConfig
-from luxenstudio.plugins.types import MethodSpecification
-
-MyMethod = MethodSpecification(
-  config=TrainerConfig(
-    method_name="my-method",
-    ...
-  ),
-  description="Custom description"
-)
-
-"""pyproject.toml"""
-[project]
-name = "my_package"
-...
-
-[project.entry-points.'luxenstudio.method_configs']
-my-method = 'my_package.my_config:MyMethod'
-```
