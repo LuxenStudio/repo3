@@ -58,6 +58,7 @@ from luxenstudio.field_components.temporal_distortions import TemporalDistortion
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
 from luxenstudio.models.dreamembedding import DreamEmbeddingModelConfig
 from luxenstudio.models.dreamfusion import DreamFusionModelConfig
+from luxenstudio.models.iterative_dreamfusion import DreamFusionIterativeModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
@@ -450,7 +451,7 @@ method_configs["iter_test"] = TrainerConfig(
         generative=True,
         datamanager=IterativeDataManagerConfig(
         ),
-        model=LuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
+        model=DreamFusionIterativeModelConfig(),
     ),
     optimizers={
         "proposal_networks": {
@@ -458,7 +459,7 @@ method_configs["iter_test"] = TrainerConfig(
             "scheduler": None,
         },
         "fields": {
-            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "optimizer": AdamOptimizerConfig(lr=1e-3, eps=1e-15),
             "scheduler": None,
         },
     },
