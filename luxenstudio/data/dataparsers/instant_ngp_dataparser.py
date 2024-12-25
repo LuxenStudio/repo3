@@ -25,7 +25,6 @@ import numpy as np
 import torch
 from rich.console import Console
 
-from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType
 from luxenstudio.data.dataparsers.base_dataparser import (
     DataParser,
