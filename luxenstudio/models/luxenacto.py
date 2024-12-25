@@ -56,7 +56,7 @@ from luxenstudio.model_components.renderers import (
     NormalsRenderer,
     RGBRenderer,
 )
-from luxenstudio.model_components.scene_colliders import NearFarCollider
+from luxenstudio.model_components.scene_colliders import AABBBoxCollider, NearFarCollider
 from luxenstudio.model_components.shaders import NormalsShader
 from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.utils import colormaps
