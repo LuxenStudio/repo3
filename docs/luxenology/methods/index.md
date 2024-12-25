@@ -31,4 +31,5 @@ In addition to their implementations, we have provided guides that walk through 
     Luxenacto<luxenacto.md>
     Instant-NGP<instant_ngp.md>
     Semantic Luxen-W<semantic_luxenw.md>
+    CleaLuxen<clealuxen.md>
 ```
