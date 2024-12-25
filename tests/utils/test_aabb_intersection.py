@@ -168,7 +168,9 @@ def test_equall_luxenacc():
         # time2 = time.time()
 
         # time3 = time.time()
-        t_min_luxenacc, t_max_luxenacc = luxenacc.ray_aabb_intersect(origins, directions, aabb)
+        t_min_luxenacc, t_max_luxenacc, _ = luxenacc.ray_aabb_intersect(origins, directions, aabb[None, :])
+        t_max_luxenacc = t_max_luxenacc.squeeze(-1)
+        t_min_luxenacc = t_min_luxenacc.squeeze(-1)
         # time4 = time.time()
 
         # print("pytorch ", time2-time1)
