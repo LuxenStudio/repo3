@@ -71,6 +71,7 @@ from luxenstudio.data.utils.luxenstudio_collate import luxenstudio_collate
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import IterableWrapper
+from luxenstudio.utils import profiler
 
 CONSOLE = Console(width=120)
 
@@ -510,6 +511,8 @@ class VanillaDataManager(DataManager):  # pylint: disable=abstract-method
             num_workers=self.world_size * 4,
         )
 
+    @profiler.time_function
+    @profile
     def next_train(self, step: int) -> Tuple[RayBundle, Dict]:
         """Returns the next batch of data from the train dataloader."""
         self.train_count += 1

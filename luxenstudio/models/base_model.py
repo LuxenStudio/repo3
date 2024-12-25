@@ -33,6 +33,7 @@ from luxenstudio.configs.config_utils import to_immutable_dict
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.model_components.scene_colliders import NearFarCollider
+from luxenstudio.utils import profiler
 
 
 # Model related configs
@@ -126,6 +127,7 @@ class Model(nn.Module):
             Outputs of model. (ie. rendered colors)
         """
 
+    @profiler.time_function
     def forward(self, ray_bundle: RayBundle) -> Dict[str, torch.Tensor]:
         """Run forward starting with a ray bundle. This outputs different things depending on the configuration
         of the model and whether or not the batch is provided (whether or not we are training basically)
