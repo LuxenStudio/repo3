@@ -59,8 +59,7 @@ from luxenstudio.model_components.renderers import (
 from luxenstudio.model_components.scene_colliders import NearFarCollider
 from luxenstudio.model_components.shaders import NormalsShader
 from luxenstudio.models.base_model import Model, ModelConfig
-from luxenstudio.utils import colormaps
-from luxenstudio.utils import profiler
+from luxenstudio.utils import colormaps, profiler
 
 
 @dataclass
