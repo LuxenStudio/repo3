@@ -3,7 +3,8 @@
 ### Running the Method
  
 ```bash
-pip install clealuxen
+pip install git+https://github.com/ethanweber/clealuxen
+clealuxen-setup
 ns-train clealuxen --help
 ```
  
