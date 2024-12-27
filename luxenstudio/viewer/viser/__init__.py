@@ -16,5 +16,6 @@
 # pylint: disable=useless-import-alias
 
 from .message_api import GuiHandle as GuiHandle
+from .message_api import GuiSelectHandle as GuiSelectHandle
 from .messages import LuxenstudioMessage as LuxenstudioMessage
 from .server import ViserServer as ViserServer

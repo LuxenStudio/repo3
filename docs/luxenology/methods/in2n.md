@@ -36,13 +36,13 @@ Details for running Instruct-Luxen2Luxen (built with Luxenstudio!) can be found 
 ns-train in2n --help
 ```
 
-Three varients of Instruct-Luxen2Luxen are provided:
+Three variants of Instruct-Luxen2Luxen are provided:
 
-| Method      | Description                  | Memory | Quality |
-| ----------- | ---------------------------- | ------ | ------- |
-| `in2n`  | Full model, used in paper    | ~15GB  | Best    |
-| `in2n-small`      | Half precision model         | ~12GB  | Good    |
-| `in2n-tiny` | Half prevision with no LPIPS | ~10GB  | Ok      |
+| Method       | Description                  | Memory | Quality |
+| ------------ | ---------------------------- | ------ | ------- |
+| `in2n`       | Full model, used in paper    | ~15GB  | Best    |
+| `in2n-small` | Half precision model         | ~12GB  | Good    |
+| `in2n-tiny`  | Half prevision with no LPIPS | ~10GB  | Ok      |
 
 ## Method
 
