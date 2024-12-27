@@ -28,6 +28,7 @@ BLACKLIST = [
     "luxenplayer-ngp",
     "luxenplayer-luxenacto",
     "neus",
+    "neus-facto",
 ]
 
 
