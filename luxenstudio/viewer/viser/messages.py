@@ -228,3 +228,16 @@ class StatusMessage(LuxenstudioMessage):
 @dataclasses.dataclass
 class SaveCheckpointMessage(LuxenstudioMessage):
     """Save checkpoint message."""
+
+
+@dataclasses.dataclass
+class UseTimeConditioningMessage(LuxenstudioMessage):
+    """Use time conditioning message."""
+
+
+@dataclasses.dataclass
+class TimeConditionMessage(LuxenstudioMessage):
+    """Time conditioning message."""
+
+    time: float
+    """ Time conditioning value """
