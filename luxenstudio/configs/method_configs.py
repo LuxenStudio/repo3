@@ -33,9 +33,6 @@ from luxenstudio.data.datamanagers.dreamfusion_datamanager import (
 from luxenstudio.data.datamanagers.sdf_datamanager import SDFDataManagerConfig
 from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
 from luxenstudio.data.datamanagers.iterative_datamanager import IterativeDataManagerConfig
-from luxenstudio.data.datamanagers.variable_res_datamanager import (
-    VariableResDataManagerConfig,
-)
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
