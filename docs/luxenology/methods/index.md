@@ -31,6 +31,7 @@ The following methods are supported in luxenstudio:
     Luxenacto<luxenacto.md>
     Instant-NGP<instant_ngp.md>
     Instruct-Luxen2Luxen<in2n.md>
+    LERF<lerf.md>
     Semantic Luxen-W<semantic_luxenw.md>
 ```
 

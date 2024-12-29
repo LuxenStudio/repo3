@@ -171,10 +171,10 @@ class DatasetImageMessage(LuxenstudioMessage):
 
 
 @dataclasses.dataclass
-class IsTrainingMessage(LuxenstudioMessage):
+class TrainingStateMessage(LuxenstudioMessage):
     """Wheather the scene is in training mode or not."""
 
-    is_training: bool
+    training_state: Literal["training", "paused", "completed"]
     """True if the model is currently trianing, False otherwise"""
 
 
@@ -228,3 +228,16 @@ class StatusMessage(LuxenstudioMessage):
 @dataclasses.dataclass
 class SaveCheckpointMessage(LuxenstudioMessage):
     """Save checkpoint message."""
+
+
+@dataclasses.dataclass
+class UseTimeConditioningMessage(LuxenstudioMessage):
+    """Use time conditioning message."""
+
+
+@dataclasses.dataclass
+class TimeConditionMessage(LuxenstudioMessage):
+    """Time conditioning message."""
+
+    time: float
+    """ Time conditioning value """
