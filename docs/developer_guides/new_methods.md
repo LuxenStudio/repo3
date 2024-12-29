@@ -10,6 +10,7 @@ We recommend the following file structure:
 
 ```
 ├── my_method
+│   ├── __init__.py
 │   ├── my_config.py
 │   ├── custom_pipeline.py [optional]
 │   ├── custom_model.py [optional]
@@ -55,6 +56,9 @@ name = "my_method"
 dependencies = [
     "luxenstudio" # you may want to consider pinning the version, ie "luxenstudio==0.1.19"
 ]
+
+[tool.setuptools.packages.find]
+include = ["my_method*"]
 
 [project.entry-points.'luxenstudio.method_configs']
 my-method = 'my_method.my_config:MyMethod'
