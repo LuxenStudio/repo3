@@ -32,5 +32,5 @@ The following methods are supported in luxenstudio:
     Instant-NGP<instant_ngp.md>
     Instruct-Luxen2Luxen<in2n.md>
     Semantic Luxen-W<semantic_luxenw.md>
-    CleaLuxen<clealuxen.md>
+    Luxenbusters<luxenbusters.md>
 ```
