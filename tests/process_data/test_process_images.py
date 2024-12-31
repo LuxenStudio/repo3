@@ -16,7 +16,9 @@ from luxenstudio.data.utils.colmap_parsing_utils import (
     write_cameras_binary,
     write_images_binary,
 )
-from scripts.process_data import ProcessImages
+from luxenstudio.process_data.images_to_nerstudio_dataset import (
+    ImagesToLuxenstudioDataset,
+)
 
 
 def random_quaternion(num_poses: int):
@@ -79,8 +81,10 @@ def test_process_images_skip_colmap(tmp_path: Path):
     (tmp_path / "mocked_bin" / "colmap").touch(mode=0o777)
     (tmp_path / "mocked_bin" / "ffmpeg").touch(mode=0o777)
 
-    # Run ProcessImages
-    cmd = ProcessImages(tmp_path / "images", tmp_path / "luxenstudio", colmap_model_path=sparse_path, skip_colmap=True)
+    # Convert images into a LuxenStudio dataset
+    cmd = ImagesToLuxenstudioDataset(
+        data=tmp_path / "images", output_dir=tmp_path / "luxenstudio", colmap_model_path=sparse_path, skip_colmap=True
+    )
     cmd.main()
     os.environ["PATH"] = old_path
 
