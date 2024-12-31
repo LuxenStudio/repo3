@@ -59,12 +59,14 @@
 
 # About
 
+_It’s as simple as plug and play with luxenstudio!_
+
 Luxenstudio provides a simple API that allows for a simplified end-to-end process of creating, training, and testing Luxens.
 The library supports a **more interpretable implementation of Luxens by modularizing each component.**
 With more modular Luxens, we hope to create a more user-friendly experience in exploring the technology.
-Luxenstudio is a contributor-friendly repo with the goal of building a community where users can more easily build upon each other's contributions.
 
-It’s as simple as plug and play with luxenstudio!
+This is a contributor-friendly repo with the goal of building a community where users can more easily build upon each other's contributions.
+Luxenstudio initially launched as an opensource project by Berkeley students in [KAIR lab](https://people.eecs.berkeley.edu/~kanazawa/index.html#kair) at [Berkeley AI Research (BAIR)](https://bair.berkeley.edu/) in October 2023 as a part of a research project ([paper](https://arxiv.org/abs/2302.04264)). It is currently developed by Berkeley students and community contributors.
 
 We are committed to providing learning resources to help you understand the basics of (if you're just getting started), and keep up-to-date with (if you're a seasoned veteran) all things Luxen. As researchers, we know just how hard it is to get onboarded with this next-gen technology. So we're here to help with tutorials, documentation, and more!
 
