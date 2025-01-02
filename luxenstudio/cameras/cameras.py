@@ -17,7 +17,6 @@ Camera Models
 """
 import base64
 import math
-import os
 from dataclasses import dataclass
 from enum import Enum, auto
 from typing import Dict, List, Optional, Tuple, Union
@@ -33,7 +32,6 @@ import luxenstudio.utils.poses as pose_utils
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.data.scene_box import SceneBox
-from luxenstudio.utils.misc import strtobool
 from luxenstudio.utils.tensor_dataclass import TensorDataclass
 
 TORCH_DEVICE = Union[torch.device, str]  # pylint: disable=invalid-name
@@ -149,8 +147,6 @@ class Cameras(TensorDataclass):
         self.metadata = metadata
 
         self.__post_init__()  # This will do the dataclass post_init and broadcast all the tensors
-
-        self._use_luxenacc = strtobool(os.environ.get("INTERSECT_WITH_NERFACC", "TRUE"))
 
     def _init_get_fc_xy(self, fc_xy: Union[float, torch.Tensor], name: str) -> torch.Tensor:
         """
