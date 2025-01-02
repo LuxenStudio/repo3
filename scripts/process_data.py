@@ -23,7 +23,7 @@ from luxenstudio.process_data import (
 from luxenstudio.process_data.colmap_converter_to_luxenstudio_dataset import (
     BaseConverterToLuxenstudioDataset,
 )
-from luxenstudio.process_data.images_to_nerstudio_dataset import (
+from luxenstudio.process_data.images_to_luxenstudio_dataset import (
     ImagesToLuxenstudioDataset,
 )
 from luxenstudio.process_data.video_to_luxenstudio_dataset import VideoToLuxenstudioDataset
