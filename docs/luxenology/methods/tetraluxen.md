@@ -44,7 +44,7 @@ Details for running Tetra-Luxen can be found [here](https://github.com/jkulhanek
 ```bash
 python -m tetraluxen.scripts.process_images --path <data folder>
 python -m tetraluxen.scripts.triangulate --pointcloud <data folder>/sparse.ply --output <data folder>/sparse.th
-ns-train tetra-luxen --pipeline.model.tetraluxen-path <data folder>/sparse.th minimal-parser --data <data folder>
+ns-train tetra-luxen --pipeline.model.tetrahedra-path <data folder>/sparse.th minimal-parser --data <data folder>
 ```
 
 Three following variants of Tetra-Luxen are provided:
