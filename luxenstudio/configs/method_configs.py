@@ -24,10 +24,10 @@ import tyro
 
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
-from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
-from luxenstudio.data.datamanagers.depth_datamanager import DepthDataManagerConfig
-from luxenstudio.data.datamanagers.sdf_datamanager import SDFDataManagerConfig
-from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
+from luxenstudio.data.datamanagers.base_datamanager import (
+    VanillaDataManager,
+    VanillaDataManagerConfig,
+)
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
@@ -40,6 +40,9 @@ from luxenstudio.data.dataparsers.phototourism_dataparser import (
 )
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
+from luxenstudio.data.datasets.depth_dataset import DepthDataset
+from luxenstudio.data.datasets.sdf_dataset import SDFDataset
+from luxenstudio.data.datasets.semantic_dataset import SemanticDataset
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
 from luxenstudio.engine.schedulers import (
     CosineDecaySchedulerConfig,
@@ -162,7 +165,8 @@ method_configs["depth-luxenacto"] = TrainerConfig(
     max_num_iterations=30000,
     mixed_precision=True,
     pipeline=VanillaPipelineConfig(
-        datamanager=DepthDataManagerConfig(
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[DepthDataset],
             dataparser=LuxenstudioDataParserConfig(),
             train_num_rays_per_batch=4096,
             eval_num_rays_per_batch=4096,
@@ -308,8 +312,11 @@ method_configs["semantic-luxenw"] = TrainerConfig(
     max_num_iterations=30000,
     mixed_precision=True,
     pipeline=VanillaPipelineConfig(
-        datamanager=SemanticDataManagerConfig(
-            dataparser=Sitcoms3DDataParserConfig(), train_num_rays_per_batch=4096, eval_num_rays_per_batch=8192
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[SemanticDataset],
+            dataparser=Sitcoms3DDataParserConfig(),
+            train_num_rays_per_batch=4096,
+            eval_num_rays_per_batch=8192,
         ),
         model=SemanticLuxenWModelConfig(eval_num_rays_per_chunk=1 << 16),
     ),
@@ -440,7 +447,8 @@ method_configs["luxenplayer-luxenacto"] = TrainerConfig(
     max_num_iterations=30000,
     mixed_precision=True,
     pipeline=VanillaPipelineConfig(
-        datamanager=DepthDataManagerConfig(
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[DepthDataset],
             dataparser=DycheckDataParserConfig(),
             train_num_rays_per_batch=4096,
             eval_num_rays_per_batch=4096,
@@ -471,7 +479,11 @@ method_configs["luxenplayer-ngp"] = TrainerConfig(
     max_num_iterations=30000,
     mixed_precision=True,
     pipeline=DynamicBatchPipelineConfig(
-        datamanager=DepthDataManagerConfig(dataparser=DycheckDataParserConfig(), train_num_rays_per_batch=8192),
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[DepthDataset],
+            dataparser=DycheckDataParserConfig(),
+            train_num_rays_per_batch=8192,
+        ),
         model=LuxenplayerNGPModelConfig(
             eval_num_rays_per_chunk=8192,
             grid_levels=1,
@@ -500,7 +512,8 @@ method_configs["neus"] = TrainerConfig(
     max_num_iterations=100000,
     mixed_precision=False,
     pipeline=VanillaPipelineConfig(
-        datamanager=SDFDataManagerConfig(
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[SDFDataset],
             dataparser=SDFStudioDataParserConfig(),
             train_num_rays_per_batch=1024,
             eval_num_rays_per_batch=1024,
@@ -533,7 +546,8 @@ method_configs["neus-facto"] = TrainerConfig(
     max_num_iterations=20001,
     mixed_precision=False,
     pipeline=VanillaPipelineConfig(
-        datamanager=SDFDataManagerConfig(
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[SDFDataset],
             dataparser=SDFStudioDataParserConfig(),
             train_num_rays_per_batch=2048,
             eval_num_rays_per_batch=2048,
