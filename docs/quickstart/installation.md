@@ -33,7 +33,7 @@ Install CUDA 11.7. You can find CUDA download links [here](https://developer.nvi
 
 ## Create environment
 
-Luxenstudio requires `python >= 3.7`. We recommend using conda to manage dependencies. Make sure to install [Conda](https://docs.conda.io/en/latest/miniconda.html) before proceeding.
+Luxenstudio requires `python >= 3.8`. We recommend using conda to manage dependencies. Make sure to install [Conda](https://docs.conda.io/en/latest/miniconda.html) before proceeding.
 
 ```bash
 conda create --name luxenstudio -y python=3.8

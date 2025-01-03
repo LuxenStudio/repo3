@@ -28,13 +28,12 @@ Example:
 """
 import contextlib
 import math
-from typing import Generator, Optional, Union
+from typing import Generator, Literal, Optional, Union
 
 import luxenacc
 import torch
 from torch import nn
 from torchtyping import TensorType
-from typing_extensions import Literal
 
 from luxenstudio.cameras.rays import RaySamples
 from luxenstudio.utils import colors

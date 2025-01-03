@@ -18,12 +18,11 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Type
+from typing import Literal, Type
 
 import numpy as np
 import torch
 from rich.progress import Console
-from typing_extensions import Literal
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType

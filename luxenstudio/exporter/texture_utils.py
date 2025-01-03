@@ -22,7 +22,7 @@ from __future__ import annotations
 
 import math
 from pathlib import Path
-from typing import Optional, Tuple, Union
+from typing import Literal, Optional, Tuple, Union
 
 import mediapy as media
 import numpy as np
@@ -30,7 +30,6 @@ import torch
 import xatlas
 from rich.console import Console
 from torchtyping import TensorType
-from typing_extensions import Literal
 
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.exporter.exporter_utils import Mesh

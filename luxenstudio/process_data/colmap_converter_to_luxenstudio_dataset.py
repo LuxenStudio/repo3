@@ -16,10 +16,9 @@
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
+from typing import Dict, List, Literal, Optional, Tuple
 
 from rich.console import Console
-from typing_extensions import Literal
 
 from luxenstudio.process_data import colmap_utils, hloc_utils, process_data_utils
 from luxenstudio.process_data.base_converter_to_luxenstudio_dataset import (
@@ -182,7 +181,11 @@ class ColmapConverterToLuxenstudioDataset(BaseConverterToLuxenstudioDataset):
         """
         self.absolute_colmap_path.mkdir(parents=True, exist_ok=True)
 
-        (sfm_tool, feature_type, matcher_type,) = process_data_utils.find_tool_feature_matcher_combination(
+        (
+            sfm_tool,
+            feature_type,
+            matcher_type,
+        ) = process_data_utils.find_tool_feature_matcher_combination(
             self.sfm_tool, self.feature_type, self.matcher_type
         )
         # check that sfm_tool is hloc if using refine_pixsfm
