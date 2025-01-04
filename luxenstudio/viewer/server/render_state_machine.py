@@ -24,7 +24,7 @@ import torch
 
 from luxenstudio.cameras.cameras import Cameras, CameraType
 from luxenstudio.model_components.renderers import background_color_override_context
-from luxenstudio.utils import writer
+from luxenstudio.utils import colormaps, writer
 from luxenstudio.utils.writer import GLOBAL_BUFFER, EventName, TimeWriter
 from luxenstudio.viewer.server import viewer_utils
 from luxenstudio.viewer.server.utils import get_intrinsics_matrix_and_camera_to_world_h
@@ -238,7 +238,15 @@ class RenderStateMachine(threading.Thread):
         self.viewer.update_colormap_options(
             dimensions=outputs[output_render].shape[-1], dtype=outputs[output_render].dtype
         )
-        selected_output = (viewer_utils.apply_colormap(self.viewer.control_panel, outputs) * 255).type(torch.uint8)
+        selected_output = colormaps.apply_colormap(
+            image=outputs[self.viewer.control_panel.output_render],
+            colormap=self.viewer.control_panel.colormap,
+            normalize=self.viewer.control_panel.colormap_normalize,
+            colormap_min=self.viewer.control_panel.colormap_min,
+            colormap_max=self.viewer.control_panel.colormap_max,
+            invert=self.viewer.control_panel.colormap_invert,
+        )
+        selected_output = (selected_output * 255).type(torch.uint8)
 
         self.viewer.viser_server.set_background_image(
             selected_output.cpu().numpy(),
