@@ -53,6 +53,7 @@ class DLuxen(DataParser):
     """DLuxen Dataset"""
 
     config: DLuxenDataParserConfig
+    includes_time: bool = True
 
     def __init__(self, config: DLuxenDataParserConfig):
         super().__init__(config=config)

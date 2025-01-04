@@ -18,13 +18,12 @@ from __future__ import annotations
 import math
 from dataclasses import dataclass, field
 from pathlib import Path, PurePath
-from typing import Optional, Type
+from typing import Literal, Optional, Type
 
 import numpy as np
 import torch
 from PIL import Image
 from rich.console import Console
-from typing_extensions import Literal
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import CAMERA_MODEL_TO_TYPE, Cameras, CameraType
@@ -46,7 +45,11 @@ class LuxenstudioDataParserConfig(DataParserConfig):
 
     _target: Type = field(default_factory=lambda: Luxenstudio)
     """target class to instantiate"""
+<<<<<<< HEAD
     data: Path = Path("data/luxenstudio")
+=======
+    data: Path = Path()
+>>>>>>> b1ddb9e695b789fae47e0f760a5c7f59f25af0bb
     """Directory or explicit json file path specifying location of data."""
     scale_factor: float = 1.0
     """How much to scale the camera origins by."""
@@ -75,6 +78,8 @@ class Luxenstudio(DataParser):
 
     def _generate_dataparser_outputs(self, split="train"):
         # pylint: disable=too-many-statements
+
+        assert self.config.data.exists(), f"Data directory {self.config.data} does not exist."
 
         if self.config.data.suffix == ".json":
             meta = load_from_json(self.config.data)

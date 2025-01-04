@@ -3,6 +3,6 @@
 Viewer
 ============
 
-.. automodule:: luxenstudio.viewer
+.. automodule:: luxenstudio.viewer.server.viewer_elements
    :members:
    :show-inheritance:
