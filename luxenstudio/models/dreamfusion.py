@@ -36,6 +36,7 @@ from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.density_fields import HashMLPDensityField
 from luxenstudio.fields.dreamfusion_field import DreamFusionField
 from luxenstudio.generative.stable_diffusion import StableDiffusion
+from luxenstudio.generative.deepfloyd import DeepFloyd
 from luxenstudio.generative.stable_diffusion_utils import PositionalTextEmbeddings
 from luxenstudio.model_components.losses import (
     MSELoss,
@@ -198,14 +199,16 @@ class DreamFusionModel(Model):
         """Set the fields and modules"""
         super().populate_modules()
 
-        self.sd = StableDiffusion(self.sd_device, version=self.sd_version)
+        # self.sd = StableDiffusion(self.sd_device, version=self.sd_version)
+        self.df = DeepFloyd(self.sd_device)
         self.text_embeddings = PositionalTextEmbeddings(
             base_prompt=self.cur_prompt,
             top_prompt=self.cur_prompt + self.top_prompt,
             side_prompt=self.cur_prompt + self.side_prompt,
             back_prompt=self.cur_prompt + self.back_prompt,
             front_prompt=self.cur_prompt + self.front_prompt,
-            stable_diffusion=self.sd,
+            # stable_diffusion=self.sd,
+            stable_diffusion=self.df,
             positional_prompting=self.positional_prompting,
         )
 
@@ -480,11 +483,18 @@ class DreamFusionModel(Model):
             .permute(0, 3, 1, 2)
         )
 
-        sds_loss = self.sd.sds_loss(
+        # sds_loss = self.sd.sds_loss(
+        #     text_embedding.to(self.sd_device),
+        #     train_output.to(self.sd_device),
+        #     guidance_scale=int(self.guidance_scale),
+        #     grad_scaler=self.grad_scaler,
+        # )
+
+        sds_loss = self.df.sds_loss(
             text_embedding.to(self.sd_device),
             train_output.to(self.sd_device),
             guidance_scale=int(self.guidance_scale),
-            grad_scaler=self.grad_scaler,
+            grad_scaler=self.grad_scaler,        
         )
 
         loss_dict["sds_loss"] = sds_loss.to(self.device)
