@@ -28,6 +28,7 @@ from luxenstudio.data.datamanagers.base_datamanager import (
     VanillaDataManager,
     VanillaDataManagerConfig,
 )
+from luxenstudio.data.datamanagers.dreamfusion_datamanager import DreamFusionDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
@@ -456,7 +457,7 @@ method_configs["dreamfusion"] = TrainerConfig(
     pipeline=VanillaPipelineConfig(
         generative=True,
         datamanager=DreamFusionDataManagerConfig(
-            horizontal_rotation_warmup=4000,
+            horizontal_rotation_warmup=0,
         ),
         model=DreamFusionModelConfig(
             eval_num_rays_per_chunk=1 << 15,
