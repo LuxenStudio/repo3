@@ -23,7 +23,6 @@ from typing import Literal, Optional, Type
 import numpy as np
 import torch
 from PIL import Image
-from rich.console import Console
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import CAMERA_MODEL_TO_TYPE, Cameras, CameraType
@@ -34,8 +33,8 @@ from luxenstudio.data.dataparsers.base_dataparser import (
 )
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.utils.io import load_from_json
+from luxenstudio.utils.rich_utils import CONSOLE
 
-CONSOLE = Console(width=120)
 MAX_AUTO_RESOLUTION = 1600
 
 

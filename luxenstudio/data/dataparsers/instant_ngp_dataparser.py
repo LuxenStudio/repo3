@@ -23,7 +23,6 @@ from typing import Dict, Tuple, Type
 import imageio
 import numpy as np
 import torch
-from rich.console import Console
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType
@@ -34,8 +33,7 @@ from luxenstudio.data.dataparsers.base_dataparser import (
 )
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.utils.io import load_from_json
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 @dataclass

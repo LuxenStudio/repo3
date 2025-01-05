@@ -21,11 +21,9 @@ from typing import List
 
 import numpy as np
 from PIL import Image
-from rich.console import Console
 
 from luxenstudio.process_data.process_data_utils import CAMERA_MODELS
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 def realitycapture_to_json(

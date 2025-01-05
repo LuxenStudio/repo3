@@ -25,14 +25,11 @@ from typing import Union
 
 import gdown
 import tyro
-from rich.console import Console
 from typing_extensions import Annotated
 
 from luxenstudio.configs.base_config import PrintableConfig
 from luxenstudio.utils import install_checks
 from luxenstudio.utils.scripts import run_command
-
-CONSOLE = Console(width=120)
 
 
 @dataclass

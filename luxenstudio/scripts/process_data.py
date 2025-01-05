@@ -24,7 +24,6 @@ from typing import Union
 
 import numpy as np
 import tyro
-from rich.console import Console
 from typing_extensions import Annotated
 
 from luxenstudio.process_data import (
@@ -41,8 +40,7 @@ from luxenstudio.process_data.images_to_luxenstudio_dataset import (
     ImagesToLuxenstudioDataset,
 )
 from luxenstudio.process_data.video_to_luxenstudio_dataset import VideoToLuxenstudioDataset
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 @dataclass

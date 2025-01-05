@@ -31,7 +31,6 @@ import numpy as np
 import open3d as o3d
 import torch
 import tyro
-from rich.console import Console
 from typing_extensions import Annotated, Literal
 
 from luxenstudio.cameras.rays import RayBundle
@@ -46,8 +45,7 @@ from luxenstudio.exporter.marching_cubes import (
 )
 from luxenstudio.pipelines.base_pipeline import Pipeline, VanillaPipeline
 from luxenstudio.utils.eval_utils import eval_setup
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 @dataclass

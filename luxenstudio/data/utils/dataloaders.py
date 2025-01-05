@@ -24,7 +24,7 @@ from abc import abstractmethod
 from typing import Dict, Optional, Tuple, Union
 
 import torch
-from rich.progress import Console, track
+from rich.progress import track
 from torch.utils.data import Dataset
 from torch.utils.data.dataloader import DataLoader
 
@@ -33,8 +33,7 @@ from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.utils.luxenstudio_collate import luxenstudio_collate
 from luxenstudio.utils.misc import get_dict_to_torch
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 class CacheDataloader(DataLoader):

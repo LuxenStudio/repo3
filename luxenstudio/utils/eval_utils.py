@@ -24,12 +24,10 @@ from typing import Literal, Optional, Tuple
 
 import torch
 import yaml
-from rich.console import Console
 
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.pipelines.base_pipeline import Pipeline
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 def eval_load_checkpoint(config: TrainerConfig, pipeline: Pipeline) -> Tuple[Path, int]:

@@ -23,13 +23,10 @@ from pathlib import Path
 from typing import Literal, Optional
 
 import tyro
-from rich.console import Console
 
 from luxenstudio.exporter import texture_utils
 from luxenstudio.exporter.exporter_utils import get_mesh_from_filename
 from luxenstudio.utils.eval_utils import eval_setup
-
-CONSOLE = Console(width=120)
 
 
 @dataclass

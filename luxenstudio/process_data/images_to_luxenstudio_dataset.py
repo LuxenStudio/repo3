@@ -17,14 +17,11 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from rich.console import Console
-
 from luxenstudio.process_data import equirect_utils, process_data_utils
 from luxenstudio.process_data.colmap_converter_to_luxenstudio_dataset import (
     ColmapConverterToLuxenstudioDataset,
 )
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 @dataclass

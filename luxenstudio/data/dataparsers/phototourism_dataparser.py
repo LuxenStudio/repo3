@@ -22,7 +22,6 @@ from typing import Literal, Type
 
 import numpy as np
 import torch
-from rich.progress import Console
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType
@@ -39,8 +38,7 @@ from luxenstudio.data.utils.colmap_parsing_utils import (
     read_cameras_binary,
     read_images_binary,
 )
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 @dataclass

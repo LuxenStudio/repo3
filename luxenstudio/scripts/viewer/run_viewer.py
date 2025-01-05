@@ -23,7 +23,6 @@ from dataclasses import dataclass, field, fields
 from pathlib import Path
 
 import tyro
-from rich.console import Console
 
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.engine.trainer import TrainerConfig
@@ -31,8 +30,6 @@ from luxenstudio.pipelines.base_pipeline import Pipeline
 from luxenstudio.utils import writer
 from luxenstudio.utils.eval_utils import eval_setup
 from luxenstudio.viewer.server.viewer_state import ViewerState
-
-CONSOLE = Console(width=120)
 
 
 @dataclass

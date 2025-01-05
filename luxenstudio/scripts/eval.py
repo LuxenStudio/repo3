@@ -23,11 +23,9 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import tyro
-from rich.console import Console
 
 from luxenstudio.utils.eval_utils import eval_setup
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 @dataclass

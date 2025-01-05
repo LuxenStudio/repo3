@@ -28,15 +28,12 @@ import mediapy as media
 import numpy as np
 import torch
 import xatlas
-from rich.console import Console
 from torchtyping import TensorType
 
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.exporter.exporter_utils import Mesh
 from luxenstudio.pipelines.base_pipeline import Pipeline
-from luxenstudio.utils.rich_utils import get_progress
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE, get_progress
 
 TORCH_DEVICE = Union[torch.device, str]  # pylint: disable=invalid-name
 

@@ -23,7 +23,6 @@ from typing import Dict, List, Tuple, Type
 import cv2
 import numpy as np
 import torch
-from rich.progress import Console
 
 from luxenstudio.cameras.cameras import Cameras, CameraType
 from luxenstudio.data.dataparsers.base_dataparser import (
@@ -34,8 +33,7 @@ from luxenstudio.data.dataparsers.base_dataparser import (
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.utils.colors import get_color
 from luxenstudio.utils.io import load_from_json
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 def downscale(img, scale: int) -> np.ndarray:

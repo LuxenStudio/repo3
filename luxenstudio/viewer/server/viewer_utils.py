@@ -24,7 +24,6 @@ from pathlib import Path
 from typing import TYPE_CHECKING, Optional, Tuple
 
 import torch
-from rich.console import Console
 
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.models.base_model import Model
@@ -32,8 +31,6 @@ from luxenstudio.utils.io import load_from_json
 
 if TYPE_CHECKING:
     from luxenstudio.engine.trainer import Trainer
-
-CONSOLE = Console(width=120)
 
 
 def get_viewer_version() -> str:

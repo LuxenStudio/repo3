@@ -22,7 +22,6 @@ from pathlib import Path
 from typing import Any, Dict, Literal, Optional
 
 import yaml
-from rich.console import Console
 
 from luxenstudio.configs.base_config import (
     InstantiateConfig,
@@ -34,8 +33,7 @@ from luxenstudio.configs.config_utils import to_immutable_dict
 from luxenstudio.engine.optimizers import OptimizerConfig
 from luxenstudio.engine.schedulers import SchedulerConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 @dataclass

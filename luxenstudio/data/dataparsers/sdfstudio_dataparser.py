@@ -20,7 +20,6 @@ from pathlib import Path
 from typing import Type
 
 import torch
-from rich.console import Console
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType
@@ -31,8 +30,6 @@ from luxenstudio.data.dataparsers.base_dataparser import (
 )
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.utils.io import load_from_json
-
-CONSOLE = Console()
 
 
 @dataclass
