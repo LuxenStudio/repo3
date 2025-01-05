@@ -6,16 +6,16 @@ We provide a command line interface for training your own Luxens (no coding nece
 
 Here are the popular commands that we offer. If you've cloned the repo, you can also look at the [pyproject.toml file](https://github.com/luxenstudio-project/luxenstudio/blob/main/pyproject.toml) at the `[project.scripts]` section for details.
 
-| Command                              | Description                            | Filename                           |
-| ------------------------------------ | -------------------------------------- | ---------------------------------- |
-| [ns-install-cli](ns_install_cli)     | Install tab completion for all scripts | scripts/completions/install.py     |
-| [ns-process-data](ns_process_data)   | Generate a dataset from your own data  | scripts/process_data.py            |
-| [ns-download-data](ns_download_data) | Download existing captures             | scripts/downloads/download_data.py |
-| [ns-train](ns_train)                 | Generate a Luxen                        | scripts/train.py                   |
-| [ns-viewer](ns_viewer)               | View a trained Luxen                    | scripts/viewer/run_viewer.py       |
-| [ns-eval](ns_eval)                   | Run evaluation metrics for your Model  | scripts/eval.py                    |
-| [ns-render](ns_render)               | Render out a video of your Luxen        | scripts/render.py                  |
-| [ns-export](ns_export)               | Export a Luxen into other formats       | scripts/exporter.py                |
+| Command                              | Description                            | Filename                                      |
+| ------------------------------------ | -------------------------------------- | --------------------------------------------- |
+| [ns-install-cli](ns_install_cli)     | Install tab completion for all scripts | luxenstudio/scripts/completions/install.py     |
+| [ns-process-data](ns_process_data)   | Generate a dataset from your own data  | luxenstudio/scripts/process_data.py            |
+| [ns-download-data](ns_download_data) | Download existing captures             | luxenstudio/scripts/downloads/download_data.py |
+| [ns-train](ns_train)                 | Generate a Luxen                        | luxenstudio/scripts/train.py                   |
+| [ns-viewer](ns_viewer)               | View a trained Luxen                    | luxenstudio/scripts/viewer/run_viewer.py       |
+| [ns-eval](ns_eval)                   | Run evaluation metrics for your Model  | luxenstudio/scripts/eval.py                    |
+| [ns-render](ns_render)               | Render out a video of your Luxen        | luxenstudio/scripts/render.py                  |
+| [ns-export](ns_export)               | Export a Luxen into other formats       | luxenstudio/scripts/exporter.py                |
 
 ```{toctree}
 :maxdepth: 1

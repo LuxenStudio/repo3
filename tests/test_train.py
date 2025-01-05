@@ -13,7 +13,7 @@ from luxenstudio.configs.method_configs import method_configs
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.minimal_dataparser import MinimalDataParserConfig
 from luxenstudio.engine.trainer import TrainerConfig
-from scripts.train import train_loop
+from luxenstudio.scripts.train import train_loop
 
 BLACKLIST = [
     "base",

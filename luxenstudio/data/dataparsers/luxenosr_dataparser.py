@@ -23,12 +23,11 @@ import glob
 import os
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Tuple, Type
+from typing import List, Literal, Tuple, Type
 
 import numpy as np
 import torch
 from rich.console import Console
-from typing_extensions import Literal
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType

@@ -24,14 +24,11 @@ import tyro
 
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
-from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
-from luxenstudio.data.datamanagers.depth_datamanager import DepthDataManagerConfig
-from luxenstudio.data.datamanagers.dreamfusion_datamanager import (
-    DreamFusionDataManagerConfig,
+from luxenstudio.data.datamanagers.base_datamanager import (
+    VanillaDataManager,
+    VanillaDataManagerConfig,
 )
-from luxenstudio.data.datamanagers.sdf_datamanager import SDFDataManagerConfig
-from luxenstudio.data.datamanagers.semantic_datamanager import SemanticDataManagerConfig
-from luxenstudio.data.datamanagers.iterative_datamanager import IterativeDataManagerConfig
+from luxenstudio.data.datamanagers.dreamfusion_datamanager import DreamFusionDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
@@ -44,6 +41,9 @@ from luxenstudio.data.dataparsers.phototourism_dataparser import (
 )
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
+from luxenstudio.data.datasets.depth_dataset import DepthDataset
+from luxenstudio.data.datasets.sdf_dataset import SDFDataset
+from luxenstudio.data.datasets.semantic_dataset import SemanticDataset
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
 from luxenstudio.engine.schedulers import (
     CosineDecaySchedulerConfig,
@@ -91,7 +91,8 @@ descriptions = {
     "dreamfusion": "Generative Text to Luxen model",
     "luxenplayer-luxenacto": "LuxenPlayer with luxenacto backbone.",
     "luxenplayer-ngp": "LuxenPlayer with InstantNGP backbone.",
-    "neus": "Implementation of NeuS. (slow)"
+    "neus": "Implementation of NeuS. (slow)",
+    "neus-facto": "Implementation of NeuS-Facto. (slow)",
 }
 
 method_configs["luxenacto"] = TrainerConfig(
@@ -174,7 +175,8 @@ method_configs["depth-luxenacto"] = TrainerConfig(
     max_num_iterations=30000,
     mixed_precision=True,
     pipeline=VanillaPipelineConfig(
-        datamanager=DepthDataManagerConfig(
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[DepthDataset],
             dataparser=LuxenstudioDataParserConfig(),
             train_num_rays_per_batch=4096,
             eval_num_rays_per_batch=4096,
@@ -320,8 +322,11 @@ method_configs["semantic-luxenw"] = TrainerConfig(
     max_num_iterations=30000,
     mixed_precision=True,
     pipeline=VanillaPipelineConfig(
-        datamanager=SemanticDataManagerConfig(
-            dataparser=Sitcoms3DDataParserConfig(), train_num_rays_per_batch=4096, eval_num_rays_per_batch=8192
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[SemanticDataset],
+            dataparser=Sitcoms3DDataParserConfig(),
+            train_num_rays_per_batch=4096,
+            eval_num_rays_per_batch=8192,
         ),
         model=SemanticLuxenWModelConfig(eval_num_rays_per_chunk=1 << 16),
     ),
@@ -371,7 +376,9 @@ method_configs["tensorf"] = TrainerConfig(
             train_num_rays_per_batch=4096,
             eval_num_rays_per_batch=4096,
         ),
-        model=TensoRFModelConfig(),
+        model=TensoRFModelConfig(
+            regularization="tv",
+        ),
     ),
     optimizers={
         "fields": {
@@ -710,7 +717,8 @@ method_configs["dreamembed"] = TrainerConfig(
 method_configs["luxenplayer-luxenacto"] = TrainerConfig(
     method_name="luxenplayer-luxenacto",
     pipeline=VanillaPipelineConfig(
-        datamanager=DepthDataManagerConfig(
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[DepthDataset],
             dataparser=DycheckDataParserConfig(),
             train_num_rays_per_batch=4096,
             eval_num_rays_per_batch=4096,
@@ -741,7 +749,11 @@ method_configs["luxenplayer-ngp"] = TrainerConfig(
     max_num_iterations=30000,
     mixed_precision=True,
     pipeline=DynamicBatchPipelineConfig(
-        datamanager=DepthDataManagerConfig(dataparser=DycheckDataParserConfig(), train_num_rays_per_batch=8192),
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[DepthDataset],
+            dataparser=DycheckDataParserConfig(),
+            train_num_rays_per_batch=8192,
+        ),
         model=LuxenplayerNGPModelConfig(
             eval_num_rays_per_chunk=8192,
             grid_levels=1,
@@ -770,7 +782,8 @@ method_configs["neus"] = TrainerConfig(
     max_num_iterations=100000,
     mixed_precision=False,
     pipeline=VanillaPipelineConfig(
-        datamanager=SDFDataManagerConfig(
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[SDFDataset],
             dataparser=SDFStudioDataParserConfig(),
             train_num_rays_per_batch=1024,
             eval_num_rays_per_batch=1024,
@@ -803,7 +816,8 @@ method_configs["neus-facto"] = TrainerConfig(
     max_num_iterations=20001,
     mixed_precision=False,
     pipeline=VanillaPipelineConfig(
-        datamanager=SDFDataManagerConfig(
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[SDFDataset],
             dataparser=SDFStudioDataParserConfig(),
             train_num_rays_per_batch=2048,
             eval_num_rays_per_batch=2048,
@@ -845,12 +859,12 @@ method_configs["neus-facto"] = TrainerConfig(
 )
 
 external_methods, external_descriptions = discover_methods()
-method_configs.update(external_methods)
-descriptions.update(external_descriptions)
+all_methods = {**method_configs, **external_methods}
+all_descriptions = {**descriptions, **external_descriptions}
 
 AnnotatedBaseConfigUnion = tyro.conf.SuppressFixed[  # Don't show unparseable (fixed) arguments in helptext.
     tyro.conf.FlagConversionOff[
-        tyro.extras.subcommand_type_from_defaults(defaults=method_configs, descriptions=descriptions)
+        tyro.extras.subcommand_type_from_defaults(defaults=all_methods, descriptions=all_descriptions)
     ]
 ]
 """Union[] type over config types, annotated with default instances for use with

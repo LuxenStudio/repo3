@@ -33,6 +33,7 @@ The following methods are supported in luxenstudio:
     Instruct-Luxen2Luxen<in2n.md>
     LERF<lerf.md>
     Semantic Luxen-W<semantic_luxenw.md>
+    Tetra-Luxen <tetraluxen.md>
 ```
 
 (own_method_docs)=
