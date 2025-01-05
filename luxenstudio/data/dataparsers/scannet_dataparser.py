@@ -21,7 +21,6 @@ from typing import Literal, Type
 import cv2
 import numpy as np
 import torch
-from typing_extensions import Literal
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType
