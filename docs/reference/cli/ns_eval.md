@@ -2,7 +2,7 @@
 
 ```{eval-rst}
 .. argparse::
-    :module: luxenstudio.scripts.eval
+    :module: scripts.eval
     :func: get_parser_fn
     :prog: ns-eval
     :nodefault:

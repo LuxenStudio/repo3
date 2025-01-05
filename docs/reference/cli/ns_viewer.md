@@ -2,7 +2,7 @@
 
 ```{eval-rst}
 .. argparse::
-    :module: luxenstudio.scripts.viewer.run_viewer
+    :module: scripts.viewer.run_viewer
     :func: get_parser_fn
     :prog: ns-viewer
     :nodefault:
