@@ -70,14 +70,14 @@ Luxenstudio initially launched as an opensource project by Berkeley students in 
 
 We are committed to providing learning resources to help you understand the basics of (if you're just getting started), and keep up-to-date with (if you're a seasoned veteran) all things Luxen. As researchers, we know just how hard it is to get onboarded with this next-gen technology. So we're here to help with tutorials, documentation, and more!
 
-Have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome any and all [contributions](https://docs.luxen.studio/en/latest/reference/contributing.html)!** Please do not hesitate to reach out to the luxenstudio team with any questions via [Discord](https://discord.gg/uMbNqcraFc).
+Have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome [contributions](https://docs.luxen.studio/en/latest/reference/contributing.html)!** Please do not hesitate to reach out to the luxenstudio team with any questions via [Discord](https://discord.gg/uMbNqcraFc).
 
 We hope luxenstudio enables you to build faster :hammer: learn together :books: and contribute to our Luxen community :sparkling_heart:.
 
 # Quickstart
 
 The quickstart will help you get started with the default vanilla Luxen trained on the classic Blender Lego scene.
-For more complex changes (e.g., running with your own data/setting up a new Luxen graph, please refer to our [references](#learn-more).
+For more complex changes (e.g., running with your own data/setting up a new Luxen graph), please refer to our [references](#learn-more).
 
 ## 1. Installation: Setup the environment
 
