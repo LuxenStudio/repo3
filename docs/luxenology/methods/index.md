@@ -47,6 +47,7 @@ We also welcome additions to the list of methods above. To do this, simply creat
 1. Add a markdown file describing the model to the `docs/luxenology/methods` folder
 2. Update the above list of implement methods in this file.
 3. Add the method to the {ref}`this<third_party_methods>` list in `docs/index.md`.
+4. Add a new `ExternalMethod` entry to the `luxenstudio/configs/external_methods.py` file.
 
 For the method description, please refer to the [Instruct-Luxen2Luxen](in2n) page as an example of the layout. Please try to include the following information:
 
