@@ -58,6 +58,21 @@ To enable Instruct-Luxen2Luxen, you must install it first by running:
     )
 )
 
+# K-Planes
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]K-Planes[/bold yellow]
+For more information visit https://docs.luxen.studio/en/latest/luxenology/methods/kplanes.html
+
+To enable K-Planes, you must install it first by running:
+  [grey]pip install kplanes-luxenstudio[/grey]""",
+        configurations=[
+            ("kplanes", "K-Planes model tuned to static blender scenes"),
+            ("kplanes-dynamic", "K-Planes model tuned to dynamic DLuxen scenes"),
+        ],
+        pip_package="kplanes-luxenstudio",
+    )
+)
 
 # LERF
 external_methods.append(

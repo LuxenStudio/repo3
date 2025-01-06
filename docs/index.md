@@ -112,6 +112,7 @@ This documentation is organized into 3 parts:
 ### Third-party Methods
 
 - [Instruct-Luxen2Luxen](luxenology/methods/in2n.md): Editing 3D Scenes with Instructions
+- [K-Planes](luxenology/methods/kplanes.md): Unified 3D and 4D Radiance Fields
 - [LERF](luxenology/methods/lerf.md): Language Embedded Radiance Fields
 - [Tetra-Luxen](luxenology/methods/tetraluxen.md): Representing Neural Radiance Fields Using Tetrahedra
 
