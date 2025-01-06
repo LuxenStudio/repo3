@@ -21,7 +21,7 @@ import tarfile
 import zipfile
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Union
+from typing import TYPE_CHECKING, Union
 
 import gdown
 import tyro
@@ -135,7 +135,10 @@ luxenstudio_file_ids = {
     "luxenstudio-dataset": luxenstudio_dataset,
 }
 
-LuxenstudioCaptureName = tyro.extras.literal_type_from_choices(luxenstudio_file_ids.keys())
+if TYPE_CHECKING:
+    LuxenstudioCaptureName = str
+else:
+    LuxenstudioCaptureName = tyro.extras.literal_type_from_choices(luxenstudio_file_ids.keys())
 
 
 def download_capture_name(save_dir: Path, dataset_name: str, capture_name: str, capture_name_to_file_id: dict):
@@ -206,7 +209,10 @@ record3d_file_ids = {
     "bear": grab_file_id("https://drive.google.com/file/d/1WRZohWMRj0nNlYFIEBwkddDoGPvLTzkR/view?usp=sharing")
 }
 
-Record3dCaptureName = tyro.extras.literal_type_from_choices(record3d_file_ids.keys())
+if TYPE_CHECKING:
+    Record3dCaptureName = str
+else:
+    Record3dCaptureName = tyro.extras.literal_type_from_choices(record3d_file_ids.keys())
 
 
 @dataclass
@@ -257,7 +263,10 @@ phototourism_downloads = {
     "all": None,
 }
 
-PhototourismCaptureName = tyro.extras.literal_type_from_choices(phototourism_downloads.keys())
+if TYPE_CHECKING:
+    PhototourismCaptureName = str
+else:
+    PhototourismCaptureName = tyro.extras.literal_type_from_choices(phototourism_downloads.keys())
 
 
 @dataclass
@@ -315,7 +324,10 @@ sdfstudio_downloads = {
     "all": None,
 }
 
-SDFstudioCaptureName = tyro.extras.literal_type_from_choices(sdfstudio_downloads.keys())
+if TYPE_CHECKING:
+    SDFstudioCaptureName = str
+else:
+    SDFstudioCaptureName = tyro.extras.literal_type_from_choices(sdfstudio_downloads.keys())
 
 
 @dataclass
@@ -385,7 +397,10 @@ luxenosr_downloads = {
 }
 
 
-LuxenOSRCaptureName = tyro.extras.literal_type_from_choices(luxenosr_downloads.keys())
+if TYPE_CHECKING:
+    LuxenOSRCaptureName = str
+else:
+    LuxenOSRCaptureName = tyro.extras.literal_type_from_choices(luxenosr_downloads.keys())
 
 
 @dataclass
