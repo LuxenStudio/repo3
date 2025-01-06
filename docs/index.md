@@ -99,16 +99,23 @@ This documentation is organized into 3 parts:
 
 ## Supported Methods
 
-- [**Luxenacto**](https://github.com/luxenstudio-project/luxenstudio/blob/master/luxenstudio/models/luxenacto.py): our de facto Luxen method combines modules focused on quality with modules focused on faster rendering. Luxenstudio easily lets us experiment with the best of both worlds!
-- [Luxen](https://www.matthewtancik.com/luxen): Representing Scenes as Neural Radiance Fields for View Synthesis
-- [Instant NGP](https://nvlabs.github.io/instant-ngp/): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
-- [Mipluxen](https://jonbarron.info/mipluxen/): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
-- [LuxenW](https://luxen-w.github.io/): Neural Radiance Fields for Unconstrained Photo Collections
-- [Semantic Luxen](https://shuaifengzhi.com/Semantic-Luxen/): In-Place Scene Labelling and Understanding with Implicit Scene Representation
+### Included Methods
 
-We'll be constantly growing this list! So make sure to check back in to see our updates.
+- [**Luxenacto**](luxenology/methods/luxenacto.md): Recommended method, integrates mutiple methods into one.
+- [Instant-NGP](luxenology/methods/instant_ngp.md): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
+- [Luxen](luxenology/methods/luxen.md): OG Nerual Radiance Fields
+- [Mip-Luxen](luxenology/methods/mipluxen.md): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
+- [TensoRF](luxenology/methods/tensorf.md): Tensorial Radiance Fields
 
-**Eager to contribute?** We'd love to see you use luxenstudio in implementing new (or even existing) methods! Feel free to contact us directly or view our [Contributor's Guide](reference/contributing) to see how you can get your model on this list!
+(third_party_methods)=
+
+### Third-party Methods
+
+- [Instruct-Luxen2Luxen](luxenology/methods/in2n.md): Editing 3D Scenes with Instructions
+- [LERF](luxenology/methods/lerf.md): Language Embedded Radiance Fields
+- [Tetra-Luxen](luxenology/methods/tetraluxen.md): Representing Neural Radiance Fields Using Tetrahedra
+
+**Eager to contribute a method?** We'd love to see you use luxenstudio in implementing new (or even existing) methods! Please view our {ref}`guide<own_method_docs>` for more details about how to add to this list!
 
 ## Quicklinks
 
