@@ -8,8 +8,7 @@ from luxenstudio.field_components.temporal_distortions import DLuxenDistortion
 
 def test_dluxen_distortion():
     """Test dluxen distortion"""
-    # pylint: disable=import-outside-toplevel
-    # pylint: disable=unused-import
+
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     distortion = DLuxenDistortion().to(device)
 

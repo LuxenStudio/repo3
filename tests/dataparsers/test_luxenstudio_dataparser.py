@@ -1,7 +1,7 @@
 """
 Luxenstudio dataparser
 """
-# pylint: disable=all
+
 import json
 from pathlib import Path
 

@@ -16,7 +16,6 @@
 Script for exporting Luxen into other formats.
 """
 
-# pylint: disable=no-member
 
 from __future__ import annotations
 

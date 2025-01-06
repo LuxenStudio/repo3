@@ -26,7 +26,7 @@ from torch import Tensor
 from luxenstudio.utils.math import Gaussians, conical_frustum_to_gaussian
 from luxenstudio.utils.tensor_dataclass import TensorDataclass
 
-TORCH_DEVICE = Union[str, torch.device]  # pylint: disable=invalid-name
+TORCH_DEVICE = Union[str, torch.device]
 
 
 @dataclass
