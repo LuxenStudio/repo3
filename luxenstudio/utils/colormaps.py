@@ -26,7 +26,7 @@ from luxenstudio.utils import colors
 Colormaps = Literal["default", "turbo", "viridis", "magma", "inferno", "cividis"]
 
 
-@dataclass
+@dataclass(frozen=True)
 class ColormapOptions:
     """Options for colormap"""
 
