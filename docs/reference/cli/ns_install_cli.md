@@ -2,7 +2,7 @@
 
 ```{eval-rst}
 .. argparse::
-    :module: scripts.completions.install
+    :module: luxenstudio.scripts.completions.install
     :func: get_parser_fn
     :prog: ns-install-cli
     :nodefault:
