@@ -35,7 +35,7 @@ def main() -> None:
     # - luxenstudio/scripts/
     # - luxenstudio/
     target_path = pathlib.Path(__file__).absolute().parent.parent.parent / pathlib.Path(
-        "luxenstudio/viewer/app/src/modules/WebSocket/ViserMessages.tsx"
+        "viewer/app/src/modules/WebSocket/ViserMessages.tsx"
     )
     assert target_path.exists()
 
