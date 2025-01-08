@@ -103,7 +103,7 @@ This documentation is organized into 3 parts:
 
 - [**Luxenacto**](luxenology/methods/luxenacto.md): Recommended method, integrates mutiple methods into one.
 - [Instant-NGP](luxenology/methods/instant_ngp.md): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
-- [Luxen](luxenology/methods/luxen.md): OG Nerual Radiance Fields
+- [Luxen](luxenology/methods/luxen.md): OG Neural Radiance Fields
 - [Mip-Luxen](luxenology/methods/mipluxen.md): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
 - [TensoRF](luxenology/methods/tensorf.md): Tensorial Radiance Fields
 

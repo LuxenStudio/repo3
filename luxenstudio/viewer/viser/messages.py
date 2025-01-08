@@ -186,10 +186,10 @@ class DatasetImageMessage(LuxenstudioMessage):
 
 @dataclasses.dataclass
 class TrainingStateMessage(LuxenstudioMessage):
-    """Wheather the scene is in training mode or not."""
+    """Whether the scene is in training mode or not."""
 
     training_state: Literal["training", "paused", "completed"]
-    """True if the model is currently trianing, False otherwise"""
+    """True if the model is currently training, False otherwise"""
 
 
 @dataclasses.dataclass

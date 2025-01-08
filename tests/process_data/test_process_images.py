@@ -23,7 +23,7 @@ from luxenstudio.process_data.images_to_luxenstudio_dataset import (
 
 def random_quaternion(num_poses: int):
     """
-    Generates random rotation quatenion.
+    Generates random rotation quaternion.
     """
     u, v, w = np.random.uniform(size=(3, num_poses))
     quaternion = np.stack(
