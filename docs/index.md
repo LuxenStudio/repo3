@@ -103,7 +103,7 @@ This documentation is organized into 3 parts:
 
 - [**Luxenacto**](luxenology/methods/luxenacto.md): Recommended method, integrates mutiple methods into one.
 - [Instant-NGP](luxenology/methods/instant_ngp.md): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
-- [Luxen](luxenology/methods/luxen.md): OG Nerual Radiance Fields
+- [Luxen](luxenology/methods/luxen.md): OG Neural Radiance Fields
 - [Mip-Luxen](luxenology/methods/mipluxen.md): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
 - [TensoRF](luxenology/methods/tensorf.md): Tensorial Radiance Fields
 
@@ -176,13 +176,17 @@ You can find a paper writeup of the framework on [arXiv](https://arxiv.org/abs/2
 If you use this library or find the documentation useful for your research, please consider citing:
 
 ```none
-@article{luxenstudio,
-    author = {Tancik, Matthew and Weber, Ethan and Ng, Evonne and Li, Ruilong and Yi,
-            Brent and Kerr, Justin and Wang, Terrance and Kristoffersen, Alexander and Austin,
-            Jake and Salahi, Kamyar and Ahuja, Abhik and McAllister, David and Kanazawa, Angjoo},
-    title = {Luxenstudio: A Modular Framework for Neural Radiance Field Development},
-    journal = {arXiv preprint arXiv:2302.04264},
-    year = {2023},
+@inproceedings{luxenstudio,
+	title        = {Luxenstudio: A Modular Framework for Neural Radiance Field Development},
+	author       = {
+		Tancik, Matthew and Weber, Ethan and Ng, Evonne and Li, Ruilong and Yi, Brent
+		and Kerr, Justin and Wang, Terrance and Kristoffersen, Alexander and Austin,
+		Jake and Salahi, Kamyar and Ahuja, Abhik and McAllister, David and Kanazawa,
+		Angjoo
+	},
+	year         = 2023,
+	booktitle    = {ACM SIGGRAPH 2023 Conference Proceedings},
+	series       = {SIGGRAPH '23}
 }
 ```
 

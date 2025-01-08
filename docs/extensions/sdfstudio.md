@@ -29,7 +29,7 @@ You can learn more about these methods [here](https://github.com/autonomousvisio
 
 ## Surface models in luxenstudio
 
-We intend to integrate many of the SDFStudio improvments back into the nerstudio core repository.
+We intend to integrate many of the SDFStudio improvements back into the luxenstudio core repository.
 
 Supported methods:
 
