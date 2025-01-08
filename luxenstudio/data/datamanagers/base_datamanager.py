@@ -64,6 +64,7 @@ from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttri
 from luxenstudio.model_components.ray_generators import RayGenerator
 from luxenstudio.utils.misc import IterableWrapper
 from luxenstudio.utils.rich_utils import CONSOLE
+from collections import defaultdict
 
 
 def variable_res_collate(batch: List[Dict]) -> Dict:
@@ -74,18 +75,24 @@ def variable_res_collate(batch: List[Dict]) -> Dict:
         Collated batch.
     """
     images = []
-    masks = []
+    imgdata_lists = defaultdict(list)
     for data in batch:
         image = data.pop("image")
-        mask = data.pop("mask", None)
         images.append(image)
-        if mask is not None:
-            masks.append(mask)
+        topop = []
+        for key, val in data.items():
+            if isinstance(val, torch.Tensor):
+                # if the value has same height and width as the image, assume that it should be collated accordingly.
+                if len(val.shape) >= 2 and val.shape[:2] == image.shape[:2]:
+                    imgdata_lists[key].append(val)
+                    topop.append(key)
+        # now that iteration is complete, the image data items can be removed from the batch
+        for key in topop:
+            del data[key]
 
     new_batch = luxenstudio_collate(batch)
     new_batch["image"] = images
-    if masks:
-        new_batch["mask"] = masks
+    new_batch.update(imgdata_lists)
 
     return new_batch
 
