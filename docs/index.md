@@ -35,7 +35,7 @@ It's as simple as plug and play with luxenstudio!
 On top of our API, we are committed to providing learning resources to help you understand the basics of (if you're just getting started), and keep up-to-date with (if you're a seasoned veteran) all things Luxen.
 As researchers, we know just how hard it is to get onboarded with this next-gen technology. So we're here to help with tutorials, documentation, and more!
 
-Finally, have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome any and all [contributions](reference/contributing)!**
+Finally, have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome [contributions](reference/contributing)!**
 Please do not hesitate to reach out to the luxenstudio team with any questions via [Discord](https://discord.gg/uMbNqcraFc).
 
 We hope luxenstudio enables you to build faster 🔨 learn together 📚 and contribute to our Luxen community 💖.
@@ -99,16 +99,24 @@ This documentation is organized into 3 parts:
 
 ## Supported Methods
 
-- [**Luxenacto**](https://github.com/luxenstudio-project/luxenstudio/blob/master/luxenstudio/models/luxenacto.py): our de facto Luxen method combines modules focused on quality with modules focused on faster rendering. Luxenstudio easily lets us experiment with the best of both worlds!
-- [Luxen](https://www.matthewtancik.com/luxen): Representing Scenes as Neural Radiance Fields for View Synthesis
-- [Instant NGP](https://nvlabs.github.io/instant-ngp/): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
-- [Mipluxen](https://jonbarron.info/mipluxen/): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
-- [LuxenW](https://luxen-w.github.io/): Neural Radiance Fields for Unconstrained Photo Collections
-- [Semantic Luxen](https://shuaifengzhi.com/Semantic-Luxen/): In-Place Scene Labelling and Understanding with Implicit Scene Representation
+### Included Methods
 
-We'll be constantly growing this list! So make sure to check back in to see our updates.
+- [**Luxenacto**](luxenology/methods/luxenacto.md): Recommended method, integrates mutiple methods into one.
+- [Instant-NGP](luxenology/methods/instant_ngp.md): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
+- [Luxen](luxenology/methods/luxen.md): OG Neural Radiance Fields
+- [Mip-Luxen](luxenology/methods/mipluxen.md): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
+- [TensoRF](luxenology/methods/tensorf.md): Tensorial Radiance Fields
 
-**Eager to contribute?** We'd love to see you use luxenstudio in implementing new (or even existing) methods! Feel free to contact us directly or view our [Contributor's Guide](reference/contributing) to see how you can get your model on this list!
+(third_party_methods)=
+
+### Third-party Methods
+
+- [Instruct-Luxen2Luxen](luxenology/methods/in2n.md): Editing 3D Scenes with Instructions
+- [K-Planes](luxenology/methods/kplanes.md): Unified 3D and 4D Radiance Fields
+- [LERF](luxenology/methods/lerf.md): Language Embedded Radiance Fields
+- [Tetra-Luxen](luxenology/methods/tetraluxen.md): Representing Neural Radiance Fields Using Tetrahedra
+
+**Eager to contribute a method?** We'd love to see you use luxenstudio in implementing new (or even existing) methods! Please view our {ref}`guide<own_method_docs>` for more details about how to add to this list!
 
 ## Quicklinks
 
@@ -168,13 +176,17 @@ You can find a paper writeup of the framework on [arXiv](https://arxiv.org/abs/2
 If you use this library or find the documentation useful for your research, please consider citing:
 
 ```none
-@article{luxenstudio,
-    author = {Tancik, Matthew and Weber, Ethan and Ng, Evonne and Li, Ruilong and Yi,
-            Brent and Kerr, Justin and Wang, Terrance and Kristoffersen, Alexander and Austin,
-            Jake and Salahi, Kamyar and Ahuja, Abhik and McAllister, David and Kanazawa, Angjoo},
-    title = {Luxenstudio: A Modular Framework for Neural Radiance Field Development},
-    journal = {arXiv preprint arXiv:2302.04264},
-    year = {2023},
+@inproceedings{luxenstudio,
+	title        = {Luxenstudio: A Modular Framework for Neural Radiance Field Development},
+	author       = {
+		Tancik, Matthew and Weber, Ethan and Ng, Evonne and Li, Ruilong and Yi, Brent
+		and Kerr, Justin and Wang, Terrance and Kristoffersen, Alexander and Austin,
+		Jake and Salahi, Kamyar and Ahuja, Abhik and McAllister, David and Kanazawa,
+		Angjoo
+	},
+	year         = 2023,
+	booktitle    = {ACM SIGGRAPH 2023 Conference Proceedings},
+	series       = {SIGGRAPH '23}
 }
 ```
 
@@ -183,3 +195,13 @@ If you use this library or find the documentation useful for your research, plea
 <a href="https://github.com/luxenstudio-project/luxenstudio/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=luxenstudio-project/luxenstudio" />
 </a>
+
+## Maintainers
+
+|                                              | Luxenstudio Discord | Affiliation                          |
+| -------------------------------------------- | ------------------ | ------------------------------------ |
+| [Justin Kerr](https://kerrj.github.io/)      | justin.kerr        | UC Berkeley                          |
+| [Jonáš Kulhánek](https://jkulhanek.com/)     | jkulhanek          | Czech Technical University in Prague |
+| [Matt Tancik](https://www.matthewtancik.com) | tancik             | UC Berkeley                          |
+| [Ethan Weber](https://ethanweber.me/)        | ethanweber         | UC Berkeley                          |
+| [Brent Yi](https://github.com/brentyi)       | brent              | UC Berkeley                          |

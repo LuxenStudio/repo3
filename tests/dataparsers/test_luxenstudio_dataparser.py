@@ -1,7 +1,7 @@
 """
 Luxenstudio dataparser
 """
-# pylint: disable=all
+
 import json
 from pathlib import Path
 
@@ -72,7 +72,6 @@ def test_luxenstudio_dataparser_split_filelist(mocked_dataset):
         json.dump(data, f)
 
     from luxenstudio.data.dataparsers.luxenstudio_dataparser import (
-        DataparserOutputs,
         Luxenstudio,
         LuxenstudioDataParserConfig,
     )

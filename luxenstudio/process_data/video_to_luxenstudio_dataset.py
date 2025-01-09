@@ -1,4 +1,4 @@
-# Copyright 2022 The Luxenstudio Team. All rights reserved.
+# Copyright 2022 the Regents of the University of California, Luxenstudio Team and contributors. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,14 +17,11 @@
 import shutil
 from dataclasses import dataclass
 
-from rich.console import Console
-
 from luxenstudio.process_data import equirect_utils, process_data_utils
 from luxenstudio.process_data.colmap_converter_to_luxenstudio_dataset import (
     ColmapConverterToLuxenstudioDataset,
 )
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 @dataclass
@@ -43,7 +40,7 @@ class VideoToLuxenstudioDataset(ColmapConverterToLuxenstudioDataset):
     percent_radius_crop: float = 1.0
     """Create circle crop mask. The radius is the percent of the image diagonal."""
 
-    def main(self) -> None:  # pylint: disable=R0915
+    def main(self) -> None:
         """Process video into a luxenstudio dataset."""
 
         summary_log = []

@@ -1,4 +1,4 @@
-# Copyright 2022 The Luxenstudio Team. All rights reserved.
+# Copyright 2022 the Regents of the University of California, Luxenstudio Team and contributors. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -23,13 +23,10 @@ from pathlib import Path
 from typing import Literal, Optional
 
 import tyro
-from rich.console import Console
 
 from luxenstudio.exporter import texture_utils
 from luxenstudio.exporter.exporter_utils import get_mesh_from_filename
 from luxenstudio.utils.eval_utils import eval_setup
-
-CONSOLE = Console(width=120)
 
 
 @dataclass
@@ -55,7 +52,6 @@ class TextureMesh:
 
     def main(self) -> None:
         """Export textured mesh"""
-        # pylint: disable=too-many-statements
 
         if not self.output_dir.exists():
             self.output_dir.mkdir(parents=True)
