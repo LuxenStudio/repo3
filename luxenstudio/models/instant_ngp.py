@@ -36,7 +36,7 @@ from luxenstudio.engine.callbacks import (
 )
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SceneContraction
-from luxenstudio.fields.luxenacto_field import TCNNLuxenactoField
+from luxenstudio.fields.luxenacto_field import LuxenactoField
 from luxenstudio.model_components.losses import MSELoss
 from luxenstudio.model_components.ray_samplers import VolumetricSampler
 from luxenstudio.model_components.renderers import (
@@ -94,7 +94,7 @@ class NGPModel(Model):
     """
 
     config: InstantNGPModelConfig
-    field: TCNNLuxenactoField
+    field: LuxenactoField
 
     def __init__(self, config: InstantNGPModelConfig, **kwargs) -> None:
         super().__init__(config=config, **kwargs)
@@ -108,7 +108,7 @@ class NGPModel(Model):
         else:
             scene_contraction = SceneContraction(order=float("inf"))
 
-        self.field = TCNNLuxenactoField(
+        self.field = LuxenactoField(
             aabb=self.scene_box.aabb,
             num_images=self.num_train_data,
             log2_hashmap_size=self.config.log2_hashmap_size,
