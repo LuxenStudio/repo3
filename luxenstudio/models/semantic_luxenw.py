@@ -38,7 +38,7 @@ from luxenstudio.engine.callbacks import (
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SceneContraction
 from luxenstudio.fields.density_fields import HashMLPDensityField
-from luxenstudio.fields.luxenacto_field import TCNNLuxenactoField
+from luxenstudio.fields.luxenacto_field import LuxenactoField
 from luxenstudio.model_components.losses import MSELoss, distortion_loss, interlevel_loss
 from luxenstudio.model_components.ray_samplers import ProposalNetworkSampler
 from luxenstudio.model_components.renderers import (
@@ -90,7 +90,7 @@ class SemanticLuxenWModel(Model):
             raise ValueError("Transient embedding is not fully working for semantic luxen-w.")
 
         # Fields
-        self.field = TCNNLuxenactoField(
+        self.field = LuxenactoField(
             self.scene_box.aabb,
             num_levels=self.config.num_levels,
             max_res=self.config.max_res,
