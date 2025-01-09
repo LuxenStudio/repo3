@@ -14,7 +14,7 @@ from luxenstudio.pipelines.base_pipeline import (
     VanillaPipeline,
     VanillaPipelineConfig,
 )
-from luxenstudio.data.base_datamanager import VanillaDataManagerConfig
+from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
 
 
 class MockedDataManager:
