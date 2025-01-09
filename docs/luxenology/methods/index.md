@@ -26,14 +26,15 @@ The following methods are supported in luxenstudio:
 
 ```{toctree}
     :maxdepth: 1
-    Luxen<luxen.md>
-    Mip-Luxen<mipluxen.md>
-    Luxenacto<luxenacto.md>
     Instant-NGP<instant_ngp.md>
     Instruct-Luxen2Luxen<in2n.md>
+    K-Planes<kplanes.md>
     LERF<lerf.md>
-    Semantic Luxen-W<semantic_luxenw.md>
-    Tetra-Luxen <tetraluxen.md>
+    Mip-Luxen<mipluxen.md>
+    Luxen<luxen.md>
+    Luxenacto<luxenacto.md>
+    Tetra-Luxen<tetraluxen.md>
+    TensoRF<tensorf.md>
 ```
 
 (own_method_docs)=
@@ -42,7 +43,14 @@ The following methods are supported in luxenstudio:
 
 If you're a researcher looking to develop new Luxen-related methods, we hope that you find luxenstudio to be a useful tool. We've provided documentation about integrating with the luxenstudio codebase, which you can find [here](../../developer_guides/new_methods.md).
 
-We also welcome additions to the list of methods above. To do this, simply create a pull request that adds a markdown file describing the model to the docs/luxenology/methods folder, and update the list in this file. For reference on the layout, you can check out the [Instruct-Luxen2Luxen](in2n) page. Please try to include the following information:
+We also welcome additions to the list of methods above. To do this, simply create a pull request with the following changes,
+
+1. Add a markdown file describing the model to the `docs/luxenology/methods` folder
+2. Update the above list of implement methods in this file.
+3. Add the method to the {ref}`this<third_party_methods>` list in `docs/index.md`.
+4. Add a new `ExternalMethod` entry to the `luxenstudio/configs/external_methods.py` file.
+
+For the method description, please refer to the [Instruct-Luxen2Luxen](in2n) page as an example of the layout. Please try to include the following information:
 
 - Installation instructions
 - Instructions for running the method

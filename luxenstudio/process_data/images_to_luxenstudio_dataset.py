@@ -1,4 +1,4 @@
-# Copyright 2022 The Luxenstudio Team. All rights reserved.
+# Copyright 2022 the Regents of the University of California, Luxenstudio Team and contributors. All rights reserved.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,14 +17,11 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from rich.console import Console
-
 from luxenstudio.process_data import equirect_utils, process_data_utils
 from luxenstudio.process_data.colmap_converter_to_luxenstudio_dataset import (
     ColmapConverterToLuxenstudioDataset,
 )
-
-CONSOLE = Console(width=120)
+from luxenstudio.utils.rich_utils import CONSOLE
 
 
 @dataclass
@@ -35,10 +32,9 @@ class ImagesToLuxenstudioDataset(ColmapConverterToLuxenstudioDataset):
     2. Calculates the camera poses for each image using `COLMAP <https://colmap.github.io/>`_.
     """
 
-    def main(self) -> None:  # pylint: disable=R0915
+    def main(self) -> None:
         """Process images into a luxenstudio dataset."""
 
-        # pylint: disable=too-many-statements
         require_cameras_exist = False
         if self.colmap_model_path != ColmapConverterToLuxenstudioDataset.default_colmap_path():
             if not self.skip_colmap:
