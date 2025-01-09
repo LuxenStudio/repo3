@@ -11,10 +11,10 @@ from luxenstudio.data.datasets.base_dataset import DataparserOutputs, InputDatas
 from luxenstudio.pipelines.base_pipeline import (
     Model,
     ModelConfig,
-    VanillaDataManagerConfig,
     VanillaPipeline,
     VanillaPipelineConfig,
 )
+from luxenstudio.data.base_datamanager import VanillaDataManagerConfig
 
 
 class MockedDataManager:
