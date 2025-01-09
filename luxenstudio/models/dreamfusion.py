@@ -37,7 +37,7 @@ from luxenstudio.fields.density_fields import HashMLPDensityField
 from luxenstudio.fields.dreamfusion_field import DreamFusionField
 from luxenstudio.generative.stable_diffusion import StableDiffusion
 from luxenstudio.generative.deepfloyd import DeepFloyd
-from luxenstudio.generative.dreamfusion_utils import PositionalTextEmbeddings
+from luxenstudio.generative.positional_text_embeddings import PositionalTextEmbeddings
 from luxenstudio.model_components.losses import (
     MSELoss,
     distortion_loss,
