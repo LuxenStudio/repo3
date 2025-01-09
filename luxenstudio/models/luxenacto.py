@@ -37,7 +37,7 @@ from luxenstudio.engine.callbacks import (
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SceneContraction
 from luxenstudio.fields.density_fields import HashMLPDensityField
-from luxenstudio.fields.luxenacto_field import TCNNLuxenactoField
+from luxenstudio.fields.luxenacto_field import LuxenactoField
 from luxenstudio.model_components.losses import (
     MSELoss,
     distortion_loss,
@@ -130,6 +130,8 @@ class LuxenactoModelConfig(ModelConfig):
     """Whether to disable scene contraction or not."""
     use_gradient_scaling: bool = False
     """Use gradient scaler where the gradients are lower for points closer to the camera."""
+    implementation: Literal["tcnn", "torch"] = "tcnn"
+    """Which implementation to use for the model."""
 
 
 class LuxenactoModel(Model):
@@ -151,7 +153,7 @@ class LuxenactoModel(Model):
             scene_contraction = SceneContraction(order=float("inf"))
 
         # Fields
-        self.field = TCNNLuxenactoField(
+        self.field = LuxenactoField(
             self.scene_box.aabb,
             hidden_dim=self.config.hidden_dim,
             num_levels=self.config.num_levels,
@@ -163,6 +165,7 @@ class LuxenactoModel(Model):
             num_images=self.num_train_data,
             use_pred_normals=self.config.predict_normals,
             use_average_appearance_embedding=self.config.use_average_appearance_embedding,
+            implementation=self.config.implementation,
         )
 
         self.density_fns = []
@@ -172,7 +175,12 @@ class LuxenactoModel(Model):
         if self.config.use_same_proposal_network:
             assert len(self.config.proposal_net_args_list) == 1, "Only one proposal network is allowed."
             prop_net_args = self.config.proposal_net_args_list[0]
-            network = HashMLPDensityField(self.scene_box.aabb, spatial_distortion=scene_contraction, **prop_net_args)
+            network = HashMLPDensityField(
+                self.scene_box.aabb,
+                spatial_distortion=scene_contraction,
+                **prop_net_args,
+                implementation=self.config.implementation,
+            )
             self.proposal_networks.append(network)
             self.density_fns.extend([network.density_fn for _ in range(num_prop_nets)])
         else:
@@ -182,6 +190,7 @@ class LuxenactoModel(Model):
                     self.scene_box.aabb,
                     spatial_distortion=scene_contraction,
                     **prop_net_args,
+                    implementation=self.config.implementation,
                 )
                 self.proposal_networks.append(network)
             self.density_fns.extend([network.density_fn for network in self.proposal_networks])

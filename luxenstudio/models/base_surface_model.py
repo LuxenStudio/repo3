@@ -33,7 +33,7 @@ from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.field_components.encodings import LuxenEncoding
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SceneContraction
-from luxenstudio.fields.luxenacto_field import TCNNLuxenactoField
+from luxenstudio.fields.luxenacto_field import LuxenactoField
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.fields.vanilla_luxen_field import LuxenField
 from luxenstudio.model_components.losses import (
@@ -124,7 +124,7 @@ class SurfaceModel(Model):
 
         # background model
         if self.config.background_model == "grid":
-            self.field_background = TCNNLuxenactoField(
+            self.field_background = LuxenactoField(
                 self.scene_box.aabb,
                 spatial_distortion=self.scene_contraction,
                 num_images=self.num_train_data,
