@@ -38,6 +38,7 @@ from luxenstudio.engine.callbacks import (
     TrainingCallbackAttributes,
     TrainingCallbackLocation,
 )
+from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager
 from luxenstudio.engine.optimizers import Optimizers
 from luxenstudio.pipelines.base_pipeline import VanillaPipeline
 from luxenstudio.utils import profiler, writer
@@ -231,6 +232,7 @@ class Trainer:
         assert self.pipeline.datamanager.train_dataset is not None, "Missing DatsetInputs"
 
         if self.pipeline.datamanager.input_data:
+            assert isinstance(self.pipeline.datamanager, VanillaDataManager)
             self.pipeline.datamanager.train_dataparser_outputs.save_dataparser_transform(
                 self.base_dir / "dataparser_transforms.json"
             )
