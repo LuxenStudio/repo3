@@ -33,24 +33,16 @@ from rich.table import Table
 from torch.cuda.amp.grad_scaler import GradScaler
 
 from luxenstudio.configs.experiment_config import ExperimentConfig
-from luxenstudio.engine.callbacks import (
-    TrainingCallback,
-    TrainingCallbackAttributes,
-    TrainingCallbackLocation,
-)
+from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.engine.optimizers import Optimizers
 from luxenstudio.pipelines.base_pipeline import VanillaPipeline
 from luxenstudio.utils import profiler, writer
-from luxenstudio.utils.decorators import (
-    check_eval_enabled,
-    check_main_thread,
-    check_viewer_enabled,
-)
+from luxenstudio.utils.decorators import check_eval_enabled, check_main_thread, check_viewer_enabled
 from luxenstudio.utils.misc import step_check
 from luxenstudio.utils.rich_utils import CONSOLE
 from luxenstudio.utils.writer import EventName, TimeWriter
 from luxenstudio.viewer.server.viewer_state import ViewerState
-from luxenstudio.viewer_beta.viewer_state import ViewerState as ViewerBetaState
+from luxenstudio.viewer_beta.viewer import Viewer as ViewerBetaState
 
 TRAIN_INTERATION_OUTPUT = Tuple[torch.Tensor, Dict[str, torch.Tensor], Dict[str, torch.Tensor]]
 TORCH_DEVICE = str
