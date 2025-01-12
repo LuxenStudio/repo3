@@ -26,21 +26,14 @@ import tyro
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.configs.external_methods import get_external_methods
-from luxenstudio.data.datamanagers.base_datamanager import (
-    VanillaDataManager,
-    VanillaDataManagerConfig,
-)
+from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
 from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
-from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
-    InstantNGPDataParserConfig,
-)
+from luxenstudio.data.dataparsers.instant_ngp_dataparser import InstantNGPDataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
-from luxenstudio.data.dataparsers.phototourism_dataparser import (
-    PhototourismDataParserConfig,
-)
+from luxenstudio.data.dataparsers.phototourism_dataparser import PhototourismDataParserConfig
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
 from luxenstudio.data.datasets.depth_dataset import DepthDataset
@@ -487,6 +480,12 @@ method_configs["dreamfusion"] = TrainerConfig(
             ),
         },
         "fields": {
+            "optimizer": AdamOptimizerConfig(lr=5e-3, eps=1e-15),
+            "scheduler": ExponentialDecaySchedulerConfig(
+                warmup_steps=4000, lr_final=5e-7, max_steps=20000, ramp="linear"
+            ),
+        },
+        "diffusion_model": {
             "optimizer": AdamOptimizerConfig(lr=5e-3, eps=1e-15),
             "scheduler": ExponentialDecaySchedulerConfig(
                 warmup_steps=4000, lr_final=5e-7, max_steps=20000, ramp="linear"
