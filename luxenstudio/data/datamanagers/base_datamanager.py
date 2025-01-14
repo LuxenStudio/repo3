@@ -53,7 +53,6 @@ from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserCon
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.pixel_samplers import (
     EquirectangularPixelSampler,
-    PatchPixelSampler,
     PairPixelSampler,
     PixelSampler,
 )

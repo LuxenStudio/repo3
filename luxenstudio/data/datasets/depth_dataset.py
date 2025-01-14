@@ -26,7 +26,7 @@ from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.utils.data_utils import get_depth_image_from_path
 from PIL import Image
 import torch
-from rich.progress import Console, track
+from rich.progress import track
 from pathlib import Path
 import json
 
