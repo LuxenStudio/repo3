@@ -94,7 +94,7 @@ pip install luxenstudio
 Optional, use this command if you want the latest development version.
 
 ```bash
-git clone git@github.com:luxenstudio-project/luxenstudio.git
+git clone https://github.com/luxenstudio-project/luxenstudio.git
 cd luxenstudio
 pip install --upgrade pip setuptools
 pip install -e .
