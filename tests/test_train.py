@@ -24,8 +24,6 @@ BLACKLIST = [
     "volinga",
     "phototourism",
     "depth-luxenacto",
-    "luxenplayer-ngp",
-    "luxenplayer-luxenacto",
     "neus",
     "neus-facto",
 ]

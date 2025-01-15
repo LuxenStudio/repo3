@@ -32,7 +32,6 @@ from luxenstudio.data.datamanagers.base_datamanager import (
 )
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
-from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
     InstantNGPDataParserConfig,
 )
@@ -58,8 +57,6 @@ from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
-from luxenstudio.models.luxenplayer_luxenacto import LuxenplayerLuxenactoModelConfig
-from luxenstudio.models.luxenplayer_ngp import LuxenplayerNGPModelConfig
 from luxenstudio.models.neus import NeuSModelConfig
 from luxenstudio.models.neus_facto import NeuSFactoModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
@@ -82,8 +79,6 @@ descriptions = {
     "tensorf": "tensorf",
     "dluxen": "Dynamic-Luxen model. (slow)",
     "phototourism": "Uses the Phototourism data.",
-    "luxenplayer-luxenacto": "LuxenPlayer with luxenacto backbone.",
-    "luxenplayer-ngp": "LuxenPlayer with InstantNGP backbone.",
     "neus": "Implementation of NeuS. (slow)",
     "neus-facto": "Implementation of NeuS-Facto. (slow)",
 }
@@ -443,69 +438,6 @@ method_configs["phototourism"] = TrainerConfig(
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
-    vis="viewer",
-)
-
-method_configs["luxenplayer-luxenacto"] = TrainerConfig(
-    method_name="luxenplayer-luxenacto",
-    steps_per_eval_batch=500,
-    steps_per_save=2000,
-    max_num_iterations=30000,
-    mixed_precision=True,
-    pipeline=VanillaPipelineConfig(
-        datamanager=VanillaDataManagerConfig(
-            _target=VanillaDataManager[DepthDataset],
-            dataparser=DycheckDataParserConfig(),
-            train_num_rays_per_batch=4096,
-            eval_num_rays_per_batch=4096,
-            camera_optimizer=CameraOptimizerConfig(
-                mode="SO3xR3", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
-            ),
-        ),
-        model=LuxenplayerLuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
-    ),
-    optimizers={
-        "proposal_networks": {
-            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
-            "scheduler": None,
-        },
-        "fields": {
-            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
-            "scheduler": None,
-        },
-    },
-    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
-    vis="viewer",
-)
-
-method_configs["luxenplayer-ngp"] = TrainerConfig(
-    method_name="luxenplayer-ngp",
-    steps_per_eval_batch=500,
-    steps_per_save=2000,
-    max_num_iterations=30000,
-    mixed_precision=True,
-    pipeline=DynamicBatchPipelineConfig(
-        datamanager=VanillaDataManagerConfig(
-            _target=VanillaDataManager[DepthDataset],
-            dataparser=DycheckDataParserConfig(),
-            train_num_rays_per_batch=8192,
-        ),
-        model=LuxenplayerNGPModelConfig(
-            eval_num_rays_per_chunk=8192,
-            grid_levels=1,
-            alpha_thre=0.0,
-            render_step_size=0.001,
-            disable_scene_contraction=True,
-            near_plane=0.01,
-        ),
-    ),
-    optimizers={
-        "fields": {
-            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
-            "scheduler": None,
-        }
-    },
-    viewer=ViewerConfig(num_rays_per_chunk=64000),
     vis="viewer",
 )
 
