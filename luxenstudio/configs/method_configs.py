@@ -26,20 +26,12 @@ import tyro
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.configs.external_methods import get_external_methods
-from luxenstudio.data.datamanagers.base_datamanager import (
-    VanillaDataManager,
-    VanillaDataManagerConfig,
-)
+from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
-from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
-from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
-    InstantNGPDataParserConfig,
-)
+from luxenstudio.data.dataparsers.instant_ngp_dataparser import InstantNGPDataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
-from luxenstudio.data.dataparsers.phototourism_dataparser import (
-    PhototourismDataParserConfig,
-)
+from luxenstudio.data.dataparsers.phototourism_dataparser import PhototourismDataParserConfig
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
 from luxenstudio.data.datasets.depth_dataset import DepthDataset
@@ -58,8 +50,6 @@ from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
-from luxenstudio.models.luxenplayer_luxenacto import LuxenplayerLuxenactoModelConfig
-from luxenstudio.models.luxenplayer_ngp import LuxenplayerNGPModelConfig
 from luxenstudio.models.neus import NeuSModelConfig
 from luxenstudio.models.neus_facto import NeuSFactoModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
@@ -82,8 +72,6 @@ descriptions = {
     "tensorf": "tensorf",
     "dluxen": "Dynamic-Luxen model. (slow)",
     "phototourism": "Uses the Phototourism data.",
-    "luxenplayer-luxenacto": "LuxenPlayer with luxenacto backbone.",
-    "luxenplayer-ngp": "LuxenPlayer with InstantNGP backbone.",
     "neus": "Implementation of NeuS. (slow)",
     "neus-facto": "Implementation of NeuS-Facto. (slow)",
 }
@@ -129,7 +117,7 @@ method_configs["luxenacto-big"] = TrainerConfig(
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
             dataparser=LuxenstudioDataParserConfig(),
-            train_num_rays_per_batch=4096,
+            train_num_rays_per_batch=8192,
             eval_num_rays_per_batch=4096,
             camera_optimizer=CameraOptimizerConfig(
                 mode="SO3xR3",
@@ -142,8 +130,9 @@ method_configs["luxenacto-big"] = TrainerConfig(
             num_proposal_samples_per_ray=(512, 256),
             hidden_dim=128,
             hidden_dim_color=128,
-            hidden_dim_transient=128,
-            max_res=3000,
+            appearance_embed_dim=128,
+            base_res=32,
+            max_res=4096,
             proposal_weights_anneal_max_num_iters=5000,
             log2_hashmap_size=21,
         ),
@@ -155,7 +144,55 @@ method_configs["luxenacto-big"] = TrainerConfig(
         },
         "fields": {
             "optimizer": RAdamOptimizerConfig(lr=1e-2, eps=1e-15),
-            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-4, max_steps=100000),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-4, max_steps=50000),
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
+method_configs["luxenacto-huge"] = TrainerConfig(
+    method_name="luxenacto",
+    steps_per_eval_batch=500,
+    steps_per_save=2000,
+    max_num_iterations=100000,
+    mixed_precision=True,
+    pipeline=VanillaPipelineConfig(
+        datamanager=VanillaDataManagerConfig(
+            dataparser=LuxenstudioDataParserConfig(downscale_factor=1),
+            train_num_rays_per_batch=16384,
+            eval_num_rays_per_batch=4096,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="SO3xR3",
+                optimizer=RAdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-3),
+                scheduler=ExponentialDecaySchedulerConfig(lr_final=6e-5, max_steps=50000),
+            ),
+        ),
+        model=LuxenactoModelConfig(
+            eval_num_rays_per_chunk=1 << 15,
+            num_luxen_samples_per_ray=64,
+            num_proposal_samples_per_ray=(512, 512),
+            proposal_net_args_list=[
+                {"hidden_dim": 16, "log2_hashmap_size": 17, "num_levels": 5, "max_res": 512, "use_linear": False},
+                {"hidden_dim": 16, "log2_hashmap_size": 17, "num_levels": 7, "max_res": 2048, "use_linear": False},
+            ],
+            hidden_dim=256,
+            hidden_dim_color=256,
+            appearance_embed_dim=256,
+            features_per_level=4,
+            base_res=32,
+            max_res=8192,
+            proposal_weights_anneal_max_num_iters=5000,
+            log2_hashmap_size=21,
+        ),
+    ),
+    optimizers={
+        "proposal_networks": {
+            "optimizer": RAdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": None,
+        },
+        "fields": {
+            "optimizer": RAdamOptimizerConfig(lr=1e-2, eps=1e-15),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-4, max_steps=50000),
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
@@ -443,69 +480,6 @@ method_configs["phototourism"] = TrainerConfig(
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
-    vis="viewer",
-)
-
-method_configs["luxenplayer-luxenacto"] = TrainerConfig(
-    method_name="luxenplayer-luxenacto",
-    steps_per_eval_batch=500,
-    steps_per_save=2000,
-    max_num_iterations=30000,
-    mixed_precision=True,
-    pipeline=VanillaPipelineConfig(
-        datamanager=VanillaDataManagerConfig(
-            _target=VanillaDataManager[DepthDataset],
-            dataparser=DycheckDataParserConfig(),
-            train_num_rays_per_batch=4096,
-            eval_num_rays_per_batch=4096,
-            camera_optimizer=CameraOptimizerConfig(
-                mode="SO3xR3", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
-            ),
-        ),
-        model=LuxenplayerLuxenactoModelConfig(eval_num_rays_per_chunk=1 << 15),
-    ),
-    optimizers={
-        "proposal_networks": {
-            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
-            "scheduler": None,
-        },
-        "fields": {
-            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
-            "scheduler": None,
-        },
-    },
-    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
-    vis="viewer",
-)
-
-method_configs["luxenplayer-ngp"] = TrainerConfig(
-    method_name="luxenplayer-ngp",
-    steps_per_eval_batch=500,
-    steps_per_save=2000,
-    max_num_iterations=30000,
-    mixed_precision=True,
-    pipeline=DynamicBatchPipelineConfig(
-        datamanager=VanillaDataManagerConfig(
-            _target=VanillaDataManager[DepthDataset],
-            dataparser=DycheckDataParserConfig(),
-            train_num_rays_per_batch=8192,
-        ),
-        model=LuxenplayerNGPModelConfig(
-            eval_num_rays_per_chunk=8192,
-            grid_levels=1,
-            alpha_thre=0.0,
-            render_step_size=0.001,
-            disable_scene_contraction=True,
-            near_plane=0.01,
-        ),
-    ),
-    optimizers={
-        "fields": {
-            "optimizer": AdamOptimizerConfig(lr=1e-2, eps=1e-15),
-            "scheduler": None,
-        }
-    },
-    viewer=ViewerConfig(num_rays_per_chunk=64000),
     vis="viewer",
 )
 

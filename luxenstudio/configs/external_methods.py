@@ -106,6 +106,21 @@ To enable Tetra-Luxen, you must install it first. Please follow the instructions
     )
 )
 
+# LuxenPlayer
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]LuxenPlayer[/bold yellow]
+For more information visit: https://docs.luxen.studio/en/latest/luxenology/methods/luxenplayer.html
+
+To enable LuxenPlayer, you must install it first by running:
+  [grey]pip install git+https://github.com/lsongx/luxenplayer-luxenstudio[/grey]""",
+        configurations=[
+            ("luxenplayer-luxenacto", "LuxenPlayer with luxenacto backbone"),
+            ("luxenplayer-ngp", "LuxenPlayer with instang-ngp-bounded backbone"),
+        ],
+    )
+)
+
 
 @dataclass
 class ExternalMethodTrainerConfig(TrainerConfig):
