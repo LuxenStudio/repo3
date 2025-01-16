@@ -25,6 +25,7 @@ BLACKLIST = [
     "phototourism",
     "depth-luxenacto",
     "neus",
+    "geluxenacto",
     "neus-facto",
 ]
 
