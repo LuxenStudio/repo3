@@ -26,34 +26,29 @@ import tyro
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.configs.external_methods import get_external_methods
-from luxenstudio.data.datamanagers.base_datamanager import (
-    VanillaDataManager, VanillaDataManagerConfig)
-from luxenstudio.data.dataparsers.blender_dataparser import \
-    BlenderDataParserConfig
+from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
+from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
+from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
-from luxenstudio.data.dataparsers.instant_ngp_dataparser import \
-    InstantNGPDataParserConfig
-from luxenstudio.data.dataparsers.luxenstudio_dataparser import \
-    LuxenstudioDataParserConfig
-from luxenstudio.data.dataparsers.phototourism_dataparser import \
-    PhototourismDataParserConfig
-from luxenstudio.data.dataparsers.sdfstudio_dataparser import \
-    SDFStudioDataParserConfig
-from luxenstudio.data.dataparsers.sitcoms3d_dataparser import \
-    Sitcoms3DDataParserConfig
+from luxenstudio.data.dataparsers.instant_ngp_dataparser import InstantNGPDataParserConfig
+from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
+from luxenstudio.data.dataparsers.phototourism_dataparser import PhototourismDataParserConfig
+from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
+from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
 from luxenstudio.data.datasets.depth_dataset import DepthDataset
 from luxenstudio.data.datasets.sdf_dataset import SDFDataset
 from luxenstudio.data.datasets.semantic_dataset import SemanticDataset
-from luxenstudio.engine.optimizers import (AdamOptimizerConfig,
-                                          RAdamOptimizerConfig)
-from luxenstudio.engine.schedulers import (CosineDecaySchedulerConfig,
-                                          ExponentialDecaySchedulerConfig,
-                                          MultiStepSchedulerConfig)
+from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
+from luxenstudio.engine.schedulers import (
+    CosineDecaySchedulerConfig,
+    ExponentialDecaySchedulerConfig,
+    MultiStepSchedulerConfig,
+)
 from luxenstudio.engine.trainer import TrainerConfig
-from luxenstudio.field_components.temporal_distortions import \
-    TemporalDistortionKind
+from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
+from luxenstudio.models.geluxenacto import GeluxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
@@ -79,6 +74,7 @@ descriptions = {
     "tensorf": "tensorf",
     "dluxen": "Dynamic-Luxen model. (slow)",
     "phototourism": "Uses the Phototourism data.",
+    "geluxenacto": "Generative Text to Luxen model",
     "neus": "Implementation of NeuS. (slow)",
     "neus-facto": "Implementation of NeuS-Facto. (slow)",
 }
@@ -111,7 +107,7 @@ method_configs["luxenacto"] = TrainerConfig(
         },
         "camera_opt": {
             "optimizer": AdamOptimizerConfig(lr=1e-3, eps=1e-15),
-            "scheduler": ExponentialDecaySchedulerConfig(lr_final=6e-6, max_steps=200000),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-4, max_steps=2000),
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),

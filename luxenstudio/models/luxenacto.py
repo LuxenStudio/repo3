@@ -28,6 +28,7 @@ from torchmetrics import PeakSignalNoiseRatio
 from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
+from luxenstudio.cameras.camera_optimizers import CameraOptimizer, CameraOptimizerConfig
 from luxenstudio.cameras.rays import RayBundle, RaySamples
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.field_components.field_heads import FieldHeadNames
@@ -48,7 +49,6 @@ from luxenstudio.model_components.scene_colliders import NearFarCollider
 from luxenstudio.model_components.shaders import NormalsShader
 from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.utils import colormaps
-from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig, CameraOptimizer
 
 
 @dataclass
@@ -232,7 +232,7 @@ class LuxenactoModel(Model):
 
         # losses
         self.rgb_loss = MSELoss()
-
+        self.step = 0
         # metrics
         self.psnr = PeakSignalNoiseRatio(data_range=1.0)
         self.ssim = structural_similarity_index_measure
@@ -260,6 +260,7 @@ class LuxenactoModel(Model):
 
             def set_anneal(step):
                 # https://arxiv.org/pdf/2111.12077.pdf eq. 18
+                self.step = step
                 train_frac = np.clip(step / N, 0, 1)
 
                 def bias(x, b):

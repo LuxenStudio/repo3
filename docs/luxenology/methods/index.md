@@ -36,6 +36,7 @@ The following methods are supported in luxenstudio:
     LuxenPlayer<luxenplayer.md>
     Tetra-Luxen<tetraluxen.md>
     TensoRF<tensorf.md>
+    Geluxenacto<geluxenacto.md>
 ```
 
 (own_method_docs)=
