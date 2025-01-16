@@ -34,6 +34,7 @@ from torch.cuda.amp.grad_scaler import GradScaler
 
 from luxenstudio.configs.experiment_config import ExperimentConfig
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
+from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager
 from luxenstudio.engine.optimizers import Optimizers
 from luxenstudio.pipelines.base_pipeline import VanillaPipeline
 from luxenstudio.utils import profiler, writer
@@ -224,9 +225,11 @@ class Trainer:
         """Train the model."""
         assert self.pipeline.datamanager.train_dataset is not None, "Missing DatsetInputs"
 
-        self.pipeline.datamanager.train_dataparser_outputs.save_dataparser_transform(
-            self.base_dir / "dataparser_transforms.json"
-        )
+        # don't want to call save_dataparser_transform if pipeline's datamanager does not have a dataparser
+        if isinstance(self.pipeline.datamanager, VanillaDataManager):
+            self.pipeline.datamanager.train_dataparser_outputs.save_dataparser_transform(
+                self.base_dir / "dataparser_transforms.json"
+            )
 
         self._init_viewer_state()
         with TimeWriter(writer, EventName.TOTAL_TRAIN_TIME):

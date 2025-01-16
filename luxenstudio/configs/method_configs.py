@@ -26,7 +26,10 @@ import tyro
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.configs.external_methods import get_external_methods
+
+from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
+
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import InstantNGPDataParserConfig
@@ -47,6 +50,7 @@ from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
+from luxenstudio.models.geluxenacto import GeluxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
@@ -72,6 +76,7 @@ descriptions = {
     "tensorf": "tensorf",
     "dluxen": "Dynamic-Luxen model. (slow)",
     "phototourism": "Uses the Phototourism data.",
+    "geluxenacto": "Generative Text to Luxen model",
     "neus": "Implementation of NeuS. (slow)",
     "neus-facto": "Implementation of NeuS-Facto. (slow)",
 }
@@ -480,6 +485,51 @@ method_configs["phototourism"] = TrainerConfig(
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
+
+method_configs["geluxenacto"] = TrainerConfig(
+    method_name="geluxenacto",
+    experiment_name="",
+    steps_per_eval_batch=50,
+    steps_per_eval_image=50,
+    steps_per_save=200,
+    max_num_iterations=30000,
+    mixed_precision=True,
+    pipeline=VanillaPipelineConfig(
+        datamanager=RandomCamerasDataManagerConfig(
+            horizontal_rotation_warmup=3000,
+        ),
+        model=GeluxenactoModelConfig(
+            eval_num_rays_per_chunk=1 << 15,
+            distortion_loss_mult=1.0,
+            interlevel_loss_mult=100.0,
+            max_res=256,
+            sphere_collider=True,
+            initialize_density=True,
+            taper_range=(0, 2000),
+            random_background=True,
+            proposal_warmup=2000,
+            proposal_update_every=0,
+            proposal_weights_anneal_max_num_iters=2000,
+            start_lambertian_training=500,
+            start_normals_training=2000,
+            opacity_loss_mult=0.001,
+            positional_prompting="discrete",
+            guidance_scale=25,
+        ),
+    ),
+    optimizers={
+        "proposal_networks": {
+            "optimizer": AdamOptimizerConfig(lr=1e-3, eps=1e-15),
+            "scheduler": None,
+        },
+        "fields": {
+            "optimizer": AdamOptimizerConfig(lr=5e-4, eps=1e-15),
+            "scheduler": None,
+        },
+    },
+    viewer=ViewerConfig(),
     vis="viewer",
 )
 
