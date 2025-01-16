@@ -173,6 +173,7 @@ method_configs["depth-luxenacto"] = TrainerConfig(
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
             _target=VanillaDataManager[DepthDataset],
+            patch_size=2,
             dataparser=LuxenstudioDataParserConfig(),
             train_num_rays_per_batch=4096,
             eval_num_rays_per_batch=4096,

@@ -22,9 +22,11 @@ from dataclasses import dataclass, field
 from typing import Dict, Tuple, Type
 
 import torch
+import numpy as np
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.model_components.losses import DepthLossType, depth_loss
+from luxenstudio.model_components import losses
+from luxenstudio.model_components.losses import DepthLossType, depth_loss, depth_ranking_loss
 from luxenstudio.models.luxenacto import LuxenactoModel, LuxenactoModelConfig
 from luxenstudio.utils import colormaps
 
@@ -98,7 +100,14 @@ class DepthLuxenactoModel(LuxenactoModel):
         loss_dict = super().get_loss_dict(outputs, batch, metrics_dict)
         if self.training:
             assert metrics_dict is not None and "depth_loss" in metrics_dict
-            loss_dict["depth_loss"] = self.config.depth_loss_mult * metrics_dict["depth_loss"]
+            # If real depth used
+            if losses.DEPTH_METRIC:
+                loss_dict["depth_loss"] = self.config.depth_loss_mult * metrics_dict["depth_loss"]
+            else:
+                loss_dict["depth_ranking"] = np.interp(self.step, [0, 2000], [0, 0.2]) * depth_ranking_loss(
+                    outputs["depth"], batch["depth_image"]
+                )
+            # Else use depth ranking loss
 
         return loss_dict
 
