@@ -29,11 +29,7 @@ from torchmetrics.functional import structural_similarity_index_measure
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle, RaySamples
-from luxenstudio.engine.callbacks import (
-    TrainingCallback,
-    TrainingCallbackAttributes,
-    TrainingCallbackLocation,
-)
+from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SceneContraction
 from luxenstudio.fields.density_fields import HashMLPDensityField
@@ -46,16 +42,8 @@ from luxenstudio.model_components.losses import (
     pred_normal_loss,
     scale_gradients_by_distance_squared,
 )
-from luxenstudio.model_components.ray_samplers import (
-    ProposalNetworkSampler,
-    UniformSampler,
-)
-from luxenstudio.model_components.renderers import (
-    AccumulationRenderer,
-    DepthRenderer,
-    NormalsRenderer,
-    RGBRenderer,
-)
+from luxenstudio.model_components.ray_samplers import ProposalNetworkSampler, UniformSampler
+from luxenstudio.model_components.renderers import AccumulationRenderer, DepthRenderer, NormalsRenderer, RGBRenderer
 from luxenstudio.model_components.scene_colliders import NearFarCollider
 from luxenstudio.model_components.shaders import NormalsShader
 from luxenstudio.models.base_model import Model, ModelConfig
@@ -81,10 +69,14 @@ class LuxenactoModelConfig(ModelConfig):
     """Dimension of hidden layers for transient network"""
     num_levels: int = 16
     """Number of levels of the hashmap for the base mlp."""
+    base_res: int = 16
+    """Resolution of the base grid for the hasgrid."""
     max_res: int = 2048
     """Maximum resolution of the hashmap for the base mlp."""
     log2_hashmap_size: int = 19
     """Size of the hashmap for the base mlp"""
+    features_per_level: int = 2
+    """How many hashgrid features per level"""
     num_proposal_samples_per_ray: Tuple[int, ...] = (256, 96)
     """Number of samples per ray for each proposal network."""
     num_luxen_samples_per_ray: int = 48
@@ -132,6 +124,8 @@ class LuxenactoModelConfig(ModelConfig):
     """Use gradient scaler where the gradients are lower for points closer to the camera."""
     implementation: Literal["tcnn", "torch"] = "tcnn"
     """Which implementation to use for the model."""
+    appearance_embed_dim: int = 32
+    """Dimension of the appearance embedding."""
 
 
 class LuxenactoModel(Model):
@@ -165,6 +159,7 @@ class LuxenactoModel(Model):
             num_images=self.num_train_data,
             use_pred_normals=self.config.predict_normals,
             use_average_appearance_embedding=self.config.use_average_appearance_embedding,
+            appearance_embedding_dim=self.config.appearance_embed_dim,
             implementation=self.config.implementation,
         )
 
