@@ -27,6 +27,7 @@ from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.configs.external_methods import get_external_methods
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
+from luxenstudio.data.datamanagers.parallel_datamanager import ParallelDataManagerConfig
 from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
@@ -86,7 +87,8 @@ method_configs["luxenacto"] = TrainerConfig(
     max_num_iterations=30000,
     mixed_precision=True,
     pipeline=VanillaPipelineConfig(
-        datamanager=VanillaDataManagerConfig(
+        datamanager=ParallelDataManagerConfig(
+        # datamanager=VanillaDataManagerConfig(
             dataparser=LuxenstudioDataParserConfig(),
             train_num_rays_per_batch=4096,
             eval_num_rays_per_batch=4096,
@@ -107,7 +109,7 @@ method_configs["luxenacto"] = TrainerConfig(
         },
         "camera_opt": {
             "optimizer": AdamOptimizerConfig(lr=1e-3, eps=1e-15),
-            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-4, max_steps=2000),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-4, max_steps=5000),
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
@@ -199,12 +201,12 @@ method_configs["luxenacto-huge"] = TrainerConfig(
             "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-4, max_steps=50000),
         },
         "camera_opt": {
-            "optimizer": RAdamOptimizerConfig(lr=6e-4, eps=1e-8),
-            "scheduler": ExponentialDecaySchedulerConfig(lr_final=6e-5, max_steps=50000),
+            "optimizer": RAdamOptimizerConfig(lr=1e-3, eps=1e-8),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-4, max_steps=10000),
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
-    vis="viewer",
+    vis="viewer_beta",
 )
 
 # method_configs["depth-luxenacto"] = TrainerConfig(
