@@ -20,23 +20,18 @@ from typing import TYPE_CHECKING
 
 import tyro
 
-from luxenstudio.data.dataparsers.arkitscenes_dataparser import (
-    ARKitScenesDataParserConfig,
-)
+from luxenstudio.data.dataparsers.arkitscenes_dataparser import ARKitScenesDataParserConfig
 from luxenstudio.data.dataparsers.base_dataparser import DataParserConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
+from luxenstudio.data.dataparsers.colmap_dataparser import ColmapDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.dycheck_dataparser import DycheckDataParserConfig
-from luxenstudio.data.dataparsers.instant_ngp_dataparser import (
-    InstantNGPDataParserConfig,
-)
+from luxenstudio.data.dataparsers.instant_ngp_dataparser import InstantNGPDataParserConfig
 from luxenstudio.data.dataparsers.minimal_dataparser import MinimalDataParserConfig
 from luxenstudio.data.dataparsers.luxenosr_dataparser import LuxenOSRDataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
 from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
-from luxenstudio.data.dataparsers.phototourism_dataparser import (
-    PhototourismDataParserConfig,
-)
+from luxenstudio.data.dataparsers.phototourism_dataparser import PhototourismDataParserConfig
 from luxenstudio.data.dataparsers.scannet_dataparser import ScanNetDataParserConfig
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
@@ -56,6 +51,7 @@ dataparsers = {
     "sdfstudio-data": SDFStudioDataParserConfig(),
     "luxenosr-data": LuxenOSRDataParserConfig(),
     "sitcoms3d-data": Sitcoms3DDataParserConfig(),
+    "colmap": ColmapDataParserConfig(),
 }
 
 external_dataparsers = discover_dataparsers()
