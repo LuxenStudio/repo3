@@ -58,8 +58,8 @@ import torch.multiprocessing as mp
 import tyro
 import yaml
 
+from luxenstudio.configs.annotated_types import AnnotatedBaseConfigUnion
 from luxenstudio.configs.config_utils import convert_markup_to_ansi
-from luxenstudio.configs.method_configs import AnnotatedBaseConfigUnion
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.utils import comms, profiler
 from luxenstudio.utils.rich_utils import CONSOLE
