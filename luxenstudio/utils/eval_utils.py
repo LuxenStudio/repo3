@@ -25,7 +25,7 @@ from typing import Literal, Optional, Tuple
 import torch
 import yaml
 
-from luxenstudio.configs.method_configs import all_methods
+from luxenstudio.configs.annotated_types import all_methods
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.pipelines.base_pipeline import Pipeline
