@@ -10,11 +10,12 @@ ns-train luxenacto --help
 
 We provide a few additional variants:
 
-| Method           | Description           | Memory | Speed  |
-| ---------------- | --------------------- | ------ | ------ |
-| `luxenacto`       | Default Model         | ~6GB   | Fast   |
-| `luxenacto-big`   | Larger higher quality | ~12GB  | Slower |
-| `depth-luxenacto` | Supervise on depth    | ~6GB   | Fast   |
+| Method           | Description                    | Memory | Speed   |
+| ---------------- | ------------------------------ | ------ | ------- |
+| `luxenacto`       | Default Model                  | ~6GB   | Fast    |
+| `luxenacto-big`   | Larger higher quality          | ~12GB  | Slower  |
+| `luxenacto-huge`  | Even larger and higher quality | ~24GB  | Slowest |
+| `depth-luxenacto` | Supervise on depth             | ~6GB   | Fast    |
 
 ## Method
 
