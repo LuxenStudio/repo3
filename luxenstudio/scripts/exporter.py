@@ -34,6 +34,7 @@ from typing_extensions import Annotated, Literal
 
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager
+from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManager
 from luxenstudio.exporter import texture_utils, tsdf_utils
 from luxenstudio.exporter.exporter_utils import (
     collect_camera_poses,
@@ -285,7 +286,7 @@ class ExportPoissonMesh(Exporter):
         validate_pipeline(self.normal_method, self.normal_output_name, pipeline)
 
         # Increase the batchsize to speed up the evaluation.
-        assert isinstance(pipeline.datamanager, VanillaDataManager)
+        assert isinstance(pipeline.datamanager, (VanillaDataManager, RandomCamerasDataManager))
         assert pipeline.datamanager.train_pixel_sampler is not None
         pipeline.datamanager.train_pixel_sampler.num_rays_per_batch = self.num_rays_per_batch
 
