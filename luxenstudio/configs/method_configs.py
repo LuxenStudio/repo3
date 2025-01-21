@@ -26,27 +26,36 @@ import tyro
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.configs.external_methods import get_external_methods
-from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
-from luxenstudio.data.datamanagers.parallel_datamanager import ParallelDataManagerConfig
-from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
-from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
+from luxenstudio.data.datamanagers.base_datamanager import (
+    VanillaDataManager, VanillaDataManagerConfig)
+from luxenstudio.data.datamanagers.parallel_datamanager import \
+    ParallelDataManagerConfig
+from luxenstudio.data.datamanagers.random_cameras_datamanager import \
+    RandomCamerasDataManagerConfig
+from luxenstudio.data.dataparsers.blender_dataparser import \
+    BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
-from luxenstudio.data.dataparsers.instant_ngp_dataparser import InstantNGPDataParserConfig
-from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
-from luxenstudio.data.dataparsers.phototourism_dataparser import PhototourismDataParserConfig
-from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
-from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
+from luxenstudio.data.dataparsers.instant_ngp_dataparser import \
+    InstantNGPDataParserConfig
+from luxenstudio.data.dataparsers.luxenstudio_dataparser import \
+    LuxenstudioDataParserConfig
+from luxenstudio.data.dataparsers.phototourism_dataparser import \
+    PhototourismDataParserConfig
+from luxenstudio.data.dataparsers.sdfstudio_dataparser import \
+    SDFStudioDataParserConfig
+from luxenstudio.data.dataparsers.sitcoms3d_dataparser import \
+    Sitcoms3DDataParserConfig
 from luxenstudio.data.datasets.depth_dataset import DepthDataset
 from luxenstudio.data.datasets.sdf_dataset import SDFDataset
 from luxenstudio.data.datasets.semantic_dataset import SemanticDataset
-from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
-from luxenstudio.engine.schedulers import (
-    CosineDecaySchedulerConfig,
-    ExponentialDecaySchedulerConfig,
-    MultiStepSchedulerConfig,
-)
+from luxenstudio.engine.optimizers import (AdamOptimizerConfig,
+                                          RAdamOptimizerConfig)
+from luxenstudio.engine.schedulers import (CosineDecaySchedulerConfig,
+                                          ExponentialDecaySchedulerConfig,
+                                          MultiStepSchedulerConfig)
 from luxenstudio.engine.trainer import TrainerConfig
-from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
+from luxenstudio.field_components.temporal_distortions import \
+    TemporalDistortionKind
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
 from luxenstudio.models.geluxenacto import GeluxenactoModelConfig
@@ -170,7 +179,7 @@ method_configs["luxenacto-huge"] = TrainerConfig(
     pipeline=VanillaPipelineConfig(
         # datamanager=VanillaDataManagerConfig(
         datamanager=ParallelDataManagerConfig(
-            dataparser=LuxenstudioDataParserConfig(),
+            dataparser=LuxenstudioDataParserConfig(train_split_fraction=.95),
             train_num_rays_per_batch=16384,
             eval_num_rays_per_batch=4096,
         ),
