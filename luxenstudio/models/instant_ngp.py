@@ -24,8 +24,8 @@ from typing import Dict, List, Literal, Optional, Tuple, Type
 import luxenacc
 import torch
 from torch.nn import Parameter
-from torchmetrics import PeakSignalNoiseRatio
 from torchmetrics.functional import structural_similarity_index_measure
+from torchmetrics.image import PeakSignalNoiseRatio
 from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
