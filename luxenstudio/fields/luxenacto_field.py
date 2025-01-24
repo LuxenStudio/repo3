@@ -37,7 +37,7 @@ from luxenstudio.field_components.field_heads import (
 )
 from luxenstudio.field_components.mlp import MLP
 from luxenstudio.field_components.spatial_distortions import SpatialDistortion
-from luxenstudio.fields.base_field import Field, shift_directions_for_tcnn
+from luxenstudio.fields.base_field import Field, get_normalized_directions
 
 
 class LuxenactoField(Field):
@@ -232,7 +232,7 @@ class LuxenactoField(Field):
         if ray_samples.camera_indices is None:
             raise AttributeError("Camera indices are not provided.")
         camera_indices = ray_samples.camera_indices.squeeze()
-        directions = shift_directions_for_tcnn(ray_samples.frustums.directions)
+        directions = get_normalized_directions(ray_samples.frustums.directions)
         directions_flat = directions.view(-1, 3)
         d = self.direction_encoding(directions_flat)
 
