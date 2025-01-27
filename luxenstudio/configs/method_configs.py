@@ -26,10 +26,8 @@ import tyro
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.configs.external_methods import get_external_methods
-
-from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
-
+from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import InstantNGPDataParserConfig
@@ -67,7 +65,7 @@ method_configs: Dict[str, TrainerConfig] = {}
 descriptions = {
     "luxenacto": "Recommended real-time model tuned for real captures. This model will be continually updated.",
     "depth-luxenacto": "Luxenacto with depth supervision.",
-    "visibility-luxenacto": "Luxenacto with visibility loss turned on.",
+    "visibility-luxenacto": "Luxenacto with visibility loss turned on. Recommended for forward facing scenes.",
     "volinga": "Real-time rendering model from Volinga. Directly exportable to NVOL format at https://volinga.ai/",
     "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for unbounded scenes.",
     "instant-ngp-bounded": "Implementation of Instant-NGP. Recommended for bounded real and synthetic scenes",
