@@ -24,7 +24,6 @@ from torch import Tensor, nn
 
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.data.scene_box import SceneBox
-from luxenstudio.utils.misc import torch_compile
 
 
 class SceneCollider(nn.Module):
@@ -109,7 +108,6 @@ class AABBBoxCollider(SceneCollider):
         return ray_bundle
 
 
-@torch_compile(dynamic=True, mode="reduce-overhead")
 def _intersect_with_sphere(
     rays_o: torch.Tensor, rays_d: torch.Tensor, center: torch.Tensor, radius: float = 1.0, near_plane: float = 0.0
 ):

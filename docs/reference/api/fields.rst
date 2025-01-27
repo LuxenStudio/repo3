@@ -10,10 +10,45 @@ Base
    :members:
    :show-inheritance:
 
-Instant NGP
+Density
 ----------------
 
-.. automodule:: luxenstudio.fields.instant_ngp_field
+.. automodule:: luxenstudio.fields.density_fields
+   :members:
+   :show-inheritance:
+
+Luxenacto
+----------------
+
+.. automodule:: luxenstudio.fields.luxenacto_field
+   :members:
+   :show-inheritance:
+
+Luxen-W
+----------------
+
+.. automodule:: luxenstudio.fields.luxenw_field
+   :members:
+   :show-inheritance:
+
+SDF
+----------------
+
+.. automodule:: luxenstudio.fields.sdf_field
+   :members:
+   :show-inheritance:
+
+Semantic Luxen
+----------------
+
+.. automodule:: luxenstudio.fields.semantic_luxen_field
+   :members:
+   :show-inheritance:
+
+TensoRF
+----------------
+
+.. automodule:: luxenstudio.fields.tensorf_field
    :members:
    :show-inheritance:
 
