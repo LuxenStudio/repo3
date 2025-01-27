@@ -33,6 +33,7 @@ The following methods are supported in luxenstudio:
     Mip-Luxen<mipluxen.md>
     Luxen<luxen.md>
     Luxenacto<luxenacto.md>
+    Luxenbusters<luxenbusters.md>
     LuxenPlayer<luxenplayer.md>
     Tetra-Luxen<tetraluxen.md>
     TensoRF<tensorf.md>
