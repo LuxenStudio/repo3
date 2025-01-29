@@ -21,7 +21,6 @@ BLACKLIST = [
     "instant-ngp",
     "instant-ngp-bounded",
     "luxenacto-big",
-    "volinga",
     "phototourism",
     "depth-luxenacto",
     "neus",
