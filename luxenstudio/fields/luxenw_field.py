@@ -123,11 +123,11 @@ class VanillaLuxenWField(Field):
         """Returns the outputs of the Luxen-W field.
 
         Args:
-            ray_samples (RaySamples): Ray samples.
-            density_embedding (Float[Tensor, "*batch embedding_size"], optional): Density embedding.
+            ray_samples: Ray samples.
+            density_embedding: Density embedding.
 
         Returns:
-            Dict[FieldHeadNames, Tensor]: Outputs of the Luxen-W field.
+            Outputs of the Luxen-W field.
         """
         outputs = {}
         encoded_dir = self.direction_encoding(ray_samples.frustums.directions)

@@ -38,7 +38,7 @@ Specify which diffusion model to use with the diffusion_model flag:
 ns-train geluxenacto --pipeline.model.diffusion_model ["stablediffusion", "deepfloyd"]
 ```
 
-# Example Results
+## Example Results
 
 The following videos are renders of Luxens generated from Geluxenacto. Each model was trained 30k steps, which took around 1 hour with DeepFloyd
 and around 4 hours with Stable Diffusion.
