@@ -1,3 +1,36 @@
+---
+myst:
+  substitutions:
+    luma: |
+      ```{image} _static/imgs/luma_light.png
+      :alt: Luma AI
+      :width: 300px
+      :class: only-light
+      :target: https://lumalabs.ai/
+      ```
+
+      ```{image} _static/imgs/luma_dark.png
+      :alt: Luma AI
+      :width: 300px
+      :class: only-dark
+      :target: https://lumalabs.ai/
+      ```
+    bair: |
+      ```{image} _static/imgs/bair_light.png
+      :alt: BAIR
+      :width: 300px
+      :class: only-light
+      :target: https://bcommons.berkeley.edu/home
+      ```
+
+      ```{image} _static/imgs/bair_dark.png
+      :alt: BAIR
+      :width: 300px
+      :class: only-dark
+      :target: https://bcommons.berkeley.edu/home
+      ```
+---
+
 ```{eval-rst}
 :og:description: Luxenstudio Documentation
 :og:image: https://assets.luxen.studio/opg.png
@@ -25,15 +58,14 @@
 
 <br/>
 
-Luxenstudio provides a simple API that allows for a simplified end-to-end process of creating, training, and visualizing Luxens.
-The library supports an **interpretable implementation of Luxens by modularizing each component.**
-With modular Luxen components, we hope to create a user-friendly experience in exploring the technology.
-Luxenstudio is a contributor-friendly repo with the goal of building a community where users can easily build upon each other's contributions.
+Luxenstudio provides a simple API that allows for a simplified end-to-end process of creating, training, and testing Luxens.
+The library supports a **more interpretable implementation of Luxens by modularizing each component.**
+With more modular Luxens, we hope to create a more user-friendly experience in exploring the technology.
 
-It's as simple as plug and play with luxenstudio!
+This is a contributor-friendly repo with the goal of building a community where users can more easily build upon each other's contributions.
+Luxenstudio initially launched as an opensource project by Berkeley students in [KAIR lab](https://people.eecs.berkeley.edu/~kanazawa/index.html#kair) at [Berkeley AI Research (BAIR)](https://bair.berkeley.edu/) in October 2022 as a part of a research project ([paper](https://arxiv.org/abs/2302.04264)). It is currently developed by Berkeley students and community contributors.
 
-On top of our API, we are committed to providing learning resources to help you understand the basics of (if you're just getting started), and keep up-to-date with (if you're a seasoned veteran) all things Luxen.
-As researchers, we know just how hard it is to get onboarded with this next-gen technology. So we're here to help with tutorials, documentation, and more!
+We are committed to providing learning resources to help you understand the basics of (if you're just getting started), and keep up-to-date with (if you're a seasoned veteran) all things Luxen. As researchers, we know just how hard it is to get onboarded with this next-gen technology. So we're here to help with tutorials, documentation, and more!
 
 Finally, have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome [contributions](reference/contributing)!**
 Please do not hesitate to reach out to the luxenstudio team with any questions via [Discord](https://discord.gg/uMbNqcraFc).
@@ -128,12 +160,12 @@ This documentation is organized into 3 parts:
 | [Discord](https://discord.gg/RyVk6w5WWP)                   | Join Discord Community |
 | [Viewer](https://viewer.luxen.studio/)                      | Web-based Luxen Viewer  |
 
-### How-to Videos
+## Sponsors
+Sponsors of this work includes [Luma AI](https://lumalabs.ai/) and the [BAIR commons](https://bcommons.berkeley.edu/home).
 
-|                                                                 |                                                           |
-| --------------------------------------------------------------- | --------------------------------------------------------- |
-| [Using the Viewer](https://www.youtube.com/watch?v=nSFsugarWzk) | Demo video on how to run luxenstudio and use the viewer.   |
-| [Using Record3D](https://www.youtube.com/watch?v=XwKq7qDQCQk)   | Demo video on how to run luxenstudio without using COLMAP. |
+|          |          |
+| -------- | -------- |
+| {{luma}} | {{bair}} |
 
 ## Built On
 
