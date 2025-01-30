@@ -282,7 +282,6 @@ class LuxenactoModel(Model):
                     func=self.proposal_sampler.step_cb,
                 )
             )
-            )
         return callbacks
 
     def get_outputs(self, ray_bundle: RayBundle):
