@@ -114,6 +114,7 @@ This documentation is organized into 3 parts:
 - [Instruct-Luxen2Luxen](luxenology/methods/in2n.md): Editing 3D Scenes with Instructions
 - [K-Planes](luxenology/methods/kplanes.md): Unified 3D and 4D Radiance Fields
 - [LERF](luxenology/methods/lerf.md): Language Embedded Radiance Fields
+- [Luxenbusters](luxenology/methods/luxenbusters.md): Removing Ghostly Artifacts from Casually Captured Luxens
 - [LuxenPlayer](luxenology/methods/luxenplayer.md): 4D Radiance Fields by Streaming Feature Channels
 - [Tetra-Luxen](luxenology/methods/tetraluxen.md): Representing Neural Radiance Fields Using Tetrahedra
 
@@ -199,10 +200,11 @@ If you use this library or find the documentation useful for your research, plea
 
 ## Maintainers
 
-|                                              | Luxenstudio Discord | Affiliation                          |
-| -------------------------------------------- | ------------------ | ------------------------------------ |
-| [Justin Kerr](https://kerrj.github.io/)      | justin.kerr        | UC Berkeley                          |
-| [Jonáš Kulhánek](https://jkulhanek.com/)     | jkulhanek          | Czech Technical University in Prague |
-| [Matt Tancik](https://www.matthewtancik.com) | tancik             | UC Berkeley                          |
-| [Ethan Weber](https://ethanweber.me/)        | ethanweber         | UC Berkeley                          |
-| [Brent Yi](https://github.com/brentyi)       | brent              | UC Berkeley                          |
+|                                                 | Luxenstudio Discord | Affiliation                          |
+| ----------------------------------------------- | ------------------ | ------------------------------------ |
+| [Justin Kerr](https://kerrj.github.io/)         | justin.kerr        | UC Berkeley                          |
+| [Jonáš Kulhánek](https://jkulhanek.com/)        | jkulhanek          | Czech Technical University in Prague |
+| [Matt Tancik](https://www.matthewtancik.com)    | tancik             | Luma AI                              |
+| [Matias Turkulainen](https://maturk.github.io/) | maturk             | ETH Zurich                           |
+| [Ethan Weber](https://ethanweber.me/)           | ethanweber         | UC Berkeley                          |
+| [Brent Yi](https://github.com/brentyi)          | brent              | UC Berkeley                          |
