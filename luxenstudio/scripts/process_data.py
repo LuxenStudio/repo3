@@ -33,12 +33,8 @@ from luxenstudio.process_data import (
     realitycapture_utils,
     record3d_utils,
 )
-from luxenstudio.process_data.colmap_converter_to_luxenstudio_dataset import (
-    BaseConverterToLuxenstudioDataset,
-)
-from luxenstudio.process_data.images_to_luxenstudio_dataset import (
-    ImagesToLuxenstudioDataset,
-)
+from luxenstudio.process_data.colmap_converter_to_luxenstudio_dataset import BaseConverterToLuxenstudioDataset
+from luxenstudio.process_data.images_to_luxenstudio_dataset import ImagesToLuxenstudioDataset
 from luxenstudio.process_data.video_to_luxenstudio_dataset import VideoToLuxenstudioDataset
 from luxenstudio.utils.rich_utils import CONSOLE
 
@@ -253,6 +249,8 @@ class ProcessMetashape(BaseConverterToLuxenstudioDataset, _NoDefaultProcessMetas
             raise ValueError(f"XML file {self.xml} must have a .xml extension")
         if not self.xml.exists:
             raise ValueError(f"XML file {self.xml} doesn't exist")
+        if self.eval_data is not None:
+            raise ValueError("Cannot use eval_data since cameras were already aligned with Metashape.")
 
         self.output_dir.mkdir(parents=True, exist_ok=True)
         image_dir = self.output_dir / "images"
@@ -338,6 +336,8 @@ class ProcessRealityCapture(BaseConverterToLuxenstudioDataset, _NoDefaultProcess
             raise ValueError(f"CSV file {self.csv} must have a .csv extension")
         if not self.csv.exists:
             raise ValueError(f"CSV file {self.csv} doesn't exist")
+        if self.eval_data is not None:
+            raise ValueError("Cannot use eval_data since cameras were already aligned with RealityCapture.")
 
         self.output_dir.mkdir(parents=True, exist_ok=True)
         image_dir = self.output_dir / "images"

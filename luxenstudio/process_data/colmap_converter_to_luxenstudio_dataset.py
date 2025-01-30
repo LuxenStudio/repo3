@@ -19,9 +19,7 @@ from pathlib import Path
 from typing import Dict, List, Literal, Optional, Tuple
 
 from luxenstudio.process_data import colmap_utils, hloc_utils, process_data_utils
-from luxenstudio.process_data.base_converter_to_luxenstudio_dataset import (
-    BaseConverterToLuxenstudioDataset,
-)
+from luxenstudio.process_data.base_converter_to_luxenstudio_dataset import BaseConverterToLuxenstudioDataset
 from luxenstudio.process_data.process_data_utils import CAMERA_MODELS
 from luxenstudio.utils import install_checks
 from luxenstudio.utils.rich_utils import CONSOLE
