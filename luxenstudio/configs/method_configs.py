@@ -305,7 +305,7 @@ method_configs["instant-ngp-bounded"] = TrainerConfig(
 method_configs["mipluxen"] = TrainerConfig(
     method_name="mipluxen",
     pipeline=VanillaPipelineConfig(
-        datamanager=VanillaDataManagerConfig(dataparser=LuxenstudioDataParserConfig(), train_num_rays_per_batch=1024),
+        datamanager=ParallelDataManagerConfig(dataparser=LuxenstudioDataParserConfig(), train_num_rays_per_batch=1024),
         model=VanillaModelConfig(
             _target=MipLuxenModel,
             loss_coefficients={"rgb_loss_coarse": 0.1, "rgb_loss_fine": 1.0},
