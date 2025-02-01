@@ -24,6 +24,7 @@ from luxenstudio.data.dataparsers.base_dataparser import DataparserOutputs
 from luxenstudio.model_components import losses
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.utils.data_utils import get_depth_image_from_path
+from luxenstudio.utils.misc import torch_compile
 from luxenstudio.utils.rich_utils import CONSOLE
 
 from typing import Union
@@ -72,7 +73,7 @@ class DepthDataset(InputDataset):
                     filenames = dataparser_outputs.image_filenames
 
                 repo = "isl-org/ZoeDepth"
-                self.zoe = torch.compile(torch.hub.load(repo, "ZoeD_NK", pretrained=True).to(device))
+                self.zoe = torch_compile(torch.hub.load(repo, "ZoeD_NK", pretrained=True).to(device))
 
                 for i in track(range(len(filenames)), description="Generating depth images"):
                     image_filename = filenames[i]
