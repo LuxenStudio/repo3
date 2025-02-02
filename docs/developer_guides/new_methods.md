@@ -2,7 +2,7 @@
 
 Luxenstudio aims to offer researchers a codebase that they can utilize to extend and develop novel methods. Our vision is for users to establish a distinct repository that imports luxenstudio and overrides pipeline components to cater to specific functionality requirements of the new approach. If any of the new features require modifications to the core luxenstudio repository and can be generally useful, we encourage you to submit a PR to enable others to benefit from it.
 
-Examples are often the best way to learn, take a look at the [LERF](https://github.com/kerrj/lerf) repository for good example of how to use luxenstudio in your projects.
+You can use the [luxenstudio-method-template](https://github.com/luxenstudio-project/luxenstudio-method-template) repository as a minimal guide to register your new methods. Examples are often the best way to learn, take a look at the [LERF](https://github.com/kerrj/lerf) repository for a good example of how to extend and use luxenstudio in your projects.
 
 ## File Structure
 
