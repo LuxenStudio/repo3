@@ -67,8 +67,10 @@ Luxenstudio initially launched as an opensource project by Berkeley students in 
 
 We are committed to providing learning resources to help you understand the basics of (if you're just getting started), and keep up-to-date with (if you're a seasoned veteran) all things Luxen. As researchers, we know just how hard it is to get onboarded with this next-gen technology. So we're here to help with tutorials, documentation, and more!
 
-Finally, have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome [contributions](reference/contributing)!**
+Have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome [contributions](reference/contributing)!**
 Please do not hesitate to reach out to the luxenstudio team with any questions via [Discord](https://discord.gg/uMbNqcraFc).
+
+Have feedback? We'd love for you to fill out our [Luxenstudio Feedback Form](https://forms.gle/sqN5phJN7LfQVwnP9) if you want to let us know who you are, why you are interested in Luxenstudio, or provide any feedback!
 
 We hope luxenstudio enables you to build faster 🔨 learn together 📚 and contribute to our Luxen community 💖.
 
@@ -159,6 +161,7 @@ This documentation is organized into 3 parts:
 | [Github](https://github.com/luxenstudio-project/luxenstudio) | Official Github Repo   |
 | [Discord](https://discord.gg/RyVk6w5WWP)                   | Join Discord Community |
 | [Viewer](https://viewer.luxen.studio/)                      | Web-based Luxen Viewer  |
+| [Feedback Form](https://forms.gle/sqN5phJN7LfQVwnP9)       | Provide Luxenstudio Feedback |
 
 ## Sponsors
 Sponsors of this work includes [Luma AI](https://lumalabs.ai/) and the [BAIR commons](https://bcommons.berkeley.edu/home).
