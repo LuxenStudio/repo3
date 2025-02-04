@@ -121,16 +121,22 @@ luxenstudio_file_ids = {
     "redwoods2": grab_file_id("https://drive.google.com/file/d/1rg-4NoXT8p6vkmbWxMOY6PSG4j3rfcJ8/view?usp=sharing"),
     "storefront": grab_file_id("https://drive.google.com/file/d/16b792AguPZWDA_YC4igKCwXJqW0Tb21o/view?usp=sharing"),
     "vegetation": grab_file_id("https://drive.google.com/file/d/1wBhLQ2odycrtU39y2akVurXEAt9SsVI3/view?usp=sharing"),
-    "Egypt": "https://data.luxen.studio/luxenstudio/Egypt.zip",
-    "person": "https://data.luxen.studio/luxenstudio/person.zip",
-    "kitchen": "https://data.luxen.studio/luxenstudio/kitchen.zip",
-    "plane": "https://data.luxen.studio/luxenstudio/plane.zip",
-    "dozer": "https://data.luxen.studio/luxenstudio/dozer.zip",
-    "floating-tree": "https://data.luxen.studio/luxenstudio/floating-tree.zip",
-    "aspen": "https://data.luxen.studio/luxenstudio/aspen.zip",
-    "stump": "https://data.luxen.studio/luxenstudio/stump.zip",
-    "sculpture": "https://data.luxen.studio/luxenstudio/sculpture.zip",
-    "Giannini-Hall": "https://data.luxen.studio/luxenstudio/Giannini-Hall.zip",
+    "Egypt": grab_file_id("https://drive.google.com/file/d/1YktD85afw7uitC3nPamusk0vcBdAfjlF/view?view?usp=sharing"),
+    "person": grab_file_id("https://drive.google.com/file/d/1HsGMwkPu-R7oU7ySMdoo6Eppq8pKhHF3/view?view?usp=sharing"),
+    "kitchen": grab_file_id("https://drive.google.com/file/d/1IRmNyNZSNFidyj93Tt5DtaEU9h6eJdi1/view?view?usp=sharing"),
+    "plane": grab_file_id("https://drive.google.com/file/d/1tnv2NC2Iwz4XRYNtziUWvLJjObkZNo2D/view?view?usp=sharing"),
+    "dozer": grab_file_id("https://drive.google.com/file/d/1jQJPz5PhzTH--LOcCxvfzV_SDLEp1de3/view?view?usp=sharing"),
+    "floating-tree": grab_file_id(
+        "https://drive.google.com/file/d/1mVEHcO2ep13WPx92IPDvdQg66vLQwFSy/view?view?usp=sharing"
+    ),
+    "aspen": grab_file_id("https://drive.google.com/file/d/1X1PQcji_QpxGfMxbETKMeK8aOnWCkuSB/view?view?usp=sharing"),
+    "stump": grab_file_id("https://drive.google.com/file/d/1yZFAAEvtw2hs4MXrrkvhVAzEliLLXPB7/view?view?usp=sharing"),
+    "sculpture": grab_file_id(
+        "https://drive.google.com/file/d/1CUU_k0Et2gysuBn_R5qenDMfYXEhNsd1/view?view?usp=sharing"
+    ),
+    "Giannini-Hall": grab_file_id(
+        "https://drive.google.com/file/d/1UkjWXLN4qybq_a-j81FsTKghiXw39O8E/view?view?usp=sharing"
+    ),
     "all": None,
     "luxenstudio-dataset": luxenstudio_dataset,
 }
@@ -184,7 +190,12 @@ def download_capture_name(save_dir: Path, dataset_name: str, capture_name: str, 
 
 @dataclass
 class LuxenstudioDownload(DatasetDownload):
-    """Download the luxenstudio dataset."""
+    """
+    Download data in the Luxenstudio format.
+    If you are interested in the Luxenstudio Dataset subset from the SIGGRAPH 2023 paper,
+    you can obtain that by using --capture-name luxenstudio-dataset or by visiting Google Drive directly at:
+    https://drive.google.com/drive/folders/19TV6kdVGcmg3cGZ1bNIUnBBMD-iQjRbG?usp=drive_link.
+    """
 
     capture_name: LuxenstudioCaptureName = "bww_entrance"
 

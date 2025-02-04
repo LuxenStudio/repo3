@@ -72,6 +72,8 @@ We are committed to providing learning resources to help you understand the basi
 
 Have feature requests? Want to add your brand-spankin'-new Luxen model? Have a new dataset? **We welcome [contributions](https://docs.luxen.studio/en/latest/reference/contributing.html)!** Please do not hesitate to reach out to the luxenstudio team with any questions via [Discord](https://discord.gg/uMbNqcraFc).
 
+Have feedback? We'd love for you to fill out our [Luxenstudio Feedback Form](https://forms.gle/sqN5phJN7LfQVwnP9) if you want to let us know who you are, why you are interested in Luxenstudio, or provide any feedback!
+
 We hope luxenstudio enables you to build faster :hammer: learn together :books: and contribute to our Luxen community :sparkling_heart:.
 
 ## Sponsors
@@ -298,6 +300,7 @@ If you're interested in learning more on how to create your own pipelines, devel
 | 💖 **Community**                                                                                   |
 | [Discord](https://discord.gg/uMbNqcraFc)                                                           | Join our community to discuss more. We would love to hear from you!                                |
 | [Twitter](https://twitter.com/luxenstudioteam)                                                      | Follow us on Twitter @luxenstudioteam to see cool updates and announcements                         |
+| [Feedback Form](TODO)                                                                              | We welcome any feedback! This is our chance to learn what you all are using Luxenstudio for.    |
 
 # Supported Features
 
