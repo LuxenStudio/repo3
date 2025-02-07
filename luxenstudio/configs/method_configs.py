@@ -66,6 +66,7 @@ from luxenstudio.plugins.registry import discover_methods
 from luxenstudio.data.datamanagers.gaussian_splatting_datamanager import RasterizerDataManagerConfig
 from luxenstudio.data.dataparsers.gaussian_splatting_dataparser import GaussianSplattingDataParserConfig
 from luxenstudio.models.gaussian_splatting import GaussianSplattingModelConfig
+from luxenstudio.pipelines.gaussian_pipeline import GaussianPipelineConfig
 
 method_configs: Dict[str, TrainerConfig] = {}
 descriptions = {
@@ -585,7 +586,7 @@ method_configs["gaussian-splatting"] = TrainerConfig(
     steps_per_save=2000,
     max_num_iterations=30000,
     mixed_precision=True,
-    pipeline=VanillaPipelineConfig(
+    pipeline=GaussianPipelineConfig(
         datamanager=RasterizerDataManagerConfig(
             dataparser=GaussianSplattingDataParserConfig(),
         ),
