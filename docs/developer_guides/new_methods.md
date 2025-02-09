@@ -88,7 +88,7 @@ from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.plugins.types import MethodSpecification
 
 def MyMethodFunc():
-    return = MethodSpecification(
+    return MethodSpecification(
       config=TrainerConfig(...)
       description="Custom description"
     )
