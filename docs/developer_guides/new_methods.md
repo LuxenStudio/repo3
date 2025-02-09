@@ -78,6 +78,27 @@ Instead, you may use the `NERFSTUDIO_METHOD_CONFIGS` environment variable to tem
 export NERFSTUDIO_METHOD_CONFIGS="my-method=my_method.my_config:MyMethod"
 ```
 
+The `NERFSTUDIO_METHOD_CONFIGS` environment variable additionally accepts a function or derived class to temporarily register your custom method.
+
+```python
+"""my_method/my_config.py"""
+
+from dataclasses import dataclass
+from luxenstudio.engine.trainer import TrainerConfig
+from luxenstudio.plugins.types import MethodSpecification
+
+def MyMethodFunc():
+    return = MethodSpecification(
+      config=TrainerConfig(...)
+      description="Custom description"
+    )
+
+@dataclass
+class MyMethodClass(MethodSpecification):
+    config: TrainerConfig = TrainerConfig(...)
+    description: str = "Custom description"
+```
+
 ## Registering custom dataparser with luxenstudio
 
 We also support adding new dataparsers in a similar way. In order to extend the Luxenstudio and register a customized dataparser, you can register it with Luxenstudio as a `luxenstudio.dataparser_configs` entrypoint in the `pyproject.toml` file. Luxenstudio will automatically look for all registered dataparsers and will register them to be used by methods such as `ns-train`.
