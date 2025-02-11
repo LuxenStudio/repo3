@@ -41,7 +41,7 @@ from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParse
 from luxenstudio.data.datasets.depth_dataset import DepthDataset
 from luxenstudio.data.datasets.sdf_dataset import SDFDataset
 from luxenstudio.data.datasets.semantic_dataset import SemanticDataset
-from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
+from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig, AdamWOptimizerConfig
 from luxenstudio.engine.schedulers import (
     CosineDecaySchedulerConfig,
     ExponentialDecaySchedulerConfig,
@@ -57,6 +57,7 @@ from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.neus import NeuSModelConfig
 from luxenstudio.models.neus_facto import NeuSFactoModelConfig
+from luxenstudio.models.neuralangelo import NeuralangeloModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
@@ -79,6 +80,7 @@ descriptions = {
     "geluxenacto": "Generative Text to Luxen model",
     "neus": "Implementation of NeuS. (slow)",
     "neus-facto": "Implementation of NeuS-Facto. (slow)",
+    "neuralangelo": "Implementation of Neuralangelo. (slow)",
 }
 
 method_configs["luxenacto"] = TrainerConfig(
@@ -575,6 +577,65 @@ method_configs["neus-facto"] = TrainerConfig(
     vis="viewer",
 )
 
+method_configs["neuralangelo"] = TrainerConfig(
+    method_name="neuralangelo",
+    steps_per_eval_image=5000,
+    steps_per_eval_batch=5000,
+    steps_per_save=20000,
+    steps_per_eval_all_images=1000000,  # set to a very large model so we don't eval with all images
+    max_num_iterations=500_001,
+    mixed_precision=False,
+    pipeline=VanillaPipelineConfig(
+        datamanager=VanillaDataManagerConfig(
+            _target=VanillaDataManager[SDFDataset],
+            dataparser=SDFStudioDataParserConfig(),
+            train_num_rays_per_batch=512,
+            eval_num_rays_per_batch=512,
+            camera_optimizer=CameraOptimizerConfig(
+                mode="off", optimizer=AdamOptimizerConfig(lr=6e-4, eps=1e-8, weight_decay=1e-2)
+            ),
+        ),
+        model=NeuralangeloModelConfig(
+            sdf_field=SDFFieldConfig(
+                use_grid_feature=True,
+                num_layers=1,
+                num_layers_color=4,
+                hidden_dim=256,
+                hidden_dim_color=256,
+                geometric_init=True,
+                bias=0.5,
+                beta_init=0.3,
+                inside_outside=False,
+                use_appearance_embedding=False,
+                position_encoding_max_degree=6,
+                use_numerical_gradients=True,
+                base_res=64,
+                max_res=4096,
+                log2_hashmap_size=22,
+                hash_features_per_level=8,
+                hash_smoothstep=False,
+                use_position_encoding=False,
+            ),
+            background_model="mlp",
+            enable_progressive_hash_encoding=True,
+            enable_curvature_loss_schedule=True,
+            enable_numerical_gradients_schedule=True,
+        ),
+    ),
+    optimizers={
+        "fields": {
+            "optimizer": AdamWOptimizerConfig(lr=1e-3, weight_decay=0.01, eps=1e-15),
+            # "scheduler": NeuSSchedulerConfig(warm_up_end=5000, learning_rate_alpha=0.05, max_steps=500000),
+            "scheduler": MultiStepWarmupSchedulerConfig(warm_up_end=5000, milestones=[300_000, 400_000], gamma=0.1),
+        },
+        "field_background": {
+            "optimizer": AdamWOptimizerConfig(lr=1e-3, eps=1e-15),
+            "scheduler": MultiStepWarmupSchedulerConfig(warm_up_end=5000, milestones=[300_000, 400_000], gamma=0.1),
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer",
+)
 
 def merge_methods(methods, method_descriptions, new_methods, new_descriptions, overwrite=True):
     """Merge new methods and descriptions into existing methods and descriptions.
