@@ -5,15 +5,14 @@ import torch
 
 from luxenstudio.cameras.rays import Frustums, RaySamples
 from luxenstudio.fields.luxenacto_field import LuxenactoField
+from luxenstudio.utils.external import TCNN_EXISTS, tcnn_import_exception
 
 
 def test_luxenacto_field():
     """Test the Luxenacto field"""
-    try:
-        import tinycudann as tcnn  # noqa: F401
-    except ModuleNotFoundError as e:
+    if not TCNN_EXISTS:
         # tinycudann module doesn't exist
-        print(e)
+        print(tcnn_import_exception)
         return
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     aabb_scale = 1.0

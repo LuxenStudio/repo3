@@ -168,6 +168,8 @@ RUN cd luxenstudio && \
 # Change working directory
 WORKDIR /workspace
 
-# Install luxenstudio cli auto completion and enter shell if no command was provided.
-CMD ns-install-cli --mode install && /bin/bash
+# Install luxenstudio cli auto completion
+RUN ns-install-cli --mode install
 
+# Bash as default entrypoint.
+CMD /bin/bash -l
