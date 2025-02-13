@@ -22,7 +22,13 @@ from pathlib import Path
 from typing import Any, Dict, Literal, Optional
 
 import yaml
-from luxenstudio.configs.base_config import InstantiateConfig, LoggingConfig, MachineConfig, ViewerConfig
+
+from luxenstudio.configs.base_config import (
+    InstantiateConfig,
+    LoggingConfig,
+    MachineConfig,
+    ViewerConfig,
+)
 from luxenstudio.configs.config_utils import to_immutable_dict
 from luxenstudio.engine.optimizers import OptimizerConfig
 from luxenstudio.engine.schedulers import SchedulerConfig
@@ -73,7 +79,7 @@ class ExperimentConfig(InstantiateConfig):
     relative_model_dir: Path = Path("luxenstudio_models/")
     """Relative path to save all checkpoints."""
     load_scheduler: bool = True
-    """Whether to load the scheduler state_dict to resume training, if exists"""
+    """Whether to load the scheduler state_dict to resume training, if it exists."""
 
     def is_viewer_enabled(self) -> bool:
         """Checks if a viewer is enabled."""
