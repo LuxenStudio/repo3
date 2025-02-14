@@ -59,7 +59,7 @@ from luxenstudio.field_components.temporal_distortions import \
     TemporalDistortionKind
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
-from luxenstudio.models.gaussian_splatting import GaussianSplattingModelConfig
+from luxenstudio.models.gaussian_splatting_inhouse import GaussianSplattingModelConfig
 from luxenstudio.models.geluxenacto import GeluxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
@@ -585,6 +585,54 @@ method_configs["neus-facto"] = TrainerConfig(
     vis="viewer",
 )
 
+# method_configs["gaussian-splatting"] = TrainerConfig(
+#     method_name="gaussian-splatting",
+#     steps_per_eval_image=10,
+#     steps_per_eval_batch=10,
+#     steps_per_save=2000,
+#     steps_per_eval_all_images=1000000,  # set to a very large model so we don't eval with all images
+#     max_num_iterations=20001,
+#     mixed_precision=False,
+#     pipeline=VanillaPipelineConfig(
+#         datamanager=FullImageDatamanagerConfig(
+#             dataparser=BlenderDataParserConfig(),
+#         ),
+#         model=GaussianSplattingModelConfig(),
+#     ),
+#     optimizers={
+#         "xyz": {
+#             "optimizer": AdamOptimizerConfig(lr=0.00016, eps=1e-15),
+#             "scheduler": ExponentialDecaySchedulerConfig(
+#                 lr_pre_warmup=0.01 * 0.00016,
+#                 lr_final=0.0000016,
+#                 warmup_steps = 0,
+#                 max_steps=30000,
+#             ),
+#         },
+#         "f_dc": {
+#             "optimizer": AdamOptimizerConfig(lr=0.0025, eps=1e-15),
+#             "scheduler": None,
+#         },
+#         "f_rest": {
+#             "optimizer": AdamOptimizerConfig(lr=0.0025, eps=1e-15),
+#             "scheduler": None,
+#         },
+#         "opacity": {
+#             "optimizer": AdamOptimizerConfig(lr=0.05, eps=1e-15),
+#             "scheduler": None,
+#         },
+#         "scaling": {
+#             "optimizer": AdamOptimizerConfig(lr=0.001, eps=1e-15),
+#             "scheduler": None,
+#         },
+#         "rotation": {
+#             "optimizer": AdamOptimizerConfig(lr=0.001, eps=1e-15),
+#             "scheduler": None,
+#         },
+#     },
+#     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+#     vis="viewer",
+# )
 method_configs["gaussian-splatting"] = TrainerConfig(
     method_name="gaussian-splatting",
     steps_per_eval_image=10,
@@ -595,27 +643,17 @@ method_configs["gaussian-splatting"] = TrainerConfig(
     mixed_precision=False,
     pipeline=VanillaPipelineConfig(
         datamanager=FullImageDatamanagerConfig(
-            dataparser=BlenderDataParserConfig(),
+            dataparser=LuxenstudioDataParserConfig(),
         ),
         model=GaussianSplattingModelConfig(),
     ),
     optimizers={
         "xyz": {
-            "optimizer": AdamOptimizerConfig(lr=0.00016*5, eps=1e-15),
+            "optimizer": AdamOptimizerConfig(lr=0.00016, eps=1e-15),
             "scheduler": ExponentialDecaySchedulerConfig(
-                lr_pre_warmup=0.01 * 0.00016*5,
-                lr_final=0.0000016*5,
-                warmup_steps = 0,
+                lr_final=0.0000016,
                 max_steps=30000,
             ),
-        },
-        "f_dc": {
-            "optimizer": AdamOptimizerConfig(lr=0.0025, eps=1e-15),
-            "scheduler": None,
-        },
-        "f_rest": {
-            "optimizer": AdamOptimizerConfig(lr=0.0025, eps=1e-15),
-            "scheduler": None,
         },
         "opacity": {
             "optimizer": AdamOptimizerConfig(lr=0.05, eps=1e-15),

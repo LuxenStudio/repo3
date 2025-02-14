@@ -39,31 +39,17 @@ from torch import Tensor, nn
 from torch.nn import Parameter
 from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
-from typing_extensions import Literal, TypeVar
+from typing_extensions import Literal
 
-from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.cameras.cameras import Cameras, CameraType
-from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.configs.base_config import InstantiateConfig
-from luxenstudio.configs.config_utils import to_immutable_dict
 from luxenstudio.configs.dataparser_configs import AnnotatedDataParserUnion
 from luxenstudio.data.datamanagers.base_datamanager import (DataManager,
-                                                           DataManagerConfig)
+                                                           DataManagerConfig,TDataset)
 from luxenstudio.data.dataparsers.base_dataparser import DataparserOutputs
 from luxenstudio.data.dataparsers.blender_dataparser import \
     BlenderDataParserConfig
 from luxenstudio.data.datasets.base_dataset import InputDataset
-from luxenstudio.data.pixel_samplers import (PatchPixelSamplerConfig,
-                                            PixelSampler, PixelSamplerConfig)
-from luxenstudio.data.scene_box import SceneBox
-from luxenstudio.data.utils.dataloaders import (CacheDataloader,
-                                               FixedIndicesEvalDataloader,
-                                               RandIndicesEvalDataloader)
-from luxenstudio.data.utils.luxenstudio_collate import luxenstudio_collate
-from luxenstudio.engine.callbacks import (TrainingCallback,
-                                         TrainingCallbackAttributes)
-from luxenstudio.model_components.ray_generators import RayGenerator
-from luxenstudio.utils.misc import IterableWrapper, get_orig_class
+from luxenstudio.utils.misc import get_orig_class
 from luxenstudio.utils.rich_utils import CONSOLE
 
 CONSOLE = Console(width=120)
@@ -85,8 +71,6 @@ class FullImageDatamanagerConfig(DataManagerConfig):
     """Specifies the image indices to use during eval; if None, uses all."""
     cache_images: Literal["no-cache", "cpu", "gpu"] = "cpu"
     """Whether to cache images in memory. If "numpy", caches as numpy arrays, if "torch", caches as torch tensors."""
-
-TDataset = TypeVar("TDataset", bound=InputDataset, default=InputDataset)
 
 class FullImageDatamanager(DataManager, Generic[TDataset]):
     """
