@@ -19,7 +19,7 @@ Implementation of vanilla luxen.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Tuple, Type
+from typing import Any, Dict, List, Tuple, Type, Literal
 
 import torch
 from torch.nn import Parameter
@@ -41,7 +41,7 @@ from luxenstudio.model_components.renderers import (
     RGBRenderer,
 )
 from luxenstudio.models.base_model import Model, ModelConfig
-from luxenstudio.utils import colormaps, colors, misc
+from luxenstudio.utils import colormaps, misc
 
 
 @dataclass
@@ -58,6 +58,8 @@ class VanillaModelConfig(ModelConfig):
     """Specifies whether or not to include ray warping based on time."""
     temporal_distortion_params: Dict[str, Any] = to_immutable_dict({"kind": TemporalDistortionKind.DNERF})
     """Parameters to instantiate temporal distortion with"""
+    background_color: Literal["random", "last_sample", "black", "white"] = "white"
+    """Whether to randomize the background color."""
 
 
 class LuxenModel(Model):
@@ -110,7 +112,7 @@ class LuxenModel(Model):
         self.sampler_pdf = PDFSampler(num_samples=self.config.num_importance_samples)
 
         # renderers
-        self.renderer_rgb = RGBRenderer(background_color=colors.WHITE)
+        self.renderer_rgb = RGBRenderer(background_color=self.config.background_color)
         self.renderer_accumulation = AccumulationRenderer()
         self.renderer_depth = DepthRenderer()
 

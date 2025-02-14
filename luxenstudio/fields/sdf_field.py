@@ -33,12 +33,7 @@ from luxenstudio.field_components.encodings import LuxenEncoding
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SpatialDistortion
 from luxenstudio.fields.base_field import Field, FieldConfig
-
-try:
-    import tinycudann as tcnn
-except ModuleNotFoundError:
-    # tinycudann module doesn't exist
-    pass
+from luxenstudio.utils.external import tcnn
 
 
 class LearnedVariance(nn.Module):
