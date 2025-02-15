@@ -62,6 +62,7 @@ from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
 from luxenstudio.models.gaussian_splatting_inhouse import GaussianSplattingModelConfig
 from luxenstudio.models.geluxenacto import GeluxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
+from luxenstudio.data.dataparsers.colmap_dataparser import ColmapDataParserConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.neus import NeuSModelConfig
@@ -637,18 +638,25 @@ method_configs["gaussian-splatting"] = TrainerConfig(
     method_name="gaussian-splatting",
     steps_per_eval_image=10,
     steps_per_eval_batch=10,
-    steps_per_save=2000,
+    steps_per_save=2000000,#saving is broken
     steps_per_eval_all_images=1000000,  # set to a very large model so we don't eval with all images
-    max_num_iterations=20001,
+    max_num_iterations=30000,
     mixed_precision=False,
     pipeline=VanillaPipelineConfig(
         datamanager=FullImageDatamanagerConfig(
-            dataparser=LuxenstudioDataParserConfig(),
+            dataparser=ColmapDataParserConfig(load_3D_points=True,downscale_factor=2),
         ),
         model=GaussianSplattingModelConfig(),
     ),
     optimizers={
         "xyz": {
+            "optimizer": AdamOptimizerConfig(lr=0.00016, eps=1e-15),
+            "scheduler": ExponentialDecaySchedulerConfig(
+                lr_final=0.0000016,
+                max_steps=30000,
+            ),
+        },
+        "color": {
             "optimizer": AdamOptimizerConfig(lr=0.00016, eps=1e-15),
             "scheduler": ExponentialDecaySchedulerConfig(
                 lr_final=0.0000016,
