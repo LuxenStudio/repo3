@@ -2,7 +2,7 @@
     <!-- community badges -->
     <a href="https://discord.gg/uMbNqcraFc"><img src="https://img.shields.io/badge/Join-Discord-blue.svg"/></a>
     <!-- doc badges -->
-    <a href='https://plenoptix-luxenstudio.readthedocs-hosted.com/en/latest/?badge=latest'>
+    <a href='https://docs.luxen.studio/'>
         <img src='https://readthedocs.com/projects/plenoptix-luxenstudio/badge/?version=latest' alt='Documentation Status' />
     </a>
     <!-- pi package badge -->
