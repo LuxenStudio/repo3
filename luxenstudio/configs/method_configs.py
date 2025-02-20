@@ -59,7 +59,7 @@ from luxenstudio.field_components.temporal_distortions import \
     TemporalDistortionKind
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
-from luxenstudio.models.gaussian_splatting_inhouse import GaussianSplattingModelConfig
+from luxenstudio.models.gaussian_splatting import GaussianSplattingModelConfig
 from luxenstudio.models.geluxenacto import GeluxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.data.dataparsers.colmap_dataparser import ColmapDataParserConfig
@@ -643,7 +643,7 @@ method_configs["gaussian-splatting"] = TrainerConfig(
         },
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
-    vis="viewer",
+    vis="viewer_beta",
 )
 
 
