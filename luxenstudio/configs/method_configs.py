@@ -49,14 +49,14 @@ from luxenstudio.data.datasets.depth_dataset import DepthDataset
 from luxenstudio.data.datasets.sdf_dataset import SDFDataset
 from luxenstudio.data.datasets.semantic_dataset import SemanticDataset
 from luxenstudio.data.pixel_samplers import PairPixelSamplerConfig
-from luxenstudio.engine.optimizers import (AdamOptimizerConfig,
-                                          RAdamOptimizerConfig)
-from luxenstudio.engine.schedulers import (CosineDecaySchedulerConfig,
-                                          ExponentialDecaySchedulerConfig,
-                                          MultiStepSchedulerConfig)
+from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
+from luxenstudio.engine.schedulers import (
+    CosineDecaySchedulerConfig,
+    ExponentialDecaySchedulerConfig,
+    MultiStepSchedulerConfig,
+)
 from luxenstudio.engine.trainer import TrainerConfig
-from luxenstudio.field_components.temporal_distortions import \
-    TemporalDistortionKind
+from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
 from luxenstudio.models.gaussian_splatting import GaussianSplattingModelConfig
@@ -629,9 +629,9 @@ method_configs["gaussian-splatting"] = TrainerConfig(
             ),
         },
         "shs": {
-            "optimizer": AdamOptimizerConfig(lr=2.5e-3/20, eps=1e-15),
+            "optimizer": AdamOptimizerConfig(lr=2.5e-3 / 20, eps=1e-15),
             "scheduler": ExponentialDecaySchedulerConfig(
-                lr_final=1e-3/20,
+                lr_final=1e-3 / 20,
                 max_steps=30000,
             ),
         },
@@ -647,7 +647,7 @@ method_configs["gaussian-splatting"] = TrainerConfig(
             ),
         },
         "rotation": {
-            "optimizer": AdamOptimizerConfig(lr=.001, eps=1e-15),
+            "optimizer": AdamOptimizerConfig(lr=0.001, eps=1e-15),
             "scheduler": ExponentialDecaySchedulerConfig(
                 lr_final=1e-4,
                 max_steps=15000,
