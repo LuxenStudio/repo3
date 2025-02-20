@@ -71,6 +71,7 @@ from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
+from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanagerConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 from luxenstudio.plugins.registry import discover_methods
 
