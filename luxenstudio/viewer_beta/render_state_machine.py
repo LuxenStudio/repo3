@@ -26,7 +26,7 @@ from luxenstudio.utils import colormaps, writer
 from luxenstudio.utils.writer import GLOBAL_BUFFER, EventName, TimeWriter
 from luxenstudio.viewer.server import viewer_utils
 from luxenstudio.viewer_beta.utils import CameraState, get_camera
-
+from luxenstudio.models.gaussian_splatting import GaussianSplattingModel
 if TYPE_CHECKING:
     from luxenstudio.viewer_beta.viewer import Viewer
 
@@ -126,7 +126,10 @@ class RenderStateMachine(threading.Thread):
 
         with TimeWriter(None, None, write=False) as vis_t:
             with self.viewer.train_lock if self.viewer.train_lock is not None else contextlib.nullcontext():
-                camera_ray_bundle = camera.generate_rays(camera_indices=0, obb_box=obb)
+                if isinstance(self.viewer.get_model(),GaussianSplattingModel):
+                    camera_ray_bundle=None
+                else:
+                    camera_ray_bundle = camera.generate_rays(camera_indices=0, obb_box=obb)
                 self.viewer.get_model().set_crop(obb)
                 self.viewer.get_model().eval()
                 step = self.viewer.step
