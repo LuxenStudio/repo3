@@ -31,7 +31,6 @@ from luxenstudio.configs.experiment_config import ExperimentConfig
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.engine.optimizers import Optimizers
-from luxenstudio.models.gaussian_splatting import GaussianSplattingModel
 from luxenstudio.pipelines.base_pipeline import VanillaPipeline
 from luxenstudio.utils import profiler, writer
 from luxenstudio.utils.decorators import check_eval_enabled, check_main_thread, check_viewer_enabled

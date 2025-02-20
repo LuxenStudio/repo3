@@ -22,13 +22,10 @@ paradigm
 from __future__ import annotations
 
 import random
-import sys
-from abc import abstractmethod
-from collections import defaultdict
 from dataclasses import dataclass, field
 from functools import cached_property
 from pathlib import Path
-from typing import (Any, Callable, Dict, ForwardRef, Generic, List, Literal,
+from typing import (Dict, ForwardRef, Generic, List, Literal,
                     Optional, Tuple, Type, Union, cast, get_args, get_origin)
 
 import cv2
@@ -36,11 +33,8 @@ import numpy as np
 import torch
 from copy import deepcopy
 from rich.progress import Console
-from torch import Tensor, nn
 from torch.nn import Parameter
-from torch.utils.data.distributed import DistributedSampler
 from tqdm import tqdm
-from typing_extensions import Literal
 
 from luxenstudio.cameras.cameras import Cameras, CameraType
 from luxenstudio.configs.dataparser_configs import AnnotatedDataParserUnion
@@ -52,8 +46,6 @@ from luxenstudio.data.dataparsers.luxenstudio_dataparser import \
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.utils.misc import get_orig_class
 from luxenstudio.utils.rich_utils import CONSOLE
-
-CONSOLE = Console(width=120)
 
 @dataclass
 class FullImageDatamanagerConfig(DataManagerConfig):
