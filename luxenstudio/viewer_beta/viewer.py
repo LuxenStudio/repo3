@@ -124,8 +124,8 @@ class Viewer:
             ),
         )
         image = viser.theme.TitlebarImage(
-            image_url_light="https://docs.luxen.studio/en/latest/_static/imgs/logo.png",
-            image_url_dark="https://docs.luxen.studio/en/latest/_static/imgs/logo-dark.png",
+            image_url_light="https://docs.luxen.studio/_static/imgs/logo.png",
+            image_url_dark="https://docs.luxen.studio/_static/imgs/logo-dark.png",
             image_alt="LuxenStudio Logo",
             href="https://docs.luxen.studio/",
         )
