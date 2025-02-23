@@ -41,6 +41,7 @@ from luxenstudio.data.datamanagers.base_datamanager import (
     VanillaDataManager,
 )
 from luxenstudio.data.datamanagers.parallel_datamanager import ParallelDataManager
+from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanager
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.utils import profiler
@@ -372,7 +373,7 @@ class VanillaPipeline(Pipeline):
         """
         self.eval()
         metrics_dict_list = []
-        assert isinstance(self.datamanager, (VanillaDataManager, ParallelDataManager))
+        assert isinstance(self.datamanager, (VanillaDataManager, ParallelDataManager,FullImageDatamanager))
         num_images = len(self.datamanager.fixed_indices_eval_dataloader)
         with Progress(
             TextColumn("[progress.description]{task.description}"),

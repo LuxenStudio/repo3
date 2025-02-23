@@ -27,7 +27,6 @@ from torch.nn.parameter import Parameter
 from luxenstudio.configs import base_config
 from luxenstudio.utils import writer
 
-
 # Optimizer related configs
 @dataclass
 class OptimizerConfig(base_config.PrintableConfig):

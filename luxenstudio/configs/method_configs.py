@@ -71,7 +71,7 @@ from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
-from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanagerConfig
+from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanagerConfig,FullImageDatamanager
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 from luxenstudio.plugins.registry import discover_methods
 
@@ -597,17 +597,16 @@ method_configs["neus-facto"] = TrainerConfig(
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
     vis="viewer",
 )
-from dataclasses import field
-from collections import defaultdict
+
 method_configs["gaussian-splatting"] = TrainerConfig(
     method_name="gaussian-splatting",
-    steps_per_eval_image=10,
-    steps_per_eval_batch=10,
+    steps_per_eval_image=100,
+    steps_per_eval_batch=100,
     steps_per_save=2000,
-    steps_per_eval_all_images=1000000,  # set to a very large model so we don't eval with all images
+    steps_per_eval_all_images=100000, 
     max_num_iterations=30000,
     mixed_precision=False,
-    gradient_accumulation_steps = {'camera_opt': 100},
+    gradient_accumulation_steps = {'camera_opt': 100,'color':10,'shs':10},
     pipeline=VanillaPipelineConfig(
         datamanager=FullImageDatamanagerConfig(
             dataparser=ColmapDataParserConfig(load_3D_points=True),
@@ -642,7 +641,7 @@ method_configs["gaussian-splatting"] = TrainerConfig(
         },
         "scaling": {
             "optimizer": AdamOptimizerConfig(lr=0.005, eps=1e-15),
-            "scheduler": None
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-3, max_steps=30000)
         },
         "rotation": {
             "optimizer": AdamOptimizerConfig(lr=0.001, eps=1e-15),
