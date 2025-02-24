@@ -29,7 +29,7 @@ from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.field_components.encodings import LuxenEncoding
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.vanilla_luxen_field import LuxenField
-from luxenstudio.model_components.losses import MSELoss
+from luxenstudio.model_components.losses import MSELoss, scale_gradients_by_distance_squared
 from luxenstudio.model_components.ray_samplers import PDFSampler, UniformSampler
 from luxenstudio.model_components.renderers import (
     AccumulationRenderer,
@@ -109,6 +109,8 @@ class MipLuxenModel(Model):
 
         # First pass:
         field_outputs_coarse = self.field.forward(ray_samples_uniform)
+        if self.config.use_gradient_scaling:
+            field_outputs_coarse = scale_gradients_by_distance_squared(field_outputs_coarse, ray_samples_uniform)
         weights_coarse = ray_samples_uniform.get_weights(field_outputs_coarse[FieldHeadNames.DENSITY])
         rgb_coarse = self.renderer_rgb(
             rgb=field_outputs_coarse[FieldHeadNames.RGB],
@@ -122,6 +124,8 @@ class MipLuxenModel(Model):
 
         # Second pass:
         field_outputs_fine = self.field.forward(ray_samples_pdf)
+        if self.config.use_gradient_scaling:
+            field_outputs_fine = scale_gradients_by_distance_squared(field_outputs_fine, ray_samples_pdf)
         weights_fine = ray_samples_pdf.get_weights(field_outputs_fine[FieldHeadNames.DENSITY])
         rgb_fine = self.renderer_rgb(
             rgb=field_outputs_fine[FieldHeadNames.RGB],

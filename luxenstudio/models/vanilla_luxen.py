@@ -33,7 +33,7 @@ from luxenstudio.field_components.encodings import LuxenEncoding
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.fields.vanilla_luxen_field import LuxenField
-from luxenstudio.model_components.losses import MSELoss
+from luxenstudio.model_components.losses import MSELoss, scale_gradients_by_distance_squared
 from luxenstudio.model_components.ray_samplers import PDFSampler, UniformSampler
 from luxenstudio.model_components.renderers import (
     AccumulationRenderer,
@@ -58,6 +58,8 @@ class VanillaModelConfig(ModelConfig):
     """Specifies whether or not to include ray warping based on time."""
     temporal_distortion_params: Dict[str, Any] = to_immutable_dict({"kind": TemporalDistortionKind.DNERF})
     """Parameters to instantiate temporal distortion with"""
+    use_gradient_scaling: bool = False
+    """Use gradient scaler where the gradients are lower for points closer to the camera."""
     background_color: Literal["random", "last_sample", "black", "white"] = "white"
     """Whether to randomize the background color."""
 
@@ -154,6 +156,8 @@ class LuxenModel(Model):
 
         # coarse field:
         field_outputs_coarse = self.field_coarse.forward(ray_samples_uniform)
+        if self.config.use_gradient_scaling:
+            field_outputs_coarse = scale_gradients_by_distance_squared(field_outputs_coarse, ray_samples_uniform)
         weights_coarse = ray_samples_uniform.get_weights(field_outputs_coarse[FieldHeadNames.DENSITY])
         rgb_coarse = self.renderer_rgb(
             rgb=field_outputs_coarse[FieldHeadNames.RGB],
@@ -172,6 +176,8 @@ class LuxenModel(Model):
 
         # fine field:
         field_outputs_fine = self.field_fine.forward(ray_samples_pdf)
+        if self.config.use_gradient_scaling:
+            field_outputs_fine = scale_gradients_by_distance_squared(field_outputs_fine, ray_samples_pdf)
         weights_fine = ray_samples_pdf.get_weights(field_outputs_fine[FieldHeadNames.DENSITY])
         rgb_fine = self.renderer_rgb(
             rgb=field_outputs_fine[FieldHeadNames.RGB],
