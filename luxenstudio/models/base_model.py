@@ -31,7 +31,7 @@ from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.configs.config_utils import to_immutable_dict
-from luxenstudio.data.scene_box import SceneBox
+from luxenstudio.data.scene_box import SceneBox, OrientedBox
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.model_components.scene_colliders import NearFarCollider
 
@@ -163,11 +163,23 @@ class Model(nn.Module):
         """
 
     @torch.no_grad()
+    def get_outputs_for_camera(self, camera: Cameras, obb_box: Optional[OrientedBox] = None) -> Dict[str, torch.Tensor]:
+        """Takes in a camera, generates the raybundle, and computes the output of the model.
+        Assumes a ray-based model.
+
+        Args:
+            camera: generates raybundle
+        """
+        return self.get_outputs_for_camera_ray_bundle(
+            camera.generate_rays(camera_indices=0, keep_shape=True, obb_box=obb_box)
+        )
+
+    @torch.no_grad()
     def get_outputs_for_camera_ray_bundle(
-        self, camera_ray_bundle: Union[RayBundle, Cameras], camera: Optional[Cameras] = None
+        self, camera_ray_bundle: RayBundle
     ) -> Dict[str, torch.Tensor]:
         """Takes in camera parameters and computes the output of the model.
-        TODO (jake-austin): Make 2 cases for when this is a ray or camera based model
+
         Args:
             camera_ray_bundle: ray bundle to calculate outputs over
         """
