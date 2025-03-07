@@ -45,7 +45,7 @@ external_methods = []
 external_methods.append(
     ExternalMethod(
         """[bold yellow]Instruct-Luxen2Luxen[/bold yellow]
-For more information visit: https://docs.luxen.studio/en/latest/luxenology/methods/in2n.html
+For more information visit: https://docs.luxen.studio/luxenology/methods/in2n.html
 
 To enable Instruct-Luxen2Luxen, you must install it first by running:
   [grey]pip install git+https://github.com/ayaanzhaque/instruct-luxen2luxen[/grey]""",
@@ -62,7 +62,7 @@ To enable Instruct-Luxen2Luxen, you must install it first by running:
 external_methods.append(
     ExternalMethod(
         """[bold yellow]K-Planes[/bold yellow]
-For more information visit https://docs.luxen.studio/en/latest/luxenology/methods/kplanes.html
+For more information visit https://docs.luxen.studio/luxenology/methods/kplanes.html
 
 To enable K-Planes, you must install it first by running:
   [grey]pip install kplanes-luxenstudio[/grey]""",
@@ -78,7 +78,7 @@ To enable K-Planes, you must install it first by running:
 external_methods.append(
     ExternalMethod(
         """[bold yellow]LERF[/bold yellow]
-For more information visit: https://docs.luxen.studio/en/latest/luxenology/methods/lerf.html
+For more information visit: https://docs.luxen.studio/luxenology/methods/lerf.html
 
 To enable LERF, you must install it first by running:
   [grey]pip install git+https://github.com/kerrj/lerf[/grey]""",
@@ -95,7 +95,7 @@ To enable LERF, you must install it first by running:
 external_methods.append(
     ExternalMethod(
         """[bold yellow]Tetra-Luxen[/bold yellow]
-For more information visit: https://docs.luxen.studio/en/latest/luxenology/methods/tetraluxen.html
+For more information visit: https://docs.luxen.studio/luxenology/methods/tetraluxen.html
 
 To enable Tetra-Luxen, you must install it first. Please follow the instructions here:
   https://github.com/jkulhanek/tetra-luxen/blob/master/README.md#installation""",
@@ -110,7 +110,7 @@ To enable Tetra-Luxen, you must install it first. Please follow the instructions
 external_methods.append(
     ExternalMethod(
         """[bold yellow]LuxenPlayer[/bold yellow]
-For more information visit: https://docs.luxen.studio/en/latest/luxenology/methods/luxenplayer.html
+For more information visit: https://docs.luxen.studio/luxenology/methods/luxenplayer.html
 
 To enable LuxenPlayer, you must install it first by running:
   [grey]pip install git+https://github.com/lsongx/luxenplayer-luxenstudio[/grey]""",
@@ -118,6 +118,24 @@ To enable LuxenPlayer, you must install it first by running:
             ("luxenplayer-luxenacto", "LuxenPlayer with luxenacto backbone"),
             ("luxenplayer-ngp", "LuxenPlayer with instang-ngp-bounded backbone"),
         ],
+    )
+)
+
+# Volinga
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]Volinga[/bold yellow]
+For more information visit: https://docs.luxen.studio/extensions/unreal_engine.html
+
+To enable Volinga, you must install it first by running:
+  [grey]pip install git+https://github.com/Volinga/volinga-model[/grey]""",
+        configurations=[
+            (
+                "volinga",
+                "Real-time rendering model from Volinga. Directly exportable to NVOL format at https://volinga.ai/",
+            ),
+        ],
+        pip_package="git+https://github.com/Volinga/volinga-model",
     )
 )
 

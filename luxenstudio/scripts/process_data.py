@@ -32,13 +32,10 @@ from luxenstudio.process_data import (
     process_data_utils,
     realitycapture_utils,
     record3d_utils,
+    odm_utils,
 )
-from luxenstudio.process_data.colmap_converter_to_luxenstudio_dataset import (
-    BaseConverterToLuxenstudioDataset,
-)
-from luxenstudio.process_data.images_to_luxenstudio_dataset import (
-    ImagesToLuxenstudioDataset,
-)
+from luxenstudio.process_data.colmap_converter_to_luxenstudio_dataset import BaseConverterToLuxenstudioDataset
+from luxenstudio.process_data.images_to_luxenstudio_dataset import ImagesToLuxenstudioDataset
 from luxenstudio.process_data.video_to_luxenstudio_dataset import VideoToLuxenstudioDataset
 from luxenstudio.utils.rich_utils import CONSOLE
 
@@ -89,7 +86,10 @@ class ProcessRecord3D(BaseConverterToLuxenstudioDataset):
         record3d_image_filenames = list(np.array(record3d_image_filenames)[idx])
         # Copy images to output directory
         copied_image_paths = process_data_utils.copy_images_list(
-            record3d_image_filenames, image_dir=image_dir, verbose=self.verbose
+            record3d_image_filenames,
+            image_dir=image_dir,
+            verbose=self.verbose,
+            num_downscales=self.num_downscales,
         )
         num_frames = len(copied_image_paths)
 
@@ -100,9 +100,6 @@ class ProcessRecord3D(BaseConverterToLuxenstudioDataset):
                 "To change the size of the dataset add the argument [yellow]--max_dataset_size[/yellow] to "
                 f"larger than the current value ({self.max_dataset_size}), or -1 to use all images."
             )
-
-        # Downscale images
-        summary_log.append(process_data_utils.downscale_images(image_dir, self.num_downscales, verbose=self.verbose))
 
         metadata_path = self.data / "metadata.json"
         record3d_utils.record3d_to_json(copied_image_paths, metadata_path, self.output_dir, indices=idx)
@@ -253,6 +250,8 @@ class ProcessMetashape(BaseConverterToLuxenstudioDataset, _NoDefaultProcessMetas
             raise ValueError(f"XML file {self.xml} must have a .xml extension")
         if not self.xml.exists:
             raise ValueError(f"XML file {self.xml} doesn't exist")
+        if self.eval_data is not None:
+            raise ValueError("Cannot use eval_data since cameras were already aligned with Metashape.")
 
         self.output_dir.mkdir(parents=True, exist_ok=True)
         image_dir = self.output_dir / "images"
@@ -266,6 +265,7 @@ class ProcessMetashape(BaseConverterToLuxenstudioDataset, _NoDefaultProcessMetas
             image_filenames,
             image_dir=image_dir,
             verbose=self.verbose,
+            num_downscales=self.num_downscales,
         )
         num_frames = len(copied_image_paths)
 
@@ -281,9 +281,6 @@ class ProcessMetashape(BaseConverterToLuxenstudioDataset, _NoDefaultProcessMetas
             )
         else:
             summary_log.append(f"Started with {num_frames} images")
-
-        # Downscale images
-        summary_log.append(process_data_utils.downscale_images(image_dir, self.num_downscales, verbose=self.verbose))
 
         # Save json
         if num_frames == 0:
@@ -340,6 +337,8 @@ class ProcessRealityCapture(BaseConverterToLuxenstudioDataset, _NoDefaultProcess
             raise ValueError(f"CSV file {self.csv} must have a .csv extension")
         if not self.csv.exists:
             raise ValueError(f"CSV file {self.csv} doesn't exist")
+        if self.eval_data is not None:
+            raise ValueError("Cannot use eval_data since cameras were already aligned with RealityCapture.")
 
         self.output_dir.mkdir(parents=True, exist_ok=True)
         image_dir = self.output_dir / "images"
@@ -353,6 +352,7 @@ class ProcessRealityCapture(BaseConverterToLuxenstudioDataset, _NoDefaultProcess
             image_filenames,
             image_dir=image_dir,
             verbose=self.verbose,
+            num_downscales=self.num_downscales,
         )
         num_frames = len(copied_image_paths)
 
@@ -368,9 +368,6 @@ class ProcessRealityCapture(BaseConverterToLuxenstudioDataset, _NoDefaultProcess
             )
         else:
             summary_log.append(f"Started with {num_frames} images")
-
-        # Downscale images
-        summary_log.append(process_data_utils.downscale_images(image_dir, self.num_downscales, verbose=self.verbose))
 
         # Save json
         if num_frames == 0:
@@ -391,6 +388,93 @@ class ProcessRealityCapture(BaseConverterToLuxenstudioDataset, _NoDefaultProcess
         CONSOLE.rule()
 
 
+@dataclass
+class ProcessODM(BaseConverterToLuxenstudioDataset):
+    """Process ODM data into a luxenstudio dataset.
+
+    This script does the following:
+
+    1. Scales images to a specified size.
+    2. Converts ODM poses into the luxenstudio format.
+    """
+
+    num_downscales: int = 3
+    """Number of times to downscale the images. Downscales by 2 each time. For example a value of 3
+        will downscale the images by 2x, 4x, and 8x."""
+    max_dataset_size: int = 600
+    """Max number of images to train on. If the dataset has more, images will be sampled approximately evenly. If -1,
+    use all images."""
+
+    def main(self) -> None:
+        """Process images into a luxenstudio dataset."""
+
+        orig_images_dir = self.data / "images"
+        cameras_file = self.data / "cameras.json"
+        shots_file = self.data / "odm_report" / "shots.geojson"
+
+        if not shots_file.exists:
+            raise ValueError(f"shots file {shots_file} doesn't exist")
+        if not shots_file.exists:
+            raise ValueError(f"cameras file {cameras_file} doesn't exist")
+
+        if not orig_images_dir.exists:
+            raise ValueError(f"Images dir {orig_images_dir} doesn't exist")
+
+        if self.eval_data is not None:
+            raise ValueError("Cannot use eval_data since cameras were already aligned with ODM.")
+
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        image_dir = self.output_dir / "images"
+        image_dir.mkdir(parents=True, exist_ok=True)
+
+        summary_log = []
+
+        # Copy images to output directory
+        image_filenames, num_orig_images = process_data_utils.get_image_filenames(
+            orig_images_dir, self.max_dataset_size
+        )
+        copied_image_paths = process_data_utils.copy_images_list(
+            image_filenames,
+            image_dir=image_dir,
+            verbose=self.verbose,
+            num_downscales=self.num_downscales,
+        )
+        num_frames = len(copied_image_paths)
+
+        copied_image_paths = [Path("images/" + copied_image_path.name) for copied_image_path in copied_image_paths]
+        original_names = [image_path.stem for image_path in image_filenames]
+        image_filename_map = dict(zip(original_names, copied_image_paths))
+
+        if self.max_dataset_size > 0 and num_frames != num_orig_images:
+            summary_log.append(f"Started with {num_frames} images out of {num_orig_images} total")
+            summary_log.append(
+                "To change the size of the dataset add the argument [yellow]--max_dataset_size[/yellow] to "
+                f"larger than the current value ({self.max_dataset_size}), or -1 to use all images."
+            )
+        else:
+            summary_log.append(f"Started with {num_frames} images")
+
+        # Save json
+        if num_frames == 0:
+            CONSOLE.print("[bold red]No images found, exiting")
+            sys.exit(1)
+        summary_log.extend(
+            odm_utils.cameras2luxends(
+                image_filename_map=image_filename_map,
+                cameras_file=cameras_file,
+                shots_file=shots_file,
+                output_dir=self.output_dir,
+                verbose=self.verbose,
+            )
+        )
+
+        CONSOLE.rule("[bold green]:tada: :tada: :tada: All DONE :tada: :tada: :tada:")
+
+        for summary in summary_log:
+            CONSOLE.print(summary, justify="center")
+        CONSOLE.rule()
+
+
 Commands = Union[
     Annotated[ImagesToLuxenstudioDataset, tyro.conf.subcommand(name="images")],
     Annotated[VideoToLuxenstudioDataset, tyro.conf.subcommand(name="video")],
@@ -398,6 +482,7 @@ Commands = Union[
     Annotated[ProcessMetashape, tyro.conf.subcommand(name="metashape")],
     Annotated[ProcessRealityCapture, tyro.conf.subcommand(name="realitycapture")],
     Annotated[ProcessRecord3D, tyro.conf.subcommand(name="record3d")],
+    Annotated[ProcessODM, tyro.conf.subcommand(name="odm")],
 ]
 
 
