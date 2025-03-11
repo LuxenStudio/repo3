@@ -22,7 +22,6 @@ from collections import OrderedDict
 from typing import Dict
 
 import tyro
-from luxenstudio.data.pixel_samplers import PairPixelSamplerConfig
 
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
@@ -49,6 +48,7 @@ from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParse
 from luxenstudio.data.datasets.depth_dataset import DepthDataset
 from luxenstudio.data.datasets.sdf_dataset import SDFDataset
 from luxenstudio.data.datasets.semantic_dataset import SemanticDataset
+from luxenstudio.data.pixel_samplers import PairPixelSamplerConfig
 from luxenstudio.engine.optimizers import AdamOptimizerConfig, RAdamOptimizerConfig
 from luxenstudio.engine.schedulers import (
     CosineDecaySchedulerConfig,
@@ -59,8 +59,10 @@ from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
+from luxenstudio.models.gaussian_splatting import GaussianSplattingModelConfig
 from luxenstudio.models.geluxenacto import GeluxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
+from luxenstudio.data.dataparsers.colmap_dataparser import ColmapDataParserConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
 from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.neus import NeuSModelConfig
@@ -69,6 +71,7 @@ from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
+from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanagerConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 from luxenstudio.plugins.registry import discover_methods
 
@@ -87,6 +90,7 @@ descriptions = {
     "geluxenacto": "Generative Text to Luxen model",
     "neus": "Implementation of NeuS. (slow)",
     "neus-facto": "Implementation of NeuS-Facto. (slow)",
+    "gaussian-splatting": "Gaussian Splatting model",
 }
 
 method_configs["luxenacto"] = TrainerConfig(
@@ -592,6 +596,54 @@ method_configs["neus-facto"] = TrainerConfig(
     },
     viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
     vis="viewer",
+)
+
+method_configs["gaussian-splatting"] = TrainerConfig(
+    method_name="gaussian-splatting",
+    steps_per_eval_image=100,
+    steps_per_eval_batch=100,
+    steps_per_save=2000,
+    steps_per_eval_all_images=1000,
+    max_num_iterations=30000,
+    mixed_precision=False,
+    gradient_accumulation_steps={"camera_opt": 100, "color": 2},
+    pipeline=VanillaPipelineConfig(
+        datamanager=FullImageDatamanagerConfig(
+            dataparser=ColmapDataParserConfig(load_3D_points=True),
+        ),
+        model=GaussianSplattingModelConfig(),
+    ),
+    optimizers={
+        "xyz": {
+            "optimizer": AdamOptimizerConfig(lr=1.6e-4, eps=1e-15),
+            "scheduler": ExponentialDecaySchedulerConfig(
+                lr_final=1.6e-6,
+                max_steps=30000,
+            ),
+        },
+        "color": {
+            "optimizer": AdamOptimizerConfig(lr=5e-4, eps=1e-15),
+            "scheduler": ExponentialDecaySchedulerConfig(
+                lr_final=1e-4,
+                max_steps=30000,
+            ),
+        },
+        "opacity": {
+            "optimizer": AdamOptimizerConfig(lr=0.05, eps=1e-15),
+            "scheduler": None,
+        },
+        "scaling": {
+            "optimizer": AdamOptimizerConfig(lr=0.005, eps=1e-15),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=1e-3, max_steps=30000),
+        },
+        "rotation": {"optimizer": AdamOptimizerConfig(lr=0.001, eps=1e-15), "scheduler": None},
+        "camera_opt": {
+            "optimizer": AdamOptimizerConfig(lr=1e-3, eps=1e-15),
+            "scheduler": ExponentialDecaySchedulerConfig(lr_final=5e-5, max_steps=30000),
+        },
+    },
+    viewer=ViewerConfig(num_rays_per_chunk=1 << 15),
+    vis="viewer_beta",
 )
 
 
