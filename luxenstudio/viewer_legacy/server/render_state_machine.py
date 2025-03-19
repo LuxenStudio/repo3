@@ -27,11 +27,11 @@ from luxenstudio.model_components.renderers import background_color_override_con
 from luxenstudio.models.gaussian_splatting import GaussianSplattingModel
 from luxenstudio.utils import colormaps, writer
 from luxenstudio.utils.writer import GLOBAL_BUFFER, EventName, TimeWriter
-from luxenstudio.viewer.server import viewer_utils
-from luxenstudio.viewer.viser.messages import CameraMessage
+from luxenstudio.viewer_legacy.server import viewer_utils
+from luxenstudio.viewer_legacy.viser.messages import CameraMessage
 
 if TYPE_CHECKING:
-    from luxenstudio.viewer.server.viewer_state import ViewerState
+    from luxenstudio.viewer_legacy.server.viewer_state import ViewerLegacyState
 
 RenderStates = Literal["low_move", "low_static", "high"]
 RenderActions = Literal["rerender", "move", "static", "step"]
@@ -55,7 +55,7 @@ class RenderStateMachine(threading.Thread):
         viewer: the viewer state
     """
 
-    def __init__(self, viewer: ViewerState):
+    def __init__(self, viewer: ViewerLegacyState):
         threading.Thread.__init__(self)
         self.transitions: Dict[RenderStates, Dict[RenderActions, RenderStates]] = {
             s: {} for s in get_args(RenderStates)

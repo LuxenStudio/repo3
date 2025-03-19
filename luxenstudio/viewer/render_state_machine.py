@@ -27,12 +27,12 @@ from luxenstudio.model_components.renderers import background_color_override_con
 from luxenstudio.models.gaussian_splatting import GaussianSplattingModel
 from luxenstudio.utils import colormaps, writer
 from luxenstudio.utils.writer import GLOBAL_BUFFER, EventName, TimeWriter
-from luxenstudio.viewer.server import viewer_utils
-from luxenstudio.viewer_beta.utils import CameraState, get_camera
+from luxenstudio.viewer_legacy.server import viewer_utils
+from luxenstudio.viewer.utils import CameraState, get_camera
 from viser import ClientHandle
 
 if TYPE_CHECKING:
-    from luxenstudio.viewer_beta.viewer import Viewer
+    from luxenstudio.viewer.viewer import Viewer
 
 RenderStates = Literal["low_move", "low_static", "high"]
 RenderActions = Literal["rerender", "move", "static", "step"]

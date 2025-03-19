@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-from luxenstudio.viewer.server.state.node import Node
+from luxenstudio.viewer_legacy.server.state.node import Node
 
 
 class StateNode(Node):

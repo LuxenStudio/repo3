@@ -21,7 +21,7 @@ import numpy as np
 import torch
 from typing_extensions import assert_never
 
-from luxenstudio.viewer.viser.messages import CameraMessage
+from luxenstudio.viewer_legacy.viser.messages import CameraMessage
 
 
 def get_chunks(

@@ -35,14 +35,14 @@ from luxenstudio.utils.decorators import check_main_thread, decorate_all
 from luxenstudio.utils.io import load_from_json, write_to_json
 from luxenstudio.utils.rich_utils import CONSOLE
 from luxenstudio.utils.writer import GLOBAL_BUFFER, EventName
-from luxenstudio.viewer.server import viewer_utils
-from luxenstudio.viewer.server.control_panel import ControlPanel
-from luxenstudio.viewer.server.gui_utils import parse_object
-from luxenstudio.viewer.server.render_state_machine import RenderAction, RenderStateMachine
-from luxenstudio.viewer.server.utils import get_intrinsics_matrix_and_camera_to_world_h
-from luxenstudio.viewer.server.viewer_elements import ViewerControl, ViewerElement
-from luxenstudio.viewer.viser import ViserServer
-from luxenstudio.viewer.viser.messages import (
+from luxenstudio.viewer_legacy.server import viewer_utils
+from luxenstudio.viewer_legacy.server.control_panel import ControlPanel
+from luxenstudio.viewer_legacy.server.gui_utils import parse_object
+from luxenstudio.viewer_legacy.server.render_state_machine import RenderAction, RenderStateMachine
+from luxenstudio.viewer_legacy.server.utils import get_intrinsics_matrix_and_camera_to_world_h
+from luxenstudio.viewer_legacy.server.viewer_elements import ViewerControl, ViewerElement
+from luxenstudio.viewer_legacy.viser import ViserServer
+from luxenstudio.viewer_legacy.viser.messages import (
     CameraMessage,
     CameraPathOptionsRequest,
     CameraPathPayloadMessage,
@@ -59,7 +59,7 @@ if TYPE_CHECKING:
 
 
 @decorate_all([check_main_thread])
-class ViewerState:
+class ViewerLegacyState:
     """Class to hold state for viewer variables
 
     Args:

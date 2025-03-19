@@ -34,13 +34,13 @@ from luxenstudio.models.base_model import Model
 from luxenstudio.pipelines.base_pipeline import Pipeline
 from luxenstudio.utils.decorators import check_main_thread, decorate_all
 from luxenstudio.utils.writer import GLOBAL_BUFFER, EventName
-from luxenstudio.viewer.server import viewer_utils
-from luxenstudio.viewer_beta.control_panel import ControlPanel
-from luxenstudio.viewer_beta.export_panel import populate_export_tab
-from luxenstudio.viewer_beta.render_panel import populate_render_tab
-from luxenstudio.viewer_beta.render_state_machine import RenderAction, RenderStateMachine
-from luxenstudio.viewer_beta.utils import CameraState, parse_object
-from luxenstudio.viewer_beta.viewer_elements import ViewerControl, ViewerElement
+from luxenstudio.viewer_legacy.server import viewer_utils
+from luxenstudio.viewer.control_panel import ControlPanel
+from luxenstudio.viewer.export_panel import populate_export_tab
+from luxenstudio.viewer.render_panel import populate_render_tab
+from luxenstudio.viewer.render_state_machine import RenderAction, RenderStateMachine
+from luxenstudio.viewer.utils import CameraState, parse_object
+from luxenstudio.viewer.viewer_elements import ViewerControl, ViewerElement
 from typing_extensions import assert_never
 
 if TYPE_CHECKING:

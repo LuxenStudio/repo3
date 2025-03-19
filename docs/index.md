@@ -161,7 +161,6 @@ This documentation is organized into 3 parts:
 | ---------------------------------------------------------- | ---------------------- |
 | [Github](https://github.com/luxenstudio-project/luxenstudio) | Official Github Repo   |
 | [Discord](https://discord.gg/RyVk6w5WWP)                   | Join Discord Community |
-| [Viewer](https://viewer.luxen.studio/)                      | Web-based Luxen Viewer  |
 | [Feedback Form](https://forms.gle/sqN5phJN7LfQVwnP9)       | Provide Luxenstudio Feedback |
 
 ## Sponsors
