@@ -39,6 +39,7 @@ The following methods are supported in luxenstudio:
     TensoRF<tensorf.md>
     Geluxenacto<geluxenacto.md>
     Instruct-GS2GS<igs2gs.md>
+    PyLuxen<pyluxen.md>
 ```
 
 (own_method_docs)=

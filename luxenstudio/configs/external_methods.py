@@ -152,6 +152,29 @@ To enable Instruct-GS2GS, you must install it first by running:
     )
 )
 
+# PyLuxen
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]PyLuxen[/bold yellow]
+For more information visit https://docs.luxen.studio/luxenology/methods/pyluxen.html
+
+To enable PyLuxen, you must install it first by running:
+  [grey]pip install git+https://github.com/hturki/pyluxen[/grey]""",
+        configurations=[
+            ("pyluxen", "PyLuxen with proposal network. The default parameters are suited for outdoor scenes."),
+            (
+                "pyluxen-synthetic",
+                "PyLuxen with proposal network. The default parameters are suited for synthetic scenes.",
+            ),
+            (
+                "pyluxen-occupancy-grid",
+                "PyLuxen with occupancy grid. The default parameters are suited for synthetic scenes.",
+            ),
+        ],
+        pip_package="git+https://github.com/hturki/pyluxen",
+    )
+)
+
 
 @dataclass
 class ExternalMethodTrainerConfig(TrainerConfig):
