@@ -35,6 +35,7 @@ from luxenstudio.data.dataparsers.phototourism_dataparser import PhototourismDat
 from luxenstudio.data.dataparsers.scannet_dataparser import ScanNetDataParserConfig
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
+from luxenstudio.data.dataparsers.scannetpp_dataparser import ScanNetppDataParserConfig
 from luxenstudio.plugins.registry_dataparser import discover_dataparsers
 
 dataparsers = {
@@ -51,6 +52,7 @@ dataparsers = {
     "sdfstudio-data": SDFStudioDataParserConfig(),
     "luxenosr-data": LuxenOSRDataParserConfig(),
     "sitcoms3d-data": Sitcoms3DDataParserConfig(),
+    "scannetpp-data": ScanNetppDataParserConfig(),
     "colmap": ColmapDataParserConfig(),
 }
 

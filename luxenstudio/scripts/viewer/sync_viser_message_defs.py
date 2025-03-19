@@ -20,7 +20,7 @@ from datetime import datetime
 import tyro
 from viser.infra import generate_typescript_interfaces
 
-from luxenstudio.viewer.viser import LuxenstudioMessage
+from luxenstudio.viewer_legacy.viser import LuxenstudioMessage
 
 
 def main() -> None:

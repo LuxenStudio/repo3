@@ -45,7 +45,7 @@ external_methods = []
 external_methods.append(
     ExternalMethod(
         """[bold yellow]Instruct-Luxen2Luxen[/bold yellow]
-For more information visit: https://docs.luxen.studio/en/latest/luxenology/methods/in2n.html
+For more information visit: https://docs.luxen.studio/luxenology/methods/in2n.html
 
 To enable Instruct-Luxen2Luxen, you must install it first by running:
   [grey]pip install git+https://github.com/ayaanzhaque/instruct-luxen2luxen[/grey]""",
@@ -62,7 +62,7 @@ To enable Instruct-Luxen2Luxen, you must install it first by running:
 external_methods.append(
     ExternalMethod(
         """[bold yellow]K-Planes[/bold yellow]
-For more information visit https://docs.luxen.studio/en/latest/luxenology/methods/kplanes.html
+For more information visit https://docs.luxen.studio/luxenology/methods/kplanes.html
 
 To enable K-Planes, you must install it first by running:
   [grey]pip install kplanes-luxenstudio[/grey]""",
@@ -78,7 +78,7 @@ To enable K-Planes, you must install it first by running:
 external_methods.append(
     ExternalMethod(
         """[bold yellow]LERF[/bold yellow]
-For more information visit: https://docs.luxen.studio/en/latest/luxenology/methods/lerf.html
+For more information visit: https://docs.luxen.studio/luxenology/methods/lerf.html
 
 To enable LERF, you must install it first by running:
   [grey]pip install git+https://github.com/kerrj/lerf[/grey]""",
@@ -95,7 +95,7 @@ To enable LERF, you must install it first by running:
 external_methods.append(
     ExternalMethod(
         """[bold yellow]Tetra-Luxen[/bold yellow]
-For more information visit: https://docs.luxen.studio/en/latest/luxenology/methods/tetraluxen.html
+For more information visit: https://docs.luxen.studio/luxenology/methods/tetraluxen.html
 
 To enable Tetra-Luxen, you must install it first. Please follow the instructions here:
   https://github.com/jkulhanek/tetra-luxen/blob/master/README.md#installation""",
@@ -110,7 +110,7 @@ To enable Tetra-Luxen, you must install it first. Please follow the instructions
 external_methods.append(
     ExternalMethod(
         """[bold yellow]LuxenPlayer[/bold yellow]
-For more information visit: https://docs.luxen.studio/en/latest/luxenology/methods/luxenplayer.html
+For more information visit: https://docs.luxen.studio/luxenology/methods/luxenplayer.html
 
 To enable LuxenPlayer, you must install it first by running:
   [grey]pip install git+https://github.com/lsongx/luxenplayer-luxenstudio[/grey]""",
@@ -125,7 +125,7 @@ To enable LuxenPlayer, you must install it first by running:
 external_methods.append(
     ExternalMethod(
         """[bold yellow]Volinga[/bold yellow]
-For more information visit: https://docs.luxen.studio/en/latest/extensions/unreal_engine.html
+For more information visit: https://docs.luxen.studio/extensions/unreal_engine.html
 
 To enable Volinga, you must install it first by running:
   [grey]pip install git+https://github.com/Volinga/volinga-model[/grey]""",
@@ -136,6 +136,19 @@ To enable Volinga, you must install it first by running:
             ),
         ],
         pip_package="git+https://github.com/Volinga/volinga-model",
+    )
+)
+
+# Instruct-GS2GS
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]Instruct-GS2GS[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/igs2gs.html
+
+To enable Instruct-GS2GS, you must install it first by running:
+  [grey]pip install git+https://github.com/cvachha/instruct-gs2gs[/grey]""",
+        configurations=[("igs2gs", "Instruct-GS2GS. Full model, used in paper")],
+        pip_package="git+https://github.com/cvachha/instruct-gs2gs",
     )
 )
 

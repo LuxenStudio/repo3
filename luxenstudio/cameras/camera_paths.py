@@ -24,7 +24,7 @@ import luxenstudio.utils.poses as pose_utils
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.camera_utils import get_interpolated_poses_many
 from luxenstudio.cameras.cameras import Cameras, CameraType
-from luxenstudio.viewer.server.utils import three_js_perspective_camera_focal_length
+from luxenstudio.viewer_legacy.server.utils import three_js_perspective_camera_focal_length
 
 
 def get_interpolated_camera_path(cameras: Cameras, steps: int, order_poses: bool) -> Cameras:

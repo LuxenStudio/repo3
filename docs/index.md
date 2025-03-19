@@ -135,7 +135,7 @@ This documentation is organized into 3 parts:
 
 ### Included Methods
 
-- [**Luxenacto**](luxenology/methods/luxenacto.md): Recommended method, integrates mutiple methods into one.
+- [**Luxenacto**](luxenology/methods/luxenacto.md): Recommended method, integrates multiple methods into one.
 - [Instant-NGP](luxenology/methods/instant_ngp.md): Instant Neural Graphics Primitives with a Multiresolution Hash Encoding
 - [Luxen](luxenology/methods/luxen.md): OG Neural Radiance Fields
 - [Mip-Luxen](luxenology/methods/mipluxen.md): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
@@ -151,6 +151,7 @@ This documentation is organized into 3 parts:
 - [Luxenbusters](luxenology/methods/luxenbusters.md): Removing Ghostly Artifacts from Casually Captured Luxens
 - [LuxenPlayer](luxenology/methods/luxenplayer.md): 4D Radiance Fields by Streaming Feature Channels
 - [Tetra-Luxen](luxenology/methods/tetraluxen.md): Representing Neural Radiance Fields Using Tetrahedra
+- [Instruct-GS2GS](luxenology/methods/igs2gs.md): Editing 3DGS Scenes with Instructions
 
 **Eager to contribute a method?** We'd love to see you use luxenstudio in implementing new (or even existing) methods! Please view our {ref}`guide<own_method_docs>` for more details about how to add to this list!
 
@@ -160,7 +161,6 @@ This documentation is organized into 3 parts:
 | ---------------------------------------------------------- | ---------------------- |
 | [Github](https://github.com/luxenstudio-project/luxenstudio) | Official Github Repo   |
 | [Discord](https://discord.gg/RyVk6w5WWP)                   | Join Discord Community |
-| [Viewer](https://viewer.luxen.studio/)                      | Web-based Luxen Viewer  |
 | [Feedback Form](https://forms.gle/sqN5phJN7LfQVwnP9)       | Provide Luxenstudio Feedback |
 
 ## Sponsors
