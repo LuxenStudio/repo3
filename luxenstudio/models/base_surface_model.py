@@ -36,19 +36,9 @@ from luxenstudio.field_components.spatial_distortions import SceneContraction
 from luxenstudio.fields.luxenacto_field import LuxenactoField
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.fields.vanilla_luxen_field import LuxenField
-from luxenstudio.model_components.losses import (
-    L1Loss,
-    MSELoss,
-    ScaleAndShiftInvariantLoss,
-    monosdf_normal_loss,
-)
+from luxenstudio.model_components.losses import L1Loss, MSELoss, ScaleAndShiftInvariantLoss, monosdf_normal_loss
 from luxenstudio.model_components.ray_samplers import LinearDisparitySampler
-from luxenstudio.model_components.renderers import (
-    AccumulationRenderer,
-    DepthRenderer,
-    RGBRenderer,
-    SemanticRenderer,
-)
+from luxenstudio.model_components.renderers import AccumulationRenderer, DepthRenderer, RGBRenderer, SemanticRenderer
 from luxenstudio.model_components.scene_colliders import AABBBoxCollider, NearFarCollider
 from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.utils import colormaps
@@ -79,7 +69,7 @@ class SurfaceModelConfig(ModelConfig):
     """Monocular normal consistency loss multiplier."""
     mono_depth_loss_mult: float = 0.0
     """Monocular depth consistency loss multiplier."""
-    sdf_field: SDFFieldConfig = field(default_factory=lambda: SDFFieldConfig())
+    sdf_field: SDFFieldConfig = field(default_factory=SDFFieldConfig)
     """Config for SDF Field"""
     background_model: Literal["grid", "mlp", "none"] = "mlp"
     """background models"""

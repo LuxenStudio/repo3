@@ -3,14 +3,13 @@ Tests for the luxenstudio.plugins.registry module.
 """
 import os
 import sys
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
-from luxenstudio.plugins import registry
+from luxenstudio.plugins import registry, registry_dataparser
+from luxenstudio.plugins.registry_dataparser import DataParserConfig, DataParserSpecification, discover_dataparsers
 from luxenstudio.plugins.types import MethodSpecification
-from luxenstudio.plugins import registry_dataparser
-from luxenstudio.plugins.registry_dataparser import DataParserSpecification, discover_dataparsers, DataParserConfig
 
 if sys.version_info < (3, 10):
     import importlib_metadata
@@ -100,7 +99,7 @@ def test_discover_methods_from_environment_variable_instance():
 
 @dataclass
 class TestDataparserConfigClass(DataParserSpecification):
-    config: DataParserConfig = DataParserConfig()
+    config: DataParserConfig = field(default_factory=DataParserConfig)
     description: str = "Test description"
 
 
