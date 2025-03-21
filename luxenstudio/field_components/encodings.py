@@ -28,11 +28,7 @@ from torch import Tensor, nn
 
 from luxenstudio.field_components.base_field_component import FieldComponent
 from luxenstudio.utils.external import TCNN_EXISTS, tcnn
-from luxenstudio.utils.math import (
-    components_from_spherical_harmonics,
-    expected_sin,
-    generate_polyhedron_basis,
-)
+from luxenstudio.utils.math import components_from_spherical_harmonics, expected_sin, generate_polyhedron_basis
 from luxenstudio.utils.printing import print_tcnn_speed_warning
 
 

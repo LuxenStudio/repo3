@@ -27,10 +27,10 @@ from typing import TYPE_CHECKING, Union
 import gdown
 import torch
 import tyro
-from luxenstudio.process_data import process_data_utils
 from typing_extensions import Annotated
 
 from luxenstudio.configs.base_config import PrintableConfig
+from luxenstudio.process_data import process_data_utils
 from luxenstudio.utils import install_checks
 from luxenstudio.utils.scripts import run_command
 

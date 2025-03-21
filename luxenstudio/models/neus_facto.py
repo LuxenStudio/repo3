@@ -27,18 +27,11 @@ import torch
 from torch.nn import Parameter
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.engine.callbacks import (
-    TrainingCallback,
-    TrainingCallbackAttributes,
-    TrainingCallbackLocation,
-)
+from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.density_fields import HashMLPDensityField
 from luxenstudio.model_components.losses import interlevel_loss
-from luxenstudio.model_components.ray_samplers import (
-    ProposalNetworkSampler,
-    UniformSampler,
-)
+from luxenstudio.model_components.ray_samplers import ProposalNetworkSampler, UniformSampler
 from luxenstudio.models.neus import NeuSModel, NeuSModelConfig
 from luxenstudio.utils import colormaps
 

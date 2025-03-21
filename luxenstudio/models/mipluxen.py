@@ -31,11 +31,7 @@ from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.vanilla_luxen_field import LuxenField
 from luxenstudio.model_components.losses import MSELoss, scale_gradients_by_distance_squared
 from luxenstudio.model_components.ray_samplers import PDFSampler, UniformSampler
-from luxenstudio.model_components.renderers import (
-    AccumulationRenderer,
-    DepthRenderer,
-    RGBRenderer,
-)
+from luxenstudio.model_components.renderers import AccumulationRenderer, DepthRenderer, RGBRenderer
 from luxenstudio.models.base_model import Model
 from luxenstudio.models.vanilla_luxen import VanillaModelConfig
 from luxenstudio.utils import colormaps, misc

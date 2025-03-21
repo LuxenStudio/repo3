@@ -24,6 +24,8 @@ from typing import TYPE_CHECKING, Any, Dict, Literal, Optional, Tuple, get_args
 import numpy as np
 import torch
 import torch.nn.functional as F
+from viser import ClientHandle
+
 from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.model_components.renderers import background_color_override_context
 from luxenstudio.models.gaussian_splatting import GaussianSplattingModel
@@ -31,8 +33,6 @@ from luxenstudio.utils import colormaps, writer
 from luxenstudio.utils.writer import GLOBAL_BUFFER, EventName, TimeWriter
 from luxenstudio.viewer.utils import CameraState, get_camera
 from luxenstudio.viewer_legacy.server import viewer_utils
-
-from viser import ClientHandle
 
 if TYPE_CHECKING:
     from luxenstudio.viewer.viewer import Viewer

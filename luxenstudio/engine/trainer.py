@@ -28,6 +28,11 @@ from threading import Lock
 from typing import DefaultDict, Dict, List, Literal, Optional, Tuple, Type, cast
 
 import torch
+from rich import box, style
+from rich.panel import Panel
+from rich.table import Table
+from torch.cuda.amp.grad_scaler import GradScaler
+
 from luxenstudio.configs.experiment_config import ExperimentConfig
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.engine.optimizers import Optimizers
@@ -39,10 +44,6 @@ from luxenstudio.utils.rich_utils import CONSOLE
 from luxenstudio.utils.writer import EventName, TimeWriter
 from luxenstudio.viewer.viewer import Viewer as ViewerState
 from luxenstudio.viewer_legacy.server.viewer_state import ViewerLegacyState
-from rich import box, style
-from rich.panel import Panel
-from rich.table import Table
-from torch.cuda.amp.grad_scaler import GradScaler
 
 TRAIN_INTERATION_OUTPUT = Tuple[torch.Tensor, Dict[str, torch.Tensor], Dict[str, torch.Tensor]]
 TORCH_DEVICE = str

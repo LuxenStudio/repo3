@@ -22,11 +22,7 @@ from dataclasses import dataclass, field
 from typing import Dict, List, Type
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.engine.callbacks import (
-    TrainingCallback,
-    TrainingCallbackAttributes,
-    TrainingCallbackLocation,
-)
+from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.model_components.ray_samplers import NeuSSampler
 from luxenstudio.models.base_surface_model import SurfaceModel, SurfaceModelConfig

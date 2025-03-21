@@ -27,33 +27,16 @@ from torch.nn import Parameter
 from typing_extensions import Literal
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.engine.callbacks import (
-    TrainingCallback,
-    TrainingCallbackAttributes,
-    TrainingCallbackLocation,
-)
+from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.density_fields import HashMLPDensityField
 from luxenstudio.fields.geluxenacto_field import GeluxenactoField
-from luxenstudio.generative.stable_diffusion import StableDiffusion
 from luxenstudio.generative.deepfloyd import DeepFloyd
 from luxenstudio.generative.positional_text_embeddings import PositionalTextEmbeddings
-from luxenstudio.model_components.losses import (
-    MSELoss,
-    distortion_loss,
-    interlevel_loss,
-    orientation_loss,
-)
-from luxenstudio.model_components.ray_samplers import (
-    ProposalNetworkSampler,
-    UniformSampler,
-)
-from luxenstudio.model_components.renderers import (
-    AccumulationRenderer,
-    DepthRenderer,
-    NormalsRenderer,
-    RGBRenderer,
-)
+from luxenstudio.generative.stable_diffusion import StableDiffusion
+from luxenstudio.model_components.losses import MSELoss, distortion_loss, interlevel_loss, orientation_loss
+from luxenstudio.model_components.ray_samplers import ProposalNetworkSampler, UniformSampler
+from luxenstudio.model_components.renderers import AccumulationRenderer, DepthRenderer, NormalsRenderer, RGBRenderer
 from luxenstudio.model_components.scene_colliders import AABBBoxCollider, SphereCollider
 from luxenstudio.model_components.shaders import LambertianShader, NormalsShader
 from luxenstudio.models.base_model import Model, ModelConfig
@@ -275,22 +258,30 @@ class GeluxenactoModel(Model):
     ) -> List[TrainingCallback]:
         # the callback that we want to run every X iterations after the training iteration
         def taper_density(
-            self, training_callback_attributes: TrainingCallbackAttributes, step: int  # pylint: disable=unused-argument
+            self,
+            training_callback_attributes: TrainingCallbackAttributes,
+            step: int,  # pylint: disable=unused-argument
         ):
             self.density_strength = np.interp(step, self.config.taper_range, self.config.taper_strength)
 
         def start_training_normals(
-            self, training_callback_attributes: TrainingCallbackAttributes, step: int  # pylint: disable=unused-argument
+            self,
+            training_callback_attributes: TrainingCallbackAttributes,
+            step: int,  # pylint: disable=unused-argument
         ):
             self.train_normals = True
 
         def start_shaded_training(
-            self, training_callback_attributes: TrainingCallbackAttributes, step: int  # pylint: disable=unused-argument
+            self,
+            training_callback_attributes: TrainingCallbackAttributes,
+            step: int,  # pylint: disable=unused-argument
         ):
             self.train_shaded = True
 
         def update_orientation_loss_mult(
-            self, training_callback_attributes: TrainingCallbackAttributes, step: int  # pylint: disable=unused-argument
+            self,
+            training_callback_attributes: TrainingCallbackAttributes,
+            step: int,  # pylint: disable=unused-argument
         ):
             if step <= self.config.start_normals_training:
                 self.orientation_loss_mult = 0

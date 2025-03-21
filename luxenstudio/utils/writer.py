@@ -28,12 +28,13 @@ import comet_ml
 import torch
 import wandb
 from jaxtyping import Float
+from torch import Tensor
+from torch.utils.tensorboard import SummaryWriter
+
 from luxenstudio.configs import base_config as cfg
 from luxenstudio.utils.decorators import check_main_thread, decorate_all
 from luxenstudio.utils.printing import human_format
 from luxenstudio.utils.rich_utils import CONSOLE
-from torch import Tensor
-from torch.utils.tensorboard import SummaryWriter
 
 
 def to8b(x):

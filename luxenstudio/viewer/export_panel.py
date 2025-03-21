@@ -18,9 +18,10 @@ from pathlib import Path
 
 import viser
 import viser.transforms as vtf
+from typing_extensions import Literal
+
 from luxenstudio.data.scene_box import OrientedBox
 from luxenstudio.viewer.control_panel import ControlPanel
-from typing_extensions import Literal
 
 
 def populate_export_tab(server: viser.ViserServer, control_panel: ControlPanel, config_path: Path) -> None:

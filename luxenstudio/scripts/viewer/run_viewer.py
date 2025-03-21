@@ -30,8 +30,8 @@ from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.pipelines.base_pipeline import Pipeline
 from luxenstudio.utils import writer
 from luxenstudio.utils.eval_utils import eval_setup
-from luxenstudio.viewer_legacy.server.viewer_state import ViewerLegacyState
 from luxenstudio.viewer.viewer import Viewer as ViewerState
+from luxenstudio.viewer_legacy.server.viewer_state import ViewerLegacyState
 
 
 @dataclass

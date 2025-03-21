@@ -27,12 +27,7 @@ from typing import Type
 import torch
 
 from luxenstudio.cameras.cameras import Cameras, CameraType
-from luxenstudio.data.dataparsers.base_dataparser import (
-    DataParser,
-    DataParserConfig,
-    DataparserOutputs,
-    Semantics,
-)
+from luxenstudio.data.dataparsers.base_dataparser import DataParser, DataParserConfig, DataparserOutputs, Semantics
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.utils.io import load_from_json
 
