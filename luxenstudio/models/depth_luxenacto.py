@@ -21,8 +21,8 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Dict, Tuple, Type
 
-import torch
 import numpy as np
+import torch
 
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.model_components import losses

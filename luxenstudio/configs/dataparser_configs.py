@@ -33,9 +33,9 @@ from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataP
 from luxenstudio.data.dataparsers.nuscenes_dataparser import NuScenesDataParserConfig
 from luxenstudio.data.dataparsers.phototourism_dataparser import PhototourismDataParserConfig
 from luxenstudio.data.dataparsers.scannet_dataparser import ScanNetDataParserConfig
+from luxenstudio.data.dataparsers.scannetpp_dataparser import ScanNetppDataParserConfig
 from luxenstudio.data.dataparsers.sdfstudio_dataparser import SDFStudioDataParserConfig
 from luxenstudio.data.dataparsers.sitcoms3d_dataparser import Sitcoms3DDataParserConfig
-from luxenstudio.data.dataparsers.scannetpp_dataparser import ScanNetppDataParserConfig
 from luxenstudio.plugins.registry_dataparser import discover_dataparsers
 
 dataparsers = {

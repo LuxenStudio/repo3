@@ -20,10 +20,11 @@ from typing import Any, List, Literal, Optional, Tuple, Union
 import numpy as np
 import torch
 from jaxtyping import Float
+from torch import nn
+
 from luxenstudio.cameras.cameras import Cameras, CameraType
 from luxenstudio.data.scene_box import SceneBox
 from luxenstudio.models.base_model import Model
-from torch import nn
 
 
 @dataclass

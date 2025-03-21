@@ -28,11 +28,11 @@ import open3d as o3d
 import pymeshlab
 import torch
 from jaxtyping import Float
-from luxenstudio.cameras.rays import RayBundle
 from rich.progress import BarColumn, Progress, TaskProgressColumn, TextColumn, TimeRemainingColumn
 from torch import Tensor
 
 from luxenstudio.cameras.cameras import Cameras
+from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.data.scene_box import OrientedBox
 from luxenstudio.pipelines.base_pipeline import Pipeline, VanillaPipeline

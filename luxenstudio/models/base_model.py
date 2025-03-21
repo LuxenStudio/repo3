@@ -31,7 +31,7 @@ from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.configs.base_config import InstantiateConfig
 from luxenstudio.configs.config_utils import to_immutable_dict
-from luxenstudio.data.scene_box import SceneBox, OrientedBox
+from luxenstudio.data.scene_box import OrientedBox, SceneBox
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.model_components.scene_colliders import NearFarCollider
 

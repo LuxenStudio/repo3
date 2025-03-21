@@ -71,10 +71,7 @@ def test_luxenstudio_dataparser_split_filelist(mocked_dataset):
         f.truncate(0)
         json.dump(data, f)
 
-    from luxenstudio.data.dataparsers.luxenstudio_dataparser import (
-        Luxenstudio,
-        LuxenstudioDataParserConfig,
-    )
+    from luxenstudio.data.dataparsers.luxenstudio_dataparser import Luxenstudio, LuxenstudioDataParserConfig
 
     parser: Luxenstudio = LuxenstudioDataParserConfig(
         data=mocked_dataset,

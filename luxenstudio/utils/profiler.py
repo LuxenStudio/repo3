@@ -24,28 +24,13 @@ import typing
 from collections import deque
 from contextlib import ContextDecorator, contextmanager
 from pathlib import Path
-from typing import (
-    Any,
-    Callable,
-    ContextManager,
-    Dict,
-    List,
-    Optional,
-    Tuple,
-    TypeVar,
-    Union,
-    overload,
-)
+from typing import Any, Callable, ContextManager, Dict, List, Optional, Tuple, TypeVar, Union, overload
 
 from torch.profiler import ProfilerActivity, profile, record_function
 
 from luxenstudio.configs import base_config as cfg
 from luxenstudio.utils import comms
-from luxenstudio.utils.decorators import (
-    check_main_thread,
-    check_profiler_enabled,
-    decorate_all,
-)
+from luxenstudio.utils.decorators import check_main_thread, check_profiler_enabled, decorate_all
 from luxenstudio.utils.rich_utils import CONSOLE
 
 PROFILER = []

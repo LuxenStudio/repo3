@@ -6,7 +6,7 @@
 
 ## Overview
 
-This Blender add-on allows for compositing with a Luxenstudio render as a background layer by generating a camera path JSON file from the Blender camera path, as well as a way to import Luxenstudio JSON files as a Blender camera baked with the Luxenstudio camera path. This add-on also allows compositing multiple Luxen objects into a Luxen scene. This is achieved by importing a mesh or point-cloud representation of the Luxen scene from Luxenstudio into Blender and getting the camera coordinates relative to the transformations of the Luxen representation. Dynamic FOV from the Blender camera is supported and will match the Luxenstudio render. Perspective, equirectangular, VR180, and omnidirectional stereo (VR 360) cameras are supported.
+This Blender add-on allows for compositing with a Luxenstudio render as a background layer by generating a camera path JSON file from the Blender camera path, as well as a way to import Luxenstudio JSON files as a Blender camera baked with the Luxenstudio camera path. This add-on also allows compositing multiple Luxen objects into a Luxen scene. This is achieved by importing a mesh or point-cloud representation of the Luxen scene from Luxenstudio into Blender and getting the camera coordinates relative to the transformations of the Luxen representation. Dynamic FOV from the Blender camera is supported and will match the Luxenstudio render. Perspective, equirectangular, VR180, and omnidirectional stereo (VR 360) cameras are supported. This add-on also supports Gaussian Splatting scenes as well, however equirectangular and VR video rendering is not currently supported.
 
 <center>
  <img width="800" alt="image" src="https://user-images.githubusercontent.com/9502341/211442247-99d1ebc7-3ef9-46f7-9bcc-0e18553f19b7.PNG">
@@ -30,7 +30,7 @@ This Blender add-on allows for compositing with a Luxenstudio render as a backgr
 
 ## Scene Setup
 
-1. Export the mesh or point cloud representation of the Luxen from Luxenstudio, which will be used as reference for the actual Luxen in the Blender scene. Mesh export at a good quality is preferred, however, if the export is not clear or the Luxen is large, a detailed point cloud export will also work.
+1. Export the mesh or point cloud representation of the Luxen from Luxenstudio, which will be used as reference for the actual Luxen in the Blender scene. Mesh export at a good quality is preferred, however, if the export is not clear or the Luxen is large, a detailed point cloud export will also work. Keep the `save_world_frame` flag as False or in the viewer, de-select the "Save in world frame" checkbox to keep the correct coordinate system for the add-on.
 
 2. Import the mesh or point cloud representation of the Luxen into the scene. You may need to crop the mesh further. Since it is used as a reference and won't be visible in the final render, only the parts that the blender animation will interact with may be necessary to import.
 

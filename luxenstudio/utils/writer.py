@@ -28,12 +28,13 @@ import comet_ml
 import torch
 import wandb
 from jaxtyping import Float
+from torch import Tensor
+from torch.utils.tensorboard import SummaryWriter
+
 from luxenstudio.configs import base_config as cfg
 from luxenstudio.utils.decorators import check_main_thread, decorate_all
 from luxenstudio.utils.printing import human_format
 from luxenstudio.utils.rich_utils import CONSOLE
-from torch import Tensor
-from torch.utils.tensorboard import SummaryWriter
 
 
 def to8b(x):
@@ -518,7 +519,7 @@ class LocalWriter:
 
             for i, mssg in enumerate(self.past_mssgs):
                 pad_len = len(max(self.past_mssgs, key=len))
-                style = "\x1b[6;30;42m" if self.banner_len and i >= len(self.past_mssgs) - self.banner_len + 1 else ""
+                style = "\x1b[30;42m" if self.banner_len and i >= len(self.past_mssgs) - self.banner_len + 1 else ""
                 print(f"{style}{mssg:{padding}<{pad_len}} \x1b[0m")
         else:
             print(curr_mssg)
