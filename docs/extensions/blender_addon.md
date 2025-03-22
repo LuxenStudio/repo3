@@ -6,7 +6,7 @@
 
 ## Overview
 
-This Blender add-on allows for compositing with a Luxenstudio render as a background layer by generating a camera path JSON file from the Blender camera path, as well as a way to import Luxenstudio JSON files as a Blender camera baked with the Luxenstudio camera path. This add-on also allows compositing multiple Luxen objects into a Luxen scene. This is achieved by importing a mesh or point-cloud representation of the Luxen scene from Luxenstudio into Blender and getting the camera coordinates relative to the transformations of the Luxen representation. Dynamic FOV from the Blender camera is supported and will match the Luxenstudio render. Perspective, equirectangular, VR180, and omnidirectional stereo (VR 360) cameras are supported. This add-on also supports Gaussian Splatting scenes as well, however equirectangular and VR video rendering is not currently supported.
+This Blender add-on allows for compositing with a Luxenstudio render as a background layer by generating a camera path JSON file from the Blender camera path, as well as a way to import Luxenstudio JSON files as a Blender camera baked with the Luxenstudio camera path. This add-on also allows compositing multiple Luxen objects into a Luxen scene. This is achieved by importing a mesh or point-cloud representation of the Luxen scene from Luxenstudio into Blender and getting the camera coordinates relative to the transformations of the Luxen representation. Dynamic FOV from the Blender camera is supported and will match the Luxenstudio render. Perspective, equirectangular, VR180, and omnidirectional stereo (VR 360) cameras are supported. This add-on also supports Gaussian Splatting scenes as well, however equirectangular and VR video rendering is not currently supported for splats.
 
 <center>
  <img width="800" alt="image" src="https://user-images.githubusercontent.com/9502341/211442247-99d1ebc7-3ef9-46f7-9bcc-0e18553f19b7.PNG">
@@ -109,6 +109,7 @@ This Blender add-on allows for compositing with a Luxenstudio render as a backgr
     <img width="300" alt="image" src="https://github-production-user-asset-6210df.s3.amazonaws.com/9502341/253217833-fd607601-2b81-48ab-ac5d-e55514a588da.png">
     </center>
 - Fisheye and orthographic cameras are not supported.
+- Renders with Gaussian Splats are supported, but the point cloud or mesh representation would need to be generated from training a Luxen on the same dataset.
 - A walkthrough of this section is included in the tutorial video.
 
 ## Create Blender Camera from Luxenstudio JSON Camera Path
