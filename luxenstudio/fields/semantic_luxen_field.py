@@ -22,12 +22,7 @@ from torch import Tensor, nn
 
 from luxenstudio.cameras.rays import RaySamples
 from luxenstudio.field_components.encodings import Encoding, Identity
-from luxenstudio.field_components.field_heads import (
-    DensityFieldHead,
-    FieldHeadNames,
-    RGBFieldHead,
-    SemanticFieldHead,
-)
+from luxenstudio.field_components.field_heads import DensityFieldHead, FieldHeadNames, RGBFieldHead, SemanticFieldHead
 from luxenstudio.field_components.mlp import MLP
 from luxenstudio.fields.base_field import Field
 

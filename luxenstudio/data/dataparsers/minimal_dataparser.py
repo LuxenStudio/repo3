@@ -24,12 +24,7 @@ import numpy as np
 import torch
 
 from luxenstudio.cameras.cameras import Cameras
-from luxenstudio.data.dataparsers.base_dataparser import (
-    DataParser,
-    DataParserConfig,
-    DataparserOutputs,
-    Semantics,
-)
+from luxenstudio.data.dataparsers.base_dataparser import DataParser, DataParserConfig, DataparserOutputs, Semantics
 from luxenstudio.data.scene_box import SceneBox
 
 

@@ -20,6 +20,8 @@ import numpy as np
 import torch
 import viser
 import viser.transforms as vtf
+from viser import ViserServer
+
 from luxenstudio.data.scene_box import OrientedBox
 from luxenstudio.utils.colormaps import ColormapOptions, Colormaps
 from luxenstudio.viewer.viewer_elements import (  # ViewerButtonGroup,
@@ -32,7 +34,6 @@ from luxenstudio.viewer.viewer_elements import (  # ViewerButtonGroup,
     ViewerSlider,
     ViewerVec3,
 )
-from viser import ViserServer
 
 
 class ControlPanel:

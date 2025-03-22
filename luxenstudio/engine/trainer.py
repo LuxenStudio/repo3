@@ -21,12 +21,18 @@ import dataclasses
 import functools
 import os
 import time
+from collections import defaultdict
 from dataclasses import dataclass, field
 from pathlib import Path
 from threading import Lock
-from typing import Dict, List, Literal, Optional, Tuple, Type, cast, DefaultDict
-from collections import defaultdict
+from typing import DefaultDict, Dict, List, Literal, Optional, Tuple, Type, cast
+
 import torch
+from rich import box, style
+from rich.panel import Panel
+from rich.table import Table
+from torch.cuda.amp.grad_scaler import GradScaler
+
 from luxenstudio.configs.experiment_config import ExperimentConfig
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.engine.optimizers import Optimizers
@@ -36,12 +42,8 @@ from luxenstudio.utils.decorators import check_eval_enabled, check_main_thread, 
 from luxenstudio.utils.misc import step_check
 from luxenstudio.utils.rich_utils import CONSOLE
 from luxenstudio.utils.writer import EventName, TimeWriter
-from luxenstudio.viewer_legacy.server.viewer_state import ViewerLegacyState
 from luxenstudio.viewer.viewer import Viewer as ViewerState
-from rich import box, style
-from rich.panel import Panel
-from rich.table import Table
-from torch.cuda.amp.grad_scaler import GradScaler
+from luxenstudio.viewer_legacy.server.viewer_state import ViewerLegacyState
 
 TRAIN_INTERATION_OUTPUT = Tuple[torch.Tensor, Dict[str, torch.Tensor], Dict[str, torch.Tensor]]
 TORCH_DEVICE = str
@@ -182,7 +184,7 @@ class Trainer:
                 train_lock=self.train_lock,
                 share=self.config.viewer.make_share_url,
             )
-            banner_messages = [f"Viewer at: {self.viewer_state.viewer_url}"]
+            banner_messages = self.viewer_state.viewer_info
         self._check_viewer_warnings()
 
         self._load_checkpoint()

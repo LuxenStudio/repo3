@@ -27,6 +27,7 @@ The following methods are supported in luxenstudio:
 ```{toctree}
     :maxdepth: 1
     Instant-NGP<instant_ngp.md>
+    3D Gaussian Splatting<splat.md>
     Instruct-Luxen2Luxen<in2n.md>
     K-Planes<kplanes.md>
     LERF<lerf.md>
@@ -39,6 +40,7 @@ The following methods are supported in luxenstudio:
     TensoRF<tensorf.md>
     Geluxenacto<geluxenacto.md>
     Instruct-GS2GS<igs2gs.md>
+    PyLuxen<pyluxen.md>
 ```
 
 (own_method_docs)=

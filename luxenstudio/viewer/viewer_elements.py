@@ -35,8 +35,8 @@ from viser import (
     ViserServer,
 )
 
-from luxenstudio.viewer.utils import CameraState, get_camera
 from luxenstudio.cameras.cameras import Cameras, CameraType
+from luxenstudio.viewer.utils import CameraState, get_camera
 
 if TYPE_CHECKING:
     from luxenstudio.viewer.viewer import Viewer

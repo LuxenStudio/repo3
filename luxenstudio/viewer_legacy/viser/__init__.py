@@ -15,7 +15,6 @@
 """ Viser is used for the luxenstudio viewer backend """
 
 
-from .message_api import GuiHandle as GuiHandle
-from .message_api import GuiSelectHandle as GuiSelectHandle
+from .message_api import GuiHandle as GuiHandle, GuiSelectHandle as GuiSelectHandle
 from .messages import LuxenstudioMessage as LuxenstudioMessage
 from .server import ViserServer as ViserServer

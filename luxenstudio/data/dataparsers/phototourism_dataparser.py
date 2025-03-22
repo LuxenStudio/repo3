@@ -25,19 +25,12 @@ import torch
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType
-from luxenstudio.data.dataparsers.base_dataparser import (
-    DataParser,
-    DataParserConfig,
-    DataparserOutputs,
-)
+from luxenstudio.data.dataparsers.base_dataparser import DataParser, DataParserConfig, DataparserOutputs
 from luxenstudio.data.scene_box import SceneBox
 
 # TODO(1480) use pycolmap instead of colmap_parsing_utils
 # import pycolmap
-from luxenstudio.data.utils.colmap_parsing_utils import (
-    read_cameras_binary,
-    read_images_binary,
-)
+from luxenstudio.data.utils.colmap_parsing_utils import read_cameras_binary, read_images_binary
 from luxenstudio.utils.rich_utils import CONSOLE
 
 

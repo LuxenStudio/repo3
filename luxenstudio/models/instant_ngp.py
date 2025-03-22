@@ -24,26 +24,15 @@ from typing import Dict, List, Literal, Optional, Tuple, Type
 import luxenacc
 import torch
 from torch.nn import Parameter
-from torchmetrics.functional import structural_similarity_index_measure
-from torchmetrics.image import PeakSignalNoiseRatio
-from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
-from luxenstudio.engine.callbacks import (
-    TrainingCallback,
-    TrainingCallbackAttributes,
-    TrainingCallbackLocation,
-)
+from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes, TrainingCallbackLocation
 from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.field_components.spatial_distortions import SceneContraction
 from luxenstudio.fields.luxenacto_field import LuxenactoField
 from luxenstudio.model_components.losses import MSELoss, scale_gradients_by_distance_squared
 from luxenstudio.model_components.ray_samplers import VolumetricSampler
-from luxenstudio.model_components.renderers import (
-    AccumulationRenderer,
-    DepthRenderer,
-    RGBRenderer,
-)
+from luxenstudio.model_components.renderers import AccumulationRenderer, DepthRenderer, RGBRenderer
 from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.utils import colormaps
 
@@ -146,6 +135,10 @@ class NGPModel(Model):
         self.rgb_loss = MSELoss()
 
         # metrics
+        from torchmetrics.functional import structural_similarity_index_measure
+        from torchmetrics.image import PeakSignalNoiseRatio
+        from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
+
         self.psnr = PeakSignalNoiseRatio(data_range=1.0)
         self.ssim = structural_similarity_index_measure
         self.lpips = LearnedPerceptualImagePatchSimilarity(normalize=True)

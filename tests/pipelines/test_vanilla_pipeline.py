@@ -7,14 +7,9 @@ import torch
 from torch import nn
 
 from luxenstudio.cameras.cameras import Cameras
-from luxenstudio.data.datasets.base_dataset import DataparserOutputs, InputDataset
-from luxenstudio.pipelines.base_pipeline import (
-    Model,
-    ModelConfig,
-    VanillaPipeline,
-    VanillaPipelineConfig,
-)
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManagerConfig
+from luxenstudio.data.datasets.base_dataset import DataparserOutputs, InputDataset
+from luxenstudio.pipelines.base_pipeline import Model, ModelConfig, VanillaPipeline, VanillaPipelineConfig
 
 
 class MockedDataManager:

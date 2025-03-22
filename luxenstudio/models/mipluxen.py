@@ -21,9 +21,6 @@ from typing import Dict, List, Tuple
 
 import torch
 from torch.nn import Parameter
-from torchmetrics.functional import structural_similarity_index_measure
-from torchmetrics.image import PeakSignalNoiseRatio
-from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
 
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.field_components.encodings import LuxenEncoding
@@ -31,11 +28,7 @@ from luxenstudio.field_components.field_heads import FieldHeadNames
 from luxenstudio.fields.vanilla_luxen_field import LuxenField
 from luxenstudio.model_components.losses import MSELoss, scale_gradients_by_distance_squared
 from luxenstudio.model_components.ray_samplers import PDFSampler, UniformSampler
-from luxenstudio.model_components.renderers import (
-    AccumulationRenderer,
-    DepthRenderer,
-    RGBRenderer,
-)
+from luxenstudio.model_components.renderers import AccumulationRenderer, DepthRenderer, RGBRenderer
 from luxenstudio.models.base_model import Model
 from luxenstudio.models.vanilla_luxen import VanillaModelConfig
 from luxenstudio.utils import colormaps, misc
@@ -89,6 +82,10 @@ class MipLuxenModel(Model):
         self.rgb_loss = MSELoss()
 
         # metrics
+        from torchmetrics.functional import structural_similarity_index_measure
+        from torchmetrics.image import PeakSignalNoiseRatio
+        from torchmetrics.image.lpip import LearnedPerceptualImagePatchSimilarity
+
         self.psnr = PeakSignalNoiseRatio(data_range=1.0)
         self.ssim = structural_similarity_index_measure
         self.lpips = LearnedPerceptualImagePatchSimilarity(normalize=True)

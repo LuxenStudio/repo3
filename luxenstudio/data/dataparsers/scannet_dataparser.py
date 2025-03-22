@@ -24,11 +24,7 @@ import torch
 
 from luxenstudio.cameras import camera_utils
 from luxenstudio.cameras.cameras import Cameras, CameraType
-from luxenstudio.data.dataparsers.base_dataparser import (
-    DataParser,
-    DataParserConfig,
-    DataparserOutputs,
-)
+from luxenstudio.data.dataparsers.base_dataparser import DataParser, DataParserConfig, DataparserOutputs
 from luxenstudio.data.scene_box import SceneBox
 
 
