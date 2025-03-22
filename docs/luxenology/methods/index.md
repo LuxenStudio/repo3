@@ -27,7 +27,7 @@ The following methods are supported in luxenstudio:
 ```{toctree}
     :maxdepth: 1
     Instant-NGP<instant_ngp.md>
-    3D Gaussian Splatting<splat.md>
+    Splatfacto<splat.md>
     Instruct-Luxen2Luxen<in2n.md>
     K-Planes<kplanes.md>
     LERF<lerf.md>

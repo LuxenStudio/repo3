@@ -32,7 +32,7 @@ from luxenstudio.cameras.cameras import CameraType
 from luxenstudio.configs import base_config as cfg
 from luxenstudio.data.datasets.base_dataset import InputDataset
 from luxenstudio.models.base_model import Model
-from luxenstudio.models.gaussian_splatting import GaussianSplattingModel
+from luxenstudio.models.splatfacto import SplatfactoModel
 from luxenstudio.pipelines.base_pipeline import Pipeline
 from luxenstudio.utils.decorators import check_main_thread, decorate_all
 from luxenstudio.utils.writer import GLOBAL_BUFFER, EventName
@@ -250,7 +250,7 @@ class Viewer:
 
         # Diagnostics for Gaussian Splatting: where the points are at the start of training.
         # This is hidden by default, it can be shown from the Viser UI's scene tree table.
-        if isinstance(pipeline.model, GaussianSplattingModel):
+        if isinstance(pipeline.model, SplatfactoModel):
             self.viser_server.add_point_cloud(
                 "/gaussian_splatting_initial_points",
                 points=pipeline.model.means.numpy(force=True) * VISER_NERFSTUDIO_SCALE_RATIO,
