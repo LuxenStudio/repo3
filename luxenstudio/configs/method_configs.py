@@ -31,7 +31,6 @@ from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatam
 from luxenstudio.data.datamanagers.parallel_datamanager import ParallelDataManagerConfig
 from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
-from luxenstudio.data.dataparsers.colmap_dataparser import ColmapDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
 from luxenstudio.data.dataparsers.instant_ngp_dataparser import InstantNGPDataParserConfig
 from luxenstudio.data.dataparsers.luxenstudio_dataparser import LuxenstudioDataParserConfig
@@ -600,7 +599,7 @@ method_configs["gaussian-splatting"] = TrainerConfig(
     gradient_accumulation_steps={"camera_opt": 100},
     pipeline=VanillaPipelineConfig(
         datamanager=FullImageDatamanagerConfig(
-            dataparser=ColmapDataParserConfig(load_3D_points=True),
+            dataparser=LuxenstudioDataParserConfig(load_3D_points=True),
         ),
         model=GaussianSplattingModelConfig(),
     ),
