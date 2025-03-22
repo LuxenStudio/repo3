@@ -51,7 +51,6 @@ from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.field_components.temporal_distortions import TemporalDistortionKind
 from luxenstudio.fields.sdf_field import SDFFieldConfig
 from luxenstudio.models.depth_luxenacto import DepthLuxenactoModelConfig
-from luxenstudio.models.gaussian_splatting import GaussianSplattingModelConfig
 from luxenstudio.models.geluxenacto import GeluxenactoModelConfig
 from luxenstudio.models.instant_ngp import InstantNGPModelConfig
 from luxenstudio.models.mipluxen import MipLuxenModel
@@ -59,6 +58,7 @@ from luxenstudio.models.luxenacto import LuxenactoModelConfig
 from luxenstudio.models.neus import NeuSModelConfig
 from luxenstudio.models.neus_facto import NeuSFactoModelConfig
 from luxenstudio.models.semantic_luxenw import SemanticLuxenWModelConfig
+from luxenstudio.models.splatfacto import SplatfactoModelConfig
 from luxenstudio.models.tensorf import TensoRFModelConfig
 from luxenstudio.models.vanilla_luxen import LuxenModel, VanillaModelConfig
 from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
@@ -80,7 +80,7 @@ descriptions = {
     "geluxenacto": "Generative Text to Luxen model",
     "neus": "Implementation of NeuS. (slow)",
     "neus-facto": "Implementation of NeuS-Facto. (slow)",
-    "gaussian-splatting": "Gaussian Splatting model",
+    "splatfacto": "Gaussian Splatting model",
 }
 
 method_configs["luxenacto"] = TrainerConfig(
@@ -588,8 +588,8 @@ method_configs["neus-facto"] = TrainerConfig(
     vis="viewer",
 )
 
-method_configs["gaussian-splatting"] = TrainerConfig(
-    method_name="gaussian-splatting",
+method_configs["splatfacto"] = TrainerConfig(
+    method_name="splatfacto",
     steps_per_eval_image=100,
     steps_per_eval_batch=0,
     steps_per_save=2000,
@@ -601,7 +601,7 @@ method_configs["gaussian-splatting"] = TrainerConfig(
         datamanager=FullImageDatamanagerConfig(
             dataparser=LuxenstudioDataParserConfig(load_3D_points=True),
         ),
-        model=GaussianSplattingModelConfig(),
+        model=SplatfactoModelConfig(),
     ),
     optimizers={
         "xyz": {
