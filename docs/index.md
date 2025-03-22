@@ -140,6 +140,7 @@ This documentation is organized into 3 parts:
 - [Luxen](luxenology/methods/luxen.md): OG Neural Radiance Fields
 - [Mip-Luxen](luxenology/methods/mipluxen.md): A Multiscale Representation for Anti-Aliasing Neural Radiance Fields
 - [TensoRF](luxenology/methods/tensorf.md): Tensorial Radiance Fields
+- [Gaussian Splatting](luxenology/methods/splat.md): 3D Gaussian Splatting
 
 (third_party_methods)=
 
