@@ -19,13 +19,13 @@ Put all the method implementations in one location.
 from __future__ import annotations
 
 from collections import OrderedDict
-from typing import Dict
+from typing import Dict, Union
 
 import tyro
 
 from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
-from luxenstudio.configs.external_methods import get_external_methods
+from luxenstudio.configs.external_methods import ExternalMethodDummyTrainerConfig, get_external_methods
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
 from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanagerConfig
 from luxenstudio.data.datamanagers.parallel_datamanager import ParallelDataManagerConfig
@@ -65,7 +65,7 @@ from luxenstudio.pipelines.base_pipeline import VanillaPipelineConfig
 from luxenstudio.pipelines.dynamic_batch import DynamicBatchPipelineConfig
 from luxenstudio.plugins.registry import discover_methods
 
-method_configs: Dict[str, TrainerConfig] = {}
+method_configs: Dict[str, Union[TrainerConfig, ExternalMethodDummyTrainerConfig]] = {}
 descriptions = {
     "luxenacto": "Recommended real-time model tuned for real captures. This model will be continually updated.",
     "depth-luxenacto": "Luxenacto with depth supervision.",
