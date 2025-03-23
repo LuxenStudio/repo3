@@ -82,6 +82,7 @@ We hope luxenstudio enables you to build faster 🔨 learn together 📚 and con
 
 quickstart/installation
 quickstart/first_luxen
+quickstart/existing_dataset
 quickstart/custom_dataset
 quickstart/viewer_quickstart
 quickstart/export_geometry
