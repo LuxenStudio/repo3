@@ -9,8 +9,6 @@
     <!-- code check badges -->
     <a href='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/core_code_checks.yml'>
         <img src='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/core_code_checks.yml/badge.svg' alt='Test Status' /></a>
-    <a href='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/viewer_build_deploy.yml'>
-        <img src='https://github.com/luxenstudio-project/luxenstudio/actions/workflows/viewer_build_deploy.yml/badge.svg' alt='Viewer build Status' /></a>
     <!-- license badge -->
     <a href="https://github.com/luxenstudio-project/luxenstudio/blob/master/LICENSE">
         <img alt="License" src="https://img.shields.io/badge/License-Apache_2.0-blue.svg"></a>
