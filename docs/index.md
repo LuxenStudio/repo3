@@ -155,6 +155,7 @@ This documentation is organized into 3 parts:
 - [Tetra-Luxen](luxenology/methods/tetraluxen.md): Representing Neural Radiance Fields Using Tetrahedra
 - [Instruct-GS2GS](luxenology/methods/igs2gs.md): Editing 3DGS Scenes with Instructions
 - [PyLuxen](luxenology/methods/pyluxen.md): Pyramidal Neural Radiance Fields
+- [SeaThru-Luxen](luxenology/methods/seathru_luxen.md): Neural Radiance Field for subsea scenes
 
 **Eager to contribute a method?** We'd love to see you use luxenstudio in implementing new (or even existing) methods! Please view our {ref}`guide<own_method_docs>` for more details about how to add to this list!
 

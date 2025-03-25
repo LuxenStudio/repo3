@@ -176,6 +176,22 @@ To enable PyLuxen, you must install it first by running:
     )
 )
 
+# SeaThru-Luxen
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]Seathru-Luxen[/bold yellow]
+For more information visit https://docs.luxen.studio/luxenology/methods/seathru_luxen.html
+
+To enable Seathru-Luxen, you must install it first by running:
+  [grey]pip install git+https://github.com/AkerBP/seathru_luxen[/grey]""",
+        configurations=[
+            ("seathru-luxen", "SeaThru-Luxen for underwater scenes."),
+            ("seathru-luxen-lite", "SeaThru-Luxen for underwater scenes (smaller networks and batches)."),
+        ],
+        pip_package="git+https://github.com/AkerBP/seathru_luxen",
+    )
+)
+
 
 @dataclass
 class ExternalMethodDummyTrainerConfig:
