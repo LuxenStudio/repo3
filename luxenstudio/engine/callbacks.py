@@ -27,6 +27,7 @@ from torch.cuda.amp.grad_scaler import GradScaler
 from luxenstudio.engine.optimizers import Optimizers
 
 if TYPE_CHECKING:
+    from luxenstudio.engine.trainer import Trainer
     from luxenstudio.pipelines.base_pipeline import Pipeline
 
 
@@ -43,6 +44,8 @@ class TrainingCallbackAttributes:
     """gradient scalers"""
     pipeline: Optional["Pipeline"]  # Prevent circular import.
     """reference to training pipeline"""
+    trainer: Optional["Trainer"]  # Prevent circular import.
+    """reference to trainer"""
 
 
 class TrainingCallbackLocation(Enum):
