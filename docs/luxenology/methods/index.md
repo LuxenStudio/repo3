@@ -26,22 +26,22 @@ The following methods are supported in luxenstudio:
 
 ```{toctree}
     :maxdepth: 1
-    Instant-NGP<instant_ngp.md>
+    Luxenacto<luxenacto.md>
     Splatfacto<splat.md>
+    Geluxenacto<geluxenacto.md>
+    Instant-NGP<instant_ngp.md>
+    Instruct-GS2GS<igs2gs.md>
     Instruct-Luxen2Luxen<in2n.md>
     K-Planes<kplanes.md>
     LERF<lerf.md>
     Mip-Luxen<mipluxen.md>
     Luxen<luxen.md>
-    Luxenacto<luxenacto.md>
     Luxenbusters<luxenbusters.md>
     LuxenPlayer<luxenplayer.md>
-    Tetra-Luxen<tetraluxen.md>
-    TensoRF<tensorf.md>
-    Geluxenacto<geluxenacto.md>
-    Instruct-GS2GS<igs2gs.md>
     PyLuxen<pyluxen.md>
     SeaThru-Luxen<seathru_luxen.md>
+    TensoRF<tensorf.md>
+    Tetra-Luxen<tetraluxen.md>
 ```
 
 (own_method_docs)=
