@@ -192,6 +192,22 @@ To enable Seathru-Luxen, you must install it first by running:
     )
 )
 
+# Zip-Luxen
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]Zip-Luxen[/bold yellow]
+For more information visit https://docs.luxen.studio/luxenology/methods/zipluxen.html
+
+To enable Zip-Luxen, you must install it first by running:
+  [grey]pip install git+https://github.com/SuLvXiangXin/zipluxen-pytorch#subdirectory=extensions/cuda 
+  and pip install git+https://github.com/SuLvXiangXin/zipluxen-pytorch[/grey]""",
+        configurations=[
+            ("zipluxen", "A pytorch implementation of 'Zip-Luxen: Anti-Aliased Grid-Based Neural Radiance Fields'")
+        ],
+        pip_package="pip install git+https://github.com/SuLvXiangXin/zipluxen-pytorch",
+    )
+)
+
 
 @dataclass
 class ExternalMethodDummyTrainerConfig:
