@@ -16,6 +16,7 @@
 
 import shutil
 from dataclasses import dataclass
+from typing import Literal
 
 from luxenstudio.process_data import equirect_utils, process_data_utils
 from luxenstudio.process_data.colmap_converter_to_luxenstudio_dataset import ColmapConverterToLuxenstudioDataset
@@ -36,6 +37,10 @@ class VideoToLuxenstudioDataset(ColmapConverterToLuxenstudioDataset):
     """Target number of frames to use per video, results may not be exact."""
     percent_radius_crop: float = 1.0
     """Create circle crop mask. The radius is the percent of the image diagonal."""
+    matching_method: Literal["exhaustive", "sequential", "vocab_tree"] = "sequential"
+    """Feature matching method to use. Vocab tree is recommended for a balance of speed
+    and accuracy. Exhaustive is slower but more accurate. Sequential is faster but
+    should only be used for videos."""
 
     def main(self) -> None:
         """Process video into a luxenstudio dataset."""
