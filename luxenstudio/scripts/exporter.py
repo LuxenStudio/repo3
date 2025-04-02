@@ -30,6 +30,8 @@ import numpy as np
 import open3d as o3d
 import torch
 import tyro
+from typing_extensions import Annotated, Literal
+
 from luxenstudio.cameras.camera_utils import quaternion_from_matrix
 from luxenstudio.cameras.rays import RayBundle
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager
@@ -44,7 +46,6 @@ from luxenstudio.models.splatfacto import SplatfactoModel
 from luxenstudio.pipelines.base_pipeline import Pipeline, VanillaPipeline
 from luxenstudio.utils.eval_utils import eval_setup
 from luxenstudio.utils.rich_utils import CONSOLE
-from typing_extensions import Annotated, Literal
 
 
 @dataclass
