@@ -115,7 +115,7 @@ Rending RGB images is not the only type of output render supported. It is possib
 Associated luxenstudio code:
 
 ```python
-from luxenstudio.renderers.renderers import RGBRenderer
+from luxenstudio.model_components.renderers import RGBRenderer
 
 renderer_rgb = RGBRenderer(background_color=colors.WHITE)
 # Ray samples discussed in the next section
