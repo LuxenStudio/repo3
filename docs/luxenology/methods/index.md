@@ -42,6 +42,7 @@ The following methods are supported in luxenstudio:
     Instruct-GS2GS<igs2gs.md>
     PyLuxen<pyluxen.md>
     SeaThru-Luxen<seathru_luxen.md>
+    Zip-Luxen<zipluxen.md>
 ```
 
 (own_method_docs)=
