@@ -222,7 +222,7 @@ method_configs["depth-luxenacto"] = TrainerConfig(
             _target=VanillaDataManager[DepthDataset],
             pixel_sampler=PairPixelSamplerConfig(),
             dataparser=LuxenstudioDataParserConfig(),
-            train_num_rays_per_batch=4096,
+            train_num_rays_per_batch=32768,
             eval_num_rays_per_batch=4096,
         ),
         model=DepthLuxenactoModelConfig(
