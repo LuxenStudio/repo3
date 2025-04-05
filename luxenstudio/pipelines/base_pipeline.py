@@ -44,6 +44,7 @@ from luxenstudio.cameras.cameras import Cameras
 from luxenstudio.fields.visibility_field import VisibilityField
 from luxenstudio.utils.misc import step_check
 from luxenstudio.data.datamanagers.random_cameras_datamanager import random_train_pose
+import math
 
 
 def module_wrapper(ddp_or_model: Union[DDP, Model]) -> Model:
