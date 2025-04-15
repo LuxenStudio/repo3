@@ -29,6 +29,8 @@ The following methods are supported in luxenstudio:
     Instant-NGP<instant_ngp.md>
     Splatfacto<splat.md>
     Instruct-Luxen2Luxen<in2n.md>
+    Instruct-GS2GS<igs2gs.md>
+    SIGLuxen<sigluxen.md>
     K-Planes<kplanes.md>
     LERF<lerf.md>
     Mip-Luxen<mipluxen.md>
@@ -39,7 +41,6 @@ The following methods are supported in luxenstudio:
     Tetra-Luxen<tetraluxen.md>
     TensoRF<tensorf.md>
     Geluxenacto<geluxenacto.md>
-    Instruct-GS2GS<igs2gs.md>
     PyLuxen<pyluxen.md>
     SeaThru-Luxen<seathru_luxen.md>
     Zip-Luxen<zipluxen.md>

@@ -14,6 +14,7 @@
 
 
 """This file contains the configuration for external methods which are not included in this repository."""
+
 import inspect
 import subprocess
 import sys
@@ -205,6 +206,22 @@ To enable Zip-Luxen, you must install it first by running:
             ("zipluxen", "A pytorch implementation of 'Zip-Luxen: Anti-Aliased Grid-Based Neural Radiance Fields'")
         ],
         pip_package="pip install git+https://github.com/SuLvXiangXin/zipluxen-pytorch",
+    )
+)
+
+# SIGLuxen
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]SIGLuxen[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/sigluxen.html
+
+To enable SIGLuxen, you must install it first by running:
+  [grey]pip install git+https://github.com/cgtuebingen/SIGLuxen[/grey] and install Stable Diffusion Web UI see [grey]https://github.com/cgtuebingen/SIGLuxen?tab=readme-ov-file#installation[/grey]""",
+        configurations=[
+            ("sigluxen", "SIGLuxen method (high quality) used in paper"),
+            ("sigluxen_luxenacto", "SIGLuxen method combined with Luxenacto (faster training less quality)"),
+        ],
+        pip_package="git+https://github.com/cgtuebingen/SIGLuxen",
     )
 )
 
