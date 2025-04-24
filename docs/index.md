@@ -147,6 +147,7 @@ This documentation is organized into 3 parts:
 
 ### Third-party Methods
 
+- [BioLuxen](luxenology/methods/bioluxen.md): Biologically Plausible Neural Radiance Fields for View Synthesis
 - [Instruct-Luxen2Luxen](luxenology/methods/in2n.md): Editing 3D Scenes with Instructions
 - [Instruct-GS2GS](luxenology/methods/igs2gs.md): Editing 3DGS Scenes with Instructions
 - [SIGLuxen](luxenology/methods/sigluxen.md): Controlled Generative Editing of Luxen Scenes
