@@ -141,6 +141,19 @@ To enable Volinga, you must install it first by running:
     )
 )
 
+# BioLuxen
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]BioLuxen[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/bioluxen.html
+
+To enable BioLuxen, you must install it first by running:
+  [grey]pip install git+https://github.com/Leandropassosjr/ns_bioluxen[/grey]""",
+        configurations=[("BioLuxen", "BioLuxen. Luxenstudio implementation")],
+        pip_package="git+https://github.com/Leandropassosjr/ns_bioluxen",
+    )
+)
+
 # Instruct-GS2GS
 external_methods.append(
     ExternalMethod(

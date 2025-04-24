@@ -44,6 +44,7 @@ The following methods are supported in luxenstudio:
     PyLuxen<pyluxen.md>
     SeaThru-Luxen<seathru_luxen.md>
     Zip-Luxen<zipluxen.md>
+    BioLuxen<bioluxen.md>
 ```
 
 (own_method_docs)=
