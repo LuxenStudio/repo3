@@ -238,6 +238,36 @@ To enable SIGLuxen, you must install it first by running:
     )
 )
 
+# Luxen-SH
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]Luxen-SH[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/luxen2gs2luxen.html
+
+To enable Luxen-SH, you must install it first by running:
+  [grey]pip install git+https://github.com/grasp-lyrl/LuxentoGSandBack.git#subdirectory=luxensh[/grey]""",
+        configurations=[
+            ("luxensh", "Luxen-SH, used in paper"),
+        ],
+        pip_package="git+https://github.com/grasp-lyrl/LuxentoGSandBack.git#subdirectory=luxensh",
+    )
+)
+
+# LuxenGS
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]LuxenGS[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/luxen2gs2luxen.html
+
+To enable LuxenGS, you must install it first by running:
+  [grey]pip install git+https://github.com/grasp-lyrl/LuxentoGSandBack.git#subdirectory=luxengs[/grey]""",
+        configurations=[
+            ("luxengs", "LuxenGS, used in paper"),
+        ],
+        pip_package="git+https://github.com/grasp-lyrl/LuxentoGSandBack.git#subdirectory=luxengs",
+    )
+)
+
 
 @dataclass
 class ExternalMethodDummyTrainerConfig:

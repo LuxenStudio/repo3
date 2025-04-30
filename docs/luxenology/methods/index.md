@@ -45,6 +45,7 @@ The following methods are supported in luxenstudio:
     SeaThru-Luxen<seathru_luxen.md>
     Zip-Luxen<zipluxen.md>
     BioLuxen<bioluxen.md>
+    LuxentoGSandBack<luxen2gs2luxen.md>
     OpenLuxen<openluxen.md>
 ```
 
