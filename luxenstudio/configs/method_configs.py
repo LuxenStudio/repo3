@@ -27,7 +27,7 @@ from luxenstudio.cameras.camera_optimizers import CameraOptimizerConfig
 from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.configs.external_methods import ExternalMethodDummyTrainerConfig, get_external_methods
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
-from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanagerConfig
+from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanagerConfig,FullImageDatamanager
 from luxenstudio.data.datamanagers.parallel_datamanager import ParallelDataManagerConfig
 from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
@@ -601,7 +601,8 @@ method_configs["splatfacto"] = TrainerConfig(
     mixed_precision=False,
     pipeline=VanillaPipelineConfig(
         datamanager=FullImageDatamanagerConfig(
-            dataparser=LuxenstudioDataParserConfig(load_3D_points=True),
+            _target=FullImageDatamanager[DepthDataset],
+            dataparser=LuxenstudioDataParserConfig(load_3D_points=True,depth_unit_scale_factor=1.0),
             cache_images_type="uint8",
         ),
         model=SplatfactoModelConfig(),
