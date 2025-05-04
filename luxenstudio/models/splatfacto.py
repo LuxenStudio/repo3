@@ -46,6 +46,7 @@ from luxenstudio.engine.optimizers import Optimizers
 from luxenstudio.model_components import renderers
 from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.utils.colors import get_color
+from luxenstudio.utils.misc import torch_compile
 from luxenstudio.utils.rich_utils import CONSOLE
 
 
@@ -99,7 +100,7 @@ def resize_image(image: torch.Tensor, d: int):
     return tf.conv2d(image.permute(2, 0, 1)[:, None, ...], weight, stride=d).squeeze(1).permute(1, 2, 0)
 
 
-@torch.compile()
+@torch_compile()
 def get_viewmat(optimized_camera_to_world):
     """
     function that converts c2w to gsplat world2camera matrix, using compile for some speed
