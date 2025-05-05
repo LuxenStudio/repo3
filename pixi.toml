@@ -1,6 +1,5 @@
 [project]
 name = "luxenstudio"
-version = "1.0.3"
 description = "All-in-one repository for state-of-the-art Luxens"
 channels = ["nvidia/label/cuda-11.8.0", "nvidia", "conda-forge", "pytorch"]
 platforms = ["linux-64"]
