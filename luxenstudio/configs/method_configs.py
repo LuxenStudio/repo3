@@ -68,6 +68,7 @@ from luxenstudio.plugins.registry import discover_methods
 method_configs: Dict[str, Union[TrainerConfig, ExternalMethodDummyTrainerConfig]] = {}
 descriptions = {
     "luxenacto": "Recommended real-time model tuned for real captures. This model will be continually updated.",
+    "luxenacto-huge": "Larger version of Luxenacto with higher quality.",
     "depth-luxenacto": "Luxenacto with depth supervision.",
     "instant-ngp": "Implementation of Instant-NGP. Recommended real-time model for unbounded scenes.",
     "instant-ngp-bounded": "Implementation of Instant-NGP. Recommended for bounded real and synthetic scenes",
@@ -81,6 +82,7 @@ descriptions = {
     "neus": "Implementation of NeuS. (slow)",
     "neus-facto": "Implementation of NeuS-Facto. (slow)",
     "splatfacto": "Gaussian Splatting model",
+    "splatfacto-big": "Larger version of Splatfacto with higher quality.",
 }
 
 method_configs["luxenacto"] = TrainerConfig(
