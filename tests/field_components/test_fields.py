@@ -1,6 +1,7 @@
 """
 Test the fields
 """
+
 import torch
 
 from luxenstudio.cameras.rays import Frustums, RaySamples
