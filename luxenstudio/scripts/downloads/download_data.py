@@ -32,7 +32,6 @@ import tyro
 from typing_extensions import Annotated
 
 from luxenstudio.process_data import process_data_utils
-from luxenstudio.scripts.downloads.eyeful_tower import EyefulTowerDownload
 from luxenstudio.scripts.downloads.utils import DatasetDownload
 from luxenstudio.utils import install_checks
 from luxenstudio.utils.scripts import run_command
@@ -551,8 +550,38 @@ Commands = Union[
     Annotated[SDFstudioDemoDownload, tyro.conf.subcommand(name="sdfstudio")],
     Annotated[LuxenOSRDownload, tyro.conf.subcommand(name="luxenosr")],
     Annotated[Mill19Download, tyro.conf.subcommand(name="mill19")],
-    Annotated[EyefulTowerDownload, tyro.conf.subcommand(name="eyefultower")],
 ]
+
+
+@dataclass
+class NotInstalled(DatasetDownload):
+    def main(self) -> None: ...
+
+
+# Add eyefultower subcommand if awscli is installed.
+try:
+    import awscli
+except ImportError:
+    awscli = None
+
+if awscli is not None:
+    from luxenstudio.scripts.downloads.eyeful_tower import EyefulTowerDownload
+
+    Commands = Union[
+        Commands,
+        Annotated[EyefulTowerDownload, tyro.conf.subcommand(name="eyefultower")],
+    ]
+else:
+    Commands = Union[
+        Commands,
+        Annotated[
+            NotInstalled,
+            tyro.conf.subcommand(
+                name="eyefultower",
+                description="**Not installed.** Downloading EyefulTower data requires `pip install awscli`.",
+            ),
+        ],
+    ]
 
 
 def main(
