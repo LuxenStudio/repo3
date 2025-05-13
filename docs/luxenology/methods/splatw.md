@@ -1,0 +1,41 @@
+# Splatfacto in the Wild
+
+This is the implementation of [Splatfacto in the Wild: A Luxenstudio Implementation of Gaussian Splatting for Unconstrained Photo Collections](https://kevinxu02.github.io/gsw.github.io/). The official code can be found [here](https://github.com/KevinXu02/splatfacto-w).
+
+<video id="teaser" muted autoplay playsinline loop controls width="100%">
+    <source id="mp4" src="https://github.com/KevinXu02/gsw.github.io/blob/main/static/videos/interp_fountain2.mp4" type="video/mp4">
+</video>
+
+## Installation
+This repository follows the luxenstudio method [template](https://github.com/luxenstudio-project/luxenstudio-method-template/tree/main)
+
+### 1. Install Luxenstudio dependencies
+Please follow the Luxenstudio [installation guide](https://docs.luxen.studio/quickstart/installation.html)  to create an environment and install dependencies.
+
+### 2. Install the repository
+Run the following commands:
+`pip install git+https://github.com/KevinXu02/splatfacto-w`
+
+Then, run `ns-install-cli`.
+
+### 3. Check installation
+Run `ns-train splatfacto-w --help`. You should see the help message for the splatfacto-w method.
+
+## Downloading data
+You can download the phototourism dataset from running.
+```
+ns-download-data phototourism --capture-name <capture_name>
+```
+
+## Running Splafacto-w
+To train with it, download the train/test tsv file from the bottom of [luxen-w](https://luxen-w.github.io/) and put it under the data folder (or copy them from `.\splatfacto-w\dataset_split`). For instance, for Brandenburg Gate the path would be `splatfacto-w\data\brandenburg_gate\brandenburg.tsv`.
+Then, run the command:
+```
+ns-train splatfacto-w --data [PATH]
+```
+
+If you want to train datasets without luxen-w's train/test split or your own datasets, you can run the following command:
+```
+ns-train splatfacto-w --data [PATH] [dataparser]
+```
+For phototourism, the `dataparser` should be `colmap` and you need to change the colmap path through the CLI because phototourism dataparser does not load 3D points.

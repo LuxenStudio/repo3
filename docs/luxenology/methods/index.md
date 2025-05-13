@@ -28,6 +28,7 @@ The following methods are supported in luxenstudio:
     :maxdepth: 1
     Instant-NGP<instant_ngp.md>
     Splatfacto<splat.md>
+    Splatfacto-W<splatw.md>
     Instruct-Luxen2Luxen<in2n.md>
     Instruct-GS2GS<igs2gs.md>
     SIGLuxen<sigluxen.md>
