@@ -180,19 +180,33 @@ curl -fsSL https://pixi.sh/install.sh | bash
 ### Install Pixi Environmnent 
 After Pixi is installed, you can run
 ```bash
+git clone https://github.com/luxenstudio-project/luxenstudio.git
+cd luxenstudio
 pixi run post-install
 pixi shell
 ```
-This will install all enviroment dependancies including colmap, tinycudann and hloc, and the active the conda environment
+This will fetch the latest Luxenstudio code, install all enviroment dependencies including colmap, tinycudann and hloc, and then activate the pixi environment (similar to conda).  
+From now on, each time you want to run Luxenstudio in a new shell, you have to navigate to the luxenstudio folder and run `pixi shell` again.
 
-you could also run
+You could also run
 
 ```bash
 pixi run post-install
 pixi run train-example-luxen
 ```
 
-to download an example dataset and run luxenacto straight away
+to download an example dataset and run luxenacto straight away.
+
+Note that this method gets you the very latest upstream Luxenstudio version, if you want to use a specific release, you have to first checkout a specific version or commit in the luxenstudio folder, i.e.:
+```
+git checkout tags/v1.1.3
+```
+
+Similarly, if you want to update, you want to update the git repo in your luxenstudio folder:
+```
+git pull
+```
+Remember that if you ran a checkout on a specific tag before, you have to manually specify a new tag or `git checkout main` to see the new changes.
 
 ## Use docker image
 
