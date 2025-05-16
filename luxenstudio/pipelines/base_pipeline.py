@@ -35,9 +35,7 @@ from torch.nn import Parameter
 from torch.nn.parallel import DistributedDataParallel as DDP
 
 from luxenstudio.configs.base_config import InstantiateConfig
-from luxenstudio.data.datamanagers.base_datamanager import DataManager, DataManagerConfig, VanillaDataManager
-from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanager
-from luxenstudio.data.datamanagers.parallel_datamanager import ParallelDataManager
+from luxenstudio.data.datamanagers.base_datamanager import DataManager, DataManagerConfig
 from luxenstudio.engine.callbacks import TrainingCallback, TrainingCallbackAttributes
 from luxenstudio.models.base_model import Model, ModelConfig
 from luxenstudio.utils import profiler
@@ -424,9 +422,9 @@ class VanillaPipeline(Pipeline):
         self, step: Optional[int] = None, output_path: Optional[Path] = None, get_std: bool = False
     ):
         """Get the average metrics for evaluation images."""
-
-        """Get the average metrics for evaluation images."""
-        assert isinstance(self.datamanager, (VanillaDataManager, ParallelDataManager, FullImageDatamanager))
+        assert hasattr(
+            self.datamanager, "fixed_indices_eval_dataloader"
+        ), "datamanager must have 'fixed_indices_eval_dataloader' attribute"
         image_prefix = "eval"
         return self.get_average_image_metrics(
             self.datamanager.fixed_indices_eval_dataloader, image_prefix, step, output_path, get_std
