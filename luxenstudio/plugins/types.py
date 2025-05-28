@@ -15,6 +15,7 @@
 """
 This package contains specifications used to register plugins.
 """
+
 from dataclasses import dataclass
 
 from luxenstudio.engine.trainer import TrainerConfig

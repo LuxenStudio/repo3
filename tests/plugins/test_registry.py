@@ -1,6 +1,7 @@
 """
 Tests for the luxenstudio.plugins.registry module.
 """
+
 import os
 import sys
 from dataclasses import dataclass, field

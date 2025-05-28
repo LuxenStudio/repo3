@@ -11,9 +11,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-""" Data parser for Luxen-OSR datasets
+"""Data parser for Luxen-OSR datasets
 
-    Presented in the paper: https://4dqv.mpi-inf.mpg.de/Luxen-OSR/
+Presented in the paper: https://4dqv.mpi-inf.mpg.de/Luxen-OSR/
 
 """
 

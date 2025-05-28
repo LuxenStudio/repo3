@@ -1,6 +1,7 @@
 """
 Test if temporal distortions run properly
 """
+
 import torch
 
 from luxenstudio.field_components.temporal_distortions import DLuxenDistortion

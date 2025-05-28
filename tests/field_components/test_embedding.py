@@ -1,6 +1,7 @@
 """
 Embedding tests
 """
+
 from luxenstudio.field_components.embedding import Embedding
 
 

@@ -1,6 +1,7 @@
 """
 Test colormaps
 """
+
 import torch
 
 from luxenstudio.utils import colormaps, plotly_utils

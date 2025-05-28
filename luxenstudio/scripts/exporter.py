@@ -16,7 +16,6 @@
 Script for exporting Luxen into other formats.
 """
 
-
 from __future__ import annotations
 
 import json

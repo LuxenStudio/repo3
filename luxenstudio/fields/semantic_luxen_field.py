@@ -15,6 +15,7 @@
 """
 Semantic Luxen field implementation.
 """
+
 from typing import Dict, Optional, Tuple
 
 import torch
