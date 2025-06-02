@@ -14,7 +14,6 @@
 
 """Classic Luxen field"""
 
-
 from typing import Dict, Optional, Tuple, Type
 
 import torch

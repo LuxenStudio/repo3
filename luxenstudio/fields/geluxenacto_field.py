@@ -16,7 +16,6 @@
 Field for Geluxenacto model
 """
 
-
 from typing import Dict, Literal, Optional, Tuple
 
 import numpy as np

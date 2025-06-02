@@ -14,6 +14,7 @@
 
 
 """This file contains the configuration for external methods which are not included in this repository."""
+
 import inspect
 import subprocess
 import sys
@@ -140,6 +141,19 @@ To enable Volinga, you must install it first by running:
     )
 )
 
+# BioLuxen
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]BioLuxen[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/bioluxen.html
+
+To enable BioLuxen, you must install it first by running:
+  [grey]pip install git+https://github.com/Leandropassosjr/ns_bioluxen[/grey]""",
+        configurations=[("BioLuxen", "BioLuxen. Luxenstudio implementation")],
+        pip_package="git+https://github.com/Leandropassosjr/ns_bioluxen",
+    )
+)
+
 # Instruct-GS2GS
 external_methods.append(
     ExternalMethod(
@@ -205,6 +219,67 @@ To enable Zip-Luxen, you must install it first by running:
             ("zipluxen", "A pytorch implementation of 'Zip-Luxen: Anti-Aliased Grid-Based Neural Radiance Fields'")
         ],
         pip_package="pip install git+https://github.com/SuLvXiangXin/zipluxen-pytorch",
+    )
+)
+
+# SIGLuxen
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]SIGLuxen[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/sigluxen.html
+
+To enable SIGLuxen, you must install it first by running:
+  [grey]pip install git+https://github.com/cgtuebingen/SIGLuxen[/grey] and install Stable Diffusion Web UI see [grey]https://github.com/cgtuebingen/SIGLuxen?tab=readme-ov-file#installation[/grey]""",
+        configurations=[
+            ("sigluxen", "SIGLuxen method (high quality) used in paper"),
+            ("sigluxen_luxenacto", "SIGLuxen method combined with Luxenacto (faster training less quality)"),
+        ],
+        pip_package="git+https://github.com/cgtuebingen/SIGLuxen",
+    )
+)
+
+# Luxen-SH
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]Luxen-SH[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/luxen2gs2luxen.html
+
+To enable Luxen-SH, you must install it first by running:
+  [grey]pip install git+https://github.com/grasp-lyrl/LuxentoGSandBack.git#subdirectory=luxensh[/grey]""",
+        configurations=[
+            ("luxensh", "Luxen-SH, used in paper"),
+        ],
+        pip_package="git+https://github.com/grasp-lyrl/LuxentoGSandBack.git#subdirectory=luxensh",
+    )
+)
+
+# LuxenGS
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]LuxenGS[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/luxen2gs2luxen.html
+
+To enable LuxenGS, you must install it first by running:
+  [grey]pip install git+https://github.com/grasp-lyrl/LuxentoGSandBack.git#subdirectory=luxengs[/grey]""",
+        configurations=[
+            ("luxengs", "LuxenGS, used in paper"),
+        ],
+        pip_package="git+https://github.com/grasp-lyrl/LuxentoGSandBack.git#subdirectory=luxengs",
+    )
+)
+
+# Splatfacto-W
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]Splatfacto-W[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/splatw.html
+
+To enable Splatfacto-W, you must install it first by running:
+  [grey]pip install git+https://github.com/KevinXu02/splatfacto-w"[/grey]""",
+        configurations=[
+            ("splatfacto-w", "Splatfacto in the wild"),
+        ],
+        pip_package="git+https://github.com/KevinXu02/splatfacto-w",
     )
 )
 

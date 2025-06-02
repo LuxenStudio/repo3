@@ -147,28 +147,33 @@ This documentation is organized into 3 parts:
 
 ### Third-party Methods
 
+- [BioLuxen](luxenology/methods/bioluxen.md): Biologically Plausible Neural Radiance Fields for View Synthesis
 - [Instruct-Luxen2Luxen](luxenology/methods/in2n.md): Editing 3D Scenes with Instructions
+- [Instruct-GS2GS](luxenology/methods/igs2gs.md): Editing 3DGS Scenes with Instructions
+- [SIGLuxen](luxenology/methods/sigluxen.md): Controlled Generative Editing of Luxen Scenes
 - [K-Planes](luxenology/methods/kplanes.md): Unified 3D and 4D Radiance Fields
 - [LERF](luxenology/methods/lerf.md): Language Embedded Radiance Fields
 - [Luxenbusters](luxenology/methods/luxenbusters.md): Removing Ghostly Artifacts from Casually Captured Luxens
 - [LuxenPlayer](luxenology/methods/luxenplayer.md): 4D Radiance Fields by Streaming Feature Channels
 - [Tetra-Luxen](luxenology/methods/tetraluxen.md): Representing Neural Radiance Fields Using Tetrahedra
-- [Instruct-GS2GS](luxenology/methods/igs2gs.md): Editing 3DGS Scenes with Instructions
 - [PyLuxen](luxenology/methods/pyluxen.md): Pyramidal Neural Radiance Fields
 - [SeaThru-Luxen](luxenology/methods/seathru_luxen.md): Neural Radiance Field for subsea scenes
 - [Zip-Luxen](luxenology/methods/zipluxen.md): Anti-Aliased Grid-Based Neural Radiance Fields
+- [LuxentoGSandBack](luxenology/methods/luxen2gs2luxen.md): Converting back and forth between Luxen and GS to get the best of both approaches.
+- [OpenLuxen](luxenology/methods/openluxen.md): OpenSet 3D Neural Scene Segmentation
 
 **Eager to contribute a method?** We'd love to see you use luxenstudio in implementing new (or even existing) methods! Please view our {ref}`guide<own_method_docs>` for more details about how to add to this list!
 
 ## Quicklinks
 
-|                                                            |                        |
-| ---------------------------------------------------------- | ---------------------- |
-| [Github](https://github.com/luxenstudio-project/luxenstudio) | Official Github Repo   |
-| [Discord](https://discord.gg/RyVk6w5WWP)                   | Join Discord Community |
+|                                                            |                             |
+| ---------------------------------------------------------- | --------------------------- |
+| [Github](https://github.com/luxenstudio-project/luxenstudio) | Official Github Repo        |
+| [Discord](https://discord.gg/RyVk6w5WWP)                   | Join Discord Community      |
 | [Feedback Form](https://forms.gle/sqN5phJN7LfQVwnP9)       | Provide Luxenstudio Feedback |
 
 ## Sponsors
+
 Sponsors of this work includes [Luma AI](https://lumalabs.ai/) and the [BAIR commons](https://bcommons.berkeley.edu/home).
 
 |          |          |
