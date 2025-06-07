@@ -526,7 +526,7 @@ def populate_render_tab(
     datapath: Path,
     viewer_model: Model,
     control_panel: Optional[ControlPanel] = None,
-) -> Tuple[RenderTabState, GuiInputHandle, GuiInputHandle, GuiInputHandle]:
+) -> Tuple[RenderTabState, CameraPath, GuiInputHandle, GuiInputHandle]:
     from luxenstudio.viewer.viewer import VISER_NERFSTUDIO_SCALE_RATIO
 
     render_tab_state = RenderTabState(
