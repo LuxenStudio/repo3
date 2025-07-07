@@ -93,6 +93,21 @@ To enable LERF, you must install it first by running:
     )
 )
 
+# Feature Splatting
+external_methods.append(
+    ExternalMethod(
+        """[bold yellow]Feature-Splatting[/bold yellow]
+For more information visit: https://docs.luxen.studio/luxenology/methods/feature_splatting.html
+
+To enable Feature Splatting, you must install it first by running:
+  [grey]pip install git+https://github.com/vuer-ai/feature-splatting[/grey]""",
+        configurations=[
+            ("feature-splatting", "Feature Splatting with MaskCLIP ViT-L/14@336px, DINOv2 ViT-S/14, and MobileSAMv2"),
+        ],
+        pip_package="git+https://github.com/vuer-ai/feature-splatting",
+    )
+)
+
 # Tetra-Luxen
 external_methods.append(
     ExternalMethod(
@@ -213,7 +228,7 @@ external_methods.append(
 For more information visit https://docs.luxen.studio/luxenology/methods/zipluxen.html
 
 To enable Zip-Luxen, you must install it first by running:
-  [grey]pip install git+https://github.com/SuLvXiangXin/zipluxen-pytorch#subdirectory=extensions/cuda 
+  [grey]pip install git+https://github.com/SuLvXiangXin/zipluxen-pytorch#subdirectory=extensions/cuda
   and pip install git+https://github.com/SuLvXiangXin/zipluxen-pytorch[/grey]""",
         configurations=[
             ("zipluxen", "A pytorch implementation of 'Zip-Luxen: Anti-Aliased Grid-Based Neural Radiance Fields'")
