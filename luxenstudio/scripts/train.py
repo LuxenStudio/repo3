@@ -62,6 +62,7 @@ from luxenstudio.configs.config_utils import convert_markup_to_ansi
 from luxenstudio.configs.method_configs import AnnotatedBaseConfigUnion
 from luxenstudio.engine.trainer import TrainerConfig
 from luxenstudio.utils import comms, profiler
+from luxenstudio.utils.available_devices import get_available_devices
 from luxenstudio.utils.rich_utils import CONSOLE
 
 DEFAULT_TIMEOUT = timedelta(minutes=30)
@@ -225,6 +226,15 @@ def launch(
 
 def main(config: TrainerConfig) -> None:
     """Main function."""
+
+    # Check if the specified device type is available
+    available_device_types = get_available_devices()
+    if config.machine.device_type not in available_device_types:
+        raise RuntimeError(
+            f"Specified device type '{config.machine.device_type}' is not available. "
+            f"Available device types: {available_device_types}. "
+            "Please specify a valid device type using the CLI option: --machine.device_type [cuda|mps|cpu]"
+        )
 
     if config.data:
         CONSOLE.log("Using --data alias for --data.pipeline.datamanager.data")

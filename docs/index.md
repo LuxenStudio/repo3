@@ -153,6 +153,7 @@ This documentation is organized into 3 parts:
 - [SIGLuxen](luxenology/methods/sigluxen.md): Controlled Generative Editing of Luxen Scenes
 - [K-Planes](luxenology/methods/kplanes.md): Unified 3D and 4D Radiance Fields
 - [LERF](luxenology/methods/lerf.md): Language Embedded Radiance Fields
+- [Feature Splatting](luxenology/methods/feature_splatting.md): Gaussian Feature Splatting based on GSplats
 - [Luxenbusters](luxenology/methods/luxenbusters.md): Removing Ghostly Artifacts from Casually Captured Luxens
 - [LuxenPlayer](luxenology/methods/luxenplayer.md): 4D Radiance Fields by Streaming Feature Channels
 - [Tetra-Luxen](luxenology/methods/tetraluxen.md): Representing Neural Radiance Fields Using Tetrahedra
