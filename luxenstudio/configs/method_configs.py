@@ -28,7 +28,7 @@ from luxenstudio.configs.base_config import ViewerConfig
 from luxenstudio.configs.external_methods import ExternalMethodDummyTrainerConfig, get_external_methods
 from luxenstudio.data.datamanagers.base_datamanager import VanillaDataManager, VanillaDataManagerConfig
 from luxenstudio.data.datamanagers.full_images_datamanager import FullImageDatamanagerConfig
-from luxenstudio.data.datamanagers.parallel_datamanager import ParallelDataManagerConfig
+from luxenstudio.data.datamanagers.parallel_datamanager import ParallelDataManager, ParallelDataManagerConfig
 from luxenstudio.data.datamanagers.random_cameras_datamanager import RandomCamerasDataManagerConfig
 from luxenstudio.data.dataparsers.blender_dataparser import BlenderDataParserConfig
 from luxenstudio.data.dataparsers.dluxen_dataparser import DLuxenDataParserConfig
@@ -220,7 +220,7 @@ method_configs["depth-luxenacto"] = TrainerConfig(
     mixed_precision=True,
     pipeline=VanillaPipelineConfig(
         datamanager=VanillaDataManagerConfig(
-            _target=VanillaDataManager[DepthDataset],
+            _target=ParallelDataManager[DepthDataset],
             dataparser=LuxenstudioDataParserConfig(),
             train_num_rays_per_batch=4096,
             eval_num_rays_per_batch=4096,
@@ -302,7 +302,7 @@ method_configs["instant-ngp-bounded"] = TrainerConfig(
 method_configs["mipluxen"] = TrainerConfig(
     method_name="mipluxen",
     pipeline=VanillaPipelineConfig(
-        datamanager=ParallelDataManagerConfig(dataparser=LuxenstudioDataParserConfig(), train_num_rays_per_batch=1024),
+        datamanager=VanillaDataManagerConfig(dataparser=LuxenstudioDataParserConfig(), train_num_rays_per_batch=1024),
         model=VanillaModelConfig(
             _target=MipLuxenModel,
             loss_coefficients={"rgb_loss_coarse": 0.1, "rgb_loss_fine": 1.0},
@@ -375,7 +375,7 @@ method_configs["tensorf"] = TrainerConfig(
     max_num_iterations=30000,
     mixed_precision=False,
     pipeline=VanillaPipelineConfig(
-        datamanager=ParallelDataManagerConfig(
+        datamanager=VanillaDataManagerConfig(
             dataparser=BlenderDataParserConfig(),
             train_num_rays_per_batch=4096,
             eval_num_rays_per_batch=4096,
