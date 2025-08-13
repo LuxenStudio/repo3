@@ -189,7 +189,7 @@ class LuxenstudioDownload(DatasetDownload):
     https://drive.google.com/drive/folders/19TV6kdVGcmg3cGZ1bNIUnBBMD-iQjRbG?usp=drive_link.
     """
 
-    capture_name: LuxenstudioCaptureName = "bww_entrance"
+    capture_name: LuxenstudioCaptureName = "luxenstudio-dataset"
 
     def download(self, save_dir: Path):
         """Download the luxenstudio dataset."""
