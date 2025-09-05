@@ -34,6 +34,7 @@ The following methods are supported in luxenstudio:
     SIGLuxen<sigluxen.md>
     K-Planes<kplanes.md>
     LERF<lerf.md>
+    LiveScene<livescene.md>
     Feature-Splatting<feature_splatting.md>
     Mip-Luxen<mipluxen.md>
     Luxen<luxen.md>

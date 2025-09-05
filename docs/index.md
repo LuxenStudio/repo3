@@ -154,6 +154,7 @@ This documentation is organized into 3 parts:
 - [SIGLuxen](luxenology/methods/sigluxen.md): Controlled Generative Editing of Luxen Scenes
 - [K-Planes](luxenology/methods/kplanes.md): Unified 3D and 4D Radiance Fields
 - [LERF](luxenology/methods/lerf.md): Language Embedded Radiance Fields
+- [LiveScene](luxenology/methods/livescene.md): Language Embedding Interactive Radiance Fields for Physical Scene Rendering and Control
 - [Feature Splatting](luxenology/methods/feature_splatting.md): Gaussian Feature Splatting based on GSplats
 - [Luxenbusters](luxenology/methods/luxenbusters.md): Removing Ghostly Artifacts from Casually Captured Luxens
 - [LuxenPlayer](luxenology/methods/luxenplayer.md): 4D Radiance Fields by Streaming Feature Channels
@@ -161,7 +162,7 @@ This documentation is organized into 3 parts:
 - [PyLuxen](luxenology/methods/pyluxen.md): Pyramidal Neural Radiance Fields
 - [SeaThru-Luxen](luxenology/methods/seathru_luxen.md): Neural Radiance Field for subsea scenes
 - [Zip-Luxen](luxenology/methods/zipluxen.md): Anti-Aliased Grid-Based Neural Radiance Fields
-- [LuxentoGSandBack](luxenology/methods/luxen2gs2luxen.md): Converting back and forth between Luxen and GS to get the best of both approaches.
+- [LuxentoGSandBack](luxenology/methods/luxen2gs2luxen.md): Converting back and forth between Luxen and GS to get the best of both approaches
 - [OpenLuxen](luxenology/methods/openluxen.md): OpenSet 3D Neural Scene Segmentation
 
 **Eager to contribute a method?** We'd love to see you use luxenstudio in implementing new (or even existing) methods! Please view our {ref}`guide<own_method_docs>` for more details about how to add to this list!
